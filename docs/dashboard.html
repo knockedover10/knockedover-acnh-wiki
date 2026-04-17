@@ -379,6 +379,260 @@
   }
   .v-note-row input::placeholder { color: #bbb0a0; }
 
+  /* ── NOOKIPEDIA SECTIONS (shared) ── */
+  .nk-loading {
+    text-align: center;
+    padding: 18px;
+    color: var(--muted);
+    font-size: .85rem;
+    font-style: italic;
+  }
+  .nk-error {
+    text-align: center;
+    padding: 12px;
+    color: var(--red);
+    font-size: .82rem;
+    background: var(--red-lt);
+    border-radius: 6px;
+    margin: 6px 0;
+  }
+  .nk-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+  .nk-search-row {
+    display: flex;
+    gap: 7px;
+    padding: 12px 14px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .nk-search-row input[type="text"] {
+    flex: 1;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--check-bg);
+    font-family: inherit;
+    font-size: .88rem;
+    color: var(--text);
+    outline: none;
+  }
+  .nk-search-row input:focus { border-color: var(--brown); background: #fffef8; }
+  .nk-search-row input::placeholder { color: #aaa090; }
+  .nk-btn {
+    background: var(--brown);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 7px 14px;
+    font-family: inherit;
+    font-size: .85rem;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .nk-btn:hover { background: var(--charcoal); }
+  .nk-btn.sm { padding: 4px 10px; font-size: .78rem; }
+  .nk-body { padding: 12px 14px; }
+
+  /* ── VILLAGER LOOKUP ── */
+  .vl-quicktaps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .vl-chip {
+    background: var(--check-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 3px 11px;
+    font-size: .78rem;
+    cursor: pointer;
+    font-family: inherit;
+    color: var(--brown);
+    transition: background .15s, border-color .15s;
+  }
+  .vl-chip:hover { background: var(--brown-lt); border-color: var(--brown); }
+  .vl-chip-label { font-size: .65rem; color: var(--muted); display: block; text-align: center; margin-bottom: 3px; letter-spacing:.06em; text-transform:uppercase; padding: 0 14px; }
+  .vl-result {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .vl-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    border: 2px solid var(--border);
+    object-fit: cover;
+    flex-shrink: 0;
+    background: var(--surface);
+  }
+  .vl-info { flex: 1; }
+  .vl-name {
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: var(--brown);
+    margin-bottom: 4px;
+  }
+  .vl-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 10px;
+    font-size: .8rem;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .vl-meta span { color: var(--text); }
+  .vl-quote {
+    font-size: .82rem;
+    color: var(--muted);
+    font-style: italic;
+    border-left: 3px solid var(--brown-lt);
+    padding-left: 8px;
+    margin-top: 4px;
+  }
+  .vl-actions { margin-top: 8px; display:flex; gap:6px; flex-wrap:wrap; }
+
+  /* ── CRITTER TRACKER ── */
+  .ct-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .ct-tab {
+    padding: 9px 16px;
+    font-size: .82rem;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+    color: var(--muted);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color .15s;
+  }
+  .ct-tab.active {
+    color: var(--brown);
+    border-bottom-color: var(--brown);
+    font-weight: bold;
+  }
+  .ct-tab:hover { color: var(--text); }
+  .ct-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .82rem;
+  }
+  .ct-table th {
+    text-align: left;
+    padding: 7px 10px;
+    background: var(--surface);
+    color: var(--muted);
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+  }
+  .ct-table td {
+    padding: 7px 10px;
+    border-bottom: 1px dashed #ddd4c0;
+    vertical-align: middle;
+  }
+  .ct-table tr:last-child td { border-bottom: none; }
+  .ct-table tr:hover td { background: #f5f0e0; }
+  .ct-leaving {
+    background: var(--red-lt) !important;
+  }
+  .ct-leaving td { color: var(--red); }
+  .ct-bell {
+    color: var(--green);
+    font-weight: bold;
+    white-space: nowrap;
+  }
+  .ct-badge {
+    display: inline-block;
+    font-size: .65rem;
+    padding: 1px 6px;
+    border-radius: 10px;
+    background: var(--red);
+    color: white;
+    white-space: nowrap;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+  .ct-wrap { max-height: 320px; overflow-y: auto; }
+  .ct-legend {
+    font-size: .72rem;
+    color: var(--muted);
+    padding: 6px 10px;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .ct-legend span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: var(--red-lt);
+    border: 1px solid var(--red);
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+
+  /* ── RECIPE FINDER ── */
+  .rf-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 8px 14px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .rf-tag {
+    background: var(--check-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 2px 10px;
+    font-size: .75rem;
+    cursor: pointer;
+    font-family: inherit;
+    color: var(--brown);
+  }
+  .rf-tag:hover { background: var(--brown-lt); border-color: var(--brown); }
+  .rf-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+    padding: 12px 14px;
+  }
+  .rf-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 9px 11px;
+  }
+  .rf-item-name {
+    font-size: .88rem;
+    font-weight: bold;
+    color: var(--brown);
+    margin-bottom: 5px;
+    text-transform: capitalize;
+  }
+  .rf-mats {
+    font-size: .78rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .rf-mats strong { color: var(--text); }
+
   /* ── SPONTANEOUS THOUGHTS ── */
   .st-card {
     background: var(--card);
@@ -1053,6 +1307,81 @@
   <div class="villager-grid" id="villager-tags"></div>
   <div class="villager-notes" id="villager-notes"></div>
 
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- NOOKIPEDIA: VILLAGER LOOKUP                                  -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="section-title">Villager Lookup <span style="font-size:.7em;color:var(--muted);text-transform:none;letter-spacing:0;">via Nookipedia</span></div>
+  <div class="nk-card">
+    <div class="nk-search-row">
+      <input type="text" id="vl-input" placeholder="Type a villager name… e.g. Kabuki, Shino, Pekoe"
+             onkeydown="if(event.key==='Enter') vlSearch()" autocomplete="off">
+      <button class="nk-btn" onclick="vlSearch()">Look up</button>
+    </div>
+    <div class="vl-quicktaps">
+      <span class="vl-chip-label">Your wishlist →</span>
+      <button class="vl-chip" onclick="vlLookup('Kabuki')">Kabuki</button>
+      <button class="vl-chip" onclick="vlLookup('Genji')">Genji</button>
+      <button class="vl-chip" onclick="vlLookup('Shino')">Shino</button>
+      <button class="vl-chip" onclick="vlLookup('Pekoe')">Pekoe</button>
+      <button class="vl-chip" onclick="vlLookup('Ken')">Ken</button>
+      <button class="vl-chip" onclick="vlLookup('Annalisa')">Annalisa</button>
+      <button class="vl-chip" onclick="vlLookup('Greta')">Greta</button>
+      <button class="vl-chip" onclick="vlLookup('Coco')">Coco</button>
+      <button class="vl-chip" onclick="vlLookup('Gladys')">Gladys</button>
+      <button class="vl-chip" onclick="vlLookup('Blanche')">Blanche</button>
+      <button class="vl-chip" onclick="vlLookup('Snake')">Snake</button>
+      <button class="vl-chip" onclick="vlLookup('Cherry')">Cherry</button>
+      <button class="vl-chip" onclick="vlLookup('Axel')">Axel</button>
+    </div>
+    <div class="nk-body" id="vl-result">
+      <p class="nk-loading">Select a villager from your wishlist or search by name.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- NOOKIPEDIA: SEASONAL CRITTER TRACKER                        -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="section-title">Critter Tracker <span style="font-size:.7em;color:var(--muted);text-transform:none;letter-spacing:0;">Northern Hemisphere · this month · via Nookipedia</span></div>
+  <div class="nk-card">
+    <div class="ct-tabs">
+      <button class="ct-tab active" id="ct-tab-fish" onclick="ctSwitch('fish')">&#127920; Fish</button>
+      <button class="ct-tab" id="ct-tab-bug" onclick="ctSwitch('bug')">&#127803; Bugs</button>
+      <button class="ct-tab" id="ct-tab-sea" onclick="ctSwitch('sea')">&#127754; Sea</button>
+    </div>
+    <div class="ct-wrap">
+      <table class="ct-table" id="ct-table">
+        <thead><tr id="ct-thead"></tr></thead>
+        <tbody id="ct-tbody"><tr><td colspan="4" class="nk-loading">Loading critter data…</td></tr></tbody>
+      </table>
+    </div>
+    <div class="ct-legend"><span></span> Leaving after this month — catch now!</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- NOOKIPEDIA: DIY RECIPE FINDER                               -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="section-title">DIY Recipe Finder <span style="font-size:.7em;color:var(--muted);text-transform:none;letter-spacing:0;">via Nookipedia</span></div>
+  <div class="nk-card">
+    <div class="nk-search-row">
+      <input type="text" id="rf-input" placeholder="Search by item or material… e.g. bamboo, stone, cedar"
+             onkeydown="if(event.key==='Enter') rfSearch()" autocomplete="off">
+      <button class="nk-btn" onclick="rfSearch()">Search</button>
+    </div>
+    <div class="rf-tags">
+      <span style="font-size:.72rem;color:var(--muted);align-self:center;">Quick:</span>
+      <button class="rf-tag" onclick="rfQuick('bamboo')">Bamboo</button>
+      <button class="rf-tag" onclick="rfQuick('stone')">Stone</button>
+      <button class="rf-tag" onclick="rfQuick('cedar')">Cedar log</button>
+      <button class="rf-tag" onclick="rfQuick('hardwood')">Hardwood</button>
+      <button class="rf-tag" onclick="rfQuick('iron')">Iron nugget</button>
+      <button class="rf-tag" onclick="rfQuick('cherry')">Cherry blossom</button>
+      <button class="rf-tag" onclick="rfQuick('gold')">Gold</button>
+    </div>
+    <div id="rf-result">
+      <p class="nk-loading">Search for a recipe or material above.</p>
+    </div>
+  </div>
+
 </div><!-- /wrap -->
 
 <footer>
@@ -1090,6 +1419,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadTrackers();
   loadNotes();
   loadVillagerData();
+  ctLoad('fish'); // auto-load fish tab on page open
 });
 
 // ── CARD TOGGLE ───────────────────────────────────────────────────────
@@ -1253,6 +1583,225 @@ function loadVillagerData() {
     }
   });
 }
+// ── NOOKIPEDIA HELPERS ──────────────────────────────────────────────
+const NK_BASE = 'https://nookipedia.com/w/api.php';
+
+async function nkCargo(table, fields, where, limit) {
+  const params = new URLSearchParams({
+    action: 'cargoquery',
+    format: 'json',
+    origin: '*',
+    tables: table,
+    fields: fields,
+    limit: limit || 50,
+  });
+  if (where) params.set('where', where);
+  const res = await fetch(NK_BASE + '?' + params.toString());
+  const data = await res.json();
+  if (data.error) throw new Error(data.error.info || 'API error');
+  return (data.cargoquery || []).map(r => r.title);
+}
+
+// ── VILLAGER LOOKUP ──────────────────────────────────────────────
+const WISHLIST = ['Kabuki','Genji','Shino','Pekoe','Ken','Annalisa','Greta','Coco','Gladys','Blanche','Snake'];
+
+function vlSearch() {
+  const name = document.getElementById('vl-input').value.trim();
+  if (!name) return;
+  vlLookup(name);
+}
+
+async function vlLookup(name) {
+  const el = document.getElementById('vl-result');
+  document.getElementById('vl-input').value = name;
+  el.innerHTML = '<p class="nk-loading">Looking up ' + escHtml(name) + '…</p>';
+  try {
+    const rows = await nkCargo(
+      'nh_villager',
+      'name,species,personality,birthday,quote,hobby,gender,image_url,catchphrase',
+      'name="' + name.replace(/"/g, '') + '"',
+      1
+    );
+    if (!rows.length) {
+      el.innerHTML = '<p class="nk-error">Villager "' + escHtml(name) + '" not found. Check spelling (e.g. "Kabuki" not "kabuki").</p>';
+      return;
+    }
+    const v = rows[0];
+    const onWishlist = WISHLIST.some(w => w.toLowerCase() === name.toLowerCase());
+    const img = v.image_url || '';
+    el.innerHTML = `
+      <div class="vl-result">
+        ${img ? `<img class="vl-img" src="${img}" alt="${escHtml(v.name)}" onerror="this.style.display='none'">` : ''}
+        <div class="vl-info">
+          <div class="vl-name">${escHtml(v.name)} ${onWishlist ? '<span style="font-size:.7rem;background:var(--green-lt);color:var(--green);border-radius:8px;padding:1px 7px;vertical-align:middle;">&#9733; Wishlist</span>' : ''}</div>
+          <div class="vl-meta">
+            <div>Species <span>${escHtml(v.species||'?')}</span></div>
+            <div>Personality <span>${escHtml(v.personality||'?')}</span></div>
+            <div>Birthday <span>${escHtml(v.birthday||'?')}</span></div>
+            <div>Hobby <span>${escHtml(v.hobby||'?')}</span></div>
+            <div>Gender <span>${escHtml(v.gender||'?')}</span></div>
+            <div>Catchphrase <span>&ldquo;${escHtml(v.catchphrase||'?')}&rdquo;</span></div>
+          </div>
+          ${v.quote ? `<div class="vl-quote">&ldquo;${escHtml(v.quote)}&rdquo;</div>` : ''}
+          <div class="vl-actions">
+            <button class="nk-btn sm" onclick="stPush('Find ${escHtml(v.name)} on mystery islands via NMT')">+ Add hunt to Thoughts</button>
+            <a class="nk-btn sm" href="https://nookipedia.com/wiki/${encodeURIComponent(v.name)}" target="_blank" rel="noopener" style="text-decoration:none;">Nookipedia &#8599;</a>
+          </div>
+        </div>
+      </div>`;
+  } catch(e) {
+    el.innerHTML = '<p class="nk-error">Could not load data. Check your internet connection.</p>';
+  }
+}
+
+// ── CRITTER TRACKER ──────────────────────────────────────────────
+let ctCurrent = 'fish';
+let ctCache = {};
+
+const CT_MONTH = new Date().getMonth() + 1; // current month, 1-12
+const CT_NEXT  = CT_MONTH === 12 ? 1 : CT_MONTH + 1;
+
+function ctSwitch(type) {
+  ctCurrent = type;
+  ['fish','bug','sea'].forEach(t => {
+    document.getElementById('ct-tab-' + t).classList.toggle('active', t === type);
+  });
+  if (ctCache[type]) {
+    ctRender(type, ctCache[type]);
+  } else {
+    ctLoad(type);
+  }
+}
+
+async function ctLoad(type) {
+  const tbody = document.getElementById('ct-tbody');
+  tbody.innerHTML = '<tr><td colspan="4" class="nk-loading">Loading…</td></tr>';
+  try {
+    let rows;
+    const mField = 'n_m' + CT_MONTH;
+    const mNextField = 'n_m' + CT_NEXT;
+    if (type === 'fish') {
+      rows = await nkCargo('nh_fish',
+        'name,location,sell_nook,' + mField + ',' + mNextField,
+        mField + '="1"', 100);
+      rows = rows.map(r => ({
+        name: r.name, where: r.location,
+        sell: parseInt(r.sell_nook)||0,
+        leaving: r[mNextField] !== '1'
+      }));
+    } else if (type === 'bug') {
+      rows = await nkCargo('nh_bug',
+        'name,location,sell_nook,' + mField + ',' + mNextField,
+        mField + '="1"', 100);
+      rows = rows.map(r => ({
+        name: r.name, where: r.location,
+        sell: parseInt(r.sell_nook)||0,
+        leaving: r[mNextField] !== '1'
+      }));
+    } else {
+      rows = await nkCargo('nh_sea_creature',
+        'name,sell_nook,' + mField + ',' + mNextField,
+        mField + '="1"', 100);
+      rows = rows.map(r => ({
+        name: r.name, where: 'Ocean (diving)',
+        sell: parseInt(r.sell_nook)||0,
+        leaving: r[mNextField] !== '1'
+      }));
+    }
+    // sort: leaving first, then by sell price desc
+    rows.sort((a, b) => (b.leaving - a.leaving) || (b.sell - a.sell));
+    ctCache[type] = rows;
+    ctRender(type, rows);
+  } catch(e) {
+    tbody.innerHTML = '<tr><td colspan="4" class="nk-error">Failed to load data. Try refreshing.</td></tr>';
+  }
+}
+
+function ctRender(type, rows) {
+  const thead = document.getElementById('ct-thead');
+  const tbody = document.getElementById('ct-tbody');
+  const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const monthName = monthNames[CT_MONTH - 1];
+
+  thead.innerHTML = `
+    <th>Name</th>
+    <th>Where</th>
+    <th class="ct-bell">${escHtml(String.fromCodePoint(0x1F514))} Bells</th>
+    <th>Status</th>`;
+
+  if (!rows.length) {
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:14px;color:var(--muted);">None available this month.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = rows.map(r => `
+    <tr class="${r.leaving ? 'ct-leaving' : ''}">
+      <td style="text-transform:capitalize;">${escHtml(r.name)}</td>
+      <td style="color:var(--muted);font-size:.8rem;">${escHtml(r.where||'—')}</td>
+      <td class="ct-bell">${r.sell.toLocaleString()}</td>
+      <td>${r.leaving
+        ? `<span class="ct-badge">Leaving ${monthName}</span>`
+        : '<span style="font-size:.72rem;color:var(--muted);">Next mo. ✓</span>'}
+      </td>
+    </tr>`).join('');
+}
+
+// ── RECIPE FINDER ───────────────────────────────────────────────
+function rfQuick(term) {
+  document.getElementById('rf-input').value = term;
+  rfSearch();
+}
+
+async function rfSearch() {
+  const term = document.getElementById('rf-input').value.trim();
+  if (!term) return;
+  const el = document.getElementById('rf-result');
+  el.innerHTML = '<p class="nk-loading">Searching recipes for "' + escHtml(term) + '"…</p>';
+  try {
+    // Try matching by item name or by any material field
+    const likeVal = '%' + term.toLowerCase() + '%';
+    // Nookipedia nh_recipe table fields: name, mat1, mat1_num, mat2, mat2_num, mat3, mat3_num, mat4, mat4_num, mat5, mat5_num
+    const fields = 'name,mat1,mat1_num,mat2,mat2_num,mat3,mat3_num,mat4,mat4_num,mat5,mat5_num';
+    // Search by name first
+    let rows = await nkCargo('nh_recipe', fields,
+      'LOWER(name) LIKE "' + likeVal.replace(/"/g,'') + '"', 30).catch(() => []);
+    // Also search by material
+    const matRows = await nkCargo('nh_recipe', fields,
+      'LOWER(mat1) LIKE "' + likeVal.replace(/"/g,'') + '"' +
+      ' OR LOWER(mat2) LIKE "' + likeVal.replace(/"/g,'') + '"' +
+      ' OR LOWER(mat3) LIKE "' + likeVal.replace(/"/g,'') + '"' +
+      ' OR LOWER(mat4) LIKE "' + likeVal.replace(/"/g,'') + '"' +
+      ' OR LOWER(mat5) LIKE "' + likeVal.replace(/"/g,'') + '"', 30).catch(() => []);
+    // Merge, dedupe by name
+    const seen = new Set();
+    const all = [...rows, ...matRows].filter(r => {
+      if (seen.has(r.name)) return false;
+      seen.add(r.name); return true;
+    });
+    if (!all.length) {
+      el.innerHTML = '<p style="padding:14px;color:var(--muted);font-size:.85rem;text-align:center;">No recipes found for "' + escHtml(term) + '". Try a different material name.</p>';
+      return;
+    }
+    const cards = all.map(r => {
+      const mats = [
+        r.mat1 ? `<strong>${r.mat1_num||1}x</strong> ${r.mat1}` : null,
+        r.mat2 ? `<strong>${r.mat2_num||1}x</strong> ${r.mat2}` : null,
+        r.mat3 ? `<strong>${r.mat3_num||1}x</strong> ${r.mat3}` : null,
+        r.mat4 ? `<strong>${r.mat4_num||1}x</strong> ${r.mat4}` : null,
+        r.mat5 ? `<strong>${r.mat5_num||1}x</strong> ${r.mat5}` : null,
+      ].filter(Boolean).join('<br>');
+      return `<div class="rf-item">
+        <div class="rf-item-name">${escHtml(r.name)}</div>
+        <div class="rf-mats">${mats || '<em>No materials listed</em>'}</div>
+      </div>`;
+    }).join('');
+    el.innerHTML = `<div class="rf-grid">${cards}</div>
+      <p style="font-size:.72rem;color:var(--muted);padding:0 14px 10px;">${all.length} recipe${all.length>1?'s':''} found · data via <a href="https://nookipedia.com" target="_blank">Nookipedia</a></p>`;
+  } catch(e) {
+    el.innerHTML = '<p class="nk-error">Could not load recipes. Check your connection.</p>';
+  }
+}
+
 // ── SPONTANEOUS THOUGHTS ──────────────────────────────────────────────
 const ST_KEY = 'st_items_v1';
 let stItems = []; // [{id, text, done}]
