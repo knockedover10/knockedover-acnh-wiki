@@ -4,6 +4,8 @@ This is my personal planning wiki for Animal Crossing: New Horizons. It serves a
 
 Everything here is a living document. Update the relevant page as the island evolves, keep the links below current, and log changes in [wiki/changelog.md](wiki/changelog.md).
 
+Chill only lol.
+
 ---
 
 ## Contents
