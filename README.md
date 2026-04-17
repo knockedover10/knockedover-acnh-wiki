@@ -48,13 +48,13 @@ Chill only lol.
 
 | Field | Status |
 |-------|--------|
-| **Island name** | Hanamori |
-| **Island theme** | Fully traditional Japanese |
-| **Current villagers** | Cherry, Axel |
-| **Villager wishlist** | Kabuki, Genji, Shino, Pekoe, Ken, Annalisa, Greta, Coco, Gladys / Blanche, Snake |
-| **Active planning areas** | Main village street, shrine district, bamboo grove, graveyard, onsen |
-| **Current stage** | Early game — first 10 days |
-| **3-star rating** | Not yet achieved |
+| 🏝️ **Island name** | Hanamori |
+| 🏯 **Island theme** | Fully traditional Japanese |
+| 🐾 **Current villagers** | Cherry, Axel |
+| ⭐ **Villager wishlist** | Kabuki, Genji, Shino, Pekoe, Ken, Annalisa, Greta, Coco, Gladys / Blanche, Snake |
+| 🗺️ **Active planning areas** | Main village street, shrine district, bamboo grove, graveyard, onsen |
+| 📅 **Current stage** | Early game — first 10 days |
+| 🌟 **3-star rating** | Not yet achieved |
 
 ---
 
