@@ -379,6 +379,180 @@
   }
   .v-note-row input::placeholder { color: #bbb0a0; }
 
+  /* ── SPONTANEOUS THOUGHTS ── */
+  .st-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+  .st-add-area {
+    padding: 12px 14px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .st-input-row {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+  }
+  .st-input-row input[type="text"] {
+    flex: 1;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--check-bg);
+    font-family: inherit;
+    font-size: .88rem;
+    color: var(--text);
+    outline: none;
+  }
+  .st-input-row input[type="text"]:focus { border-color: var(--brown); background: #fffef8; }
+  .st-input-row input::placeholder { color: #aaa090; }
+  .st-btn {
+    background: var(--brown);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 7px 14px;
+    font-family: inherit;
+    font-size: .85rem;
+    cursor: pointer;
+    white-space: nowrap;
+    letter-spacing: .02em;
+  }
+  .st-btn:hover { background: var(--charcoal); }
+  .st-btn.green { background: var(--green); }
+  .st-btn.green:hover { background: #406035; }
+  .st-btn.sm {
+    padding: 5px 10px;
+    font-size: .78rem;
+  }
+  .st-divider {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: .72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+  }
+  .st-divider::before, .st-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .st-prompt-row {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+  }
+  .st-prompt-row input[type="text"] {
+    flex: 1;
+    padding: 6px 10px;
+    border: 1px dashed var(--brown);
+    border-radius: 5px;
+    background: #fffef8;
+    font-family: inherit;
+    font-size: .85rem;
+    color: var(--text);
+    outline: none;
+    font-style: italic;
+  }
+  .st-prompt-row input:focus { border-style: solid; }
+  .st-prompt-row input::placeholder { color: #bbb0a0; font-style: italic; }
+  .st-list {
+    list-style: none;
+    padding: 0;
+  }
+  .st-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 9px 14px;
+    border-bottom: 1px dashed #ddd4c0;
+    animation: fadeIn .2s ease;
+  }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
+  .st-item:last-child { border-bottom: none; }
+  .st-item input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 17px;
+    height: 17px;
+    border: 2px solid var(--brown);
+    border-radius: 3px;
+    background: var(--check-bg);
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 2px;
+    position: relative;
+  }
+  .st-item input[type="checkbox"]:checked {
+    background: var(--green);
+    border-color: var(--green);
+  }
+  .st-item input[type="checkbox"]:checked::after {
+    content: '\2713';
+    position: absolute;
+    top: -2px;
+    left: 2px;
+    font-size: 12px;
+    color: #fff;
+  }
+  .st-item .st-label {
+    flex: 1;
+    font-size: .88rem;
+    line-height: 1.5;
+    cursor: pointer;
+  }
+  .st-item.done .st-label {
+    color: var(--muted);
+    text-decoration: line-through;
+  }
+  .st-del {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: .95rem;
+    cursor: pointer;
+    padding: 0 2px;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+    opacity: .5;
+  }
+  .st-del:hover { color: var(--red); opacity: 1; }
+  .st-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 14px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    font-size: .78rem;
+    color: var(--muted);
+  }
+  .st-empty {
+    padding: 18px 14px;
+    text-align: center;
+    color: var(--muted);
+    font-size: .85rem;
+    font-style: italic;
+  }
+  .st-processing {
+    font-size: .78rem;
+    color: var(--brown);
+    font-style: italic;
+    padding: 2px 0;
+    display: none;
+  }
+
   /* ── FOOTER ── */
   footer {
     text-align: center;
@@ -752,6 +926,34 @@
     </div>
   </div>
 
+  <!-- SPONTANEOUS THOUGHTS -->
+  <div class="section-title">Spontaneous Thoughts</div>
+  <div class="st-card">
+    <div class="st-add-area">
+      <!-- Direct add -->
+      <div class="st-input-row">
+        <input type="text" id="st-direct-input" placeholder="Add a new action item…" maxlength="200"
+               onkeydown="if(event.key==='Enter') stAddDirect()">
+        <button class="st-btn" onclick="stAddDirect()">+ Add</button>
+      </div>
+      <!-- AI prompt add -->
+      <div class="st-divider">or describe it naturally</div>
+      <div class="st-prompt-row">
+        <input type="text" id="st-prompt-input" placeholder="e.g. “remind me to check bamboo after rain” or “need to find Kabuki on mystery islands”…"
+               maxlength="300" onkeydown="if(event.key==='Enter') stAddFromPrompt()">
+        <button class="st-btn green" onclick="stAddFromPrompt()">&#10024; Parse</button>
+      </div>
+      <div class="st-processing" id="st-processing">Parsing your thought into an action item…</div>
+    </div>
+    <ul class="st-list" id="st-list">
+      <li class="st-empty" id="st-empty">No thoughts yet — add something above.</li>
+    </ul>
+    <div class="st-footer">
+      <span id="st-count">0 items</span>
+      <button class="st-btn sm" onclick="stClearDone()">Clear completed</button>
+    </div>
+  </div>
+
   <!-- 3-STAR TRACKER -->
   <div class="section-title">3-Star Requirement Tracker</div>
   <p style="font-size:.8rem;color:var(--muted);margin-bottom:10px;">
@@ -882,6 +1084,7 @@ const DAY_IDS = [
 document.addEventListener('DOMContentLoaded', () => {
   buildVillagerSection();
   loadAll();
+  stLoad();
   updateProgress();
   DAY_IDS.forEach(updateDayProgress);
   loadTrackers();
@@ -915,12 +1118,16 @@ function loadAll() {
 
 // ── PROGRESS BAR ─────────────────────────────────────────────────────
 function updateProgress() {
-  const all  = document.querySelectorAll('.checklist input[type="checkbox"]');
-  const done = document.querySelectorAll('.checklist input[type="checkbox"]:checked');
-  const pct  = all.length ? Math.round((done.length / all.length) * 100) : 0;
+  const dayAll  = document.querySelectorAll('.checklist input[type="checkbox"]');
+  const dayDone = document.querySelectorAll('.checklist input[type="checkbox"]:checked');
+  const stAll   = document.querySelectorAll('.st-item input[type="checkbox"]');
+  const stDone  = document.querySelectorAll('.st-item input[type="checkbox"]:checked');
+  const total   = dayAll.length + stAll.length;
+  const done    = dayDone.length + stDone.length;
+  const pct     = total ? Math.round((done / total) * 100) : 0;
   document.getElementById('main-bar').style.width = pct + '%';
   document.getElementById('pct-text').textContent  = pct + '%';
-  document.getElementById('count-text').textContent = done.length + ' / ' + all.length + ' tasks complete';
+  document.getElementById('count-text').textContent = done + ' / ' + total + ' tasks complete';
 }
 
 function updateDayProgress(dayId) {
@@ -1046,6 +1253,170 @@ function loadVillagerData() {
     }
   });
 }
+// ── SPONTANEOUS THOUGHTS ──────────────────────────────────────────────
+const ST_KEY = 'st_items_v1';
+let stItems = []; // [{id, text, done}]
+
+function stSave() {
+  localStorage.setItem(ST_KEY, JSON.stringify(stItems));
+}
+
+function stLoad() {
+  try {
+    stItems = JSON.parse(localStorage.getItem(ST_KEY) || '[]');
+  } catch(e) { stItems = []; }
+  stRender();
+}
+
+function stRender() {
+  const list  = document.getElementById('st-list');
+  const empty = document.getElementById('st-empty');
+  const count = document.getElementById('st-count');
+
+  // Remove all real items (not the empty placeholder)
+  list.querySelectorAll('.st-item').forEach(el => el.remove());
+
+  if (stItems.length === 0) {
+    empty.style.display = '';
+    count.textContent = '0 items';
+    updateProgress();
+    return;
+  }
+  empty.style.display = 'none';
+
+  stItems.forEach(item => {
+    const li = document.createElement('li');
+    li.className = 'st-item' + (item.done ? ' done' : '');
+    li.dataset.id = item.id;
+    li.innerHTML = `
+      <input type="checkbox" ${item.done ? 'checked' : ''}
+             onchange="stToggle('${item.id}', this)">
+      <span class="st-label" ondblclick="stEdit('${item.id}', this)">${escHtml(item.text)}</span>
+      <button class="st-del" title="Delete" onclick="stDelete('${item.id}')">&#10005;</button>
+    `;
+    list.appendChild(li);
+  });
+
+  const done  = stItems.filter(i => i.done).length;
+  const total = stItems.length;
+  count.textContent = total === 0 ? '0 items' :
+    done === total ? `All ${total} done ✓` :
+    `${done} / ${total} done`;
+
+  updateProgress();
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function stAddDirect() {
+  const inp = document.getElementById('st-direct-input');
+  const text = inp.value.trim();
+  if (!text) { inp.focus(); return; }
+  stPush(text);
+  inp.value = '';
+  inp.focus();
+}
+
+function stAddFromPrompt() {
+  const inp = document.getElementById('st-prompt-input');
+  const raw = inp.value.trim();
+  if (!raw) { inp.focus(); return; }
+
+  const proc = document.getElementById('st-processing');
+  proc.style.display = 'block';
+
+  // Client-side natural language parser — converts casual thoughts into clean action items
+  setTimeout(() => {
+    const text = stParsePrompt(raw);
+    stPush(text);
+    inp.value = '';
+    proc.style.display = 'none';
+    inp.focus();
+  }, 350);
+}
+
+function stParsePrompt(raw) {
+  let s = raw.trim();
+
+  // Strip filler openers
+  s = s.replace(/^(remind me to|remember to|don't forget to|need to|i need to|i want to|i should|should|want to|gotta|got to|have to|i have to|i gotta|note[:\s]+|todo[:\s]*)/i, '').trim();
+
+  // Strip trailing filler
+  s = s.replace(/\s*(pls|please|asap|later|eventually|ok|okay|thanks)$/i, '').trim();
+
+  // Capitalise first letter
+  s = s.charAt(0).toUpperCase() + s.slice(1);
+
+  // Strip trailing period and add none (keep it short)
+  s = s.replace(/\.+$/, '').trim();
+
+  return s || raw; // fallback to raw if parser emptied it
+}
+
+function stPush(text) {
+  const id = 'st_' + Date.now() + '_' + Math.random().toString(36).slice(2,6);
+  stItems.unshift({ id, text, done: false });
+  stSave();
+  stRender();
+}
+
+function stToggle(id, cb) {
+  const item = stItems.find(i => i.id === id);
+  if (!item) return;
+  item.done = cb.checked;
+  stSave();
+  // update the li class without full re-render (smoother)
+  const li = cb.closest('.st-item');
+  if (li) li.className = 'st-item' + (item.done ? ' done' : '');
+  const done  = stItems.filter(i => i.done).length;
+  const total = stItems.length;
+  document.getElementById('st-count').textContent =
+    done === total && total > 0 ? `All ${total} done \u2713` : `${done} / ${total} done`;
+  updateProgress();
+}
+
+function stDelete(id) {
+  stItems = stItems.filter(i => i.id !== id);
+  stSave();
+  stRender();
+}
+
+function stEdit(id, labelEl) {
+  // Double-click to inline-edit an item
+  const item = stItems.find(i => i.id === id);
+  if (!item || item.done) return;
+  const current = item.text;
+  const inp = document.createElement('input');
+  inp.type = 'text';
+  inp.value = current;
+  inp.style.cssText = 'flex:1;border:1px solid var(--brown);border-radius:4px;padding:2px 6px;font-family:inherit;font-size:.88rem;background:#fffef8;outline:none;';
+  labelEl.replaceWith(inp);
+  inp.focus();
+  inp.select();
+  function commit() {
+    const newText = inp.value.trim() || current;
+    item.text = newText;
+    stSave();
+    stRender();
+  }
+  inp.addEventListener('blur', commit);
+  inp.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { inp.blur(); }
+    if (e.key === 'Escape') { inp.value = current; inp.blur(); }
+  });
+}
+
+function stClearDone() {
+  const doneCnt = stItems.filter(i => i.done).length;
+  if (doneCnt === 0) return;
+  if (!confirm(`Remove ${doneCnt} completed item${doneCnt > 1 ? 's' : ''}?`)) return;
+  stItems = stItems.filter(i => !i.done);
+  stSave();
+  stRender();
+}
+
 </script>
 </body>
 </html>
