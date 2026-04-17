@@ -25,6 +25,16 @@ A running log of meaningful island updates. Append a short entry whenever a sign
 
 ---
 
+### 2026-04-18 — Added interactive dashboard via GitHub Pages
+
+- Added `docs/dashboard.html` — interactive 3-star checklist (Day 0–14), requirement tracker, district planning notes, and villager wishlist with localStorage persistence
+- Enabled GitHub Pages (served from `docs/` on `main` branch)
+- Dashboard URL: https://knockedover10.github.io/knockedover-acnh-wiki/dashboard.html
+- Linked dashboard from README Contents table and Recent Updates
+- Dashboard includes back-link to the wiki
+
+---
+
 ### 2026-04-18 — Added Trees & Nature page
 
 - Created `wiki/trees-and-nature.md` with tree spacing rules (sapling vs. transplanted adult), the Dense Orchard Method, bamboo mechanics, cedar tree tips, wood farming guidance, and a non-native fruit Bell strategy

@@ -12,6 +12,7 @@ Chill only lol.
 
 | Date | What changed |
 |------|--------------|
+| 2026-04-18 | [Dashboard](https://knockedover10.github.io/knockedover-acnh-wiki/dashboard.html) — interactive 3-star checklist and tracker added via GitHub Pages |
 | 2026-04-18 | [Trees & Nature](wiki/trees-and-nature.md) — new page: tree spacing, Dense Orchard Method, bamboo mechanics, Bell fruit tips |
 | 2026-04-18 | [Island Layout](wiki/island-layout.md) — bamboo grove cross-linked to Dense Orchard Method |
 | 2026-04-18 | [Items & Furniture](wiki/items-and-furniture.md) — bamboo section updated with nature page link |
@@ -24,7 +25,8 @@ Chill only lol.
 ## Contents
 
 | Page | What it covers |
-|------|---------------|
+|------|----------------|
+| [🗂 Interactive Dashboard](https://knockedover10.github.io/knockedover-acnh-wiki/dashboard.html) | 3-star checklist, progress tracker, planning notes (live web app) |
 | [Island Layout](wiki/island-layout.md) | Layout vision, districts, terraforming plans |
 | [Villagers](wiki/villagers.md) | Current residents, wishlist, thematic fit |
 | [Progression](wiki/progression.md) | Unlock order, 3-star goals, milestones |
