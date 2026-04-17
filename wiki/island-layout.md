@@ -43,6 +43,7 @@ The island is divided into distinct districts, each with a clear purpose and atm
 - Bamboo shoots planted in neat rows or natural-looking clusters
 - Paths through the grove use earthy, worn-looking patterns (dirt or wood)
 - Can include a small rest area — stone bench, bamboo basket, tea set
+- Use the Dense Orchard Method (transplanting adult bamboo) for an immediately full-looking grove — see [Trees & Nature → Bamboo Grove](trees-and-nature.md#bamboo-grove)
 - See also: [Items & Furniture → Bamboo items](items-and-furniture.md#bamboo-items)
 
 ---

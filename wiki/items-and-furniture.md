@@ -43,6 +43,8 @@ Required recipes involve bamboo pieces, young spring bamboo, and bamboo shoots.
 | Bamboo lunch box | DIY (bamboo) | ⬜ |
 
 > **Note:** Young spring bamboo only available in spring (Feb–May in Northern Hemisphere). Prioritise farming these DIYs now.
+>
+> For bamboo grove planting mechanics (spacing, transplanting, self-expansion), see [Trees & Nature → Bamboo Grove](trees-and-nature.md#bamboo-grove).
 
 ---
 

@@ -25,4 +25,12 @@ A running log of meaningful island updates. Append a short entry whenever a sign
 
 ---
 
+### 2026-04-18 — Added Trees & Nature page
+
+- Created `wiki/trees-and-nature.md` with tree spacing rules (sapling vs. transplanted adult), the Dense Orchard Method, bamboo mechanics, cedar tree tips, wood farming guidance, and a non-native fruit Bell strategy
+- Added cross-links from `island-layout.md` (bamboo grove section) and `items-and-furniture.md` (bamboo note)
+- Added Trees & Nature to README Contents table
+
+---
+
 *Future updates: append a new dated entry below the most recent one. Keep each entry brief — two to five bullet points is enough.*

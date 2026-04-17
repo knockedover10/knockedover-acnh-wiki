@@ -16,6 +16,7 @@ Everything here is a living document. Update the relevant page as the island evo
 | [Daily Checklists](wiki/daily-checklists.md) | First-10-days checklist, reusable daily routine |
 | [Items & Furniture](wiki/items-and-furniture.md) | Themed items, furniture wishlist, crafting targets |
 | [Ideas & Inspirations](wiki/ideas-and-inspirations.md) | Build ideas, district concepts, villager house plans |
+| [Trees & Nature](wiki/trees-and-nature.md) | Tree spacing, bamboo mechanics, wood farming, Bell fruit tips |
 | [Changelog](wiki/changelog.md) | Running log of island updates |
 
 ---
