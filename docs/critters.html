@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🦋 Critters — Hanamori Wiki</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ── */
+:root {
+  --bg:       #f5f0e8;
+  --surface:  #ede7d9;
+  --card:     #faf6ee;
+  --border:   #c8bfa8;
+  --text:     #2e2a22;
+  --muted:    #7a7060;
+  --green:    #5a7a4a;
+  --green-lt: #d4e2ca;
+  --brown:    #7a5c38;
+  --brown-lt: #e8d9c4;
+  --red:      #a83232;
+  --red-lt:   #f0dada;
+  --charcoal: #3a3530;
+  --sakura:   #e8b4c0;
+  --gold:     #c9a84c;
+  --check-bg: #f0e8d8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;padding-bottom:60px}
+a{color:var(--brown);text-decoration:none}
+a:hover{text-decoration:underline;color:var(--red)}
+
+/* ── HEADER ── */
+header{background:var(--charcoal);color:#f5f0e8;padding:20px 20px 16px;text-align:center;border-bottom:3px solid var(--red)}
+header h1{font-family:'Noto Serif JP',serif;font-size:1.5rem;font-weight:600;letter-spacing:.05em}
+header .subtitle{font-size:.8rem;color:rgba(245,240,232,.55);margin-top:4px;letter-spacing:.08em}
+
+/* ── NAV ── */
+.top-nav{background:var(--charcoal);border-top:1px solid rgba(255,255,255,.07);padding:0 20px;display:flex;justify-content:center;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.top-nav a{color:rgba(245,240,232,.7);font-size:.78rem;letter-spacing:.06em;padding:11px 13px;display:inline-block;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.top-nav a:hover,.top-nav a.active{color:var(--sakura);border-bottom-color:var(--sakura);text-decoration:none}
+
+/* ── PAGE WRAP ── */
+.page-wrap{max-width:1100px;margin:0 auto;padding:28px 16px}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
+.tab-btn{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 18px;font-family:'Lato',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;color:var(--muted);transition:all .18s;letter-spacing:.04em}
+.tab-btn:hover{background:var(--brown-lt);color:var(--brown)}
+.tab-btn.active{background:var(--charcoal);color:#f5f0e8;border-color:var(--charcoal)}
+
+/* ── FILTER BAR ── */
+.filter-bar{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:18px;display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+.filter-group{display:flex;flex-direction:column;gap:4px;min-width:140px}
+.filter-group label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.filter-group input,.filter-group select{background:var(--bg);border:1px solid var(--border);border-radius:5px;padding:6px 9px;font-family:'Lato',sans-serif;font-size:.82rem;color:var(--text);outline:none;transition:border-color .15s}
+.filter-group input:focus,.filter-group select:focus{border-color:var(--brown)}
+.filter-group input{min-width:180px}
+.filter-actions{display:flex;gap:8px;align-items:flex-end;margin-left:auto}
+.btn-reset{background:none;border:1px solid var(--border);border-radius:5px;padding:6px 14px;font-family:'Lato',sans-serif;font-size:.8rem;cursor:pointer;color:var(--muted);transition:all .15s}
+.btn-reset:hover{border-color:var(--red);color:var(--red)}
+
+/* ── STATS BAR ── */
+.stats-bar{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px;font-size:.8rem;color:var(--muted)}
+.stats-bar span{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:3px 12px}
+.stats-bar span b{color:var(--charcoal)}
+.leaving-badge{background:var(--red-lt)!important;border-color:rgba(168,50,50,.3)!important;color:var(--red)!important}
+.leaving-badge b{color:var(--red)!important}
+
+/* ── PROGRESS BAR ── */
+.progress-wrap{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:18px}
+.progress-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.progress-row:last-child{margin-bottom:0}
+.progress-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);min-width:80px}
+.progress-track{flex:1;background:var(--surface);border-radius:20px;height:8px;overflow:hidden}
+.progress-fill{height:100%;border-radius:20px;transition:width .4s ease}
+.fill-green{background:var(--green)}
+.fill-brown{background:var(--brown)}
+.progress-count{font-size:.8rem;color:var(--muted);min-width:52px;text-align:right}
+
+/* ── TABLE WRAPPER ── */
+.table-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;background:var(--card);min-width:700px}
+thead{background:var(--charcoal);color:#f5f0e8}
+thead th{padding:10px 12px;text-align:left;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;cursor:pointer;user-select:none;transition:background .15s}
+thead th:hover{background:#4a423c}
+thead th.sorted-asc::after{content:' ↑';opacity:.8}
+thead th.sorted-desc::after{content:' ↓';opacity:.8}
+thead th.no-sort{cursor:default}
+thead th.no-sort:hover{background:var(--charcoal)}
+
+tbody tr{border-bottom:1px solid var(--border);transition:background .12s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:var(--brown-lt)}
+tbody tr.leaving{background:var(--red-lt)}
+tbody tr.leaving:hover{background:#ecc8c8}
+tbody tr.hidden{display:none}
+tbody tr.fully-collected{opacity:.55}
+
+td{padding:9px 12px;vertical-align:middle;font-size:.83rem}
+
+/* ── CRITTER IMAGE ── */
+.critter-img-cell{width:52px;min-width:52px;text-align:center}
+.critter-img{width:44px;height:44px;object-fit:contain;image-rendering:pixelated;display:block;margin:0 auto;opacity:0;transition:opacity .3s}
+.critter-img.loaded{opacity:1}
+.critter-img-placeholder{width:44px;height:44px;background:var(--surface);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--muted);margin:0 auto}
+
+/* ── NAME CELL ── */
+.name-cell{font-weight:700;color:var(--charcoal)}
+.leaving-tag{display:inline-block;background:var(--red);color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.06em;border-radius:3px;padding:1px 5px;margin-left:5px;vertical-align:middle}
+.available-now{display:inline-block;background:var(--green);color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.06em;border-radius:3px;padding:1px 5px;margin-left:5px;vertical-align:middle}
+
+/* ── PRICE CELL ── */
+.price-cell{font-weight:700;color:var(--brown);white-space:nowrap}
+
+/* ── CHECKBOX CELL ── */
+.check-cell{text-align:center;white-space:nowrap}
+.check-label{display:inline-flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:2px 6px;border-radius:5px;transition:background .12s}
+.check-label:hover{background:var(--check-bg)}
+.check-label input[type=checkbox]{width:15px;height:15px;accent-color:var(--green);cursor:pointer}
+.check-label span{font-size:.62rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.check-label.checked span{color:var(--green)}
+
+/* ── MONTH CELL ── */
+.month-cell{font-size:.78rem;color:var(--muted)}
+
+/* ── NO RESULTS ── */
+.no-results{text-align:center;padding:40px;color:var(--muted);font-style:italic;display:none}
+
+/* ── SECTION TITLE ── */
+.section-title{font-family:'Noto Serif JP',serif;font-size:1.05rem;font-weight:600;color:var(--charcoal);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+
+/* ── PANEL ── */
+.panel{display:none}
+.panel.active{display:block}
+
+/* ── FOOTER ── */
+footer{background:var(--charcoal);color:rgba(245,240,232,.45);text-align:center;padding:20px;font-size:.75rem;border-top:3px solid var(--red);margin-top:40px}
+footer a{color:rgba(245,240,232,.5)}
+
+@media(max-width:600px){
+  .filter-bar{flex-direction:column}
+  .filter-actions{margin-left:0}
+  .filter-group{min-width:100%}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🦋 Critters</h1>
+  <div class="subtitle">Hikari @ Hanamori · Northern Hemisphere · Animal Crossing: New Horizons</div>
+</header>
+
+<nav class="top-nav">
+  <a href="index.html">🌸 Wiki Home</a>
+  <a href="dashboard.html">🖥️ Dashboard</a>
+  <a href="#fish" class="active" id="nav-fish">🐟 Fish</a>
+  <a href="#bugs" id="nav-bugs">🦟 Bugs</a>
+  <a href="#sea" id="nav-sea">🦀 Sea Creatures</a>
+  <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/critters.md" target="_blank" rel="noopener">📄 Raw MD</a>
+</nav>
+
+<main class="page-wrap">
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('fish')">🐟 Fish <span id="tab-fish-count"></span></button>
+    <button class="tab-btn" onclick="switchTab('bugs')">🦟 Bugs <span id="tab-bugs-count"></span></button>
+    <button class="tab-btn" onclick="switchTab('sea')">🦀 Sea Creatures <span id="tab-sea-count"></span></button>
+  </div>
+
+  <!-- ══════════ FISH PANEL ══════════ -->
+  <div class="panel active" id="panel-fish">
+    <div class="section-title">🐟 Fish</div>
+
+    <!-- Progress -->
+    <div class="progress-wrap" id="prog-fish">
+      <div class="progress-row">
+        <span class="progress-label">🪣 Caught</span>
+        <div class="progress-track"><div class="progress-fill fill-green" id="fill-fish-caught" style="width:0%"></div></div>
+        <span class="progress-count" id="cnt-fish-caught">0 / 80</span>
+      </div>
+      <div class="progress-row">
+        <span class="progress-label">🏛️ Donated</span>
+        <div class="progress-track"><div class="progress-fill fill-brown" id="fill-fish-donated" style="width:0%"></div></div>
+        <span class="progress-count" id="cnt-fish-donated">0 / 80</span>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-bar">
+      <div class="filter-group">
+        <label>Search</label>
+        <input type="text" id="fish-search" placeholder="Name…" oninput="applyFilters('fish')">
+      </div>
+      <div class="filter-group">
+        <label>Location</label>
+        <select id="fish-loc" onchange="applyFilters('fish')">
+          <option value="">All locations</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Month</label>
+        <select id="fish-month" onchange="applyFilters('fish')">
+          <option value="">All months</option>
+          <option value="1">January</option><option value="2">February</option>
+          <option value="3">March</option><option value="4">April</option>
+          <option value="5">May</option><option value="6">June</option>
+          <option value="7">July</option><option value="8">August</option>
+          <option value="9">September</option><option value="10">October</option>
+          <option value="11">November</option><option value="12">December</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Show</label>
+        <select id="fish-show" onchange="applyFilters('fish')">
+          <option value="all">All critters</option>
+          <option value="uncaught">Not yet caught</option>
+          <option value="undonated">Not yet donated</option>
+          <option value="leaving">Leaving this month ⚠️</option>
+        </select>
+      </div>
+      <div class="filter-actions">
+        <button class="btn-reset" onclick="resetFilters('fish')">↺ Reset</button>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-bar" id="fish-stats">
+      <span>Showing <b id="fish-visible">80</b> of <b>80</b> fish</span>
+      <span class="leaving-badge">⚠️ <b id="fish-leaving-count">0</b> leaving this month</span>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap">
+      <table id="fish-table">
+        <thead>
+          <tr>
+            <th class="no-sort">Pic</th>
+            <th onclick="sortTable('fish',1)">Name</th>
+            <th onclick="sortTable('fish',2)">Location</th>
+            <th onclick="sortTable('fish',3)">Time</th>
+            <th onclick="sortTable('fish',4)">Bells ↓</th>
+            <th onclick="sortTable('fish',5)">Months (NH)</th>
+            <th class="no-sort" style="text-align:center">🪣 Caught</th>
+            <th class="no-sort" style="text-align:center">🏛️ Donated</th>
+          </tr>
+        </thead>
+        <tbody id="fish-tbody"></tbody>
+      </table>
+      <div class="no-results" id="fish-no-results">No fish match your filters.</div>
+    </div>
+  </div>
+
+  <!-- ══════════ BUGS PANEL ══════════ -->
+  <div class="panel" id="panel-bugs">
+    <div class="section-title">🦟 Bugs</div>
+
+    <div class="progress-wrap" id="prog-bugs">
+      <div class="progress-row">
+        <span class="progress-label">🪣 Caught</span>
+        <div class="progress-track"><div class="progress-fill fill-green" id="fill-bugs-caught" style="width:0%"></div></div>
+        <span class="progress-count" id="cnt-bugs-caught">0 / 80</span>
+      </div>
+      <div class="progress-row">
+        <span class="progress-label">🏛️ Donated</span>
+        <div class="progress-track"><div class="progress-fill fill-brown" id="fill-bugs-donated" style="width:0%"></div></div>
+        <span class="progress-count" id="cnt-bugs-donated">0 / 80</span>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <div class="filter-group">
+        <label>Search</label>
+        <input type="text" id="bugs-search" placeholder="Name…" oninput="applyFilters('bugs')">
+      </div>
+      <div class="filter-group">
+        <label>Location</label>
+        <select id="bugs-loc" onchange="applyFilters('bugs')">
+          <option value="">All locations</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Month</label>
+        <select id="bugs-month" onchange="applyFilters('bugs')">
+          <option value="">All months</option>
+          <option value="1">January</option><option value="2">February</option>
+          <option value="3">March</option><option value="4">April</option>
+          <option value="5">May</option><option value="6">June</option>
+          <option value="7">July</option><option value="8">August</option>
+          <option value="9">September</option><option value="10">October</option>
+          <option value="11">November</option><option value="12">December</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Show</label>
+        <select id="bugs-show" onchange="applyFilters('bugs')">
+          <option value="all">All critters</option>
+          <option value="uncaught">Not yet caught</option>
+          <option value="undonated">Not yet donated</option>
+          <option value="leaving">Leaving this month ⚠️</option>
+        </select>
+      </div>
+      <div class="filter-actions">
+        <button class="btn-reset" onclick="resetFilters('bugs')">↺ Reset</button>
+      </div>
+    </div>
+
+    <div class="stats-bar" id="bugs-stats">
+      <span>Showing <b id="bugs-visible">80</b> of <b>80</b> bugs</span>
+      <span class="leaving-badge">⚠️ <b id="bugs-leaving-count">0</b> leaving this month</span>
+    </div>
+
+    <div class="table-wrap">
+      <table id="bugs-table">
+        <thead>
+          <tr>
+            <th class="no-sort">Pic</th>
+            <th onclick="sortTable('bugs',1)">Name</th>
+            <th onclick="sortTable('bugs',2)">Location</th>
+            <th onclick="sortTable('bugs',3)">Time</th>
+            <th onclick="sortTable('bugs',4)">Bells ↓</th>
+            <th onclick="sortTable('bugs',5)">Months (NH)</th>
+            <th class="no-sort" style="text-align:center">🪣 Caught</th>
+            <th class="no-sort" style="text-align:center">🏛️ Donated</th>
+          </tr>
+        </thead>
+        <tbody id="bugs-tbody"></tbody>
+      </table>
+      <div class="no-results" id="bugs-no-results">No bugs match your filters.</div>
+    </div>
+  </div>
+
+  <!-- ══════════ SEA PANEL ══════════ -->
+  <div class="panel" id="panel-sea">
+    <div class="section-title">🦀 Sea Creatures</div>
+
+    <div class="progress-wrap" id="prog-sea">
+      <div class="progress-row">
+        <span class="progress-label">🪣 Caught</span>
+        <div class="progress-track"><div class="progress-fill fill-green" id="fill-sea-caught" style="width:0%"></div></div>
+        <span class="progress-count" id="cnt-sea-caught">0 / 40</span>
+      </div>
+      <div class="progress-row">
+        <span class="progress-label">🏛️ Donated</span>
+        <div class="progress-track"><div class="progress-fill fill-brown" id="fill-sea-donated" style="width:0%"></div></div>
+        <span class="progress-count" id="cnt-sea-donated">0 / 40</span>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <div class="filter-group">
+        <label>Search</label>
+        <input type="text" id="sea-search" placeholder="Name…" oninput="applyFilters('sea')">
+      </div>
+      <div class="filter-group">
+        <label>Shadow Size</label>
+        <select id="sea-loc" onchange="applyFilters('sea')">
+          <option value="">All sizes</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Month</label>
+        <select id="sea-month" onchange="applyFilters('sea')">
+          <option value="">All months</option>
+          <option value="1">January</option><option value="2">February</option>
+          <option value="3">March</option><option value="4">April</option>
+          <option value="5">May</option><option value="6">June</option>
+          <option value="7">July</option><option value="8">August</option>
+          <option value="9">September</option><option value="10">October</option>
+          <option value="11">November</option><option value="12">December</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Show</label>
+        <select id="sea-show" onchange="applyFilters('sea')">
+          <option value="all">All critters</option>
+          <option value="uncaught">Not yet caught</option>
+          <option value="undonated">Not yet donated</option>
+          <option value="leaving">Leaving this month ⚠️</option>
+        </select>
+      </div>
+      <div class="filter-actions">
+        <button class="btn-reset" onclick="resetFilters('sea')">↺ Reset</button>
+      </div>
+    </div>
+
+    <div class="stats-bar" id="sea-stats">
+      <span>Showing <b id="sea-visible">40</b> of <b>40</b> sea creatures</span>
+      <span class="leaving-badge">⚠️ <b id="sea-leaving-count">0</b> leaving this month</span>
+    </div>
+
+    <div class="table-wrap">
+      <table id="sea-table">
+        <thead>
+          <tr>
+            <th class="no-sort">Pic</th>
+            <th onclick="sortTable('sea',1)">Name</th>
+            <th onclick="sortTable('sea',2)">Shadow Size</th>
+            <th onclick="sortTable('sea',3)">Bells ↓</th>
+            <th onclick="sortTable('sea',4)">Months (NH)</th>
+            <th class="no-sort" style="text-align:center">🪣 Caught</th>
+            <th class="no-sort" style="text-align:center">🏛️ Donated</th>
+          </tr>
+        </thead>
+        <tbody id="sea-tbody"></tbody>
+      </table>
+      <div class="no-results" id="sea-no-results">No sea creatures match your filters.</div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <span style="font-family:'Noto Serif JP',serif;color:rgba(245,240,232,.7);display:block;margin-bottom:4px">🌸 花森 — Hanamori</span>
+  Data from <a href="https://nookipedia.com" target="_blank" rel="noopener">Nookipedia</a> (CC BY-SA 3.0) ·
+  <a href="index.html">Wiki Home</a> · <a href="dashboard.html">Dashboard</a>
+</footer>
+
+<script>
+// ══════════════════════════════════════════════
+//  DATA  (embedded from wiki/critters.md)
+// ══════════════════════════════════════════════
+
+// months stored as array of month numbers (1–12); "All year" = [1..12]
+// leaving = true if available in current month (Apr=4) but NOT next (May=5)
+// image loaded lazily from Nookipedia API
+
+const CURRENT_MONTH = 4; // April
+const NEXT_MONTH    = 5; // May
+
+const FISH = [
+  {name:"Anchovy",       loc:"Sea",              time:"4 AM – 9 PM",              price:200,   months:[1,2,3,4,5,6,7,8,9,10,11,12], leaving:false},
+  {name:"Angelfish",     loc:"River",            time:"4 PM – 9 AM",              price:3000,  months:[5,6,7,8,9,10],                leaving:false},
+  {name:"Arapaima",      loc:"River",            time:"4 PM – 9 AM",              price:10000, months:[6,7,8,9],                     leaving:false},
+  {name:"Arowana",       loc:"River",            time:"4 PM – 9 AM",              price:10000, months:[6,7,8,9],                     leaving:false},
+  {name:"Barred knifejaw",loc:"Sea",             time:"All day",                  price:5000,  months:[3,4,5,6,7,8,9,10,11],        leaving:false},
+  {name:"Barreleye",     loc:"Sea",              time:"9 PM – 4 AM",              price:15000, months:[1,2,3,4,5,6,7,8,9,10,11,12], leaving:false},
+  {name:"Betta",         loc:"River",            time:"9 AM – 4 PM",              price:2500,  months:[5,6,7,8,9,10],                leaving:false},
+  {name:"Bitterling",    loc:"River",            time:"All day",                  price:900,   months:[11,12,1,2,3],                 leaving:false},
+  {name:"Black bass",    loc:"River",            time:"All day",                  price:400,   months:[1,2,3,4,5,6,7,8,9,10,11,12], leaving:false},
+  {name:"Blowfish",      loc:"Sea",              time:"9 PM – 4 AM",              price:5000,  months:[11,12,1,2],                   leaving:false},
+  {name:"Blue marlin",   loc:"Pier",             time:"All day",                  price:10000, months:[11,12,1,2,3,4,7,8,9],        leaving:true},
+  {name:"Bluegill",      loc:"River",            time:"9 AM – 4 PM",              price:180,   months:[1,2,3,4,5,6,7,8,9,10,11,12], leaving:false},
+  {name:"Butterfly fish",loc:"Sea",              time:"All day",                  price:1000,  months:[4,5,6,7,8,9],                 leaving:false},
+  {name:"Carp",          loc:"Pond",             time:"All day",                  price:300,   months:[1,2,3,4,5,6,7,8,9,10,11,12], leaving:false},
+  {name:"Catfish",       loc:"Pond",             time:"4 PM – 9 AM",              price:800,   months:[5,6,7,8,9,10],                leaving:false},
+  {name:"Char",          loc:"River (clifftop)", time:"4 PM – 9 AM",              price:3800,  months:[3,4,5,6,9,10,11],             leaving:false},
+  {name:"Cherry salmon", loc:"River (clifftop)", time:"4 PM – 9 AM",              price:1000,  months:[3,4,5,6,9,10,11],             leaving:false},
+  {name:"Clown fish",    loc:"Sea",              time:"All day",                  price:650,   months:[4,5,6,7,8,9],                 leaving:false},
+  {name:"Coelacanth",    loc:"Sea (raining)",    time:"All day",                  price:15000, months:[1,2,3,4,5,6,7,8,9,10,11,12], leaving:false},
+  {name:"Crawfish",      loc:"Pond",             time:"All day",                  price:200,   months:[4,5,6,7,8,9],                 leaving:false},
+  {name:"Crucian carp",  loc:"River",            time:"All day",                  price:160,   months:[1,2,3,4,5,6,7,8,9,10,11,12], leaving:false},
+  {name:"Dab",           loc:"Sea",              time:"All day",                  price:300,   months:[10,11,12,1,2,3,4],            leaving:true},
+  {name:"Dace",          loc:"River",            time:"4 PM – 9 AM",              price:240,   months:[1,2,3,4,5,6,7,8,9,10,11,12], leaving:false},
+  {name:"Dorado",        loc:"River",            time:"4 AM – 9 PM",              price:15000, months:[6,7,8,9],                     leaving:false},
+  {name:"Football fish", loc:"Sea",              time:"4 PM – 9 AM",              price:2500,  months:[11,12,1,2,3],                 leaving:false},
+  {name:"Freshwater goby",loc:"River",           time:"4 PM – 9 AM",              price:400,   months:[1,2,3,4,5,6,7,8,9,10,11,12], leaving:false},
+  {name:"Frog",          loc:"Pond",             time:"All day",                  price:120,   months:[5,6,7,8],                     leaving:false},
+  {name:"Gar",           loc:"Pond",             time:"4 PM – 9 AM",              price:6000,  months:[6,7,8,9],                     leaving:false},
+  {name:"Giant snakehead",loc:"Pond",            time:"9 AM – 4 PM",              price:5500,  months:[6,7,8],                       leaving:false},
+  {name:"Giant trevally",loc:"Pier",             time:"All day",                  price:4500,  months:[5,6,7,8,9,10],                leaving:false},
+  {name:"Goldfish",      loc:"Pond",             time:"All day",                  price:1300,  months:[1,2,3,4,5,6,7,8,9,10,11,12], leaving:false},
+  {name:"Golden trout",  loc:"River (clifftop)", time:"4 PM – 9 AM",              price:15000, months:[3,4,5,9,10,11],               leaving:false},
+  {name:"Great white shark",loc:"Sea",           time:"4 PM – 9 AM",              price:15000, months:[6,7,8,9],                     leaving:false},
+  {name:"Guppy",         loc:"River",            time:"9 AM – 4 PM",              price:1300,  months:[4,5,6,7,8,9,10,11],           leaving:false},
+  {name:"Hammerhead shark",loc:"Sea",            time:"4 PM – 9 AM",              price:8000,  months:[6,7,8,9],                     leaving:false},
+  {name:"Horse mackerel",loc:"Sea",              time:"All day",                  price:150,   months:[1,2,3,4,5,6,7,8,9,10,11,12], leaving:false},
+  {name:"Killifish",     loc:"Pond",             time:"All day",                  price:300,   months:[4,5,6,7,8],                   leaving:false},
+  {name:"King salmon",   loc:"River (mouth)",    time:"All day",                  price:1800,  months:[9],                           leaving:false},
+  {name:"Koi",           loc:"Pond",             time:"4 PM – 9 AM",              price:4000,  months:[1,2,3,4,5,6,7,8,9,10,11,12], leaving:false},
+  {name:"Loach",         loc:"River",            time:"All day",                  price:400,   months:[3,4,5],                       leaving:false},
+  {name:"Mahi-mahi",     loc:"Pier",             time:"All day",                  price:6000,  months:[5,6,7,8,9,10],                leaving:false},
+  {name:"Mitten crab",   loc:"River",            time:"4 PM – 9 AM",              price:2000,  months:[9,10,11],                     leaving:false},
+  {name:"Moray eel",     loc:"Sea",              time:"All day",                  price:2000,  months:[8,9,10],                      leaving:false},
+  {name:"Napoleonfish",  loc:"Sea",              time:"4 AM – 9 PM",              price:10000, months:[7,8],                         leaving:false},
+  {name:"Neon tetra",    loc:"River",            time:"9 AM – 4 PM",              price:500,   months:[4,5,6,7,8,9,10,11],           leaving:false},
+  {name:"Nibble fish",   loc:"River",            time:"9 AM – 4 PM",              price:1500,  months:[5,6,7,8,9],                   leaving:false},
+  {name:"Oarfish",       loc:"Sea",              time:"All day",                  price:9000,  months:[12,1,2,3,4,5],                leaving:false},
+  {name:"Ocean sunfish", loc:"Sea",              time:"4 AM – 9 PM",              price:4000,  months:[7,8,9],                       leaving:false},
+  {name:"Olive flounder",loc:"Sea",              time:"All day",                  price:800,   months:[1,2,3,4,5,6,7,8,9,10,11,12], leaving:false},
+  {name:"Pale chub",     loc:"River",            time:"9 AM – 4 PM",              price:200,   months:[1,2,3,4,5,6,7,8,9,10,11,12], leaving:false},
+  {name:"Pike",          loc:"River",            time:"All day",                  price:1800,  months:[9,10,11,12],                  leaving:false},
+  {name:"Piranha",       loc:"River",            time:"9 AM – 4 PM & 9 PM – 4 AM",price:2500, months:[6,7,8,9],                     leaving:false},
+  {name:"Pond smelt",    loc:"River",            time:"All day",                  price:400,   months:[12,1,2],                      leaving:false},
+  {name:"Pop-eyed goldfish",loc:"Pond",          time:"9 AM – 4 PM",              price:1300,  months:[1,2,3,4,5,6,7,8,9,10,11,12], leaving:false},
+  {name:"Puffer fish",   loc:"Sea",              time:"All day",                  price:250,   months:[7,8,9],                       leaving:false},
+  {name:"Rainbowfish",   loc:"River",            time:"9 AM – 4 PM",              price:800,   months:[5,6,7,8,9,10],                leaving:false},
+  {name:"Ranchu goldfish",loc:"Pond",            time:"9 AM – 4 PM",              price:4500,  months:[1,2,3,4,5,6,7,8,9,10,11,12], leaving:false},
+  {name:"Ray",           loc:"Sea",              time:"4 AM – 9 PM",              price:3000,  months:[8,9,10,11],                   leaving:false},
+  {name:"Red snapper",   loc:"Sea",              time:"All day",                  price:3000,  months:[1,2,3,4,5,6,7,8,9,10,11,12], leaving:false},
+  {name:"Ribbon eel",    loc:"Sea",              time:"All day",                  price:600,   months:[6,7,8,9,10],                  leaving:false},
+  {name:"Saddled bichir",loc:"River",            time:"9 PM – 4 AM",              price:4000,  months:[6,7,8,9],                     leaving:false},
+  {name:"Salmon",        loc:"River (mouth)",    time:"All day",                  price:700,   months:[9],                           leaving:false},
+  {name:"Saw shark",     loc:"Sea",              time:"4 PM – 9 AM",              price:12000, months:[6,7,8,9],                     leaving:false},
+  {name:"Sea bass",      loc:"Sea",              time:"All day",                  price:400,   months:[1,2,3,4,5,6,7,8,9,10,11,12], leaving:false},
+  {name:"Sea butterfly", loc:"Sea",              time:"All day",                  price:1000,  months:[12,1,2,3],                    leaving:false},
+  {name:"Sea horse",     loc:"Sea",              time:"All day",                  price:1100,  months:[4,5,6,7,8,9,10,11],           leaving:false},
+  {name:"Snapping turtle",loc:"River",           time:"9 PM – 4 AM",              price:5000,  months:[4,5,6,7,8,9,10],              leaving:false},
+  {name:"Soft-shelled turtle",loc:"River",       time:"4 PM – 9 AM",              price:3750,  months:[8,9],                         leaving:false},
+  {name:"Squid",         loc:"Sea",              time:"All day",                  price:500,   months:[12,1,2,3,4,5,6,7,8],          leaving:false},
+  {name:"Stringfish",    loc:"River (clifftop)", time:"4 PM – 9 AM",              price:15000, months:[12,1,2,3],                    leaving:false},
+  {name:"Sturgeon",      loc:"River (mouth)",    time:"All day",                  price:10000, months:[9,10,11,12,1,2,3],            leaving:false},
+  {name:"Suckerfish",    loc:"Sea",              time:"All day",                  price:1500,  months:[6,7,8,9],                     leaving:false},
+  {name:"Surgeonfish",   loc:"Sea",              time:"All day",                  price:1000,  months:[4,5,6,7,8,9],                 leaving:false},
+  {name:"Sweetfish",     loc:"River",            time:"All day",                  price:900,   months:[7,8,9],                       leaving:false},
+  {name:"Tadpole",       loc:"Pond",             time:"All day",                  price:100,   months:[3,4,5,6,7],                   leaving:false},
+  {name:"Tilapia",       loc:"River",            time:"All day",                  price:800,   months:[6,7,8,9,10],                  leaving:false},
+  {name:"Tuna",          loc:"Pier",             time:"All day",                  price:7000,  months:[11,12,1,2,3,4],               leaving:true},
+  {name:"Whale shark",   loc:"Sea",              time:"All day",                  price:13000, months:[6,7,8,9],                     leaving:false},
+  {name:"Yellow perch",  loc:"River",            time:"All day",                  price:300,   months:[10,11,12,1,2,3],              leaving:false},
+  {name:"Zebra turkeyfish",loc:"Sea",            time:"All day",                  price:500,   months:[4,5,6,7,8,9,10,11],           leaving:false},
+];
+
+const BUGS = [
+  {name:"Agrias butterfly",   loc:"Flying near flowers",                                    time:"8 AM – 5 PM",                 price:3000,  months:[4,5,6,7,8,9],       leaving:false},
+  {name:"Ant",                loc:"On/near spoiled turnips or candy",                        time:"All day",                     price:80,    months:[1,2,3,4,5,6,7,8,9,10,11,12],leaving:false},
+  {name:"Atlas moth",         loc:"On trees (any kind)",                                     time:"7 PM – 4 AM",                 price:3000,  months:[4,5,6,7,8,9],       leaving:false},
+  {name:"Bagworm",            loc:"Shaking trees",                                           time:"All day",                     price:600,   months:[1,2,3,4,5,6,7,8,9,10,11,12],leaving:false},
+  {name:"Banded dragonfly",   loc:"Flying near water",                                       time:"8 AM – 5 PM",                 price:4500,  months:[5,6,7,8,9,10],      leaving:false},
+  {name:"Bell cricket",       loc:"On the ground",                                           time:"5 PM – 8 AM",                 price:430,   months:[9,10],               leaving:false},
+  {name:"Blue weevil beetle", loc:"On palm trees",                                           time:"All day",                     price:800,   months:[7,8],                leaving:false},
+  {name:"Brown cicada",       loc:"On trees (hardwood and cedar)",                           time:"8 AM – 5 PM",                 price:250,   months:[7,8],                leaving:false},
+  {name:"Centipede",          loc:"From hitting rocks",                                      time:"4 PM – 11 PM",                price:300,   months:[9,10,11,12,1,2,3,4,5,6],leaving:false},
+  {name:"Cicada shell",       loc:"On trees (hardwood and cedar)",                           time:"All day",                     price:10,    months:[7,8],                leaving:false},
+  {name:"Citrus long-horned beetle",loc:"On tree stumps",                                   time:"All day",                     price:350,   months:[1,2,3,4,5,6,7,8,9,10,11,12],leaving:false},
+  {name:"Common bluebottle",  loc:"Flying",                                                  time:"4 AM – 7 PM",                 price:300,   months:[4,5,6,7,8],          leaving:false},
+  {name:"Common butterfly",   loc:"Flying",                                                  time:"4 AM – 7 PM",                 price:160,   months:[9,10,11,12,1,2,3,4,5,6],leaving:false},
+  {name:"Cricket",            loc:"On the ground",                                           time:"5 PM – 8 AM",                 price:130,   months:[9,10,11],            leaving:false},
+  {name:"Cyclommatus stag",   loc:"On palm trees",                                           time:"5 PM – 8 AM",                 price:8000,  months:[7,8],                leaving:false},
+  {name:"Damselfly",          loc:"Flying near water",                                       time:"All day",                     price:500,   months:[11,12,1,2],          leaving:false},
+  {name:"Darner dragonfly",   loc:"Flying near water",                                       time:"8 AM – 5 PM",                 price:230,   months:[4,5,6,7,8,9,10],     leaving:false},
+  {name:"Diving beetle",      loc:"On rivers and ponds",                                     time:"8 AM – 7 PM",                 price:800,   months:[5,6,7,8,9],          leaving:false},
+  {name:"Drone beetle",       loc:"On trees (any kind)",                                     time:"All day",                     price:200,   months:[6,7,8],              leaving:false},
+  {name:"Dung beetle",        loc:"Pushing snowballs",                                       time:"All day",                     price:3000,  months:[12,1,2],             leaving:false},
+  {name:"Earth-boring dung beetle",loc:"On the ground",                                     time:"All day",                     price:300,   months:[7,8,9],              leaving:false},
+  {name:"Emperor butterfly",  loc:"Flying near flowers",                                     time:"5 PM – 8 AM",                 price:4000,  months:[12,1,2,3,6,7,8,9],   leaving:false},
+  {name:"Evening cicada",     loc:"On trees (hardwood and cedar)",                           time:"4 AM – 8 AM & 4 PM – 7 PM",  price:550,   months:[7,8],                leaving:false},
+  {name:"Firefly",            loc:"Flying near water",                                       time:"7 PM – 4 AM",                 price:300,   months:[6],                  leaving:false},
+  {name:"Flea",               loc:"On villagers",                                            time:"All day",                     price:70,    months:[4,5,6,7,8,9,10,11],  leaving:false},
+  {name:"Fly",                loc:"Flying near trash or rotten turnips",                     time:"All day",                     price:60,    months:[1,2,3,4,5,6,7,8,9,10,11,12],leaving:false},
+  {name:"Giant cicada",       loc:"On trees (hardwood and cedar)",                           time:"8 AM – 5 PM",                 price:500,   months:[7,8],                leaving:false},
+  {name:"Giant stag",         loc:"On trees (any kind)",                                     time:"11 PM – 8 AM",                price:10000, months:[7,8],                leaving:false},
+  {name:"Giant water bug",    loc:"On rivers and ponds",                                     time:"7 PM – 8 AM",                 price:2000,  months:[4,5,6,7,8,9],        leaving:false},
+  {name:"Giraffe stag",       loc:"On palm trees",                                           time:"5 PM – 8 AM",                 price:12000, months:[7,8],                leaving:false},
+  {name:"Golden stag",        loc:"On palm trees",                                           time:"5 PM – 8 AM",                 price:12000, months:[7,8],                leaving:false},
+  {name:"Goliath beetle",     loc:"On palm trees",                                           time:"5 PM – 8 AM",                 price:8000,  months:[6,7,8,9],            leaving:false},
+  {name:"Grasshopper",        loc:"On the ground",                                           time:"8 AM – 5 PM",                 price:160,   months:[7,8,9],              leaving:false},
+  {name:"Great purple emperor",loc:"Flying near flowers",                                    time:"4 AM – 7 PM",                 price:3000,  months:[5,6,7,8],            leaving:false},
+  {name:"Hermit crab",        loc:"Disguised on shoreline",                                  time:"7 PM – 8 AM",                 price:1000,  months:[1,2,3,4,5,6,7,8,9,10,11,12],leaving:false},
+  {name:"Honeybee",           loc:"Flying near flowers",                                     time:"8 AM – 5 PM",                 price:200,   months:[3,4,5,6,7],          leaving:false},
+  {name:"Horned atlas",       loc:"On palm trees",                                           time:"5 PM – 8 AM",                 price:8000,  months:[7,8],                leaving:false},
+  {name:"Horned dynastid",    loc:"On trees (any kind)",                                     time:"5 PM – 8 AM",                 price:1350,  months:[7,8],                leaving:false},
+  {name:"Horned elephant",    loc:"On palm trees",                                           time:"5 PM – 8 AM",                 price:8000,  months:[7,8],                leaving:false},
+  {name:"Horned hercules",    loc:"On palm trees",                                           time:"5 PM – 8 AM",                 price:12000, months:[7,8],                leaving:false},
+  {name:"Jewel beetle",       loc:"On tree stumps",                                          time:"All day",                     price:2400,  months:[4,5,6,7,8],          leaving:false},
+  {name:"Ladybug",            loc:"On flowers",                                              time:"8 AM – 5 PM",                 price:200,   months:[3,4,5,6,10],         leaving:false},
+  {name:"Long locust",        loc:"On the ground",                                           time:"8 AM – 7 PM",                 price:200,   months:[4,5,6,7,8,9,10,11],  leaving:false},
+  {name:"Madagascan sunset moth",loc:"Flying near flowers",                                  time:"8 AM – 4 PM",                 price:2500,  months:[4,5,6,7,8,9],        leaving:false},
+  {name:"Man-faced stink bug",loc:"On flowers",                                              time:"7 PM – 8 AM",                 price:1000,  months:[3,4,5,6,7,8,9,10],   leaving:false},
+  {name:"Mantis",             loc:"On flowers",                                              time:"8 AM – 5 PM",                 price:430,   months:[3,4,5,6,7,8,9,10,11],leaving:false},
+  {name:"Migratory locust",   loc:"On the ground",                                           time:"8 AM – 7 PM",                 price:600,   months:[8,9,10,11],           leaving:false},
+  {name:"Miyama stag",        loc:"On trees (any kind)",                                     time:"All day",                     price:1000,  months:[7,8],                leaving:false},
+  {name:"Mole cricket",       loc:"Underground",                                             time:"All day",                     price:500,   months:[11,12,1,2,3,4,5],    leaving:false},
+  {name:"Monarch butterfly",  loc:"Flying near flowers",                                     time:"4 AM – 5 PM",                 price:140,   months:[9,10,11],            leaving:false},
+  {name:"Mosquito",           loc:"Flying",                                                  time:"5 PM – 4 AM",                 price:130,   months:[6,7,8,9],            leaving:false},
+  {name:"Moth",               loc:"Flying near light sources",                               time:"7 PM – 4 AM",                 price:130,   months:[1,2,3,4,5,6,7,8,9,10,11,12],leaving:false},
+  {name:"Orchid mantis",      loc:"On white flowers",                                        time:"8 AM – 5 PM",                 price:2400,  months:[3,4,5,6,7,8,9,10,11],leaving:false},
+  {name:"Paper kite butterfly",loc:"Flying near flowers",                                    time:"8 AM – 7 PM",                 price:1000,  months:[1,2,3,4,5,6,7,8,9,10,11,12],leaving:false},
+  {name:"Peacock butterfly",  loc:"Flying near blue, purple, and black flowers",             time:"4 AM – 7 PM",                 price:2500,  months:[3,4,5,6],            leaving:false},
+  {name:"Pill bug",           loc:"From hitting rocks",                                      time:"11 PM – 4 PM",                price:250,   months:[9,10,11,12,1,2,3,4,5,6],leaving:false},
+  {name:"Pondskater",         loc:"On rivers and ponds",                                     time:"8 AM – 7 PM",                 price:130,   months:[5,6,7,8,9],          leaving:false},
+  {name:"Queen Alexandra's birdwing",loc:"Flying near flowers",                              time:"8 AM – 4 PM",                 price:4000,  months:[5,6,7,8,9],          leaving:false},
+  {name:"Rainbow stag",       loc:"On trees (any kind)",                                     time:"7 PM – 8 AM",                 price:6000,  months:[6,7,8,9],            leaving:false},
+  {name:"Rajah Brooke's birdwing",loc:"Flying near flowers",                                time:"8 AM – 5 PM",                 price:2500,  months:[12,1,2,4,5,6,7,8,9], leaving:false},
+  {name:"Red dragonfly",      loc:"Flying near water",                                       time:"8 AM – 7 PM",                 price:180,   months:[9,10],               leaving:false},
+  {name:"Rice grasshopper",   loc:"On the ground",                                           time:"8 AM – 7 PM",                 price:400,   months:[8,9,10,11],           leaving:false},
+  {name:"Robust cicada",      loc:"On trees (hardwood and cedar)",                           time:"8 AM – 5 PM",                 price:300,   months:[7,8],                leaving:false},
+  {name:"Rosalia batesi beetle",loc:"On tree stumps",                                        time:"All day",                     price:3000,  months:[5,6,7,8,9],          leaving:false},
+  {name:"Saw stag",           loc:"On trees (any kind)",                                     time:"All day",                     price:2000,  months:[7,8],                leaving:false},
+  {name:"Scarab beetle",      loc:"On trees (any kind)",                                     time:"11 PM – 8 AM",                price:10000, months:[7,8],                leaving:false},
+  {name:"Scorpion",           loc:"On the ground",                                           time:"7 PM – 4 AM",                 price:8000,  months:[5,6,7,8,9,10],       leaving:false},
+  {name:"Snail",              loc:"On rocks and bushes (rainy days)",                        time:"All day",                     price:250,   months:[1,2,3,4,5,6,7,8,9,10,11,12],leaving:false},
+  {name:"Spider",             loc:"Shaking trees",                                           time:"7 PM – 8 AM",                 price:600,   months:[1,2,3,4,5,6,7,8,9,10,11,12],leaving:false},
+  {name:"Stinkbug",           loc:"On flowers",                                              time:"All day",                     price:120,   months:[3,4,5,6,7,8,9,10],   leaving:false},
+  {name:"Tarantula",          loc:"On the ground",                                           time:"7 PM – 4 AM",                 price:8000,  months:[11,12,1,2,3,4],       leaving:true},
+  {name:"Tiger beetle",       loc:"On the ground",                                           time:"All day",                     price:1500,  months:[2,3,4,5,6,7,8,9,10], leaving:false},
+  {name:"Tiger butterfly",    loc:"Flying",                                                  time:"4 AM – 7 PM",                 price:240,   months:[3,4,5,6,7,8,9],      leaving:false},
+  {name:"Violin beetle",      loc:"On tree stumps",                                          time:"All day",                     price:450,   months:[5,6,9,10,11],         leaving:false},
+  {name:"Walker cicada",      loc:"On trees (hardwood and cedar)",                           time:"8 AM – 5 PM",                 price:400,   months:[8,9],                leaving:false},
+  {name:"Walking leaf",       loc:"Disguised under trees",                                   time:"All day",                     price:600,   months:[7,8,9],              leaving:false},
+  {name:"Walking stick",      loc:"On trees (any kind)",                                     time:"4 AM – 8 AM & 5 PM – 7 PM",  price:600,   months:[7,8,9,10,11],         leaving:false},
+  {name:"Wasp",               loc:"Shaking non-fruit hardwood or cedar trees",               time:"All day",                     price:2500,  months:[1,2,3,4,5,6,7,8,9,10,11,12],leaving:false},
+  {name:"Wharf roach",        loc:"On beach rocks",                                          time:"All day",                     price:200,   months:[1,2,3,4,5,6,7,8,9,10,11,12],leaving:false},
+  {name:"Yellow butterfly",   loc:"Flying",                                                  time:"4 AM – 7 PM",                 price:160,   months:[3,4,5,6,9,10],        leaving:false},
+];
+
+const SEA = [
+  {name:"Abalone",           loc:"Medium",    price:2000,  months:[6,7,8,9,10,11,12,1],  leaving:false},
+  {name:"Acorn barnacle",    loc:"Tiny",      price:600,   months:[1,2,3,4,5,6,7,8,9,10,11,12],leaving:false},
+  {name:"Chambered nautilus",loc:"Medium",    price:1800,  months:[3,4,5,6,9,10,11],     leaving:false},
+  {name:"Dungeness crab",    loc:"Medium",    price:1900,  months:[11,12,1,2,3,4,5],     leaving:false},
+  {name:"Firefly squid",     loc:"Tiny",      price:1400,  months:[3,4,5,6],             leaving:false},
+  {name:"Flatworm",          loc:"Tiny",      price:700,   months:[8,9],                 leaving:false},
+  {name:"Gazami crab",       loc:"Medium",    price:2200,  months:[6,7,8,9,10,11],       leaving:false},
+  {name:"Giant isopod",      loc:"Medium",    price:12000, months:[7,8,9,10],            leaving:false},
+  {name:"Gigas giant clam",  loc:"Very large",price:15000, months:[5,6,7,8,9],           leaving:false},
+  {name:"Horseshoe crab",    loc:"Medium",    price:2500,  months:[7,8,9],               leaving:false},
+  {name:"Lobster",           loc:"Large",     price:4500,  months:[12,1,4,5,6],          leaving:false},
+  {name:"Mantis shrimp",     loc:"Small",     price:2500,  months:[1,2,3,4,5,6,7,8,9,10,11,12],leaving:false},
+  {name:"Moon jellyfish",    loc:"Small",     price:600,   months:[7,8,9],               leaving:false},
+  {name:"Mussel",            loc:"Small",     price:1500,  months:[6,7,8,9,10,11,12],    leaving:false},
+  {name:"Octopus",           loc:"Medium",    price:1200,  months:[1,2,3,4,5,6,7,8,9,10,11,12],leaving:false},
+  {name:"Oyster",            loc:"Small",     price:1100,  months:[9,10,11,12,1,2],      leaving:false},
+  {name:"Pearl oyster",      loc:"Small",     price:2800,  months:[1,2,3,4,5,6,7,8,9,10,11,12],leaving:false},
+  {name:"Red king crab",     loc:"Large",     price:8000,  months:[11,12,1,2,3],         leaving:false},
+  {name:"Scallop",           loc:"Medium",    price:1200,  months:[1,2,3,4,5,6,7,8,9,10,11,12],leaving:false},
+  {name:"Sea anemone",       loc:"Large",     price:500,   months:[1,2,3,4,5,6,7,8,9,10,11,12],leaving:false},
+  {name:"Sea cucumber",      loc:"Medium",    price:500,   months:[11,12,1,2,3,4],       leaving:true},
+  {name:"Sea grapes",        loc:"Small",     price:900,   months:[6,7,8,9],             leaving:false},
+  {name:"Sea pig",           loc:"Small",     price:10000, months:[11,12,1,2],           leaving:false},
+  {name:"Sea pineapple",     loc:"Small",     price:1500,  months:[4,5,6,7,8],           leaving:false},
+  {name:"Sea slug",          loc:"Tiny",      price:600,   months:[1,2,3,4,5,6,7,8,9,10,11,12],leaving:false},
+  {name:"Sea star",          loc:"Small",     price:500,   months:[1,2,3,4,5,6,7,8,9,10,11,12],leaving:false},
+  {name:"Sea urchin",        loc:"Small",     price:1700,  months:[5,6,7,8,9],           leaving:false},
+  {name:"Seaweed",           loc:"Large",     price:600,   months:[10,11,12,1,2,3,4,5,6,7],leaving:false},
+  {name:"Slate pencil urchin",loc:"Medium",   price:2000,  months:[5,6,7,8,9],           leaving:false},
+  {name:"Snow crab",         loc:"Large",     price:6000,  months:[11,12,1,2,3,4],       leaving:true},
+  {name:"Spider crab",       loc:"Very large",price:12000, months:[3,4],                 leaving:true},
+  {name:"Spiny lobster",     loc:"Large",     price:5000,  months:[10,11,12],            leaving:false},
+  {name:"Spotted garden eel", loc:"Small",    price:1100,  months:[5,6,7,8,9,10],        leaving:false},
+  {name:"Sweet shrimp",      loc:"Small",     price:1400,  months:[9,10,11,12,1,2],      leaving:false},
+  {name:"Tiger prawn",       loc:"Small",     price:3000,  months:[6,7,8,9],             leaving:false},
+  {name:"Turban shell",      loc:"Small",     price:1000,  months:[3,4,5,9,10,11,12],    leaving:false},
+  {name:"Umbrella octopus",  loc:"Small",     price:6000,  months:[3,4,5,9,10,11],       leaving:false},
+  {name:"Vampire squid",     loc:"Medium",    price:10000, months:[5,6,7,8],             leaving:false},
+  {name:"Venus' flower basket",loc:"Medium",  price:5000,  months:[10,11,12,1,2],        leaving:false},
+  {name:"Whelk",             loc:"Small",     price:1000,  months:[1,2,3,4,5,6,7,8,9,10,11,12],leaving:false},
+];
+
+// ══════════════════════════════════════════════
+//  IMAGE LOOKUP via Nookipedia Cargo API
+// ══════════════════════════════════════════════
+
+const imageCache = {};
+
+async function fetchImages(type) {
+  const tableMap = { fish:'nh_fish', bugs:'nh_bug', sea:'nh_sea_creature' };
+  const table = tableMap[type];
+  const url = `https://nookipedia.com/w/api.php?action=cargoquery&format=json&origin=*&tables=${table}&fields=name,image_url&limit=500`;
+  try {
+    const r = await fetch(url);
+    const j = await r.json();
+    (j.cargoquery||[]).forEach(({title})=>{
+      if(title.name && title.image_url) imageCache[title.name.toLowerCase()] = title.image_url;
+    });
+  } catch(e){ /* silent fail — placeholder shows */ }
+}
+
+function getImg(name, type) {
+  const key = name.replace(/ ⚠️$/,'').toLowerCase();
+  const src = imageCache[key];
+  if(!src) return `<div class="critter-img-placeholder">${type==='fish'?'🐟':type==='bugs'?'🦟':'🦀'}</div>`;
+  return `<img class="critter-img" src="${src}" alt="${name}" loading="lazy" onload="this.classList.add('loaded')">`;
+}
+
+// ══════════════════════════════════════════════
+//  LOCALSTORAGE
+// ══════════════════════════════════════════════
+
+const LS_KEY = 'hanamori_critters_v1';
+let state = {};
+try { state = JSON.parse(localStorage.getItem(LS_KEY)||'{}'); } catch(e){ state={}; }
+function saveState(){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
+function getCritterKey(type, name){ return `${type}__${name}`; }
+function isCaught(type, name){ return !!(state[getCritterKey(type,name)]||{}).caught; }
+function isDonated(type, name){ return !!(state[getCritterKey(type,name)]||{}).donated; }
+function setCheck(type, name, field, val){
+  const k = getCritterKey(type, name);
+  if(!state[k]) state[k]={};
+  state[k][field]=val;
+  saveState();
+  updateProgress(type);
+}
+
+// ══════════════════════════════════════════════
+//  SORT STATE
+// ══════════════════════════════════════════════
+const sortState = { fish:{col:4,dir:-1}, bugs:{col:4,dir:-1}, sea:{col:3,dir:-1} };
+
+// ══════════════════════════════════════════════
+//  BUILD TABLES
+// ══════════════════════════════════════════════
+
+function buildRow(type, critter, idx) {
+  const isFish = type==='fish', isSea=type==='sea';
+  const caught = isCaught(type, critter.name);
+  const donated = isDonated(type, critter.name);
+  const leavingTag = critter.leaving ? '<span class="leaving-tag">⚠️ LEAVING</span>' : '';
+  const availNow = critter.months.includes(CURRENT_MONTH) && !critter.leaving
+    ? '<span class="available-now">NOW</span>' : '';
+  const imgCell = `<td class="critter-img-cell" id="img-${type}-${idx}"><div class="critter-img-placeholder">${isSea?'🦀':isFish?'🐟':'🦟'}</div></td>`;
+
+  const monthsText = critter.months.length===12 ? 'All year' : formatMonths(critter.months);
+
+  let cells;
+  if(isSea){
+    cells = `
+      ${imgCell}
+      <td class="name-cell" data-val="${critter.name.toLowerCase()}">${critter.name}${leavingTag}${availNow}</td>
+      <td data-val="${critter.loc}">${critter.loc}</td>
+      <td class="price-cell" data-val="${critter.price}">🔔 ${critter.price.toLocaleString()}</td>
+      <td class="month-cell" data-val="${critter.months.join(',')}">${monthsText}</td>`;
+  } else {
+    cells = `
+      ${imgCell}
+      <td class="name-cell" data-val="${critter.name.toLowerCase()}">${critter.name}${leavingTag}${availNow}</td>
+      <td data-val="${critter.loc}">${critter.loc}</td>
+      <td data-val="${critter.time}">${critter.time}</td>
+      <td class="price-cell" data-val="${critter.price}">🔔 ${critter.price.toLocaleString()}</td>
+      <td class="month-cell" data-val="${critter.months.join(',')}">${monthsText}</td>`;
+  }
+
+  return `<tr class="${critter.leaving?'leaving':''} ${(caught&&donated)?'fully-collected':''}" 
+              data-name="${critter.name.toLowerCase()}" 
+              data-loc="${critter.loc.toLowerCase()}"
+              data-months="${critter.months.join(',')}"
+              data-leaving="${critter.leaving}"
+              data-caught="${caught}"
+              data-donated="${donated}"
+              data-idx="${idx}">
+    ${cells}
+    <td class="check-cell">
+      <label class="check-label ${caught?'checked':''}">
+        <input type="checkbox" ${caught?'checked':''} onchange="toggleCheck('${type}','${critter.name}','caught',this,${idx})">
+        <span>${caught?'✓ Yes':'No'}</span>
+      </label>
+    </td>
+    <td class="check-cell">
+      <label class="check-label ${donated?'checked':''}">
+        <input type="checkbox" ${donated?'checked':''} onchange="toggleCheck('${type}','${critter.name}','donated',this,${idx})">
+        <span>${donated?'✓ Yes':'No'}</span>
+      </label>
+    </td>
+  </tr>`;
+}
+
+const MONTH_NAMES = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+function formatMonths(arr){
+  if(!arr||!arr.length) return '—';
+  const sorted = [...new Set(arr)].sort((a,b)=>a-b);
+  // build consecutive ranges
+  const ranges=[];
+  let start=sorted[0], prev=sorted[0];
+  for(let i=1;i<sorted.length;i++){
+    const cur=sorted[i];
+    // handle wrap-around: 12->1 counts as consecutive
+    const isConsec = (cur===prev+1)||(prev===12&&cur===1);
+    if(isConsec){ prev=cur; }
+    else{ ranges.push([start,prev]); start=cur; prev=cur; }
+  }
+  ranges.push([start,prev]);
+  return ranges.map(([s,e])=>s===e?MONTH_NAMES[s]:`${MONTH_NAMES[s]}–${MONTH_NAMES[e]}`).join('; ');
+}
+
+function toggleCheck(type, name, field, el, idx){
+  const val = el.checked;
+  setCheck(type, name, field, val);
+  const label = el.parentElement;
+  label.classList.toggle('checked', val);
+  label.querySelector('span').textContent = val ? '✓ Yes' : 'No';
+  // update row classes
+  const row = el.closest('tr');
+  row.dataset[field] = val;
+  const c = row.dataset.caught==='true', d=row.dataset.donated==='true';
+  row.classList.toggle('fully-collected', c&&d);
+}
+
+async function buildTable(type, data) {
+  await fetchImages(type);
+  const tbody = document.getElementById(`${type}-tbody`);
+  tbody.innerHTML = data.map((c,i)=>buildRow(type,c,i)).join('');
+
+  // lazy-load images into cells
+  data.forEach((c,i)=>{
+    const cell = document.getElementById(`img-${type}-${i}`);
+    if(cell) cell.innerHTML = getImg(c.name, type);
+  });
+
+  populateLocFilter(type, data);
+  updateProgress(type);
+  applyFilters(type);
+}
+
+function populateLocFilter(type, data){
+  const locs = [...new Set(data.map(c=>c.loc))].sort();
+  const sel = document.getElementById(`${type}-loc`);
+  locs.forEach(l=>{ const o=document.createElement('option'); o.value=l; o.textContent=l; sel.appendChild(o); });
+}
+
+// ══════════════════════════════════════════════
+//  PROGRESS
+// ══════════════════════════════════════════════
+
+function updateProgress(type){
+  const data = type==='fish'?FISH:type==='bugs'?BUGS:SEA;
+  const total = data.length;
+  let caught=0, donated=0;
+  data.forEach(c=>{ if(isCaught(type,c.name)) caught++; if(isDonated(type,c.name)) donated++; });
+  document.getElementById(`fill-${type}-caught`).style.width = (caught/total*100)+'%';
+  document.getElementById(`fill-${type}-donated`).style.width = (donated/total*100)+'%';
+  document.getElementById(`cnt-${type}-caught`).textContent = `${caught} / ${total}`;
+  document.getElementById(`cnt-${type}-donated`).textContent = `${donated} / ${total}`;
+  // tab label
+  const pct = Math.round((caught+donated)/(total*2)*100);
+  document.getElementById(`tab-${type}-count`).textContent = pct>0?`(${pct}%)`:'';
+}
+
+// ══════════════════════════════════════════════
+//  FILTER
+// ══════════════════════════════════════════════
+
+function applyFilters(type){
+  const search = document.getElementById(`${type}-search`).value.toLowerCase().trim();
+  const loc    = document.getElementById(`${type}-loc`).value.toLowerCase();
+  const month  = document.getElementById(`${type}-month`).value;
+  const show   = document.getElementById(`${type}-show`).value;
+
+  const tbody = document.getElementById(`${type}-tbody`);
+  const rows  = tbody.querySelectorAll('tr');
+  let visible=0, leavingVisible=0;
+
+  rows.forEach(row=>{
+    const name    = row.dataset.name;
+    const rowLoc  = row.dataset.loc;
+    const months  = row.dataset.months.split(',').map(Number);
+    const leaving = row.dataset.leaving==='true';
+    const caught  = row.dataset.caught==='true';
+    const donated = row.dataset.donated==='true';
+
+    let show_ = true;
+    if(search && !name.includes(search))        show_=false;
+    if(loc    && !rowLoc.includes(loc))          show_=false;
+    if(month  && !months.includes(+month))       show_=false;
+    if(show==='uncaught'  && caught)             show_=false;
+    if(show==='undonated' && donated)            show_=false;
+    if(show==='leaving'   && !leaving)           show_=false;
+
+    row.classList.toggle('hidden', !show_);
+    if(show_){ visible++; if(leaving) leavingVisible++; }
+  });
+
+  document.getElementById(`${type}-visible`).textContent = visible;
+  const nr = document.getElementById(`${type}-no-results`);
+  nr.style.display = visible===0?'block':'none';
+  const lc = document.getElementById(`${type}-leaving-count`);
+  if(lc) lc.textContent = leavingVisible;
+}
+
+function resetFilters(type){
+  document.getElementById(`${type}-search`).value='';
+  document.getElementById(`${type}-loc`).value='';
+  document.getElementById(`${type}-month`).value='';
+  document.getElementById(`${type}-show`).value='all';
+  applyFilters(type);
+}
+
+// ══════════════════════════════════════════════
+//  SORT
+// ══════════════════════════════════════════════
+
+function sortTable(type, colIdx){
+  const ss = sortState[type];
+  if(ss.col===colIdx) ss.dir*=-1;
+  else { ss.col=colIdx; ss.dir=-1; }
+
+  // update header classes
+  const table = document.getElementById(`${type}-table`);
+  table.querySelectorAll('thead th').forEach((th,i)=>{
+    th.classList.remove('sorted-asc','sorted-desc');
+    if(i===colIdx) th.classList.add(ss.dir===1?'sorted-asc':'sorted-desc');
+  });
+
+  const tbody = document.getElementById(`${type}-tbody`);
+  const rows = [...tbody.querySelectorAll('tr')];
+  rows.sort((a,b)=>{
+    const av = a.querySelectorAll('td')[colIdx]?.dataset.val || '';
+    const bv = b.querySelectorAll('td')[colIdx]?.dataset.val || '';
+    const an = parseFloat(av), bn = parseFloat(bv);
+    if(!isNaN(an)&&!isNaN(bn)) return ss.dir*(an-bn);
+    return ss.dir*av.localeCompare(bv);
+  });
+  rows.forEach(r=>tbody.appendChild(r));
+}
+
+// ══════════════════════════════════════════════
+//  TABS
+// ══════════════════════════════════════════════
+
+function switchTab(type){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(`panel-${type}`).classList.add('active');
+  document.querySelectorAll('.tab-btn')[['fish','bugs','sea'].indexOf(type)].classList.add('active');
+  // update nav highlight
+  document.querySelectorAll('.top-nav a').forEach(a=>a.classList.remove('active'));
+  const navEl = document.getElementById(`nav-${type}`);
+  if(navEl) navEl.classList.add('active');
+}
+
+// ══════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════
+
+(async()=>{
+  await Promise.all([
+    buildTable('fish', FISH),
+    buildTable('bugs', BUGS),
+    buildTable('sea',  SEA),
+  ]);
+  // set initial sort header indicators
+  ['fish','bugs','sea'].forEach(type=>{
+    const ss = sortState[type];
+    const table = document.getElementById(`${type}-table`);
+    const th = table.querySelectorAll('thead th')[ss.col];
+    if(th) th.classList.add('sorted-desc');
+  });
+})();
+</script>
+</body>
+</html>
