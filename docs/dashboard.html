@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ACNH Island Dashboard — Japanese Theme</title>
+<title>Hikari @ Hanamori Island Dashboard — ACNH</title>
 <style>
   :root {
     --bg:        #f5f0e8;
@@ -378,6 +378,96 @@
     outline: none;
   }
   .v-note-row input::placeholder { color: #bbb0a0; }
+
+
+  /* ── COLLECTIBLES ── */
+  .coll-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .coll-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .coll-card-header {
+    background: var(--charcoal);
+    color: #f5f0e8;
+    font-size: .78rem;
+    padding: 7px 11px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    letter-spacing: .04em;
+  }
+  .coll-progress-label {
+    font-size: .7rem;
+    color: #c8bfa8;
+    margin-left: auto;
+  }
+  .coll-mini-bar {
+    height: 3px;
+    background: var(--brown-lt);
+  }
+  .coll-mini-fill {
+    height: 100%;
+    background: var(--green);
+    transition: width .3s;
+  }
+  .coll-list {
+    list-style: none;
+    max-height: 220px;
+    overflow-y: auto;
+    padding: 4px 0;
+  }
+  .coll-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 11px;
+    border-bottom: 1px dashed #ddd4c0;
+    font-size: .82rem;
+  }
+  .coll-item:last-child { border-bottom: none; }
+  .coll-item input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 2px solid var(--brown);
+    border-radius: 3px;
+    background: var(--check-bg);
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .coll-item input:checked { background: var(--green); border-color: var(--green); }
+  .coll-item input:checked::after {
+    content: '✓';
+    position: absolute;
+    top: -3px;
+    left: 1px;
+    font-size: 11px;
+    color: #fff;
+  }
+  .coll-item label {
+    cursor: pointer;
+    flex: 1;
+    line-height: 1.4;
+  }
+  .coll-item input:checked + label { color: var(--muted); text-decoration: line-through; }
+  .coll-footer {
+    font-size: .72rem;
+    color: var(--muted);
+    padding: 5px 11px;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    display: flex;
+    justify-content: space-between;
+  }
 
   /* ── NOOKIPEDIA SECTIONS (shared) ── */
   .nk-loading {
@@ -822,13 +912,50 @@
     .tracker-grid { grid-template-columns: 1fr 1fr; }
     .notes-grid { grid-template-columns: 1fr; }
   }
+
+  /* ── MAIN NAV ── */
+  .main-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--charcoal);
+    border-bottom: 2px solid var(--red);
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+  .main-nav::-webkit-scrollbar { display: none; }
+  .main-nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0 10px;
+    margin: 0;
+    gap: 0;
+  }
+  .main-nav li a {
+    display: block;
+    padding: 9px 13px;
+    color: #c8bfa8;
+    text-decoration: none;
+    font-size: .76rem;
+    letter-spacing: .04em;
+    transition: color .15s, background .15s;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+  }
+  .main-nav li a:hover {
+    color: #f5f0e8;
+    background: rgba(255,255,255,.05);
+    border-bottom-color: var(--brown-lt);
+  }
+
 </style>
 </head>
 <body>
 
 <header>
-  <h1>🌸 Japanese Island — ACNH Restart Dashboard</h1>
-  <p class="subtitle">
+  <h1>🌸 Hikari @ Hanamori's Island Dashboard</h1>
+  <p class="subtitle">Animal Crossing: New Horizons · 
     Following the
     <a href="https://www.youtube.com/watch?v=SUbViQyH4h8" target="_blank" rel="noopener">
       Complete Guide to 3 Stars — Speed Run the Start of ACNH
@@ -836,6 +963,20 @@
     &nbsp;·&nbsp; Day 0 → Day 14
   </p>
 </header>
+
+<nav class="main-nav" aria-label="Dashboard sections">
+  <ul>
+    <li><a href="#sec-checklist">📅 Checklist</a></li>
+    <li><a href="#sec-thoughts">💭 Thoughts</a></li>
+    <li><a href="#sec-3star">⭐ 3-Star</a></li>
+    <li><a href="#sec-notes">🗒️ Notes</a></li>
+    <li><a href="#sec-wishlist">🏘️ Villagers</a></li>
+    <li><a href="#sec-villager-lookup">🔍 Lookup</a></li>
+    <li><a href="#sec-critters">🦋 Critters</a></li>
+    <li><a href="#sec-recipes">🪵 Recipes</a></li>
+    <li><a href="#sec-collectibles">🏅 Collectibles</a></li>
+  </ul>
+</nav>
 
 <div class="wrap">
 
@@ -856,7 +997,7 @@
   </div>
 
   <!-- DAY CARDS -->
-  <div class="section-title">Day-by-Day Checklist</div>
+  <div class="section-title" id="sec-checklist">📅 Day-by-Day Checklist</div>
 
   <!-- DAY 0 -->
   <div class="day-card" id="card-day0">
@@ -1181,7 +1322,7 @@
   </div>
 
   <!-- SPONTANEOUS THOUGHTS -->
-  <div class="section-title">Spontaneous Thoughts</div>
+  <div class="section-title" id="sec-thoughts">💭 Spontaneous Thoughts</div>
   <div class="st-card">
     <div class="st-add-area">
       <!-- Direct add -->
@@ -1209,7 +1350,7 @@
   </div>
 
   <!-- 3-STAR TRACKER -->
-  <div class="section-title">3-Star Requirement Tracker</div>
+  <div class="section-title" id="sec-3star">⭐ 3-Star Requirement Tracker</div>
   <p style="font-size:.8rem;color:var(--muted);margin-bottom:10px;">
     Based on the guide creator's example counts when reaching 3 stars. Enter your current numbers.
   </p>
@@ -1273,7 +1414,7 @@
   </div>
 
   <!-- ISLAND PLANNING NOTES -->
-  <div class="section-title">Japanese Island Planning Notes</div>
+  <div class="section-title" id="sec-notes">🗒️ Japanese Island Planning Notes</div>
   <div class="notes-grid">
     <div class="note-card">
       <div class="note-card-header"><span class="note-icon">🏘️</span> Main Village Street</div>
@@ -1302,7 +1443,7 @@
   </div>
 
   <!-- VILLAGER WISHLIST -->
-  <div class="section-title">Villager Wishlist</div>
+  <div class="section-title" id="sec-wishlist">🏘️ Villager Wishlist</div>
   <p style="font-size:.8rem;color:var(--muted);margin-bottom:8px;">Tap a name to mark as recruited. Add notes in the fields below.</p>
   <div class="villager-grid" id="villager-tags"></div>
   <div class="villager-notes" id="villager-notes"></div>
@@ -1310,7 +1451,7 @@
   <!-- ═══════════════════════════════════════════════════════════ -->
   <!-- NOOKIPEDIA: VILLAGER LOOKUP                                  -->
   <!-- ═══════════════════════════════════════════════════════════ -->
-  <div class="section-title">Villager Lookup <span style="font-size:.7em;color:var(--muted);text-transform:none;letter-spacing:0;">via Nookipedia</span></div>
+  <div class="section-title" id="sec-villager-lookup">🔍 Villager Lookup <span id="sec-villager-lookup" style="display:none"></span><span style="font-size:.7em;color:var(--muted);text-transform:none;letter-spacing:0;">via Nookipedia</span></div>
   <div class="nk-card">
     <div class="nk-search-row">
       <input type="text" id="vl-input" placeholder="Type a villager name… e.g. Kabuki, Shino, Pekoe"
@@ -1341,7 +1482,7 @@
   <!-- ═══════════════════════════════════════════════════════════ -->
   <!-- NOOKIPEDIA: SEASONAL CRITTER TRACKER                        -->
   <!-- ═══════════════════════════════════════════════════════════ -->
-  <div class="section-title">Critter Tracker <span style="font-size:.7em;color:var(--muted);text-transform:none;letter-spacing:0;">Northern Hemisphere · this month · via Nookipedia</span></div>
+  <div class="section-title" id="sec-critters">🦋 Critter Tracker <span style="font-size:.7em;color:var(--muted);text-transform:none;letter-spacing:0;">Northern Hemisphere · this month · via Nookipedia</span></div>
   <div class="nk-card">
     <div class="ct-tabs">
       <button class="ct-tab active" id="ct-tab-fish" onclick="ctSwitch('fish')">&#127920; Fish</button>
@@ -1360,7 +1501,7 @@
   <!-- ═══════════════════════════════════════════════════════════ -->
   <!-- NOOKIPEDIA: DIY RECIPE FINDER                               -->
   <!-- ═══════════════════════════════════════════════════════════ -->
-  <div class="section-title">DIY Recipe Finder <span style="font-size:.7em;color:var(--muted);text-transform:none;letter-spacing:0;">via Nookipedia</span></div>
+  <div class="section-title" id="sec-recipes">🪵 DIY Recipe Finder <span style="font-size:.7em;color:var(--muted);text-transform:none;letter-spacing:0;">via Nookipedia</span></div>
   <div class="nk-card">
     <div class="nk-search-row">
       <input type="text" id="rf-input" placeholder="Search by item or material… e.g. bamboo, stone, cedar"
@@ -1381,6 +1522,12 @@
       <p class="nk-loading">Search for a recipe or material above.</p>
     </div>
   </div>
+
+
+  <!-- COLLECTIBLES TRACKER -->
+  <div class="section-title" id="sec-collectibles">🏅 Collectibles Progress</div>
+  <p style="font-size:.8rem;color:var(--muted);margin-bottom:8px;">Track your museum, recipes, and milestone collectibles. Check off as you complete them.</p>
+  <div class="coll-grid" id="coll-grid"></div>
 
 </div><!-- /wrap -->
 
@@ -1420,6 +1567,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadNotes();
   loadVillagerData();
   ctLoad('fish'); // auto-load fish tab on page open
+  collBuild();
 });
 
 // ── CARD TOGGLE ───────────────────────────────────────────────────────
@@ -1452,8 +1600,10 @@ function updateProgress() {
   const dayDone = document.querySelectorAll('.checklist input[type="checkbox"]:checked');
   const stAll   = document.querySelectorAll('.st-item input[type="checkbox"]');
   const stDone  = document.querySelectorAll('.st-item input[type="checkbox"]:checked');
-  const total   = dayAll.length + stAll.length;
-  const done    = dayDone.length + stDone.length;
+  const collAll  = document.querySelectorAll('.coll-item input[type="checkbox"]');
+  const collDone = document.querySelectorAll('.coll-item input[type="checkbox"]:checked');
+  const total   = dayAll.length + stAll.length + collAll.length;
+  const done    = dayDone.length + stDone.length + collDone.length;
   const pct     = total ? Math.round((done / total) * 100) : 0;
   document.getElementById('main-bar').style.width = pct + '%';
   document.getElementById('pct-text').textContent  = pct + '%';
@@ -1801,6 +1951,164 @@ async function rfSearch() {
     el.innerHTML = '<p class="nk-error">Could not load recipes. Check your connection.</p>';
   }
 }
+
+
+// ── COLLECTIBLES ──────────────────────────────────────────────────────
+const COLLECTIBLES = [
+  {
+    id: 'fossils', icon: '🦕', label: 'Fossils', total: 73,
+    items: [
+      'Acanthostega','Amber','Ammonite','Anomalocaris','Archaeopteryx','Archelon skull','Archelon tail',
+      'Australopith','Brachio chest','Brachio pelvis','Brachio skull','Brachio tail',
+      'Coprolite','Deinony tail','Deinony torso','Dimetrodon skull','Dimetrodon torso',
+      'Dinosaur track','Diplo chest','Diplo hip','Diplo neck','Diplo skull','Diplo tail','Diplo tail tip',
+      'Dunkleosteus','Eusthenopteron','Iguanodon skull','Iguanodon tail','Iguanodon torso',
+      'Juramaia','Left megalo side','Left ptera wing','Left quetzal wing','Mammoth skull','Mammoth torso',
+      'Megacero skull','Megacero tail','Megacero torso','Myllokunmingia',
+      'Ophthalmo skull','Ophthalmo torso','Pachy skull','Pachy tail',
+      'Pachysaurus skull','Pachysaurus tail','Pachysaurus torso',
+      'Parasaur skull','Parasaur tail','Parasaur torso','Plesio body','Plesio skull','Plesio tail',
+      'Ptera body','Quetzal torso','Right megalo side','Right ptera wing','Right quetzal wing',
+      'Sabertooth skull','Sabertooth tail','Shark-tooth pattern',
+      'Shastasaurus skull','Shastasaurus tail','Shastasaurus torso',
+      'Spino skull','Spino tail','Spino torso',
+      'Stego skull','Stego tail','Stego torso','T-Rex skull','T-Rex tail','T-Rex torso','Tricera skull','Tricera tail','Tricera torso'
+    ]
+  },
+  {
+    id: 'kk_songs', icon: '🎵', label: 'K.K. Songs', total: 95,
+    items: [
+      'Agent K.K.','Aloha K.K.','Animal City','Bubblegum K.K.','Café K.K.','Comrade K.K.',
+      'DJ K.K.','Drivin'','Farewell','Forest Life','Go K.K. Rider','Hypno K.K.',
+      'I Love You','Imperial K.K.','K.K. Aria','K.K. Baller','K.K. Ballad','K.K. Bazaar',
+      'K.K. Blues','K.K. Bolero','K.K. Bossa','K.K. Calypso','K.K. Casbah','K.K. Chorinho',
+      'K.K. Christmas','K.K. Condor','K.K. Country','K.K. Cruisin'','K.K. D&B',
+      'K.K. Dirge','K.K. Disco','K.K. Dixie','K.K. Étude','K.K. Faire','K.K. Flamenco',
+      'K.K. Folk','K.K. Fusion','K.K. Groove','K.K. Gumbo','K.K. House','K.K. Island',
+      'K.K. Jazz','K.K. Jongara','K.K. Lament','K.K. Love Song','K.K. Lullaby',
+      'K.K. Mambo','K.K. Marathon','K.K. March','K.K. Metal','K.K. Milonga','K.K. Mixer',
+      'K.K. Moody','K.K. Mountain','K.K. Movie','K.K. Oasis','K.K. Parade','K.K. Party',
+      'K.K. Pendulum','K.K. Picnic','K.K. Pirates','K.K. Pop','K.K. Ragtime','K.K. Rally',
+      'K.K. Reggae','K.K. Rock','K.K. Rockabilly','K.K. Safari','K.K. Salsa','K.K. Samba',
+      'K.K. Ska','K.K. Slow Blues','K.K. Soul','K.K. Stroll','K.K. Swing','K.K. Synth',
+      'K.K. Tango','K.K. Technopop','K.K. Timber','K.K. Waltz','K.K. Western',
+      'King K.K.','Lucky K.K.','Marine Song 2001','Mountain Song','Mr. K.K.',
+      'My Place','Neapolitan','Only Me','Pondering','Rockin' K.K.','Soulful K.K.',
+      'Space K.K.','Spring Blossoms','Stale Cupcakes','Steep Hill','Surfin' K.K.',
+      'The K. Funk','To the Edge','Two Days Ago','Wandering'
+    ]
+  },
+  {
+    id: 'art', icon: '🖼️', label: 'Art (Museum)', total: 43,
+    items: [
+      'Academic painting','Amazing painting','Basic painting','Beautiful statue',
+      'Calm painting','Common painting','Detailed painting','Dynamic painting',
+      'Familiar statue','Famous painting','Flowery painting','Gallant statue',
+      'Glowing painting','Graceful painting','Great statue','Informative statue',
+      'Jolly painting','Moody painting','Moving painting','Mysterious painting',
+      'Nice painting','Proper painting','Quaint painting','Qurious painting',
+      'Robust statue','Scenic painting','Serene painting','Sinking painting',
+      'Solemn painting','Twinkling painting','Warm painting','Wistful painting',
+      'Worthy painting','Amazing statue','Familiar statue (fake)','Rock-head statue',
+      'Tremendous statue','Valiant statue','Warrior statue','Wary painting',
+      'Wild painting left half','Wild painting right half','Worthy painting'
+    ]
+  },
+  {
+    id: 'nook_miles', icon: '✈️', label: 'Nook Miles Achievements', total: 30,
+    items: [
+      'Island Ichthyologist (catch all fish)','Insects in All Seasons (catch all bugs)',
+      'You've Got the Bug (catch 50 bugs)','One Man's Trash (find 10 message bottles)',
+      'Rock-Paper-Scissors (break all rocks)','Island Designer (use Island Designer)',
+      'Have a Nice Trip! (use 10 NMTs)','Far-Flung Flier (use 50 NMTs)',
+      'Frequent Flier (use 100 NMTs)','Globetrotter (use 200 NMTs)',
+      'Horizon Hopper (use 500 NMTs)',
+      'Shell We? (collect all shell types)','Fruit Roots (plant 50 trees)',
+      'Wood You Believe It (chop wood 200 times)','Stalk Market (buy turnips)',
+      'Bell Ringer (earn 1M bells)','Mille-Feuille (earn 5M bells)',
+      'Millionaire (earn 10M bells)','Tom Nook's BFF (pay off home loans)',
+      'Tool Time (craft 50 tools)','DIY Enthusiast (craft 200 DIYs)',
+      'DIY Master (craft 1000 DIYs)','Fashion Check (wear 50 outfits)',
+      'Style Savvy (wear 100 outfits)','Long-Distance Relative (get adopted)',
+      'Moving Up (build Resident Services)','Fancy Furniture (place 50 outdoor items)',
+      'Outdoor Aficionado (place 200 outdoor items)',
+      'My Museum, My Rules (donate to museum)','Museum Medalist (complete museum)'
+    ]
+  },
+  {
+    id: 'diy_japanese', icon: '🎋', label: 'Japanese Theme DIYs', total: 20,
+    items: [
+      'Bamboo shoot lamp','Bamboo bench','Bamboo basket','Bamboo noodle slide',
+      'Bamboo speaker','Bamboo stool','Bamboo wand (spring only)',
+      'Bamboo doll','Bamboo partition','Bamboo grove wall',
+      'Stone arch','Garden rock','Flat garden rock','Mossy-garden rock',
+      'Stone lantern','Log bridge','Stone fence','Bamboo fence',
+      'Cherry-blossom wand (spring only)','Leaf campfire'
+    ]
+  },
+  {
+    id: 'bridges_inclines', icon: '🌉', label: 'Bridges & Inclines', total: 16,
+    items: [
+      'Log bridge','Stone bridge','Suspension bridge','Wooden bridge',
+      'Brick bridge','Zen-style bridge','Red zen-style bridge','Natural bridge',
+      'Log staircase','Stone staircase','Blue plank staircase','Red plank staircase',
+      'Wooden staircase','Log incline','Stone incline','Iron-and-wood incline'
+    ]
+  }
+];
+
+function collBuild() {
+  const grid = document.getElementById('coll-grid');
+  if (!grid) return;
+  grid.innerHTML = COLLECTIBLES.map(cat => {
+    const checked = cat.items.filter((_,i) => localStorage.getItem('coll_' + cat.id + '_' + i) === '1').length;
+    const pct = Math.round((checked / cat.total) * 100);
+    const itemsHtml = cat.items.map((item, i) => {
+      const cbId = 'coll_' + cat.id + '_' + i;
+      const isChecked = localStorage.getItem(cbId) === '1';
+      return `<li class="coll-item">
+        <input type="checkbox" id="${cbId}" ${isChecked ? 'checked' : ''}
+          onchange="collToggle(this,'${cat.id}',${i})">
+        <label for="${cbId}">${escHtml(item)}</label>
+      </li>`;
+    }).join('');
+    return `<div class="coll-card">
+      <div class="coll-card-header">
+        <span>${cat.icon}</span> ${escHtml(cat.label)}
+        <span class="coll-progress-label" id="coll-prog-${cat.id}">${checked}/${cat.total}</span>
+      </div>
+      <div class="coll-mini-bar"><div class="coll-mini-fill" id="coll-bar-${cat.id}" style="width:${pct}%"></div></div>
+      <ul class="coll-list">${itemsHtml}</ul>
+      <div class="coll-footer">
+        <span id="coll-pct-${cat.id}">${pct}% complete</span>
+        <button class="st-btn sm" onclick="collClear('${cat.id}')">Reset</button>
+      </div>
+    </div>`;
+  }).join('');
+  updateProgress();
+}
+
+function collToggle(cb, catId, idx) {
+  localStorage.setItem('coll_' + catId + '_' + idx, cb.checked ? '1' : '0');
+  const cat = COLLECTIBLES.find(c => c.id === catId);
+  const checked = cat.items.filter((_,i) => localStorage.getItem('coll_' + catId + '_' + i) === '1').length;
+  const pct = Math.round((checked / cat.total) * 100);
+  const prog = document.getElementById('coll-prog-' + catId);
+  const bar  = document.getElementById('coll-bar-' + catId);
+  const pctEl = document.getElementById('coll-pct-' + catId);
+  if (prog) prog.textContent = checked + '/' + cat.total;
+  if (bar)  bar.style.width = pct + '%';
+  if (pctEl) pctEl.textContent = pct + '% complete';
+  updateProgress();
+}
+
+function collClear(catId) {
+  const cat = COLLECTIBLES.find(c => c.id === catId);
+  if (!cat || !confirm('Reset all ' + cat.label + ' progress?')) return;
+  cat.items.forEach((_,i) => localStorage.removeItem('coll_' + catId + '_' + i));
+  collBuild();
+}
+
 
 // ── SPONTANEOUS THOUGHTS ──────────────────────────────────────────────
 const ST_KEY = 'st_items_v1';

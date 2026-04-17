@@ -1,10 +1,10 @@
-# Villagers
+# 🏘️ Villagers
 
 [← Back to README](../README.md)
 
 ---
 
-## Starter Villagers
+## 🌸 Starter Villagers
 
 | Villager | Personality | Species | Notes |
 |----------|-------------|---------|-------|
@@ -13,7 +13,7 @@
 
 ---
 
-## Current Villager Preferences
+## 🎯 Current Villager Preferences
 
 - **Preferred personalities:** Cranky, Lazy, Normal, Uchi — tend to produce more interesting dialogue in a quiet, traditional setting
 - **Avoid:** Peppy and Snooty personalities feel tonally mismatched with the island vibe
@@ -21,7 +21,7 @@
 
 ---
 
-## Long-Term Wishlist
+## ⭐ Long-Term Wishlist
 
 | Villager | Personality | Species | Why they fit |
 |----------|-------------|---------|-------------|
@@ -38,7 +38,7 @@
 
 ---
 
-## Notes on Thematic Fit
+## 🗺️ Notes on Thematic Fit
 
 - **Shrine district residents:** Kabuki, Shino, Coco
 - **Village core / domestic:** Pekoe, Genji, Annalisa
@@ -49,4 +49,4 @@
 
 ---
 
-*Last updated: Initial setup — April 2026*
+*Last updated: 18/04/2026 — Initial setup*

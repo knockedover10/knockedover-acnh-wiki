@@ -1,4 +1,4 @@
-# Items & Furniture
+# 🪴 Items & Furniture
 
 [← Back to README](../README.md)
 
@@ -6,7 +6,7 @@ A running catalogue of items relevant to the Japanese island theme — what to c
 
 ---
 
-## Shrine Items
+## ⛩️ Shrine Items
 
 Key items for building out the shrine district. See [Island Layout → Shrine District](island-layout.md#shrine-district).
 
@@ -25,7 +25,7 @@ Key items for building out the shrine district. See [Island Layout → Shrine Di
 
 ---
 
-## Bamboo Items
+## 🎋 Bamboo Items
 
 Required recipes involve bamboo pieces, young spring bamboo, and bamboo shoots.
 
@@ -48,7 +48,7 @@ Required recipes involve bamboo pieces, young spring bamboo, and bamboo shoots.
 
 ---
 
-## Onsen Items
+## ♨️ Onsen Items
 
 For the hot spring area. See [Island Layout → Onsen](island-layout.md#onsen).
 
@@ -64,7 +64,7 @@ For the hot spring area. See [Island Layout → Onsen](island-layout.md#onsen).
 
 ---
 
-## Stone Items
+## 🪨 Stone Items
 
 Essential for paths, borders, and general Japanese garden aesthetic.
 
@@ -78,7 +78,7 @@ Essential for paths, borders, and general Japanese garden aesthetic.
 
 ---
 
-## Fences
+## 🚧 Fences
 
 Fencing contributes to the 3-star rating. These styles suit the Japanese theme.
 
@@ -93,7 +93,7 @@ Avoid: White picket, Wooden-plank, Simple, or any "cute" fence styles.
 
 ---
 
-## Bridges and Inclines
+## 🌉 Bridges and Inclines
 
 Plan these before placing house plots or terraforming.
 
@@ -107,7 +107,7 @@ Plan these before placing house plots or terraforming.
 
 ---
 
-## Seasonal Items
+## 🍂 Seasonal Items
 
 Flag these to collect before the seasonal window closes.
 
@@ -121,7 +121,7 @@ Flag these to collect before the seasonal window closes.
 
 ---
 
-## Wishlist Items to Collect
+## 🌟 Wishlist Items to Collect
 
 General items to keep an eye out for from Nook Shopping, Saharah, Kicks, or trades.
 
@@ -140,4 +140,4 @@ General items to keep an eye out for from Nook Shopping, Saharah, Kicks, or trad
 
 ---
 
-*Last updated: Initial setup — April 2026*
+*Last updated: 18/04/2026 — Initial setup*

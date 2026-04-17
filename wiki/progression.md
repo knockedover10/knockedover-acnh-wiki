@@ -1,10 +1,10 @@
-# Progression
+# 📈 Progression
 
 [← Back to README](../README.md)
 
 ---
 
-## Main Early-Game Unlock Order
+## 🗝️ Main Early-Game Unlock Order
 
 These are the key unlocks to prioritise in the first 1–2 weeks. Order matters — rushing ahead without completing prerequisites will stall progress.
 
@@ -22,7 +22,7 @@ These are the key unlocks to prioritise in the first 1–2 weeks. Order matters 
 
 ---
 
-## 3-Star Goals
+## ⭐ 3-Star Goals
 
 To reach 3 stars, Isabelle evaluates:
 
@@ -37,7 +37,7 @@ To reach 3 stars, Isabelle evaluates:
 
 ---
 
-## Milestone Notes
+## 🏆 Milestone Notes
 
 | Milestone | Trigger | Notes |
 |-----------|---------|-------|
@@ -51,7 +51,7 @@ To reach 3 stars, Isabelle evaluates:
 
 ---
 
-## Current Progress
+## 📋 Current Progress
 
 | Item | Status |
 |------|--------|
@@ -67,7 +67,7 @@ To reach 3 stars, Isabelle evaluates:
 
 ---
 
-## Open Questions
+## ❓ Open Questions
 
 - [ ] Where to permanently place the museum without breaking the Japanese aesthetic?
 - [ ] Which villager to rehome first — Axel or keep for jock slot until Snake is found?
@@ -77,4 +77,4 @@ To reach 3 stars, Isabelle evaluates:
 
 ---
 
-*Last updated: Initial setup — April 2026*
+*Last updated: 18/04/2026 — Initial setup*

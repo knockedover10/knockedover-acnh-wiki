@@ -1,4 +1,4 @@
-# Trees & Nature
+# 🌳 Trees & Nature
 
 [← Back to README](../README.md)
 
@@ -6,9 +6,9 @@ Rules and strategies for planting, growing, and farming trees — including bamb
 
 ---
 
-## Spacing Rules
+## 📐 Spacing Rules
 
-### Saplings (planting from scratch)
+### 🌱 Saplings (planting from scratch)
 
 Saplings need **2 empty squares in every direction** to grow. If anything blocks that space — another tree, building, cliff, water, or fence — the sapling will die within a day.
 
@@ -21,7 +21,7 @@ X . . X . . X
 X . . X . . X
 ```
 
-### Transplanted Adult Trees
+### 🌲 Transplanted Adult Trees
 
 Fully grown trees only need **1 empty square in every direction**. This is how you build a dense orchard — grow trees elsewhere first, then transplant them tightly.
 
@@ -35,7 +35,7 @@ This is the most space-efficient layout possible.
 
 ---
 
-## The Dense Orchard Method
+## 🍎 The Dense Orchard Method
 
 1. Plant saplings somewhere open with 2-square gaps — anywhere on the island works
 2. Wait **3–4 days** for them to fully grow
@@ -47,7 +47,7 @@ Use this method for your non-native fruit orchard and your bamboo grove layout.
 
 ---
 
-## Key Tree Rules
+## 📋 Key Tree Rules
 
 | Topic | Detail |
 |-------|--------|
@@ -61,7 +61,7 @@ Use this method for your non-native fruit orchard and your bamboo grove layout.
 
 ---
 
-## Wood Farming
+## 🪵 Wood Farming
 
 - Each tree gives 3 pieces of wood per day (hardwood, softwood, or wood — random)
 - Hit with **Flimsy Axe** or **Stone Axe** — never the iron axe on trees you want to keep
@@ -70,7 +70,7 @@ Use this method for your non-native fruit orchard and your bamboo grove layout.
 
 ---
 
-## Bamboo Grove
+## 🎋 Bamboo Grove
 
 See also: [Island Layout → Bamboo Grove](island-layout.md#bamboo-grove) | [Items & Furniture → Bamboo Items](items-and-furniture.md#bamboo-items)
 
@@ -84,7 +84,7 @@ See also: [Island Layout → Bamboo Grove](island-layout.md#bamboo-grove) | [Ite
 
 ---
 
-## Cedar Trees
+## 🌲 Cedar Trees
 
 - Evergreen look — ideal for the **shrine area and cliff zones** in your Japanese layout
 - Drop **pine cones in autumn** and **ornaments in winter** (for seasonal DIY recipes)
@@ -93,7 +93,7 @@ See also: [Island Layout → Bamboo Grove](island-layout.md#bamboo-grove) | [Ite
 
 ---
 
-## Coconut / Palm Trees
+## 🌴 Coconut / Palm Trees
 
 - Only grow on **sand** — native beach sand or a custom sand-design path laid inland
 - If you want palms in a coastal or beach-adjacent area of your island, lay a sand path tile first
@@ -101,7 +101,7 @@ See also: [Island Layout → Bamboo Grove](island-layout.md#bamboo-grove) | [Ite
 
 ---
 
-## Bell Farming via Fruit Trees
+## 💰 Bell Farming via Fruit Trees
 
 Non-native fruit sells for **500 Bells each** vs. 100 Bells for your native fruit.
 
@@ -120,7 +120,7 @@ Plant these in a dense orchard using the transplant method above to maximise yie
 
 ---
 
-## For the Japanese Island Specifically
+## 🏯 For the Japanese Island Specifically
 
 | Use case | Recommendation |
 |----------|---------------|
@@ -132,4 +132,4 @@ Plant these in a dense orchard using the transplant method above to maximise yie
 
 ---
 
-*Last updated: 2026-04-18 — Added tree spacing, bamboo mechanics, wood farming, and Bell tips*
+*Last updated: 18/04/2026 — Added tree spacing, bamboo mechanics, wood farming, and Bell tips*

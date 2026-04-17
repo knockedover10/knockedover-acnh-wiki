@@ -1,22 +1,22 @@
-# Island Layout
+# 🗾 Island Layout
 
 [← Back to README](../README.md)
 
 ---
 
-## Current Island Concept
+## 🌿 Current Island Concept
 
 A fully traditional Japanese island. The aesthetic draws from Edo-period villages, Shinto shrines, bamboo forests, and natural onsen towns. No modern elements. Every structure, path, and plant choice should reinforce this theme.
 
 ---
 
-## Long-Term Layout Vision
+## 🗺️ Long-Term Layout Vision
 
 The island is divided into distinct districts, each with a clear purpose and atmosphere. Movement between districts should feel like walking through different parts of a historical Japanese town — from the lively main street, out to the quiet shrine, deeper into the bamboo grove, and finally to the secluded onsen.
 
 ---
 
-## Village Core
+## 🏮 Village Core
 
 **Main Village Street**
 - Central artery of the island — the primary path connecting key buildings
@@ -26,7 +26,7 @@ The island is divided into distinct districts, each with a clear purpose and atm
 
 ---
 
-## Shrine District
+## ⛩️ Shrine District
 
 - Dedicated area with a Shinto shrine aesthetic
 - Key items: torii gates, stone lanterns, offering boxes, lucky cat furniture, zen cushions
@@ -37,7 +37,7 @@ The island is divided into distinct districts, each with a clear purpose and atm
 
 ---
 
-## Bamboo Grove
+## 🎋 Bamboo Grove
 
 - A dense stand of bamboo in a quieter part of the island
 - Bamboo shoots planted in neat rows or natural-looking clusters
@@ -48,7 +48,7 @@ The island is divided into distinct districts, each with a clear purpose and atm
 
 ---
 
-## Graveyard
+## 🪦 Graveyard
 
 - Small, atmospheric area — peaceful rather than spooky
 - Grave markers (headstones), stone lanterns, overgrown look with moss-adjacent flowers
@@ -57,7 +57,7 @@ The island is divided into distinct districts, each with a clear purpose and atm
 
 ---
 
-## Onsen
+## ♨️ Onsen
 
 - Secluded hot spring area, ideally near water or a cliff edge
 - Items: outdoor bath, hot spring stones, bamboo fence, towel racks
@@ -67,7 +67,7 @@ The island is divided into distinct districts, each with a clear purpose and atm
 
 ---
 
-## Museum Placement
+## 🏛️ Museum Placement
 
 - Museum should be placed where it doesn't disrupt the main Japanese aesthetic
 - Options: tuck it near the beach or into a natural cliffside setting
@@ -76,7 +76,7 @@ The island is divided into distinct districts, each with a clear purpose and atm
 
 ---
 
-## Villager Housing Areas
+## 🏡 Villager Housing Areas
 
 - Villager houses should be clustered by "neighbourhood" feel rather than scattered randomly
 - Aim for 2–3 small clusters with interior paths connecting them
@@ -86,7 +86,7 @@ The island is divided into distinct districts, each with a clear purpose and atm
 
 ---
 
-## Future Terraforming Notes
+## 🏔️ Future Terraforming Notes
 
 - Raise the shrine district by at least one cliff level
 - Create a natural-looking river path that flows past the bamboo grove
@@ -97,4 +97,4 @@ The island is divided into distinct districts, each with a clear purpose and atm
 
 ---
 
-*Last updated: Initial setup — April 2026*
+*Last updated: 18/04/2026 — Initial setup*

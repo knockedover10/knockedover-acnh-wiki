@@ -1,10 +1,10 @@
-# Daily Checklists
+# 📅 Daily Checklists
 
 [← Back to README](../README.md)
 
 ---
 
-## First-10-Days Checklist
+## 🗓️ First-10-Days Checklist
 
 A structured guide for the critical early window. Tick off as you go.
 
@@ -64,40 +64,40 @@ A structured guide for the critical early window. Tick off as you go.
 
 ---
 
-## Reusable Daily Checklist
+## ♻️ Reusable Daily Checklist
 
 Run through this every day once the island is past early game.
 
-**Morning**
+**🌅 Morning**
 - [ ] Check Nook Stop for daily Nook Miles bonus (500 NM)
 - [ ] Talk to all villagers — gifts, new dialogue, friendship building
 - [ ] Dig up 4 fossils → donate new ones, sell duplicates
 - [ ] Check the beach for washed-up items and bottles (DIY recipes)
 - [ ] Check balloon presents (listen for pop sound near cliffs/coast)
 
-**Shops & Economy**
+**🛍️ Shops & Economy**
 - [ ] Check Nook's Cranny for daily rotating items and turnip price
 - [ ] Check Able Sisters for new clothing items
 - [ ] Sell fish, bugs, and extra materials as needed
 
-**Nature & Maintenance**
+**🌱 Nature & Maintenance**
 - [ ] Water flowers (or check if rain is forecast)
 - [ ] Check for hybrid flower growth
 - [ ] Clear any weeds
 - [ ] Shake trees for furniture, wasps (net ready), and Bells
 
-**Villager Interaction**
+**🗣️ Villager Interaction**
 - [ ] Give a gift to 1–2 priority villagers (friendship farming)
 - [ ] Complete any villager requests or errands
 
-**Optional / As Needed**
+**📌 Optional / As Needed**
 - [ ] NMT island hopping for villager hunting
 - [ ] Stalk Market — check AM and PM turnip prices
 - [ ] Catch seasonal fish or bugs before they rotate out
 
 ---
 
-## Today's Focus
+## 🎯 Today's Focus
 
 > *(Update this section each session — one or two specific goals for today's play.)*
 
@@ -107,4 +107,4 @@ See [Progression → Current Progress](progression.md#current-progress) for the 
 
 ---
 
-*Last updated: Initial setup — April 2026*
+*Last updated: 18/04/2026 — Initial setup*
