@@ -8,6 +8,19 @@ Chill only lol.
 
 ---
 
+## Recent Updates
+
+| Date | What changed |
+|------|--------------|
+| 2026-04-18 | [Trees & Nature](wiki/trees-and-nature.md) — new page: tree spacing, Dense Orchard Method, bamboo mechanics, Bell fruit tips |
+| 2026-04-18 | [Island Layout](wiki/island-layout.md) — bamboo grove cross-linked to Dense Orchard Method |
+| 2026-04-18 | [Items & Furniture](wiki/items-and-furniture.md) — bamboo section updated with nature page link |
+| 2026-04-18 | Wiki created — all core pages seeded with Japanese island context |
+
+> Full history → [Changelog](wiki/changelog.md)
+
+---
+
 ## Contents
 
 | Page | What it covers |
@@ -41,6 +54,6 @@ Chill only lol.
 > **For future AI runs:** When updating this wiki, follow these rules:
 >
 > 1. **Update the most relevant existing page** — do not create a new page unless the topic is genuinely new.
-> 2. **Keep this README's Contents table and Current Snapshot current** when major milestones are reached.
+> 2. **Keep this README's Contents table, Current Snapshot, and Recent Updates table current** — add a row to Recent Updates for every meaningful change, and trim it to the last 5 entries.
 > 3. **Append a short dated entry to [wiki/changelog.md](wiki/changelog.md)** summarising what changed.
 > 4. Keep writing practical, structured, and concise — this is a personal reference, not a guide for others.
