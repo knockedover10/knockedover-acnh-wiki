@@ -1,4 +1,4 @@
-# 🏯 Knockedover — ACNH Island Wiki
+# 🏯 @knockedover's ACNH Island Wiki
 
 This is my personal planning wiki for Animal Crossing: New Horizons. It serves as my long-term source of truth for island layout decisions, villager management, progression tracking, and build inspiration — all centered on a fully traditional Japanese island concept.
 
