@@ -49,4 +49,47 @@
 
 ---
 
-*Last updated: 18/04/2026 — Initial setup*
+## 🎟️ Villager Hunting — How It Works
+
+### Early game: the first 3 plots
+
+Accept all 3. Tom Nook's storyline requires you to fill exactly 3 house plots, and the game hard-locks the personality pool to **Lazy, Normal, and Peppy** for this phase. You can invite more than one per day during this window (the normal one-per-day rule doesn't apply yet), but don't expect thematic fits — the RNG is constrained. These are placeholder residents, not permanent choices.
+
+Also note: **your first campsite visitor is a mandatory Smug** — you have no choice but to accept them.
+
+### After early game: real hunting begins
+
+1. **Keep an open plot** — you need 9 or fewer current villagers. Either leave a plot unbuilt, or wait for an unwanted villager to develop a thought bubble (~15 days of being ignored).
+2. **Buy Nook Miles Tickets** — 2,000 NMT each from the Nook Stop. Stock up heavily before hunting — specific targets can take hundreds of tickets.
+3. **Fly to mystery islands** via Orville at the airport → "I wanna fly!" → "Use a Nook Miles Ticket."
+4. **One villager per island** — talk to them twice and they'll offer to move in. Don't want them? Leave and use another ticket.
+5. **One invite per day** — once you successfully invite someone, no more villagers appear on mystery islands that day.
+
+### How the RNG works
+
+The game selects a **species first** (1 of 35, equally weighted), then picks randomly within that species. Practical implications:
+
+- **Octopus** (3 villagers total) → easiest to hit a specific target from this species
+- **Cat** (23 villagers total) → hardest; finding Kabuki specifically requires a lot of tickets
+- For Kabuki specifically: ~1/35 chance of landing on cat species, then ~1/23 within cats = roughly **1 in 800 islands**
+
+### Tips for Hanamori's wishlist
+
+- **Prioritise Shino and Coco** — Deer has only 4 villagers (good odds); Rabbit has 20, but Coco is the only one that fits the aesthetic, so recognise it'll take patience
+- **Check the hotel first** (post-2.0) — if a villager from your wishlist is currently staying as a hotel tourist, they won't appear on mystery islands that day
+- **Campsite rolling** is a more reliable method if you're willing to time travel — the campsite can roll any villager regardless of personality lock
+- **Don't accept a mystery island villager mid-hunt** if you already have 10 residents — the plot must be open or the invite won't trigger
+- Keep NMT farming daily (balloon presents, money rock, fossils → sell → buy NMT) so you're never caught short mid-hunt
+
+### Rehoming Axel — when and how
+
+Axel (Jock) is the weakest thematic fit. To replace him:
+1. Ignore him completely for ~15 days — no talking, no gifting
+2. He'll eventually show a thought bubble, then come to you asking to leave
+3. Say yes → his plot opens → begin hunting for Snake (Jock slot, ninja design) or any higher-priority wishlist resident
+
+Don't force him out before you have a replacement lined up — an empty plot can be filled randomly if a new villager moves in from another player's island via online play.
+
+---
+
+*Last updated: 18/04/2026 — Added villager hunting strategy, RNG mechanics, early-game plot rules, and Hanamori-specific tips*

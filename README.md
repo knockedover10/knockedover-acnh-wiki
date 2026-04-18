@@ -18,11 +18,11 @@ Chill only lol.
 
 | Date | What changed |
 |------|--------------|
+| 18/04/2026 | [🏨 Villagers](wiki/villagers.md) — added villager hunting strategy: early-game plot rules, RNG mechanics, per-species odds, Hanamori tips, rehoming Axel |
+| 18/04/2026 | [🖥️ Critter Tracker](https://knockedover10.github.io/knockedover-acnh-wiki/critters.html) — interactive HTML page: filter, sort, caught/donated checkboxes, critter images via Nookipedia |
 | 18/04/2026 | [🗂 Dashboard](https://knockedover10.github.io/knockedover-acnh-wiki/dashboard.html) — renamed, sticky nav, icons, Nookipedia integration, collectibles tracker, Spontaneous Thoughts |
-| 18/04/2026 | [🦋 Critters](wiki/critters.md) — new page: 200 critters (80 fish, 80 bugs, 40 sea creatures), sell prices, ⚠️ leaving-soon markers |
-| 18/04/2026 | All wiki pages updated with emoji section headers; dates standardised to DD/MM/YYYY; README contents alphabetically sorted |
+| 18/04/2026 | [🦋 Critters](wiki/critters.md) — new wiki page: 200 critters (80 fish, 80 bugs, 40 sea creatures), sell prices, ⚠️ leaving-soon markers |
 | 18/04/2026 | [🌿 Trees & Nature](wiki/trees-and-nature.md) — new page: tree spacing, Dense Orchard Method, bamboo mechanics, Bell fruit tips |
-| 18/04/2026 | Wiki created — all core pages seeded with Japanese island context |
 
 > Full history → [📋 Changelog](wiki/changelog.md)
 

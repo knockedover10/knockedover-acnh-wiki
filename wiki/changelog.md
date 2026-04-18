@@ -43,6 +43,13 @@ A running log of meaningful island updates. Append a short entry whenever a sign
 
 ---
 
+### 18/04/2026 — Villager hunting strategy added
+
+- Added 🎟️ Villager Hunting section to `wiki/villagers.md`
+- Covers: early-game 3-plot rules and personality locks, post-early-game NMT hunting flow, species-based RNG mechanics, per-species odds for Hanamori's wishlist (Shino, Kabuki, Coco etc.), campsite rolling note, and a step-by-step guide for rehoming Axel
+
+---
+
 ### 18/04/2026 — Major wiki & dashboard overhaul
 
 - **Dashboard:** Renamed to "Hikari @ Hanamori's Island Dashboard (Animal Crossing: New Horizons)"; added sticky nav menu with anchor links to all sections; added section icons
