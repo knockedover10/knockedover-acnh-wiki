@@ -132,6 +132,16 @@
     user-select: none;
     background: var(--surface);
     border-bottom: 1px solid transparent;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+    font-size: inherit;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-radius: 0;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(122,92,56,0.15);
   }
   .day-card.open .day-header { border-bottom-color: var(--border); }
   .day-badge {
@@ -913,6 +923,28 @@
     .notes-grid { grid-template-columns: 1fr; }
   }
 
+  /* ── iOS: prevent zoom on input focus, ensure touch targets ── */
+  input, select, textarea, button {
+    font-size: 16px;
+    touch-action: manipulation;
+  }
+  .day-header, .st-btn, .nk-btn, .ct-tab, .vl-chip, .reset-btn {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+  /* Scroll hint for nav on mobile */
+  @media (max-width: 600px) {
+    .main-nav::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 24px;
+      background: linear-gradient(to right, transparent, rgba(58,53,48,.8));
+      pointer-events: none;
+    }
+    .main-nav { position: sticky; }
+  }
+
   /* ── MAIN NAV ── */
   .main-nav {
     position: sticky;
@@ -922,15 +954,20 @@
     border-bottom: 2px solid var(--red);
     overflow-x: auto;
     white-space: nowrap;
-    scrollbar-width: none;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(200,191,168,.6) rgba(58,53,48,.4);
+    -webkit-overflow-scrolling: touch;
   }
-  .main-nav::-webkit-scrollbar { display: none; }
+  .main-nav::-webkit-scrollbar { height: 4px; display: block; }
+  .main-nav::-webkit-scrollbar-track { background: rgba(58,53,48,.4); }
+  .main-nav::-webkit-scrollbar-thumb { background: rgba(200,191,168,.6); border-radius: 4px; }
   .main-nav ul {
     display: flex;
     list-style: none;
     padding: 0 10px;
     margin: 0;
     gap: 0;
+    min-width: max-content;
   }
   .main-nav li a {
     display: block;
@@ -1002,12 +1039,12 @@
 
   <!-- DAY 0 -->
   <div class="day-card" id="card-day0">
-    <div class="day-header" onclick="toggleCard('day0')">
+    <button class="day-header" onclick="toggleCard(\'day0\')" type="button">
       <span class="day-badge" id="badge-day0">Day 0</span>
       <span class="day-title">Island Setup &amp; Opening Ceremony</span>
       <span class="day-prog" id="prog-day0"></span>
       <span class="chevron">▼</span>
-    </div>
+    </button>
     <div class="day-body">
       <ul class="checklist">
         <li><input type="checkbox" id="d0_1" onchange="save(this)"><label for="d0_1">Choose the best map layout for your Japanese theme (rivers, cliffs, beach access)</label></li>
@@ -1023,12 +1060,12 @@
 
   <!-- DAY 1 -->
   <div class="day-card" id="card-day1">
-    <div class="day-header" onclick="toggleCard('day1')">
+    <button class="day-header" onclick="toggleCard(\'day1\')" type="button">
       <span class="day-badge" id="badge-day1">Day 1</span>
       <span class="day-title">NookPhone, Pay Loan, DIY Workshop, Museum Tent</span>
       <span class="day-prog" id="prog-day1"></span>
       <span class="chevron">▼</span>
-    </div>
+    </button>
     <div class="day-body">
       <ul class="checklist">
         <li><input type="checkbox" id="d1_1" onchange="save(this)"><label for="d1_1">Pick up NookPhone from Tom Nook</label></li>
@@ -1050,12 +1087,12 @@
 
   <!-- DAY 2 -->
   <div class="day-card" id="card-day2">
-    <div class="day-header" onclick="toggleCard('day2')">
+    <button class="day-header" onclick="toggleCard(\'day2\')" type="button">
       <span class="day-badge" id="badge-day2">Day 2</span>
       <span class="day-title">Vaulting Pole, Shovel, Gather Resources, Nook's Cranny</span>
       <span class="day-prog" id="prog-day2"></span>
       <span class="chevron">▼</span>
-    </div>
+    </button>
     <div class="day-body">
       <ul class="checklist">
         <li><input type="checkbox" id="d2_1" onchange="save(this)"><label for="d2_1">Visit Blathers — receive Vaulting Pole &amp; Shovel DIY recipes</label></li>
@@ -1073,12 +1110,12 @@
 
   <!-- DAY 3 -->
   <div class="day-card" id="card-day3">
-    <div class="day-header" onclick="toggleCard('day3')">
+    <button class="day-header" onclick="toggleCard(\'day3\')" type="button">
       <span class="day-badge" id="badge-day3">Day 3</span>
       <span class="day-title">Bridge, 3 Housing Plots, Furniture, Ladder Recipe</span>
       <span class="day-prog" id="prog-day3"></span>
       <span class="chevron">▼</span>
-    </div>
+    </button>
     <div class="day-body">
       <ul class="checklist">
         <li><input type="checkbox" id="d3_1" onchange="save(this)"><label for="d3_1">Speak to Tom Nook — receive bridge kit &amp; place bridge</label></li>
@@ -1095,12 +1132,12 @@
 
   <!-- DAY 4 -->
   <div class="day-card" id="card-day4">
-    <div class="day-header" onclick="toggleCard('day4')">
+    <button class="day-header" onclick="toggleCard(\'day4\')" type="button">
       <span class="day-badge" id="badge-day4">Day 4</span>
       <span class="day-title">Museum Opens, First Villager Moves In, Customisation Workshop</span>
       <span class="day-prog" id="prog-day4"></span>
       <span class="chevron">▼</span>
-    </div>
+    </button>
     <div class="day-body">
       <ul class="checklist">
         <li><input type="checkbox" id="d4_1" onchange="save(this)"><label for="d4_1">Museum building is finished — explore it</label></li>
@@ -1115,12 +1152,12 @@
 
   <!-- DAY 5 -->
   <div class="day-card" id="card-day5">
-    <div class="day-header" onclick="toggleCard('day5')">
+    <button class="day-header" onclick="toggleCard(\'day5\')" type="button">
       <span class="day-badge" id="badge-day5">Day 5</span>
       <span class="day-title">Peppy Villager Moves In, Decorate</span>
       <span class="day-prog" id="prog-day5"></span>
       <span class="chevron">▼</span>
-    </div>
+    </button>
     <div class="day-body">
       <ul class="checklist">
         <li><input type="checkbox" id="d5_1" onchange="save(this)"><label for="d5_1">Peppy villager (2nd plot) moves in today</label></li>
@@ -1135,12 +1172,12 @@
 
   <!-- DAY 6 -->
   <div class="day-card" id="card-day6">
-    <div class="day-header" onclick="toggleCard('day6')">
+    <button class="day-header" onclick="toggleCard(\'day6\')" type="button">
       <span class="day-badge" id="badge-day6">Day 6</span>
       <span class="day-title">Normal Villager Moves In, Prepare for Upgrade</span>
       <span class="day-prog" id="prog-day6"></span>
       <span class="chevron">▼</span>
-    </div>
+    </button>
     <div class="day-body">
       <ul class="checklist">
         <li><input type="checkbox" id="d6_1" onchange="save(this)"><label for="d6_1">Normal villager (3rd plot) moves in today</label></li>
@@ -1155,12 +1192,12 @@
 
   <!-- DAY 7 -->
   <div class="day-card" id="card-day7">
-    <div class="day-header" onclick="toggleCard('day7')">
+    <button class="day-header" onclick="toggleCard(\'day7\')" type="button">
       <span class="day-badge" id="badge-day7">Day 7</span>
       <span class="day-title">Resident Services Under Maintenance — Keep Decorating</span>
       <span class="day-prog" id="prog-day7"></span>
       <span class="chevron">▼</span>
-    </div>
+    </button>
     <div class="day-body">
       <ul class="checklist">
         <li><input type="checkbox" id="d7_1" onchange="save(this)"><label for="d7_1">Resident Services is closed for renovation today</label></li>
@@ -1175,12 +1212,12 @@
 
   <!-- DAY 8 -->
   <div class="day-card" id="card-day8">
-    <div class="day-header" onclick="toggleCard('day8')">
+    <button class="day-header" onclick="toggleCard(\'day8\')" type="button">
       <span class="day-badge" id="badge-day8">Day 8</span>
       <span class="day-title">Resident Services Opens, Isabelle Arrives, Campsite</span>
       <span class="day-prog" id="prog-day8"></span>
       <span class="chevron">▼</span>
-    </div>
+    </button>
     <div class="day-body">
       <ul class="checklist">
         <li><input type="checkbox" id="d8_1" onchange="save(this)"><label for="d8_1">Resident Services (brick building) is open — meet Isabelle</label></li>
@@ -1196,12 +1233,12 @@
 
   <!-- DAY 9 -->
   <div class="day-card" id="card-day9">
-    <div class="day-header" onclick="toggleCard('day9')">
+    <button class="day-header" onclick="toggleCard(\'day9\')" type="button">
       <span class="day-badge" id="badge-day9">Day 9</span>
       <span class="day-title">Campsite Finished — Decorate &amp; Plant</span>
       <span class="day-prog" id="prog-day9"></span>
       <span class="chevron">▼</span>
-    </div>
+    </button>
     <div class="day-body">
       <ul class="checklist">
         <li><input type="checkbox" id="d9_1" onchange="save(this)"><label for="d9_1">Campsite is finished and ready for visitors</label></li>
@@ -1216,12 +1253,12 @@
 
   <!-- DAY 10 -->
   <div class="day-card" id="card-day10">
-    <div class="day-header" onclick="toggleCard('day10')">
+    <button class="day-header" onclick="toggleCard(\'day10\')" type="button">
       <span class="day-badge" id="badge-day10">Day 10</span>
       <span class="day-title">First Campsite Visitor, Invite Smug Villager, New Plots</span>
       <span class="day-prog" id="prog-day10"></span>
       <span class="chevron">▼</span>
-    </div>
+    </button>
     <div class="day-body">
       <ul class="checklist">
         <li><input type="checkbox" id="d10_1" onchange="save(this)"><label for="d10_1">First campsite visitor arrives — talk to them</label></li>
@@ -1237,12 +1274,12 @@
 
   <!-- DAY 11 -->
   <div class="day-card" id="card-day11">
-    <div class="day-header" onclick="toggleCard('day11')">
+    <button class="day-header" onclick="toggleCard(\'day11\')" type="button">
       <span class="day-badge" id="badge-day11">Day 11</span>
       <span class="day-title">Campsite Villager Moves In — Continue Villager Hunting</span>
       <span class="day-prog" id="prog-day11"></span>
       <span class="chevron">▼</span>
-    </div>
+    </button>
     <div class="day-body">
       <ul class="checklist">
         <li><input type="checkbox" id="d11_1" onchange="save(this)"><label for="d11_1">Campsite villager moves in (villager 4)</label></li>
@@ -1257,12 +1294,12 @@
 
   <!-- DAY 12 -->
   <div class="day-card" id="card-day12">
-    <div class="day-header" onclick="toggleCard('day12')">
+    <button class="day-header" onclick="toggleCard(\'day12\')" type="button">
       <span class="day-badge" id="badge-day12">Day 12</span>
       <span class="day-title">Villager 7 Moves In — Unlock Island Evaluations &amp; Push Rating</span>
       <span class="day-prog" id="prog-day12"></span>
       <span class="chevron">▼</span>
-    </div>
+    </button>
     <div class="day-body">
       <ul class="checklist">
         <li><input type="checkbox" id="d12_1" onchange="save(this)"><label for="d12_1">Villager 7 moves in (can now reach 2-star rating minimum)</label></li>
@@ -1279,12 +1316,12 @@
 
   <!-- DAY 13 -->
   <div class="day-card" id="card-day13">
-    <div class="day-header" onclick="toggleCard('day13')">
+    <button class="day-header" onclick="toggleCard(\'day13\')" type="button">
       <span class="day-badge" id="badge-day13">Day 13</span>
       <span class="day-title">Villager 8 Moves In — Big Rating Push</span>
       <span class="day-prog" id="prog-day13"></span>
       <span class="chevron">▼</span>
-    </div>
+    </button>
     <div class="day-body">
       <ul class="checklist">
         <li><input type="checkbox" id="d13_1" onchange="save(this)"><label for="d13_1">Villager 8 moves in — 3-star rating now possible!</label></li>
@@ -1303,12 +1340,12 @@
 
   <!-- DAY 14 -->
   <div class="day-card" id="card-day14">
-    <div class="day-header" onclick="toggleCard('day14')">
+    <button class="day-header" onclick="toggleCard(\'day14\')" type="button">
       <span class="day-badge" id="badge-day14">Day 14</span>
       <span class="day-title">🎵 KK Concert &amp; Island Designer Unlocked</span>
       <span class="day-prog" id="prog-day14"></span>
       <span class="chevron">▼</span>
-    </div>
+    </button>
     <div class="day-body">
       <ul class="checklist">
         <li><input type="checkbox" id="d14_1" onchange="save(this)"><label for="d14_1">KK Slider performs "Welcome Horizons" at the plaza — attend the concert</label></li>

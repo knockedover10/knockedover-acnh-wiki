@@ -81,8 +81,8 @@ header .subtitle{font-size:.8rem;color:rgba(245,240,232,.55);margin-top:4px;lett
 .progress-count{font-size:.8rem;color:var(--muted);min-width:52px;text-align:right}
 
 /* ── TABLE WRAPPER ── */
-.table-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--border)}
-table{width:100%;border-collapse:collapse;background:var(--card);min-width:700px}
+.table-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--border);-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;background:var(--card);min-width:520px}
 thead{background:var(--charcoal);color:#f5f0e8}
 thead th{padding:10px 12px;text-align:left;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;cursor:pointer;user-select:none;transition:background .15s}
 thead th:hover{background:#4a423c}
@@ -100,6 +100,18 @@ tbody tr.hidden{display:none}
 tbody tr.fully-collected{opacity:.55}
 
 td{padding:9px 12px;vertical-align:middle;font-size:.83rem}
+
+/* ── MOBILE: hide time column, condense ── */
+@media(max-width:700px){
+  .col-time{display:none}
+  .col-months{display:none}
+  td,th{padding:7px 8px;font-size:.78rem}
+  .critter-img{width:34px;height:34px}
+  .critter-img-cell{width:40px;min-width:40px}
+  .critter-img-placeholder{width:34px;height:34px;font-size:.9rem}
+  .check-label{padding:2px 4px}
+  .check-label span{font-size:.6rem}
+}
 
 /* ── CRITTER IMAGE ── */
 .critter-img-cell{width:52px;min-width:52px;text-align:center}
@@ -144,6 +156,16 @@ footer a{color:rgba(245,240,232,.5)}
   .filter-bar{flex-direction:column}
   .filter-actions{margin-left:0}
   .filter-group{min-width:100%}
+  .page-wrap{padding:16px 10px}
+  .tabs{gap:4px}
+  .tab-btn{font-size:.78rem;padding:7px 12px}
+  .progress-wrap{padding:10px 12px}
+}
+/* Ensure selects/inputs are touch-friendly */
+.filter-group select,.filter-group input{
+  touch-action:manipulation;
+  font-size:16px; /* prevents iOS zoom on focus */
+  min-height:38px;
 }
 </style>
 </head>
@@ -242,9 +264,9 @@ footer a{color:rgba(245,240,232,.5)}
             <th class="no-sort">Pic</th>
             <th onclick="sortTable('fish',1)">Name</th>
             <th onclick="sortTable('fish',2)">Location</th>
-            <th onclick="sortTable('fish',3)">Time</th>
+            <th class="col-time" onclick="sortTable('fish',3)">Time</th>
             <th onclick="sortTable('fish',4)">Bells ↓</th>
-            <th onclick="sortTable('fish',5)">Months (NH)</th>
+            <th class="col-months" onclick="sortTable('fish',5)">Months (NH)</th>
             <th class="no-sort" style="text-align:center">🪣 Caught</th>
             <th class="no-sort" style="text-align:center">🏛️ Donated</th>
           </tr>
@@ -321,9 +343,9 @@ footer a{color:rgba(245,240,232,.5)}
             <th class="no-sort">Pic</th>
             <th onclick="sortTable('bugs',1)">Name</th>
             <th onclick="sortTable('bugs',2)">Location</th>
-            <th onclick="sortTable('bugs',3)">Time</th>
+            <th class="col-time" onclick="sortTable('bugs',3)">Time</th>
             <th onclick="sortTable('bugs',4)">Bells ↓</th>
-            <th onclick="sortTable('bugs',5)">Months (NH)</th>
+            <th class="col-months" onclick="sortTable('bugs',5)">Months (NH)</th>
             <th class="no-sort" style="text-align:center">🪣 Caught</th>
             <th class="no-sort" style="text-align:center">🏛️ Donated</th>
           </tr>
@@ -401,7 +423,7 @@ footer a{color:rgba(245,240,232,.5)}
             <th onclick="sortTable('sea',1)">Name</th>
             <th onclick="sortTable('sea',2)">Shadow Size</th>
             <th onclick="sortTable('sea',3)">Bells ↓</th>
-            <th onclick="sortTable('sea',4)">Months (NH)</th>
+            <th class="col-months" onclick="sortTable('sea',4)">Months (NH)</th>
             <th class="no-sort" style="text-align:center">🪣 Caught</th>
             <th class="no-sort" style="text-align:center">🏛️ Donated</th>
           </tr>
@@ -713,15 +735,15 @@ function buildRow(type, critter, idx) {
       <td class="name-cell" data-val="${critter.name.toLowerCase()}">${critter.name}${leavingTag}${availNow}</td>
       <td data-val="${critter.loc}">${critter.loc}</td>
       <td class="price-cell" data-val="${critter.price}">🔔 ${critter.price.toLocaleString()}</td>
-      <td class="month-cell" data-val="${critter.months.join(',')}">${monthsText}</td>`;
+      <td class="col-months month-cell" data-val="${critter.months.join(',')}">${monthsText}</td>`;
   } else {
     cells = `
       ${imgCell}
       <td class="name-cell" data-val="${critter.name.toLowerCase()}">${critter.name}${leavingTag}${availNow}</td>
       <td data-val="${critter.loc}">${critter.loc}</td>
-      <td data-val="${critter.time}">${critter.time}</td>
+      <td class="col-time" data-val="${critter.time}">${critter.time}</td>
       <td class="price-cell" data-val="${critter.price}">🔔 ${critter.price.toLocaleString()}</td>
-      <td class="month-cell" data-val="${critter.months.join(',')}">${monthsText}</td>`;
+      <td class="col-months month-cell" data-val="${critter.months.join(',')}">${monthsText}</td>`;
   }
 
   return `<tr class="${critter.leaving?'leaving':''} ${(caught&&donated)?'fully-collected':''}" 
