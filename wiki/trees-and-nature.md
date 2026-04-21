@@ -156,6 +156,44 @@ Plant these in a dense orchard using the transplant method above to maximise yie
 
 ---
 
+## 💰 Money Trees (Gold Spots)
+
+Each day, one **glowing gold spot** appears somewhere on your island. Dig it up to collect **1,000 Bells** and get a special hole that can grow a money tree.
+
+### How it works
+
+Bury a bag of Bells in the glowing hole — the tree will grow and produce **3 Bell bags** based on how much you buried. The tree only yields Bells **once**, then becomes a regular hardwood tree.
+
+### What to bury
+
+| Bells buried | 70% outcome | 30% outcome | Expected profit |
+|---|---|---|---|
+| ≤ 1,000 | 3 × 1,000 (3,000) | 3 × 1,000 (3,000) | +2,000 (guaranteed) |
+| 1,001–9,999 | 3,000 Bells | 3× buried amount | Variable |
+| **10,000** ✅ | **30,000 Bells** | **30,000 Bells** | **+20,000 (guaranteed)** |
+| 30,000 | 30,000 (break even) | 90,000 Bells | +18,000 expected |
+| > 99,000 | 90,000 (a loss) | 90,000 (a loss) | Always a loss |
+
+### Recommendation
+
+**Always bury exactly 10,000 Bells.** At this amount, both outcomes (70% and 30%) pay 30,000 — it is a guaranteed 20,000 Bell profit every single day with zero risk.
+
+Burying 30,000 is the gambler's play: break-even on bad luck, 60,000 profit on good luck, but expected return (18,000) is actually worse than the safe 10k strategy.
+
+Never bury more than 99,000 — the max any tree can produce is 297,000 Bells (3 × 99,000), and anything over 99,000 buried per bag is wasted.
+
+### Daily routine
+
+1. Walk around the island until you spot the **glowing gold patch** in the ground
+2. Dig it up → collect the 1,000 Bells it gives you
+3. Open your wallet and take out **10,000 Bells**
+4. Bury the 10,000 in the same glowing hole
+5. Come back in 3–4 days to shake the tree for 30,000 Bells
+
+> 💡 Only one glowing spot appears per day. You cannot plant multiple money trees on the same day.
+
+---
+
 ## 🏯 For the Japanese Island Specifically
 
 | Use case | Recommendation |
@@ -168,4 +206,4 @@ Plant these in a dense orchard using the transplant method above to maximise yie
 
 ---
 
-*Last updated: 22/04/2026 — Added Tree Shaking section: daily limits, tree type behaviour, fruit-eating clarification*
+*Last updated: 22/04/2026 — Added Money Trees section: gold spot mechanics, odds table, optimal 10k strategy*
