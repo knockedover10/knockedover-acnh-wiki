@@ -50,6 +50,13 @@ A running log of meaningful island updates. Append a short entry whenever a sign
 
 ---
 
+### 22/04/2026 — Money Trees section added
+
+- Added 💰 Money Trees (Gold Spots) section to `wiki/trees-and-nature.md`
+- Covers: how the glowing gold spot works, full odds table (10k/30k/higher), optimal daily strategy (always bury 10,000 Bells for a guaranteed +20,000 profit), and step-by-step daily routine
+
+---
+
 ### 18/04/2026 — Major wiki & dashboard overhaul
 
 - **Dashboard:** Renamed to "Hikari @ Hanamori's Island Dashboard (Animal Crossing: New Horizons)"; added sticky nav menu with anchor links to all sections; added section icons
