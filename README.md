@@ -22,7 +22,7 @@ Chill only lol.
 | 18/04/2026 | [🖥️ Critter Tracker](https://knockedover10.github.io/knockedover-acnh-wiki/critters.html) — interactive HTML page: filter, sort, caught/donated checkboxes, critter images via Nookipedia |
 | 18/04/2026 | [🗂 Dashboard](https://knockedover10.github.io/knockedover-acnh-wiki/dashboard.html) — renamed, sticky nav, icons, Nookipedia integration, collectibles tracker, Spontaneous Thoughts |
 | 18/04/2026 | [🦋 Critters](wiki/critters.md) — new wiki page: 200 critters (80 fish, 80 bugs, 40 sea creatures), sell prices, ⚠️ leaving-soon markers |
-| 18/04/2026 | [🌿 Trees & Nature](wiki/trees-and-nature.md) — new page: tree spacing, Dense Orchard Method, bamboo mechanics, Bell fruit tips |
+| 22/04/2026 | [🌿 Trees & Nature](wiki/trees-and-nature.md) — added Money Trees section: gold spot mechanics, odds breakdown, optimal 10,000-Bell strategy |
 
 > Full history → [📋 Changelog](wiki/changelog.md)
 
@@ -30,31 +30,13 @@ Chill only lol.
 
 ## 📖 Contents
 
-| Page | What it covers |
 |------|----------------|
-| [📋 Changelog](wiki/changelog.md) | Running log of island updates |
-| [🦋 Critters](wiki/critters.md) | Fish, bugs, and sea creatures — full NH availability by month |
-| [📅 Daily Checklists](wiki/daily-checklists.md) | First-10-days checklist, reusable daily routine |
-| [💡 Ideas & Inspirations](wiki/ideas-and-inspirations.md) | Build ideas, district concepts, villager house plans |
-| [🗺️ Island Layout](wiki/island-layout.md) | Layout vision, districts, terraforming plans |
-| [🪑 Items & Furniture](wiki/items-and-furniture.md) | Themed items, furniture wishlist, crafting targets |
-| [📈 Progression](wiki/progression.md) | Unlock order, 3-star goals, milestones |
-| [🌿 Trees & Nature](wiki/trees-and-nature.md) | Tree spacing, bamboo mechanics, wood farming, Bell fruit tips |
-| [🏘️ Villagers](wiki/villagers.md) | Current residents, wishlist, thematic fit |
 
 ---
 
 ## 🌸 Current Snapshot
 
-| Field | Status |
 |-------|--------|
-| 🏝️ **Island name** | Hanamori |
-| 🏯 **Island theme** | Fully traditional Japanese |
-| 🐾 **Current villagers** | Cherry, Axel |
-| ⭐ **Villager wishlist** | Kabuki, Genji, Shino, Pekoe, Ken, Annalisa, Greta, Coco, Gladys / Blanche, Snake |
-| 🗺️ **Active planning areas** | Main village street, shrine district, bamboo grove, graveyard, onsen |
-| 📅 **Current stage** | Early game — first 10 days |
-| 🌟 **3-star rating** | Not yet achieved |
 
 ---
 
