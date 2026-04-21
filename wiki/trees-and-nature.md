@@ -61,6 +61,42 @@ Use this method for your non-native fruit orchard and your bamboo grove layout.
 
 ---
 
+## 🌳 Tree Shaking
+
+Shaking trees is a free daily income source. Outcomes are determined by **daily island-wide limits and tree type** — eating fruit has no effect on what you get from shaking (fruit only gives strength to dig up whole trees or break rocks).
+
+### Daily limits (island-wide, across all non-fruit trees)
+
+| Drop | Limit per day |
+|------|---------------|
+| 🪹 Wasp nests | Up to 5 |
+| 🪑 Furniture items | Up to 2 |
+| 🔔 Bell bags (100 Bells each) | Up to 10 |
+| 🌿 Branches | Unlimited |
+
+- Once the daily limit for a drop type is reached, additional trees of that type yield nothing or just branches
+- Limits reset at **5:00 AM** each day
+- Shake hardwood and cedar trees across the whole island to hit all limits
+
+### Tree type behaviour
+
+| Tree type | What you get from shaking |
+|-----------|---------------------------|
+| **Hardwood / cedar** | Bells, furniture, wasps, branches, seasonal items |
+| **Fruit trees** | Their set fruit (usually 3 per tree when ripe) — unaffected by eating fruit |
+| **Bamboo** | Nothing from shaking; chop with axe for bamboo pieces |
+| **Palm trees** | Coconuts when ripe; otherwise nothing |
+
+### Tips
+
+- **Always equip your net before shaking** — wasps spawn instantly and sting you if you're not ready
+- Shake all non-fruit trees daily to reliably collect 2 furniture items and up to 10 × 100 Bell bags
+- Furniture drops are random and can include rare items — do not skip this
+- Seasonal materials (pine cones in autumn from cedar trees, spring bamboo shoots from bamboo) drop during their window regardless of whether you ate fruit
+- **Do not eat fruit before shaking** — save it for transplanting trees or breaking rocks; it does nothing for shake yields
+
+---
+
 ## 🪵 Wood Farming
 
 - Each tree gives 3 pieces of wood per day (hardwood, softwood, or wood — random)
@@ -132,4 +168,4 @@ Plant these in a dense orchard using the transplant method above to maximise yie
 
 ---
 
-*Last updated: 18/04/2026 — Added tree spacing, bamboo mechanics, wood farming, and Bell tips*
+*Last updated: 22/04/2026 — Added Tree Shaking section: daily limits, tree type behaviour, fruit-eating clarification*
