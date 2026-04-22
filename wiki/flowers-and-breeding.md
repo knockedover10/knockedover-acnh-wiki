@@ -348,6 +348,16 @@ Seeds: Red · Yellow · White → Hybrids: **Pink · Orange · Purple · Black �
 
 ---
 
+## Breeding Guide Infographic
+
+Full visual reference for all 8 species — parent/offspring icons, genetic notation, and the Blue Rose Folklore Method chain:
+
+![Ultimate Flower Breeding Guide 2.0](../docs/img/layouts/ultimate-breeding-guide.jpeg)
+
+*Ultimate Flower Breeding Guide 2.0 by BigIce88J. Based on datamined genetics data. Credits: Paleh (Discord: Paleh#0526), Aeter (Discord: backwards#7201). Original post on Reddit — [r/AnimalCrossing](https://www.reddit.com/r/AnimalCrossing/).*
+
+---
+
 ## Sources
 
 - [Animal Crossing Wiki — Flower Mechanics](https://animalcrossing.fandom.com/wiki/Flowers/New_Horizons_mechanics)
