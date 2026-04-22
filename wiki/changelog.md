@@ -16,6 +16,12 @@ A running log of meaningful island updates. Append a short entry whenever a sign
 
 ---
 
+### 22/04/2026 — Flowers & Breeding wiki page added
+- Created `wiki/flowers-and-breeding.md` — full cross-pollination reference for all 8 species
+- Covers: breeding mechanics, watering probability table, layout glossary, isolation cheat sheet, per-species chains with rates, blue/gold rose chains, master probability table, early-game checklist
+- Added FAQs: running through flowers (prevents breeding), picking flowers (prevents breeding until regrown)
+- Updated README: Contents (alphabetical), Recent Updates
+
 ### 18/04/2026 — Initial wiki setup
 
 - Created full wiki structure: README, island-layout, villagers, progression, daily-checklists, items-and-furniture, ideas-and-inspirations, changelog
