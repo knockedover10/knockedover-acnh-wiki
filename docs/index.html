@@ -485,6 +485,44 @@
     .hero h1 { font-size: 1.6rem; }
     .top-nav a { padding: 10px 10px; font-size: 0.74rem; }
     .dashboard-cta { flex-direction: column; }
+
+    /* Compact wiki page cards on mobile */
+    .wiki-grid {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+    .wiki-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px 10px 16px;
+      border-radius: 8px;
+    }
+    .wiki-card::before {
+      top: 0; left: 0; bottom: 0; right: auto;
+      width: 3px; height: 100%;
+      border-radius: 8px 0 0 8px;
+    }
+    .wiki-card .card-icon {
+      font-size: 1.2rem;
+      display: block;
+      margin: 0;
+      flex-shrink: 0;
+    }
+    .wiki-card h3 {
+      font-size: 0.88rem;
+      margin: 0;
+      flex: 1;
+      line-height: 1.2;
+    }
+    .wiki-card p {
+      display: none;
+    }
+    .card-link {
+      font-size: 0.72rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
   }
 
   /* ── SEASONAL DECORATION ── */
@@ -659,6 +697,13 @@
         <h3>Villagers</h3>
         <p>Starter villagers, personality preferences, and the 10-villager wishlist with thematic fit notes and district placement guide.</p>
         <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/villagers.md" class="card-link" target="_blank" rel="noopener">View page</a>
+      </div>
+
+      <div class="wiki-card accent-sakura">
+        <span class="card-icon">🌸</span>
+        <h3>Flowers &amp; Breeding</h3>
+        <p>Cross-pollination guide for all 8 species — layout configurations, probability tables, watering rules, and early-game checklist.</p>
+        <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/flowers-and-breeding.md" class="card-link" target="_blank" rel="noopener">View page</a>
       </div>
 
     </div>
