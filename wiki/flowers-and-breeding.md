@@ -66,6 +66,54 @@ Quick-reference guide for Hanamori flower breeding. Built for speed — scan tab
 | Cloning (isolated) | Duplicating a single rare hybrid | Any |
 | Interleaved Cloning | Duplicating 2–4 rare hybrids at once | Any |
 
+### Layout Illustrations
+
+**Turtle** — diagonal stagger, all-purpose same-parent layout
+
+![Turtle layout](../docs/img/layouts/turtle.png)
+
+---
+
+**Hex-hole** — dense packing with offset row gaps, best for solo play
+
+![Hex-hole layout](../docs/img/layouts/hex-hole.png)
+
+---
+
+**Super Turtle** — expanded turtle with more open spawn tiles, use with 3–5 visitors
+
+![Super Turtle layout](../docs/img/layouts/super_turtle.png)
+
+---
+
+**Checkerboard** — A and B alternate every tile, maximum cross-breeding efficiency
+
+![Checkerboard layout](../docs/img/layouts/checkerboard.png)
+
+---
+
+**Alternating Columns** — A column / empty / B column / empty, good for long plots
+
+![Alternating columns layout](../docs/img/layouts/diagonal.png)
+
+---
+
+**Isolated Pairs** — one A next to one B, 2+ tile gap before next pair (mandatory for hybrid-red steps)
+
+![Isolated pairs layout](../docs/img/layouts/isolated_pairs.png)
+
+---
+
+**Cloning vs Breeding** — how placement determines whether a flower clones or breeds
+
+![Clone vs breed diagram](../docs/img/layouts/mtmmo_combined.png)
+
+> Left: isolated = will only clone. Right: surrounded = will never clone. Bottom row: mixed placements.
+>
+> *Source: [mtmmo.com ACNH Flower Breeding Layouts 2026](https://www.mtmmo.com/news/2219--acnh-flower-breeding-layouts--hybrid-cloning-guide-2026)*
+
+*Layout screenshots from [AC Flower Factory](https://skent259.github.io/ac-flower-factory/breeding-patterns/) by skent259 (CC-BY)*
+
 ### Decision Flow
 
 ```
