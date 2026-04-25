@@ -9,14 +9,13 @@
 | Villager | Personality | Species | Thematic Fit | Notes |
 |----------|-------------|---------|--------------|-------|
 | **Cherry** | Uchi (big sister) | Dog | ✅ Good | Edgy look; dark colour palette suits a moody Japanese aesthetic |
-| **Mint** | Snooty | Squirrel | ⚠️ Neutral | Teal cat design; cute but not specifically Japanese-themed |
-| **Bella** | Peppy | Mouse | ⚠️ Neutral | Pink dog/mouse; energetic personality clashes slightly with quiet island vibe |
-| **Ricky** | Cranky | Squirrel | ⚠️ Neutral | Orange squirrel; Cranky personality fits well, design is generic |
-| **Flick** | Cranky | Chameleon | ⚠️ Neutral | Blue chameleon; Cranky personality good, design is modern/edgy not traditional |
-| **Wart Jr.** | Cranky | Frog | ⚠️ Neutral | Green frog; Cranky fits, but design is plain — low priority to keep |
-| **Drago** | Lazy | Alligator | ✅ Good | Blue dragon design — fits beautifully with a Japanese dragon mythology theme |
+| **Nibbles** | Peppy | Squirrel | ⚠️ Neutral | Peppy personality is tonally mismatched with the quiet island vibe |
+| **Bettina** | Normal | Mouse | ⚠️ Neutral | Plain design; no strong Japanese aesthetic connection |
+| **Axel** | Jock | Elephant | ❌ Poor | Less thematically ideal — rehome when possible |
+| **Quillson** | Smug | Duck | ⚠️ Neutral | Smug personality works; design has no Japanese theme link |
+| **Stu** | Lazy | Bull | ⚠️ Neutral | Lazy personality fits the relaxed vibe; no strong theme connection |
 
-7 / 10 slots filled.
+6 / 10 slots filled.
 
 ---
 
@@ -108,4 +107,4 @@ Don't force him out before you have a replacement lined up — an empty plot can
 
 ---
 
-*Last updated: 26/04/2026 — Updated current residents table with 7 confirmed villagers (Cherry, Mint, Bella, Ricky, Flick, Wart Jr., Drago)*
+*Last updated: 26/04/2026 — Updated current residents: Cherry, Nibbles, Bettina, Axel, Quillson, Stu (6/10 slots)*
