@@ -21,6 +21,10 @@
     --charcoal:  #3a3530;
     --check-bg:  #f0e8d8;
     --bar-fill:  #5a7a4a;
+    --sakura:    #e8b4c0;
+    --sakura-lt: #fdf0f3;
+    --gold:      #c9a84c;
+    --gold-lt:   #fdf5e0;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -986,9 +990,107 @@
     border-bottom-color: var(--brown-lt);
   }
 
+  /* ── TOP NAV ── */
+  .top-nav {
+    background: #2a2520;
+    border-bottom: 2px solid var(--red);
+    padding: 0 16px;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .top-nav a {
+    color: rgba(245,240,232,0.65);
+    font-size: 0.78rem;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    padding: 11px 14px;
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+  }
+  .top-nav a:hover, .top-nav a.active {
+    color: var(--sakura);
+    border-bottom-color: var(--sakura);
+    background: rgba(255,255,255,0.04);
+  }
+  .top-nav a.active { color: #f5f0e8; }
+
+  /* ── WIKI GRID ── */
+  .wiki-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+  .wiki-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .wiki-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--card-accent, var(--green));
+    border-radius: 10px 10px 0 0;
+  }
+  .wiki-card:hover {
+    border-color: var(--brown);
+    box-shadow: 0 4px 16px rgba(122,92,56,0.12);
+    transform: translateY(-2px);
+  }
+  .wiki-card .card-icon { font-size: 1.5rem; display: block; margin-bottom: 8px; }
+  .wiki-card h3 { font-size: 0.93rem; font-weight: bold; color: var(--charcoal); margin-bottom: 5px; line-height: 1.3; }
+  .wiki-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.5; margin-bottom: 12px; }
+  .card-link {
+    font-size: 0.76rem; font-weight: bold; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--brown); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .card-link::after { content: '\2192'; transition: transform 0.2s; }
+  .wiki-card:hover .card-link::after { transform: translateX(3px); }
+  .accent-green  { --card-accent: var(--green); }
+  .accent-brown  { --card-accent: var(--brown); }
+  .accent-red    { --card-accent: var(--red); }
+  .accent-sakura { --card-accent: var(--sakura); }
+  .accent-gold   { --card-accent: var(--gold); }
+  #sec-wiki { scroll-margin-top: 48px; }
+
+  @media (max-width: 600px) {
+    .top-nav a { padding: 9px 10px; font-size: 0.7rem; }
+    .wiki-grid { grid-template-columns: 1fr; gap: 6px; }
+    .wiki-card { display: flex; align-items: center; gap: 10px; padding: 10px 12px 10px 16px; border-radius: 8px; }
+    .wiki-card::before { top: 0; left: 0; bottom: 0; right: auto; width: 3px; height: 100%; border-radius: 8px 0 0 8px; }
+    .wiki-card .card-icon { font-size: 1.1rem; display: block; margin: 0; flex-shrink: 0; }
+    .wiki-card h3 { font-size: 0.86rem; margin: 0; flex: 1; line-height: 1.2; }
+    .wiki-card p { display: none; }
+    .card-link { font-size: 0.7rem; white-space: nowrap; flex-shrink: 0; }
+  }
+
 </style>
 </head>
 <body>
+
+<!-- ── TOP NAV ── -->
+<nav class="top-nav" aria-label="Site navigation">
+  <a href="index.html" class="active">🏠 Dashboard</a>
+  <a href="#sec-wiki">📚 Wiki Pages</a>
+  <a href="critters.html">🦋 Critter Tracker</a>
+  <a href="#" style="opacity:0.45;cursor:default;" title="Coming soon">&#x1F4C8; Turnip Prophet</a>
+  <a href="https://github.com/knockedover10/knockedover-acnh-wiki" target="_blank" rel="noopener">⚙️ GitHub</a>
+</nav>
 
 <header>
   <h1>🌸 Hikari @ Hanamori's Island Dashboard</h1>
@@ -1013,13 +1115,14 @@
     <li><a href="critters.html">📊 Full Critter Tracker</a></li>
     <li><a href="#sec-recipes">🪵 Recipes</a></li>
     <li><a href="#sec-collectibles">🏅 Collectibles</a></li>
+    <li><a href="#sec-wiki">📚 Wiki</a></li>
   </ul>
 </nav>
 
 <div class="wrap">
 
   <!-- PROGRESS -->
-  <div class="wiki-link">← <a href="index.html">Wiki Home</a> &nbsp;·&nbsp; <a href="critters.html">🦋 Critter Tracker</a> &nbsp;·&nbsp; <a href="https://github.com/knockedover10/knockedover-acnh-wiki" target="_blank" rel="noopener">GitHub</a></div>
+  <div class="wiki-link"><a href="https://github.com/knockedover10/knockedover-acnh-wiki" target="_blank" rel="noopener">⚙️ GitHub Repository</a></div>
   <div class="progress-section">
     <div class="progress-label">
       <span>Overall Checklist Progress</span>
@@ -1566,6 +1669,84 @@
   <div class="section-title" id="sec-collectibles">🏅 Collectibles Progress</div>
   <p style="font-size:.8rem;color:var(--muted);margin-bottom:8px;">Track your museum, recipes, and milestone collectibles. Check off as you complete them.</p>
   <div class="coll-grid" id="coll-grid"></div>
+
+
+  <!-- ── WIKI PAGES ── -->
+  <div class="section-title" id="sec-wiki">📚 Wiki Pages</div>
+  <p style="font-size:.8rem;color:var(--muted);margin-bottom:14px;">All living documents for Hanamori island planning — open any page to read or update.</p>
+  <div class="wiki-grid">
+
+    <div class="wiki-card accent-gold">
+      <span class="card-icon">📜</span>
+      <h3>Changelog</h3>
+      <p>Running log of all meaningful island updates — new villagers, layout decisions, milestone unlocks, and wiki changes.</p>
+      <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/changelog.md" class="card-link" target="_blank" rel="noopener">View page</a>
+    </div>
+
+    <div class="wiki-card accent-green">
+      <span class="card-icon">🦋</span>
+      <h3>Critters</h3>
+      <p>Complete Northern Hemisphere reference — 80 fish, 80 bugs, 40 sea creatures. Filter, sort, track caught &amp; donated.</p>
+      <a href="critters.html" class="card-link">Open tracker</a>
+    </div>
+
+    <div class="wiki-card accent-brown">
+      <span class="card-icon">📅</span>
+      <h3>Daily Checklists</h3>
+      <p>Day-by-day guide for the first 10 days plus a reusable daily routine for morning, shops, nature, and villager tasks.</p>
+      <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/daily-checklists.md" class="card-link" target="_blank" rel="noopener">View page</a>
+    </div>
+
+    <div class="wiki-card accent-sakura">
+      <span class="card-icon">🌸</span>
+      <h3>Flowers &amp; Breeding</h3>
+      <p>Cross-pollination guide for all 8 species — layout configs, probability tables, watering rules, early-game checklist.</p>
+      <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/flowers-and-breeding.md" class="card-link" target="_blank" rel="noopener">View page</a>
+    </div>
+
+    <div class="wiki-card accent-sakura">
+      <span class="card-icon">💡</span>
+      <h3>Ideas &amp; Inspirations</h3>
+      <p>Scratchpad for build concepts, district visions, and villager house placements. Includes a district overview table.</p>
+      <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/ideas-and-inspirations.md" class="card-link" target="_blank" rel="noopener">View page</a>
+    </div>
+
+    <div class="wiki-card accent-brown">
+      <span class="card-icon">&#x1F5FA;&#xFE0F;</span>
+      <h3>Island Layout</h3>
+      <p>District-by-district breakdown — village core, shrine, bamboo grove, graveyard, onsen, museum, terraforming notes.</p>
+      <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/island-layout.md" class="card-link" target="_blank" rel="noopener">View page</a>
+    </div>
+
+    <div class="wiki-card accent-sakura">
+      <span class="card-icon">&#x1FAB4;</span>
+      <h3>Items &amp; Furniture</h3>
+      <p>Themed item catalogue by district — shrine, bamboo, onsen, stone. Fence and bridge guides, seasonal items, wishlist.</p>
+      <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/items-and-furniture.md" class="card-link" target="_blank" rel="noopener">View page</a>
+    </div>
+
+    <div class="wiki-card accent-red">
+      <span class="card-icon">📈</span>
+      <h3>Progression</h3>
+      <p>Early-game unlock order, 3-star rating criteria, milestone checklist (Blathers through terraforming), current progress.</p>
+      <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/progression.md" class="card-link" target="_blank" rel="noopener">View page</a>
+    </div>
+
+    <div class="wiki-card accent-green">
+      <span class="card-icon">🌳</span>
+      <h3>Trees &amp; Nature</h3>
+      <p>Tree spacing rules, Dense Orchard Method, bamboo mechanics, wood farming, cedar/palm tips, Bell income math.</p>
+      <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/trees-and-nature.md" class="card-link" target="_blank" rel="noopener">View page</a>
+    </div>
+
+    <div class="wiki-card accent-brown">
+      <span class="card-icon">🏘️</span>
+      <h3>Villagers</h3>
+      <p>Starter villagers, personality preferences, and the 10-villager wishlist with thematic fit notes and placement guide.</p>
+      <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/villagers.md" class="card-link" target="_blank" rel="noopener">View page</a>
+    </div>
+
+  </div>
 
 </div><!-- /wrap -->
 
