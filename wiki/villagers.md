@@ -4,12 +4,28 @@
 
 ---
 
-## 🌸 Starter Villagers
+## 🏡 Current Residents (as of 26/04/2026)
+
+| Villager | Personality | Species | Thematic Fit | Notes |
+|----------|-------------|---------|--------------|-------|
+| **Cherry** | Uchi (big sister) | Dog | ✅ Good | Edgy look; dark colour palette suits a moody Japanese aesthetic |
+| **Mint** | Snooty | Squirrel | ⚠️ Neutral | Teal cat design; cute but not specifically Japanese-themed |
+| **Bella** | Peppy | Mouse | ⚠️ Neutral | Pink dog/mouse; energetic personality clashes slightly with quiet island vibe |
+| **Ricky** | Cranky | Squirrel | ⚠️ Neutral | Orange squirrel; Cranky personality fits well, design is generic |
+| **Flick** | Cranky | Chameleon | ⚠️ Neutral | Blue chameleon; Cranky personality good, design is modern/edgy not traditional |
+| **Wart Jr.** | Cranky | Frog | ⚠️ Neutral | Green frog; Cranky fits, but design is plain — low priority to keep |
+| **Drago** | Lazy | Alligator | ✅ Good | Blue dragon design — fits beautifully with a Japanese dragon mythology theme |
+
+7 / 10 slots filled.
+
+---
+
+## 🌸 Original Starter Villagers
 
 | Villager | Personality | Species | Notes |
 |----------|-------------|---------|-------|
-| **Cherry** | Uchi (big sister) | Dog | Edgy look; dark colour palette suits a moody Japanese aesthetic |
-| **Axel** | Jock | Elephant | Less thematically ideal — may rehome once wishlist villagers become available |
+| **Cherry** | Uchi (big sister) | Dog | Edgy look; dark colour palette suits a moody Japanese aesthetic — still on island |
+| **Axel** | Jock | Elephant | Less thematically ideal — rehome when possible |
 
 ---
 
@@ -92,4 +108,4 @@ Don't force him out before you have a replacement lined up — an empty plot can
 
 ---
 
-*Last updated: 18/04/2026 — Added villager hunting strategy, RNG mechanics, early-game plot rules, and Hanamori-specific tips*
+*Last updated: 26/04/2026 — Updated current residents table with 7 confirmed villagers (Cherry, Mint, Bella, Ricky, Flick, Wart Jr., Drago)*
