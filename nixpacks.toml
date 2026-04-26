@@ -1,2 +1,4 @@
+providers = ["python"]
+
 [start]
 cmd = "python3 -m http.server $PORT --directory docs"
