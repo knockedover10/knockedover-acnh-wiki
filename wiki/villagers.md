@@ -15,8 +15,9 @@
 | **Quillson** | Smug | Duck | ⚠️ Neutral | Smug personality works; design has no Japanese theme link |
 | **Stu** | Lazy | Bull | ⚠️ Neutral | Lazy personality fits the relaxed vibe; no strong theme connection |
 | **T-Bone** | Cranky | Bull | ⚠️ Neutral | Cranky personality adds gruff character; no strong Japanese aesthetic link — keep an eye on fit |
+| **Astrid** | Snooty | Kangaroo | ⚠️ Neutral | Star-themed design is charming; snooty personality can add drama. No strong Japanese link but aesthetically distinctive |
 
-7 / 10 slots filled.
+8 / 10 slots filled.
 
 ---
 
@@ -108,4 +109,4 @@ Don't force him out before you have a replacement lined up — an empty plot can
 
 ---
 
-*Last updated: 26/04/2026 — T-Bone moved in; roster now 7/10 (Cherry, Nibbles, Bettina, Axel, Quillson, Stu, T-Bone)*
+*Last updated: 27/04/2026 — Astrid moved in; roster now 8/10 (Cherry, Nibbles, Bettina, Axel, Quillson, Stu, T-Bone, Astrid)*
