@@ -43,7 +43,7 @@
   a { color: var(--brown); text-decoration: none; }
   a:hover { text-decoration: underline; color: var(--red); }
 
-  /* ── HERO / HEADER ── */
+  /* ── HERO ── */
   .hero {
     background: var(--charcoal);
     color: #f5f0e8;
@@ -53,7 +53,6 @@
     overflow: hidden;
     border-bottom: 4px solid var(--red);
   }
-
   .hero::before {
     content: '';
     position: absolute;
@@ -63,92 +62,67 @@
       radial-gradient(ellipse at 80% 30%, rgba(201,168,76,0.06) 0%, transparent 55%);
     pointer-events: none;
   }
-
-  /* Decorative petals */
-  .petals {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
-  .petal {
-    position: absolute;
-    font-size: 1.2rem;
-    opacity: 0.18;
-    animation: drift linear infinite;
-  }
-  .petal:nth-child(1)  { left: 5%;  animation-duration: 18s; animation-delay: 0s;    top: -20px; }
-  .petal:nth-child(2)  { left: 15%; animation-duration: 22s; animation-delay: 3s;    top: -20px; }
-  .petal:nth-child(3)  { left: 30%; animation-duration: 16s; animation-delay: 1s;    top: -20px; }
-  .petal:nth-child(4)  { left: 45%; animation-duration: 20s; animation-delay: 5s;    top: -20px; }
-  .petal:nth-child(5)  { left: 60%; animation-duration: 24s; animation-delay: 2s;    top: -20px; }
-  .petal:nth-child(6)  { left: 75%; animation-duration: 17s; animation-delay: 7s;    top: -20px; }
-  .petal:nth-child(7)  { left: 88%; animation-duration: 21s; animation-delay: 4s;    top: -20px; }
-  .petal:nth-child(8)  { left: 95%; animation-duration: 19s; animation-delay: 6s;    top: -20px; }
-
+  .petals { position: absolute; top:0;left:0;right:0;bottom:0; pointer-events:none; overflow:hidden; }
+  .petal { position:absolute; font-size:1.2rem; opacity:0.18; animation: drift linear infinite; }
+  .petal:nth-child(1){left:5%;animation-duration:18s;animation-delay:0s;top:-20px}
+  .petal:nth-child(2){left:15%;animation-duration:22s;animation-delay:3s;top:-20px}
+  .petal:nth-child(3){left:30%;animation-duration:16s;animation-delay:1s;top:-20px}
+  .petal:nth-child(4){left:45%;animation-duration:20s;animation-delay:5s;top:-20px}
+  .petal:nth-child(5){left:60%;animation-duration:24s;animation-delay:2s;top:-20px}
+  .petal:nth-child(6){left:75%;animation-duration:17s;animation-delay:7s;top:-20px}
+  .petal:nth-child(7){left:88%;animation-duration:21s;animation-delay:4s;top:-20px}
+  .petal:nth-child(8){left:95%;animation-duration:19s;animation-delay:6s;top:-20px}
   @keyframes drift {
-    0%   { transform: translateY(-30px) rotate(0deg);   opacity: 0; }
-    10%  { opacity: 0.18; }
-    90%  { opacity: 0.1; }
-    100% { transform: translateY(300px) rotate(360deg); opacity: 0; }
+    0%   { transform:translateY(-30px) rotate(0deg); opacity:0; }
+    10%  { opacity:0.18; }
+    90%  { opacity:0.1; }
+    100% { transform:translateY(300px) rotate(360deg); opacity:0; }
   }
+  .hero-kana { font-size:1rem;font-weight:300;letter-spacing:.25em;color:var(--sakura);display:block;margin-bottom:10px;position:relative; }
+  .hero h1 { font-size:2.2rem;font-weight:700;letter-spacing:.06em;line-height:1.25;color:#f5f0e8;position:relative;margin-bottom:8px; }
+  .hero-sub { font-size:0.85rem;color:rgba(245,240,232,0.55);letter-spacing:.12em;text-transform:uppercase;position:relative;margin-bottom:22px; }
+  .hero-divider { width:60px;height:2px;background:linear-gradient(90deg,transparent,var(--sakura),transparent);margin:0 auto 22px;position:relative; }
+  .hero-badges { display:flex;justify-content:center;gap:10px;flex-wrap:wrap;position:relative; }
+  .badge { background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(245,240,232,0.8);border-radius:20px;padding:4px 14px;font-size:0.78rem;letter-spacing:.05em; }
 
-  .hero-kana {
-    font-family: 'Lato', sans-serif;
-    font-size: 1rem;
-    font-weight: 300;
-    letter-spacing: .25em;
-    color: var(--sakura);
-    display: block;
-    margin-bottom: 10px;
-    position: relative;
-  }
-
-  .hero h1 {
-    font-family: 'Lato', sans-serif;
-    font-size: 2.2rem;
-    font-weight: 600;
-    letter-spacing: .06em;
-    line-height: 1.25;
-    color: #f5f0e8;
-    position: relative;
-    margin-bottom: 8px;
-  }
-
-  .hero-sub {
-    font-size: 0.85rem;
-    color: rgba(245,240,232,0.55);
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    position: relative;
-    margin-bottom: 22px;
-  }
-
-  .hero-divider {
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--sakura), transparent);
-    margin: 0 auto 22px;
-    position: relative;
-  }
-
-  .hero-badges {
+  /* ── ALERT BANNER ── */
+  #alert-banner {
+    background: linear-gradient(135deg, #fff8e8, #fdf0d0);
+    border: 1px solid var(--gold);
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
     display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    position: relative;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.87rem;
+    color: var(--charcoal);
   }
-
-  .badge {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    color: rgba(245,240,232,0.8);
-    border-radius: 20px;
-    padding: 4px 14px;
-    font-size: 0.78rem;
-    letter-spacing: .05em;
+  #alert-banner.hidden { display: none; }
+  #alert-text { flex: 1; font-weight: 600; }
+  #alert-text.empty { color: var(--muted); font-weight: 400; font-style: italic; }
+  .alert-edit-btn {
+    background: none; border: 1px solid var(--gold); border-radius: 5px;
+    padding: 3px 10px; font-size: 0.75rem; cursor: pointer; color: var(--brown);
+    font-family: 'Lato', sans-serif; white-space: nowrap;
+    transition: background 0.15s;
   }
+  .alert-edit-btn:hover { background: var(--gold-lt); }
+  .alert-clear-btn {
+    background: none; border: none; cursor: pointer; color: var(--muted);
+    font-size: 1rem; padding: 0 4px; line-height: 1;
+  }
+  #alert-edit-form { display: none; margin-top: 10px; gap: 8px; align-items: center; flex-wrap: wrap; }
+  #alert-edit-form.show { display: flex; }
+  #alert-input {
+    flex: 1; min-width: 200px; border: 1px solid var(--border); border-radius: 5px;
+    padding: 6px 10px; font-family: 'Lato', sans-serif; font-size: 0.85rem;
+    background: var(--bg); color: var(--text); outline: none;
+  }
+  #alert-input:focus { border-color: var(--gold); }
+  .btn-save { background: var(--charcoal); color: #f5f0e8; border: none; border-radius: 5px; padding: 6px 14px; font-family: 'Lato', sans-serif; font-size: 0.82rem; cursor: pointer; font-weight: 700; }
+  .btn-cancel { background: none; border: 1px solid var(--border); border-radius: 5px; padding: 6px 12px; font-family: 'Lato', sans-serif; font-size: 0.82rem; cursor: pointer; color: var(--muted); }
 
   /* ── NAV ── */
   .top-nav {
@@ -157,336 +131,209 @@
     padding: 0 20px;
     display: flex;
     justify-content: center;
-    gap: 0;
     flex-wrap: wrap;
     position: sticky;
     top: 0;
     z-index: 100;
     box-shadow: 0 2px 8px rgba(0,0,0,0.25);
   }
+  .top-nav a { color:rgba(245,240,232,0.7);font-size:0.8rem;letter-spacing:.06em;padding:12px 14px;display:inline-block;transition:color 0.2s,background 0.2s;border-bottom:2px solid transparent; }
+  .top-nav a:hover { color:var(--sakura);background:rgba(255,255,255,0.04);border-bottom-color:var(--sakura);text-decoration:none; }
 
-  .top-nav a {
-    color: rgba(245,240,232,0.7);
-    font-size: 0.8rem;
-    letter-spacing: .06em;
-    padding: 12px 14px;
-    display: inline-block;
-    transition: color 0.2s, background 0.2s;
-    border-bottom: 2px solid transparent;
-  }
-
-  .top-nav a:hover {
-    color: var(--sakura);
-    background: rgba(255,255,255,0.04);
-    border-bottom-color: var(--sakura);
-    text-decoration: none;
-  }
-
-  /* ── MAIN LAYOUT ── */
-  .page-wrap {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 40px 20px 80px;
-  }
+  /* ── LAYOUT ── */
+  .page-wrap { max-width:960px;margin:0 auto;padding:40px 20px 80px; }
 
   /* ── SECTION TITLES ── */
   .section-title {
-    font-family: 'Lato', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--charcoal);
-    margin-bottom: 18px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    letter-spacing: .04em;
+    font-size:1.1rem;font-weight:700;color:var(--charcoal);
+    margin-bottom:18px;padding-bottom:8px;border-bottom:2px solid var(--border);
+    display:flex;align-items:center;gap:8px;letter-spacing:.04em;
   }
+  .section-title .icon { font-size:1.2rem; }
 
-  .section-title .icon {
-    font-size: 1.2rem;
-  }
-
-  /* ── SNAPSHOT CARD ── */
+  /* ── SNAPSHOT ── */
   .snapshot {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 24px;
-    margin-bottom: 36px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 16px;
+    background:var(--card);border:1px solid var(--border);border-radius:10px;
+    padding:24px;margin-bottom:36px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;
   }
+  .snap-item { text-align:center; }
+  .snap-label { font-size:0.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px; }
+  .snap-value { font-size:1.1rem;font-weight:700;color:var(--charcoal);display:block; }
+  .snap-value.status-early { color:var(--brown); }
 
-  .snap-item {
-    text-align: center;
+  /* ── ISLAND PROGRESS TRACKER ── */
+  .progress-tracker {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 22px 24px; margin-bottom: 36px;
   }
-
-  .snap-label {
-    font-size: 0.72rem;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    display: block;
-    margin-bottom: 4px;
+  .progress-overall {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
   }
-
-  .snap-value {
-    font-family: 'Lato', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--charcoal);
-    display: block;
+  .progress-bar-track {
+    flex: 1; height: 10px; background: var(--surface); border-radius: 10px; overflow: hidden;
   }
-
-  .snap-value.status-early {
-    color: var(--brown);
+  .progress-bar-fill {
+    height: 100%; background: linear-gradient(90deg, var(--green), var(--gold));
+    border-radius: 10px; transition: width 0.4s ease;
   }
-
-  .snap-divider {
-    width: 1px;
-    background: var(--border);
-    display: none;
+  .progress-pct { font-size: 0.85rem; font-weight: 700; color: var(--green); min-width: 36px; text-align: right; }
+  .milestone-groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .milestone-group h4 {
+    font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--muted); margin-bottom: 10px;
   }
-
-  @media (min-width: 600px) {
-    .snap-divider { display: block; }
+  .milestone-item {
+    display: flex; align-items: center; gap: 10px; padding: 6px 0;
+    border-bottom: 1px solid var(--border); cursor: pointer;
   }
+  .milestone-item:last-child { border-bottom: none; }
+  .milestone-item input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--green); cursor: pointer; flex-shrink: 0; }
+  .milestone-item label { font-size: 0.84rem; cursor: pointer; line-height: 1.3; }
+  .milestone-item.done label { text-decoration: line-through; color: var(--muted); }
 
-  /* ── DASHBOARD CTA ── */
+  /* ── SEASONAL CALENDAR ── */
+  .seasonal-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 22px 24px; margin-bottom: 36px;
+  }
+  .cal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+  .cal-col h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 10px; }
+  .cal-item { font-size: 0.83rem; padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 8px; }
+  .cal-item:last-child { border-bottom: none; }
+  .cal-badge { font-size: 0.68rem; font-weight: 700; border-radius: 4px; padding: 1px 6px; white-space: nowrap; flex-shrink: 0; }
+  .cal-badge.leaving { background: var(--red-lt); color: var(--red); }
+  .cal-badge.arriving { background: var(--green-lt); color: var(--green); }
+  .cal-badge.event { background: var(--gold-lt); color: var(--brown); }
+  .cal-badge.all-month { background: var(--surface); color: var(--muted); }
+
+  /* ── VILLAGER NOTES ── */
+  .villager-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px; margin-bottom: 36px;
+  }
+  .villager-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .villager-card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .villager-emoji { font-size: 1.6rem; }
+  .villager-name { font-weight: 700; font-size: 0.95rem; color: var(--charcoal); }
+  .villager-type { font-size: 0.75rem; color: var(--muted); }
+  .villager-notes-input {
+    width: 100%; border: 1px solid var(--border); border-radius: 6px;
+    padding: 7px 10px; font-family: 'Lato', sans-serif; font-size: 0.82rem;
+    background: var(--bg); color: var(--text); resize: vertical; min-height: 60px;
+    outline: none; transition: border-color 0.15s;
+  }
+  .villager-notes-input:focus { border-color: var(--brown); }
+  .villager-notes-input::placeholder { color: var(--muted); font-style: italic; }
+
+  /* ── FLOWER TRACKER ── */
+  .flower-tracker { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; margin-bottom: 36px; }
+  .flower-controls { display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; align-items: center; }
+  .flower-controls select, .flower-controls input {
+    border: 1px solid var(--border); border-radius: 6px; padding: 7px 10px;
+    font-family: 'Lato', sans-serif; font-size: 0.84rem; background: var(--bg); color: var(--text);
+    outline: none;
+  }
+  .flower-controls select:focus, .flower-controls input:focus { border-color: var(--green); }
+  .btn-add-flower { background: var(--green); color: #fff; border: none; border-radius: 6px; padding: 7px 16px; font-family: 'Lato', sans-serif; font-size: 0.84rem; font-weight: 700; cursor: pointer; }
+  .btn-add-flower:hover { background: #4a6a3a; }
+  .flower-log { display: flex; flex-direction: column; gap: 8px; }
+  .flower-entry {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 7px;
+    padding: 10px 14px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .flower-dot { width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; border: 2px solid rgba(0,0,0,0.1); }
+  .flower-entry-text { flex: 1; font-size: 0.84rem; color: var(--text); min-width: 120px; }
+  .flower-entry-note { font-size: 0.78rem; color: var(--muted); }
+  .flower-watered { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--muted); cursor: pointer; }
+  .flower-watered input { accent-color: var(--green); }
+  .flower-del { background: none; border: none; cursor: pointer; color: var(--muted); font-size: 0.9rem; padding: 2px 6px; border-radius: 4px; }
+  .flower-del:hover { background: var(--red-lt); color: var(--red); }
+  .flower-empty { text-align: center; color: var(--muted); font-size: 0.84rem; font-style: italic; padding: 20px 0; }
+
+  /* ── WISHLIST ── */
+  .wishlist-section { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; margin-bottom: 36px; }
+  .wishlist-add { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+  .wishlist-input {
+    flex: 1; min-width: 180px; border: 1px solid var(--border); border-radius: 6px;
+    padding: 7px 10px; font-family: 'Lato', sans-serif; font-size: 0.84rem;
+    background: var(--bg); color: var(--text); outline: none;
+  }
+  .wishlist-input:focus { border-color: var(--sakura); }
+  .wishlist-cat {
+    border: 1px solid var(--border); border-radius: 6px; padding: 7px 10px;
+    font-family: 'Lato', sans-serif; font-size: 0.84rem; background: var(--bg); color: var(--text); outline: none;
+  }
+  .btn-add-wish { background: var(--charcoal); color: #f5f0e8; border: none; border-radius: 6px; padding: 7px 16px; font-family: 'Lato', sans-serif; font-size: 0.84rem; font-weight: 700; cursor: pointer; }
+  .btn-add-wish:hover { background: #2a2520; }
+  .wish-list { display: flex; flex-direction: column; gap: 6px; }
+  .wish-item {
+    display: flex; align-items: center; gap: 12px; padding: 9px 14px;
+    background: var(--bg); border: 1px solid var(--border); border-radius: 7px;
+    transition: opacity 0.2s;
+  }
+  .wish-item.got { opacity: 0.5; }
+  .wish-item.got .wish-name { text-decoration: line-through; }
+  .wish-check { accent-color: var(--green); width: 16px; height: 16px; cursor: pointer; flex-shrink: 0; }
+  .wish-name { flex: 1; font-size: 0.84rem; }
+  .wish-cat-tag { font-size: 0.7rem; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1px 8px; color: var(--muted); white-space: nowrap; }
+  .wish-del { background: none; border: none; cursor: pointer; color: var(--muted); font-size: 0.85rem; padding: 2px 6px; border-radius: 4px; }
+  .wish-del:hover { background: var(--red-lt); color: var(--red); }
+  .wish-empty { text-align: center; color: var(--muted); font-size: 0.84rem; font-style: italic; padding: 16px 0; }
 
   /* ── WIKI GRID ── */
-  .wiki-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-    gap: 16px;
-    margin-bottom: 40px;
-  }
-
-  .wiki-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px;
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .wiki-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--card-accent, var(--green));
-    border-radius: 10px 10px 0 0;
-  }
-
-  .wiki-card:hover {
-    border-color: var(--brown);
-    box-shadow: 0 4px 16px rgba(122,92,56,0.12);
-    transform: translateY(-2px);
-  }
-
-  .wiki-card .card-icon {
-    font-size: 1.6rem;
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  .wiki-card h3 {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--charcoal);
-    margin-bottom: 6px;
-    line-height: 1.3;
-  }
-
-  .wiki-card p {
-    font-size: 0.82rem;
-    color: var(--muted);
-    line-height: 1.55;
-    margin-bottom: 14px;
-  }
-
-  .card-link {
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    color: var(--brown);
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .card-link::after {
-    content: '→';
-    transition: transform 0.2s;
-  }
-
-  .wiki-card:hover .card-link::after {
-    transform: translateX(3px);
-  }
-
-  /* card accent colours */
+  .wiki-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;margin-bottom:40px; }
+  .wiki-card { background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;transition:border-color 0.2s,box-shadow 0.2s,transform 0.15s;position:relative;overflow:hidden; }
+  .wiki-card::before { content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--card-accent,var(--green));border-radius:10px 10px 0 0; }
+  .wiki-card:hover { border-color:var(--brown);box-shadow:0 4px 16px rgba(122,92,56,0.12);transform:translateY(-2px); }
+  .wiki-card .card-icon { font-size:1.6rem;display:block;margin-bottom:10px; }
+  .wiki-card h3 { font-size:0.95rem;font-weight:700;color:var(--charcoal);margin-bottom:6px;line-height:1.3; }
+  .wiki-card p { font-size:0.82rem;color:var(--muted);line-height:1.55;margin-bottom:14px; }
+  .card-link { font-size:0.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--brown);display:inline-flex;align-items:center;gap:4px; }
+  .card-link::after { content:'→';transition:transform 0.2s; }
+  .wiki-card:hover .card-link::after { transform:translateX(3px); }
   .accent-green  { --card-accent: var(--green); }
   .accent-brown  { --card-accent: var(--brown); }
   .accent-red    { --card-accent: var(--red); }
   .accent-sakura { --card-accent: var(--sakura); }
   .accent-gold   { --card-accent: var(--gold); }
 
-  /* ── RECENT UPDATES ── */
-  .updates-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 40px;
-  }
-
-  .update-row {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px 16px;
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-  }
-
-  .update-date {
-    font-size: 0.75rem;
-    color: var(--muted);
-    white-space: nowrap;
-    padding-top: 2px;
-    min-width: 80px;
-  }
-
-  .update-text {
-    font-size: 0.84rem;
-    color: var(--text);
-    line-height: 1.5;
-  }
-
-  .update-text a {
-    font-weight: 700;
-  }
-
   /* ── CRITTER CALLOUT ── */
-  .critter-callout {
-    background: var(--red-lt);
-    border: 1px solid rgba(168,50,50,0.25);
-    border-left: 4px solid var(--red);
-    border-radius: 8px;
-    padding: 16px 20px;
-    margin-bottom: 36px;
-    font-size: 0.85rem;
-  }
+  .critter-callout { background:var(--red-lt);border:1px solid rgba(168,50,50,0.25);border-left:4px solid var(--red);border-radius:8px;padding:16px 20px;margin-bottom:36px;font-size:0.85rem; }
+  .critter-callout strong { color:var(--red);display:block;font-size:0.9rem;margin-bottom:6px; }
+  .critter-leaving { display:flex;flex-wrap:wrap;gap:6px;margin-top:8px; }
+  .critter-tag { background:rgba(168,50,50,0.1);border:1px solid rgba(168,50,50,0.2);border-radius:20px;padding:2px 10px;font-size:0.78rem;color:var(--red); }
 
-  .critter-callout strong {
-    color: var(--red);
-    display: block;
-    font-size: 0.9rem;
-    margin-bottom: 6px;
-  }
-
-  .critter-leaving {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 8px;
-  }
-
-  .critter-tag {
-    background: rgba(168,50,50,0.1);
-    border: 1px solid rgba(168,50,50,0.2);
-    border-radius: 20px;
-    padding: 2px 10px;
-    font-size: 0.78rem;
-    color: var(--red);
-  }
+  /* ── RECENT UPDATES ── */
+  .updates-list { list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:40px; }
+  .update-row { background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 16px;display:flex;align-items:flex-start;gap:14px; }
+  .update-date { font-size:0.75rem;color:var(--muted);white-space:nowrap;padding-top:2px;min-width:80px; }
+  .update-text { font-size:0.84rem;color:var(--text);line-height:1.5; }
+  .update-text a { font-weight:700; }
 
   /* ── FOOTER ── */
-  footer {
-    background: var(--charcoal);
-    color: rgba(245,240,232,0.45);
-    text-align: center;
-    padding: 24px 20px;
-    font-size: 0.78rem;
-    letter-spacing: .06em;
-    border-top: 3px solid var(--red);
-  }
-
-  footer .footer-island {
-    font-family: 'Lato', sans-serif;
-    color: rgba(245,240,232,0.7);
-    font-size: 0.9rem;
-    margin-bottom: 6px;
-    display: block;
-  }
-
-  footer a { color: rgba(245,240,232,0.5); }
-  footer a:hover { color: var(--sakura); }
+  footer { background:var(--charcoal);color:rgba(245,240,232,0.45);text-align:center;padding:24px 20px;font-size:0.78rem;letter-spacing:.06em;border-top:3px solid var(--red); }
+  footer .footer-island { color:rgba(245,240,232,0.7);font-size:0.9rem;margin-bottom:6px;display:block; }
+  footer a { color:rgba(245,240,232,0.5); }
+  footer a:hover { color:var(--sakura); }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 600px) {
-    .hero h1 { font-size: 1.6rem; }
-    .top-nav a { padding: 10px 10px; font-size: 0.74rem; }
-
-    /* Compact wiki page cards on mobile */
-    .wiki-grid {
-      grid-template-columns: 1fr;
-      gap: 6px;
-    }
-    .wiki-card {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 12px 10px 16px;
-      border-radius: 8px;
-    }
-    .wiki-card::before {
-      top: 0; left: 0; bottom: 0; right: auto;
-      width: 3px; height: 100%;
-      border-radius: 8px 0 0 8px;
-    }
-    .wiki-card .card-icon {
-      font-size: 1.2rem;
-      display: block;
-      margin: 0;
-      flex-shrink: 0;
-    }
-    .wiki-card h3 {
-      font-size: 0.88rem;
-      margin: 0;
-      flex: 1;
-      line-height: 1.2;
-    }
-    .wiki-card p {
-      display: none;
-    }
-    .card-link {
-      font-size: 0.72rem;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-  }
-
-  /* ── SEASONAL DECORATION ── */
-  .seasonal-banner {
-    background: linear-gradient(135deg, var(--sakura-lt), var(--gold-lt));
-    border: 1px solid var(--sakura);
-    border-radius: 8px;
-    padding: 10px 16px;
-    font-size: 0.82rem;
-    color: var(--brown);
-    text-align: center;
-    margin-bottom: 28px;
-    letter-spacing: .04em;
+    .hero h1 { font-size:1.6rem; }
+    .top-nav a { padding:10px 10px;font-size:0.74rem; }
+    .wiki-grid { grid-template-columns:1fr;gap:6px; }
+    .wiki-card { display:flex;align-items:center;gap:10px;padding:10px 12px 10px 16px;border-radius:8px; }
+    .wiki-card::before { top:0;left:0;bottom:0;right:auto;width:3px;height:100%;border-radius:8px 0 0 8px; }
+    .wiki-card .card-icon { font-size:1.2rem;display:block;margin:0;flex-shrink:0; }
+    .wiki-card h3 { font-size:0.88rem;margin:0;flex:1;line-height:1.2; }
+    .wiki-card p { display:none; }
+    .card-link { font-size:0.72rem;white-space:nowrap;flex-shrink:0; }
+    .milestone-groups { grid-template-columns: 1fr; }
+    .cal-grid { grid-template-columns: 1fr; }
+    .villager-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -495,14 +342,9 @@
 <!-- ── HERO ── -->
 <header class="hero">
   <div class="petals" aria-hidden="true">
-    <span class="petal">🌸</span>
-    <span class="petal">🍂</span>
-    <span class="petal">🌸</span>
-    <span class="petal">🍁</span>
-    <span class="petal">🌸</span>
-    <span class="petal">🍂</span>
-    <span class="petal">🌸</span>
-    <span class="petal">🌸</span>
+    <span class="petal">🌸</span><span class="petal">🍂</span><span class="petal">🌸</span>
+    <span class="petal">🍁</span><span class="petal">🌸</span><span class="petal">🍂</span>
+    <span class="petal">🌸</span><span class="petal">🌸</span>
   </div>
   <span class="hero-kana">花森 — はなもり</span>
   <h1>Hikari @ Hanamori</h1>
@@ -517,148 +359,140 @@
 </header>
 
 <!-- ── STICKY NAV ── -->
-<nav class="top-nav" aria-label="Wiki sections">
+<nav class="top-nav">
   <a href="#snapshot">📊 Snapshot</a>
-  <a href="#wiki-pages">📚 Wiki Pages</a>
+  <a href="#progress">🌱 Progress</a>
+  <a href="#calendar">🗓️ Calendar</a>
+  <a href="#villagers">🏘️ Villagers</a>
+  <a href="#flowers">🌸 Flowers</a>
+  <a href="#wishlist">🏡 Wishlist</a>
+  <a href="#wiki-pages">📚 Wiki</a>
   <a href="critters.html">🦋 Critters</a>
-  <a href="#recent">🕐 Updates</a>
   <a href="https://github.com/knockedover10/knockedover-acnh-wiki" target="_blank" rel="noopener">⚙️ GitHub</a>
 </nav>
 
 <!-- ── PAGE BODY ── -->
 <main class="page-wrap">
 
-  <!-- Seasonal banner -->
-  <div class="seasonal-banner">
-    🌸 Spring is here — cherry blossom DIY balloons active until Apr 10 · Young spring bamboo available until May · Blue marlin & Tuna leaving end of April ⚠️
+  <!-- ══ ALERT BANNER ══ -->
+  <div id="alert-banner">
+    <span>📢</span>
+    <span id="alert-text" class="empty">No active alert — tap Edit to add one</span>
+    <button class="alert-edit-btn" onclick="toggleAlertEdit()">Edit</button>
+    <button class="alert-clear-btn" onclick="clearAlert()" title="Clear alert">✕</button>
+  </div>
+  <div id="alert-edit-form">
+    <input id="alert-input" type="text" placeholder='e.g. "Meteor shower tonight! 🌠"' maxlength="140">
+    <button class="btn-save" onclick="saveAlert()">Save</button>
+    <button class="btn-cancel" onclick="toggleAlertEdit()">Cancel</button>
   </div>
 
-  <!-- ── ISLAND SNAPSHOT ── -->
+  <!-- ══ ISLAND SNAPSHOT ══ -->
   <section id="snapshot">
     <h2 class="section-title"><span class="icon">📊</span> Island Snapshot</h2>
     <div class="snapshot">
-      <div class="snap-item">
-        <span class="snap-label">Owner</span>
-        <span class="snap-value">Hikari</span>
+      <div class="snap-item"><span class="snap-label">Owner</span><span class="snap-value">Hikari</span></div>
+      <div class="snap-item"><span class="snap-label">Island Name</span><span class="snap-value">Hanamori 🌸</span></div>
+      <div class="snap-item"><span class="snap-label">Theme</span><span class="snap-value">Traditional Japanese</span></div>
+      <div class="snap-item"><span class="snap-label">Stage</span><span class="snap-value status-early">Early Game</span></div>
+      <div class="snap-item"><span class="snap-label">Villagers</span><span class="snap-value">6 / 10</span></div>
+      <div class="snap-item"><span class="snap-label">Residents</span><span class="snap-value" style="font-size:.9rem">Cherry · Nibbles · Bettina · Axel · Quillson · Stu</span></div>
+      <div class="snap-item"><span class="snap-label">Island Rating</span><span class="snap-value status-early">Not yet rated</span></div>
+      <div class="snap-item"><span class="snap-label">K.K. Slider</span><span class="snap-value status-early">Not yet</span></div>
+    </div>
+  </section>
+
+  <!-- ══ ISLAND PROGRESS TRACKER ══ -->
+  <section id="progress">
+    <h2 class="section-title"><span class="icon">🌱</span> Island Progress</h2>
+    <div class="progress-tracker">
+      <div class="progress-overall">
+        <span style="font-size:.82rem;color:var(--muted);font-weight:700;min-width:90px">Overall</span>
+        <div class="progress-bar-track"><div class="progress-bar-fill" id="prog-fill" style="width:0%"></div></div>
+        <span class="progress-pct" id="prog-pct">0%</span>
       </div>
-      <div class="snap-item">
-        <span class="snap-label">Island Name</span>
-        <span class="snap-value">Hanamori 🌸</span>
+      <div class="milestone-groups" id="milestone-groups"></div>
+    </div>
+  </section>
+
+  <!-- ══ SEASONAL CALENDAR ══ -->
+  <section id="calendar">
+    <h2 class="section-title"><span class="icon">🗓️</span> This Month — <span id="cal-month-name"></span></h2>
+    <div class="seasonal-card">
+      <div class="cal-grid" id="cal-grid"></div>
+    </div>
+  </section>
+
+  <!-- ══ VILLAGER NOTES ══ -->
+  <section id="villagers">
+    <h2 class="section-title"><span class="icon">🏘️</span> Villager Notes</h2>
+    <div class="villager-grid" id="villager-grid"></div>
+  </section>
+
+  <!-- ══ FLOWER BREEDING TRACKER ══ -->
+  <section id="flowers">
+    <h2 class="section-title"><span class="icon">🌸</span> Flower Breeding Tracker</h2>
+    <div class="flower-tracker">
+      <div class="flower-controls">
+        <select id="flower-species">
+          <option value="">Species...</option>
+          <option>Rose</option><option>Tulip</option><option>Pansy</option>
+          <option>Cosmos</option><option>Lily</option><option>Hyacinth</option>
+          <option>Windflower</option><option>Mum</option>
+        </select>
+        <select id="flower-parent1">
+          <option value="">Parent 1 colour...</option>
+          <option>White</option><option>Red</option><option>Yellow</option>
+          <option>Orange</option><option>Pink</option><option>Blue</option>
+          <option>Purple</option><option>Black</option><option>Gold</option>
+        </select>
+        <span style="color:var(--muted);font-size:.85rem">×</span>
+        <select id="flower-parent2">
+          <option value="">Parent 2 colour...</option>
+          <option>White</option><option>Red</option><option>Yellow</option>
+          <option>Orange</option><option>Pink</option><option>Blue</option>
+          <option>Purple</option><option>Black</option><option>Gold</option>
+        </select>
+        <span style="color:var(--muted);font-size:.85rem">→</span>
+        <input id="flower-result" type="text" placeholder="Result / note" style="min-width:140px">
+        <button class="btn-add-flower" onclick="addFlower()">+ Add</button>
       </div>
-      <div class="snap-item">
-        <span class="snap-label">Theme</span>
-        <span class="snap-value">Traditional Japanese</span>
-      </div>
-      <div class="snap-item">
-        <span class="snap-label">Stage</span>
-        <span class="snap-value status-early">Early Game</span>
-      </div>
-      <div class="snap-item">
-        <span class="snap-label">Villagers</span>
-        <span class="snap-value">6 / 10</span>
-      </div>
-      <div class="snap-item">
-        <span class="snap-label">Residents</span>
-        <span class="snap-value">Cherry · Nibbles · Bettina · Axel · Quillson · Stu</span>
-      </div>
-      <div class="snap-item">
-        <span class="snap-label">Island Rating</span>
-        <span class="snap-value status-early">Not yet rated</span>
-      </div>
-      <div class="snap-item">
-        <span class="snap-label">K.K. Slider</span>
-        <span class="snap-value status-early">Not yet</span>
+      <div class="flower-log" id="flower-log">
+        <div class="flower-empty" id="flower-empty">No breeding attempts logged yet.</div>
       </div>
     </div>
   </section>
 
-  <!-- ── DASHBOARD CTA ── -->
-  </div>
-
-  <!-- ── WIKI PAGES ── -->
-  <section id="wiki-pages">
-    <h2 class="section-title"><span class="icon">📚</span> Wiki Pages</h2>
-    <div class="wiki-grid">
-
-      <div class="wiki-card accent-gold">
-        <span class="card-icon">📜</span>
-        <h3>Changelog</h3>
-        <p>Running log of all meaningful island updates — new villagers, layout decisions, milestone unlocks, and wiki changes.</p>
-        <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/changelog.md" class="card-link" target="_blank" rel="noopener">View page</a>
+  <!-- ══ WISHLIST & SHOP LOG ══ -->
+  <section id="wishlist">
+    <h2 class="section-title"><span class="icon">🏡</span> Wishlist & Shop Log</h2>
+    <div class="wishlist-section">
+      <div class="wishlist-add">
+        <input class="wishlist-input" id="wish-input" type="text" placeholder="Item name..." maxlength="80"
+          onkeydown="if(event.key==='Enter') addWish()">
+        <select class="wishlist-cat" id="wish-cat">
+          <option value="Nook Shopping">Nook Shopping</option>
+          <option value="Nook Miles">Nook Miles</option>
+          <option value="Nook Miles Ticket">NMT Trip</option>
+          <option value="Crafting">Crafting</option>
+          <option value="Trading">Trading</option>
+          <option value="Villager Gift">Villager Gift</option>
+          <option value="Other">Other</option>
+        </select>
+        <button class="btn-add-wish" onclick="addWish()">+ Add</button>
       </div>
-
-      <div class="wiki-card accent-green">
-        <span class="card-icon">🦋</span>
-        <h3>Critters</h3>
-        <p>Complete Northern Hemisphere reference — 80 fish, 80 bugs, 40 sea creatures. Filter by month/location, sort any column, track caught &amp; donated per critter.</p>
-        <a href="critters.html" class="card-link">Open interactive tracker</a>
+      <div class="wish-list" id="wish-list">
+        <div class="wish-empty" id="wish-empty">Nothing on the wishlist yet.</div>
       </div>
-
-      <div class="wiki-card accent-brown">
-        <span class="card-icon">📅</span>
-        <h3>Daily Checklists</h3>
-        <p>Structured day-by-day guide for the first 10 days, plus a reusable daily routine for morning, shops, nature, and villager tasks.</p>
-        <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/daily-checklists.md" class="card-link" target="_blank" rel="noopener">View page</a>
-      </div>
-
-      <div class="wiki-card accent-sakura">
-        <span class="card-icon">💡</span>
-        <h3>Ideas & Inspirations</h3>
-        <p>Scratchpad for build concepts, district visions, and villager house placements. Includes a district overview table with links.</p>
-        <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/ideas-and-inspirations.md" class="card-link" target="_blank" rel="noopener">View page</a>
-      </div>
-
-      <div class="wiki-card accent-brown">
-        <span class="card-icon">🗾</span>
-        <h3>Island Layout</h3>
-        <p>District-by-district breakdown — village core, shrine district, bamboo grove, graveyard, onsen, museum placement, and terraforming notes.</p>
-        <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/island-layout.md" class="card-link" target="_blank" rel="noopener">View page</a>
-      </div>
-
-      <div class="wiki-card accent-sakura">
-        <span class="card-icon">🪴</span>
-        <h3>Items & Furniture</h3>
-        <p>Themed item catalogue by district — shrine, bamboo, onsen, stone. Includes fence and bridge guides, seasonal items, and a wishlist.</p>
-        <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/items-and-furniture.md" class="card-link" target="_blank" rel="noopener">View page</a>
-      </div>
-
-      <div class="wiki-card accent-red">
-        <span class="card-icon">📈</span>
-        <h3>Progression</h3>
-        <p>Early-game unlock order, 3-star rating criteria, milestone checklist (Blathers through terraforming), and current progress board.</p>
-        <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/progression.md" class="card-link" target="_blank" rel="noopener">View page</a>
-      </div>
-
-      <div class="wiki-card accent-green">
-        <span class="card-icon">🌳</span>
-        <h3>Trees & Nature</h3>
-        <p>Tree spacing rules (sapling vs. adult), the Dense Orchard Method, bamboo mechanics, wood farming, cedar and palm tips, Bell income math.</p>
-        <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/trees-and-nature.md" class="card-link" target="_blank" rel="noopener">View page</a>
-      </div>
-
-      <div class="wiki-card accent-brown">
-        <span class="card-icon">🏘️</span>
-        <h3>Villagers</h3>
-        <p>Starter villagers, personality preferences, and the 10-villager wishlist with thematic fit notes and district placement guide.</p>
-        <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/villagers.md" class="card-link" target="_blank" rel="noopener">View page</a>
-      </div>
-
-      <div class="wiki-card accent-sakura">
-        <span class="card-icon">🌸</span>
-        <h3>Flowers &amp; Breeding</h3>
-        <p>Cross-pollination guide for all 8 species — layout configurations, probability tables, watering rules, and early-game checklist.</p>
-        <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/flowers-and-breeding.md" class="card-link" target="_blank" rel="noopener">View page</a>
-      </div>
-
     </div>
   </section>
 
-  <!-- ── CRITTER ALERT ── -->
+  <!-- ══ CRITTER ALERT ══ -->
   <section id="critters">
     <h2 class="section-title"><span class="icon">🦋</span> Critter Alert — April</h2>
     <div class="critter-callout">
       <strong>⚠️ Leaving after April — catch these before May!</strong>
-      These critters are available now but will disappear when May begins. Check the <a href="critters.html">interactive critter tracker</a> for full availability data.
+      Check the <a href="critters.html">interactive critter tracker</a> for full availability data.
       <div class="critter-leaving">
         <span class="critter-tag">🐟 Blue marlin</span>
         <span class="critter-tag">🐟 Tuna</span>
@@ -671,30 +505,32 @@
     </div>
   </section>
 
-  <!-- ── RECENT UPDATES ── -->
+  <!-- ══ WIKI PAGES ══ -->
+  <section id="wiki-pages">
+    <h2 class="section-title"><span class="icon">📚</span> Wiki Pages</h2>
+    <div class="wiki-grid">
+      <div class="wiki-card accent-gold"><span class="card-icon">📜</span><h3>Changelog</h3><p>Running log of all meaningful island updates.</p><a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/changelog.md" class="card-link" target="_blank" rel="noopener">View page</a></div>
+      <div class="wiki-card accent-green"><span class="card-icon">🦋</span><h3>Critters</h3><p>Complete tracker — 80 fish, 80 bugs, 40 sea creatures.</p><a href="critters.html" class="card-link">Open tracker</a></div>
+      <div class="wiki-card accent-brown"><span class="card-icon">📅</span><h3>Daily Checklists</h3><p>Day-by-day first 10 days guide plus daily routine.</p><a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/daily-checklists.md" class="card-link" target="_blank" rel="noopener">View page</a></div>
+      <div class="wiki-card accent-sakura"><span class="card-icon">💡</span><h3>Ideas & Inspirations</h3><p>Build concepts, district visions, and placement ideas.</p><a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/ideas-and-inspirations.md" class="card-link" target="_blank" rel="noopener">View page</a></div>
+      <div class="wiki-card accent-brown"><span class="card-icon">🗾</span><h3>Island Layout</h3><p>District breakdown — shrine, bamboo, onsen, graveyard.</p><a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/island-layout.md" class="card-link" target="_blank" rel="noopener">View page</a></div>
+      <div class="wiki-card accent-sakura"><span class="card-icon">🪴</span><h3>Items & Furniture</h3><p>Themed item catalogue by district, fence and bridge guides.</p><a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/items-and-furniture.md" class="card-link" target="_blank" rel="noopener">View page</a></div>
+      <div class="wiki-card accent-red"><span class="card-icon">📈</span><h3>Progression</h3><p>Unlock order, 3-star rating criteria, milestone checklist.</p><a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/progression.md" class="card-link" target="_blank" rel="noopener">View page</a></div>
+      <div class="wiki-card accent-green"><span class="card-icon">🌳</span><h3>Trees & Nature</h3><p>Tree spacing, bamboo mechanics, Bell farming strategy.</p><a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/trees-and-nature.md" class="card-link" target="_blank" rel="noopener">View page</a></div>
+      <div class="wiki-card accent-brown"><span class="card-icon">🏘️</span><h3>Villagers</h3><p>Current residents, wishlist, personality fit notes.</p><a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/villagers.md" class="card-link" target="_blank" rel="noopener">View page</a></div>
+      <div class="wiki-card accent-sakura"><span class="card-icon">🌸</span><h3>Flowers & Breeding</h3><p>Cross-pollination guide, hybrid tables, watering rules.</p><a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/flowers-and-breeding.md" class="card-link" target="_blank" rel="noopener">View page</a></div>
+    </div>
+  </section>
+
+  <!-- ══ RECENT UPDATES ══ -->
   <section id="recent">
     <h2 class="section-title"><span class="icon">🕐</span> Recent Updates</h2>
     <ul class="updates-list">
-      <li class="update-row">
-        <span class="update-date">18/04/2026</span>
-        <span class="update-text">Major overhaul — dashboard renamed, sticky nav, collectibles tracker, Nookipedia integration (villager lookup, critter tracker, DIY finder), styled wiki index built</span>
-      </li>
-      <li class="update-row">
-        <span class="update-date">18/04/2026</span>
-        <span class="update-text">New wiki page: <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/critters.md" target="_blank" rel="noopener">Critters</a> — 200 critters (80 fish, 80 bugs, 40 sea creatures), sorted by sell price, ⚠️ leaving-this-month markers</span>
-      </li>
-      <li class="update-row">
-        <span class="update-date">18/04/2026</span>
-        <span class="update-text">All wiki pages updated with emoji section icons; dates standardised to DD/MM/YYYY throughout; README contents sorted alphabetically</span>
-      </li>
-      <li class="update-row">
-        <span class="update-date">18/04/2026</span>
-        <span class="update-text">Added <a href="https://github.com/knockedover10/knockedover-acnh-wiki/blob/main/wiki/trees-and-nature.md" target="_blank" rel="noopener">Trees & Nature</a> — tree spacing rules, Dense Orchard Method, bamboo mechanics, Bell farming strategy</span>
-      </li>
-      <li class="update-row">
-        <span class="update-date">18/04/2026</span>
-        <span class="update-text">Wiki created — 8 pages covering island layout, villagers, progression, daily checklists, items, ideas, and changelog</span>
-      </li>
+      <li class="update-row"><span class="update-date">26/04/2026</span><span class="update-text">Added 6 live features: alert banner, island progress tracker, seasonal calendar, villager notes, flower breeding tracker, wishlist</span></li>
+      <li class="update-row"><span class="update-date">26/04/2026</span><span class="update-text">Villager roster corrected: Cherry, Nibbles, Bettina, Axel, Quillson, Stu (6/10)</span></li>
+      <li class="update-row"><span class="update-date">26/04/2026</span><span class="update-text">Site restructured — wiki becomes homepage, dashboard removed, all fonts switched to Lato</span></li>
+      <li class="update-row"><span class="update-date">26/04/2026</span><span class="update-text">Flower breeding guide updated — new ACNH Hybrid Guide infographic (Aeter/Paleh/peach-n-key) added at top</span></li>
+      <li class="update-row"><span class="update-date">18/04/2026</span><span class="update-text">Wiki created — 8 pages covering island layout, villagers, progression, daily checklists, items, ideas, and changelog</span></li>
     </ul>
   </section>
 
@@ -707,14 +543,348 @@
   <p style="margin-top:8px;">
     <a href="https://github.com/knockedover10/knockedover-acnh-wiki" target="_blank" rel="noopener">GitHub Repository</a>
     &nbsp;·&nbsp;
-    Hanamori Wiki
-    &nbsp;·&nbsp;
     <a href="https://nookipedia.com" target="_blank" rel="noopener">Nookipedia</a>
-  </p>
-  <p style="margin-top:10px; font-size:0.72rem; opacity:0.6;">
-    Lato font via Google Fonts · Data from Nookipedia (CC BY-SA 3.0)
   </p>
 </footer>
 
+<script>
+// ══════════════════════════════════════════════════════
+//  STORAGE HELPERS
+// ══════════════════════════════════════════════════════
+const LS = {
+  get: (k, def) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : def; } catch(e){ return def; } },
+  set: (k, v)   => { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+};
+
+// ══════════════════════════════════════════════════════
+//  ALERT BANNER
+// ══════════════════════════════════════════════════════
+function initAlert() {
+  const msg = LS.get('hanamori_alert', '');
+  const textEl = document.getElementById('alert-text');
+  if (msg) {
+    textEl.textContent = msg;
+    textEl.classList.remove('empty');
+  }
+}
+function toggleAlertEdit() {
+  const form = document.getElementById('alert-edit-form');
+  const input = document.getElementById('alert-input');
+  const show = !form.classList.contains('show');
+  form.classList.toggle('show', show);
+  if (show) {
+    input.value = LS.get('hanamori_alert', '');
+    input.focus();
+  }
+}
+function saveAlert() {
+  const msg = document.getElementById('alert-input').value.trim();
+  LS.set('hanamori_alert', msg);
+  const textEl = document.getElementById('alert-text');
+  if (msg) {
+    textEl.textContent = msg;
+    textEl.classList.remove('empty');
+  } else {
+    textEl.textContent = 'No active alert — tap Edit to add one';
+    textEl.classList.add('empty');
+  }
+  document.getElementById('alert-edit-form').classList.remove('show');
+}
+function clearAlert() {
+  LS.set('hanamori_alert', '');
+  const textEl = document.getElementById('alert-text');
+  textEl.textContent = 'No active alert — tap Edit to add one';
+  textEl.classList.add('empty');
+}
+document.getElementById('alert-input')?.addEventListener('keydown', e => { if(e.key==='Enter') saveAlert(); });
+
+// ══════════════════════════════════════════════════════
+//  ISLAND PROGRESS TRACKER
+// ══════════════════════════════════════════════════════
+const MILESTONES = [
+  { group: '🏗️ Early Unlocks', items: [
+    'Blathers arrived (museum tent)',
+    'Nook\'s Cranny opened',
+    'Mable visited (first time)',
+    'Able Sisters opened',
+    'Resident Services upgraded (building)',
+    'Campsite built',
+  ]},
+  { group: '⭐ Island Rating', items: [
+    '3-star island rating achieved',
+    'K.K. Slider performed (first concert)',
+    'Terraforming unlocked (Island Designer)',
+  ]},
+  { group: '🏛️ Museum', items: [
+    'Museum building opened (donated 15 critters)',
+    'Art wing opened (donated first artwork)',
+    'All fish donated',
+    'All bugs donated',
+    'All sea creatures donated',
+  ]},
+  { group: '🌿 Nature & Crafting', items: [
+    'All native fruit trees planted',
+    'Bamboo grove planted',
+    'Hybrid flowers started',
+    'All golden tools obtained',
+    'All DIY recipes collected',
+  ]},
+  { group: '🏘️ Villagers', items: [
+    '8 villagers moved in',
+    '10 villagers moved in',
+    'All wishlist villagers obtained',
+  ]},
+  { group: '💰 Bells & Economy', items: [
+    'Loan fully paid off (5M Bells)',
+    'First 1M Bells earned from turnips',
+  ]},
+];
+
+function initProgress() {
+  const saved = LS.get('hanamori_progress', {});
+  const container = document.getElementById('milestone-groups');
+  let total = 0, done = 0;
+
+  MILESTONES.forEach(group => {
+    const div = document.createElement('div');
+    div.className = 'milestone-group';
+    div.innerHTML = `<h4>${group.group}</h4>`;
+    group.items.forEach(item => {
+      total++;
+      const key = 'prog_' + item;
+      const checked = !!saved[key];
+      if (checked) done++;
+      const row = document.createElement('div');
+      row.className = 'milestone-item' + (checked ? ' done' : '');
+      const id = 'ms_' + key.replace(/\W/g,'_');
+      row.innerHTML = `<input type="checkbox" id="${id}" ${checked?'checked':''}><label for="${id}">${item}</label>`;
+      row.querySelector('input').addEventListener('change', function() {
+        const s = LS.get('hanamori_progress', {});
+        s[key] = this.checked;
+        LS.set('hanamori_progress', s);
+        row.classList.toggle('done', this.checked);
+        updateProgressBar();
+      });
+      div.appendChild(row);
+    });
+    container.appendChild(div);
+  });
+
+  updateProgressBar();
+}
+
+function updateProgressBar() {
+  const saved = LS.get('hanamori_progress', {});
+  let total = 0, done = 0;
+  MILESTONES.forEach(g => g.items.forEach(item => {
+    total++;
+    if (saved['prog_' + item]) done++;
+  }));
+  const pct = total ? Math.round(done / total * 100) : 0;
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = pct + '%';
+}
+
+// ══════════════════════════════════════════════════════
+//  SEASONAL CALENDAR
+// ══════════════════════════════════════════════════════
+const CALENDAR = {
+  1:  { leaving:['Bitterling','Pond smelt','Stringfish','Salmon (river)'], arriving:['Flea','Agrias butterfly'], events:['New Year\'s Day (1 Jan)'] },
+  2:  { leaving:['Pike','Cherry salmon','Char'], arriving:['Hermit crab','Common butterfly'], events:['Festivale (mid-Feb)'] },
+  3:  { leaving:['Dab','Football fish'], arriving:['Cherry blossom DIY balloons','Tadpole'], events:['Bunny Day prep (late Mar)'] },
+  4:  { leaving:['Blue marlin','Tuna','Tarantula','Spider crab','Snow crab','Sea cucumber','Dab'], arriving:['Soft-shelled turtle','Firefly (from May)'], events:['Bunny Day (early Apr)','Cherry blossom season (Apr 1–10)'] },
+  5:  { leaving:['Cherry salmon','Stringfish','Golden trout'], arriving:['Firefly','Agrias butterfly','Mahi-mahi','Moray eel'], events:['Nature Day (early May)','Museum Day (mid-May)'] },
+  6:  { leaving:['Banded dragonfly (peak)'], arriving:['Mahi-mahi','Hammerhead shark','Saw shark'], events:['Bug-Off (3rd Sat)','Wedding Season (Jun)'] },
+  7:  { leaving:[], arriving:['Cicada shell','Walker cicada','Evening cicada','Robust cicada'], events:['Bug-Off (3rd Sat)','Fireworks (every Sun)'] },
+  8:  { leaving:['Firefly'], arriving:['Tarantula (from Nov)'], events:['Bug-Off (3rd Sat)','Fireworks (every Sun)'] },
+  9:  { leaving:['Hammerhead shark','Saw shark','Whale shark'], arriving:['Salmon','King salmon','Migratory locust'], events:['Fishing Tourney (2nd Sat)'] },
+  10: { leaving:['Banded dragonfly','Walker cicada','Cicada shell'], arriving:['Dab','Pike'], events:['Halloween (31 Oct)'] },
+  11: { leaving:['Migratory locust','Agrias butterfly'], arriving:['Stringfish','Pond smelt','Bitterling','Tarantula'], events:['Mushrooming season'] },
+  12: { leaving:['Tarantula'], arriving:['Football fish','Cherry salmon','Char'], events:['Toy Day (24 Dec)','New Year\'s Eve (31 Dec)'] },
+};
+
+function initCalendar() {
+  const month = new Date().getMonth() + 1;
+  const data = CALENDAR[month] || { leaving:[], arriving:[], events:[] };
+  const names = ['','January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('cal-month-name').textContent = names[month];
+
+  const grid = document.getElementById('cal-grid');
+
+  const makeCol = (title, items, badgeClass) => {
+    if (!items.length) return;
+    const col = document.createElement('div');
+    col.className = 'cal-col';
+    col.innerHTML = `<h4>${title}</h4>`;
+    items.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'cal-item';
+      div.innerHTML = `<span class="cal-badge ${badgeClass}">${badgeClass==='leaving'?'LEAVING':badgeClass==='arriving'?'NEW':'EVENT'}</span><span>${item}</span>`;
+      col.appendChild(div);
+    });
+    grid.appendChild(col);
+  };
+
+  makeCol('⚠️ Leaving this month', data.leaving, 'leaving');
+  makeCol('🆕 Arriving this month', data.arriving, 'arriving');
+  makeCol('📅 Events', data.events, 'event');
+
+  if (!data.leaving.length && !data.arriving.length && !data.events.length) {
+    grid.innerHTML = '<p style="color:var(--muted);font-size:.84rem">Nothing notable this month.</p>';
+  }
+}
+
+// ══════════════════════════════════════════════════════
+//  VILLAGER NOTES
+// ══════════════════════════════════════════════════════
+const VILLAGERS = [
+  { name:'Cherry',   emoji:'🐕', type:'Dog · Uchi' },
+  { name:'Nibbles',  emoji:'🐿️', type:'Squirrel · Peppy' },
+  { name:'Bettina',  emoji:'🐭', type:'Mouse · Normal' },
+  { name:'Axel',     emoji:'🦏', type:'Elephant · Jock' },
+  { name:'Quillson', emoji:'🦆', type:'Duck · Smug' },
+  { name:'Stu',      emoji:'🐮', type:'Bull · Lazy' },
+];
+
+function initVillagers() {
+  const saved = LS.get('hanamori_villager_notes', {});
+  const grid = document.getElementById('villager-grid');
+  VILLAGERS.forEach(v => {
+    const card = document.createElement('div');
+    card.className = 'villager-card';
+    card.innerHTML = `
+      <div class="villager-card-head">
+        <span class="villager-emoji">${v.emoji}</span>
+        <div><div class="villager-name">${v.name}</div><div class="villager-type">${v.type}</div></div>
+      </div>
+      <textarea class="villager-notes-input" placeholder="Gifts given, birthday, notes..." rows="3">${saved[v.name]||''}</textarea>`;
+    card.querySelector('textarea').addEventListener('input', function() {
+      const s = LS.get('hanamori_villager_notes', {});
+      s[v.name] = this.value;
+      LS.set('hanamori_villager_notes', s);
+    });
+    grid.appendChild(card);
+  });
+}
+
+// ══════════════════════════════════════════════════════
+//  FLOWER BREEDING TRACKER
+// ══════════════════════════════════════════════════════
+const FLOWER_COLOURS = {
+  White:'#f5f5f5', Red:'#c0392b', Yellow:'#f1c40f', Orange:'#e67e22',
+  Pink:'#f4a0b5', Blue:'#5b9bd5', Purple:'#8e44ad', Black:'#2c2c2c', Gold:'#c9a84c'
+};
+
+function initFlowers() {
+  renderFlowers();
+}
+
+function renderFlowers() {
+  const flowers = LS.get('hanamori_flowers', []);
+  const log = document.getElementById('flower-log');
+  const empty = document.getElementById('flower-empty');
+  log.querySelectorAll('.flower-entry').forEach(e => e.remove());
+  if (!flowers.length) { empty.style.display='block'; return; }
+  empty.style.display = 'none';
+  flowers.forEach((f, i) => {
+    const entry = document.createElement('div');
+    entry.className = 'flower-entry';
+    entry.innerHTML = `
+      <div class="flower-dot" style="background:${FLOWER_COLOURS[f.p1]||'#ccc'}" title="${f.p1}"></div>
+      <span style="font-size:.8rem;color:var(--muted)">×</span>
+      <div class="flower-dot" style="background:${FLOWER_COLOURS[f.p2]||'#ccc'}" title="${f.p2}"></div>
+      <span style="font-size:.8rem;color:var(--muted)">→</span>
+      <div class="flower-entry-text">
+        <strong>${f.species}</strong>: ${f.p1} × ${f.p2}
+        ${f.result ? `<br><span class="flower-entry-note">Result: ${f.result}</span>` : ''}
+      </div>
+      <label class="flower-watered"><input type="checkbox" ${f.watered?'checked':''} onchange="toggleWatered(${i},this.checked)"> Watered today</label>
+      <button class="flower-del" onclick="deleteFlower(${i})">✕</button>`;
+    log.insertBefore(entry, empty);
+  });
+}
+
+function addFlower() {
+  const species = document.getElementById('flower-species').value;
+  const p1 = document.getElementById('flower-parent1').value;
+  const p2 = document.getElementById('flower-parent2').value;
+  const result = document.getElementById('flower-result').value.trim();
+  if (!species || !p1 || !p2) { alert('Please select species and both parent colours.'); return; }
+  const flowers = LS.get('hanamori_flowers', []);
+  flowers.push({ species, p1, p2, result, watered: false });
+  LS.set('hanamori_flowers', flowers);
+  document.getElementById('flower-result').value = '';
+  renderFlowers();
+}
+
+function toggleWatered(i, val) {
+  const flowers = LS.get('hanamori_flowers', []);
+  if (flowers[i]) { flowers[i].watered = val; LS.set('hanamori_flowers', flowers); }
+}
+
+function deleteFlower(i) {
+  const flowers = LS.get('hanamori_flowers', []);
+  flowers.splice(i, 1);
+  LS.set('hanamori_flowers', flowers);
+  renderFlowers();
+}
+
+// ══════════════════════════════════════════════════════
+//  WISHLIST & SHOP LOG
+// ══════════════════════════════════════════════════════
+function initWishlist() { renderWishlist(); }
+
+function renderWishlist() {
+  const items = LS.get('hanamori_wishlist', []);
+  const list = document.getElementById('wish-list');
+  const empty = document.getElementById('wish-empty');
+  list.querySelectorAll('.wish-item').forEach(e => e.remove());
+  if (!items.length) { empty.style.display='block'; return; }
+  empty.style.display = 'none';
+  items.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'wish-item' + (item.got ? ' got' : '');
+    div.innerHTML = `
+      <input type="checkbox" class="wish-check" ${item.got?'checked':''} onchange="toggleWish(${i},this.checked)">
+      <span class="wish-name">${item.name}</span>
+      <span class="wish-cat-tag">${item.cat}</span>
+      <button class="wish-del" onclick="deleteWish(${i})">✕</button>`;
+    list.insertBefore(div, empty);
+  });
+}
+
+function addWish() {
+  const name = document.getElementById('wish-input').value.trim();
+  const cat = document.getElementById('wish-cat').value;
+  if (!name) return;
+  const items = LS.get('hanamori_wishlist', []);
+  items.push({ name, cat, got: false });
+  LS.set('hanamori_wishlist', items);
+  document.getElementById('wish-input').value = '';
+  renderWishlist();
+}
+
+function toggleWish(i, val) {
+  const items = LS.get('hanamori_wishlist', []);
+  if (items[i]) { items[i].got = val; LS.set('hanamori_wishlist', items); renderWishlist(); }
+}
+
+function deleteWish(i) {
+  const items = LS.get('hanamori_wishlist', []);
+  items.splice(i, 1);
+  LS.set('hanamori_wishlist', items);
+  renderWishlist();
+}
+
+// ══════════════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════════════
+initAlert();
+initProgress();
+initCalendar();
+initVillagers();
+initFlowers();
+initWishlist();
+</script>
 </body>
 </html>
