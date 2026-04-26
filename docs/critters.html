@@ -690,36 +690,25 @@ function getImg(name, type) {
 }
 
 // ══════════════════════════════════════════════
-//  API-SYNCED STATE
+//  LOCAL STORAGE
 // ══════════════════════════════════════════════
 
-const API_BASE = '';
+const LS_KEY = 'hanamori_critters_v1';
 let state = {};
-
-async function loadState(){
-  try {
-    const res = await fetch(API_BASE+'/api/progress');
-    if(res.ok) state = await res.json();
-  } catch(e){ state = {}; }
-}
-
+try { state = JSON.parse(localStorage.getItem(LS_KEY)||'{}'); } catch(e){ state={}; }
+function saveState(){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
 function getCritterKey(type, name){ return `${type}__${name}`; }
 function isCaught(type, name){ return !!(state[getCritterKey(type,name)]||{}).caught; }
 function isDonated(type, name){ return !!(state[getCritterKey(type,name)]||{}).donated; }
-
-async function setCheck(type, name, field, val){
+function setCheck(type, name, field, val){
   const k = getCritterKey(type, name);
   if(!state[k]) state[k]={};
   state[k][field]=val;
+  saveState();
   updateProgress(type);
-  try {
-    await fetch(API_BASE+'/api/progress', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({key:k, field, value:val})
-    });
-  } catch(e){ console.warn('Save failed', e); }
 }
+
+async function loadState(){ /* localStorage — no async needed */ }
 
 // ══════════════════════════════════════════════
 //  SORT STATE
@@ -802,9 +791,9 @@ function formatMonths(arr){
   return ranges.map(([s,e])=>s===e?MONTH_NAMES[s]:`${MONTH_NAMES[s]}–${MONTH_NAMES[e]}`).join('; ');
 }
 
-async function toggleCheck(type, name, field, el, idx){
+function toggleCheck(type, name, field, el, idx){
   const val = el.checked;
-  await setCheck(type, name, field, val);
+  setCheck(type, name, field, val);
   const label = el.parentElement;
   label.classList.toggle('checked', val);
   label.querySelector('span').textContent = val ? '✓ Yes' : 'No';
