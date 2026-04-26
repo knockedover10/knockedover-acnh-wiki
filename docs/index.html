@@ -208,22 +208,34 @@
   .cal-badge.all-month { background: var(--surface); color: var(--muted); }
 
   /* ── VILLAGER NOTES ── */
+  .villager-bday-alert {
+    background: #fff3e0; border: 1.5px solid var(--gold); border-radius: 10px;
+    padding: 12px 16px; margin-bottom: 18px; font-size: 0.88rem;
+    color: var(--brown); font-weight: 600; display: none;
+  }
   .villager-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 14px; margin-bottom: 36px;
   }
   .villager-card {
     background: var(--card); border: 1px solid var(--border); border-radius: 10px;
     padding: 16px 18px;
   }
-  .villager-card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .villager-card.is-birthday { border-color: var(--gold); box-shadow: 0 0 0 2px #f6d97a55; }
+  .villager-card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
   .villager-emoji { font-size: 1.6rem; }
   .villager-name { font-weight: 700; font-size: 0.95rem; color: var(--charcoal); }
   .villager-type { font-size: 0.75rem; color: var(--muted); }
+  .villager-facts {
+    font-size: 0.78rem; color: var(--muted); margin-bottom: 10px;
+    border-top: 1px solid var(--border); padding-top: 8px; line-height: 1.7;
+  }
+  .villager-facts span { display: block; }
+  .villager-facts .fact-label { color: var(--brown); font-weight: 700; }
   .villager-notes-input {
     width: 100%; border: 1px solid var(--border); border-radius: 6px;
     padding: 7px 10px; font-family: 'Lato', sans-serif; font-size: 0.82rem;
-    background: var(--bg); color: var(--text); resize: vertical; min-height: 60px;
+    background: var(--bg); color: var(--text); resize: vertical; min-height: 54px;
     outline: none; transition: border-color 0.15s;
   }
   .villager-notes-input:focus { border-color: var(--brown); }
@@ -463,6 +475,7 @@
   <!-- ══ VILLAGER NOTES ══ -->
   <section id="villagers">
     <h2 class="section-title"><span class="icon">🏘️</span> Villager Notes</h2>
+    <div class="villager-bday-alert" id="villager-bday-alert"></div>
     <div class="villager-grid" id="villager-grid"></div>
   </section>
 
@@ -870,27 +883,86 @@ function initCalendar() {
 //  VILLAGER NOTES
 // ══════════════════════════════════════════════════════
 const VILLAGERS = [
-  { name:'Cherry',   emoji:'🐕', type:'Dog · Uchi' },
-  { name:'Nibbles',  emoji:'🐿️', type:'Squirrel · Peppy' },
-  { name:'Bettina',  emoji:'🐭', type:'Mouse · Normal' },
-  { name:'Axel',     emoji:'🦏', type:'Elephant · Jock' },
-  { name:'Quillson', emoji:'🦆', type:'Duck · Smug' },
-  { name:'Stu',      emoji:'🐮', type:'Bull · Lazy' },
-  { name:'T-Bone',   emoji:'🐂', type:'Bull · Cranky' },
+  {
+    name:'Cherry', emoji:'🐕', type:'Dog · Uchi',
+    birthday:'11 May', bdayMMDD:'05-11', catchphrase:'what what',
+    colours:'Black, Purple', styles:'Cool, Elegant',
+    hobby:'Music', gift:'Purple/black clothing — pleather trench coat, mage robe, round shades',
+    fact:'Loves rock music and fashion. Her house has skull flooring and a rose bed. Birthday: 11 May.'
+  },
+  {
+    name:'Nibbles', emoji:'🐿️', type:'Squirrel · Peppy',
+    birthday:'19 Sep', bdayMMDD:'09-19', catchphrase:'niblet',
+    colours:'Red, White', styles:'Active, Simple',
+    hobby:'Nature', gift:'Red or white sporty/simple clothing',
+    fact:'Energetic and enthusiastic — always cheerful. Loves the outdoors. Birthday: 19 Sep.'
+  },
+  {
+    name:'Bettina', emoji:'🐭', type:'Mouse · Normal',
+    birthday:'16 Jul', bdayMMDD:'07-16', catchphrase:'eekers',
+    colours:'Pink, White', styles:'Simple, Elegant',
+    hobby:'Music', gift:'Pink or white simple/elegant clothing',
+    fact:'Sweet and caring — will check on you and other villagers. Easygoing to befriend. Birthday: 16 Jul.'
+  },
+  {
+    name:'Axel', emoji:'🦏', type:'Elephant · Jock',
+    birthday:'19 Mar', bdayMMDD:'03-19', catchphrase:'WHONK',
+    colours:'Orange, White', styles:'Active, Simple',
+    hobby:'Fitness', gift:'Orange or white sporty clothing — track jackets, athletic gear',
+    fact:'Fitness-obsessed and competitive. Will challenge you to games. Birthday: 19 Mar.'
+  },
+  {
+    name:'Quillson', emoji:'🦆', type:'Duck · Smug',
+    birthday:'11 Dec', bdayMMDD:'12-11', catchphrase:'quillicious',
+    colours:'Red, White', styles:'Cool, Elegant',
+    hobby:'Music', gift:'Red or white cool/elegant clothing',
+    fact:'Charming and a little vain — thinks highly of himself. Gets along with most villagers. Birthday: 11 Dec.'
+  },
+  {
+    name:'Stu', emoji:'🐮', type:'Bull · Lazy',
+    birthday:'10 May', bdayMMDD:'05-10', catchphrase:'moooooo',
+    colours:'Blue, White', styles:'Simple, Cute',
+    hobby:'Food', gift:'Blue or white simple/cute clothing — sweaters, casual tops',
+    fact:'Laid-back and food-obsessed. Easy to befriend. Talks about sleep and snacks constantly. Birthday: 10 May.'
+  },
+  {
+    name:'T-Bone', emoji:'🐂', type:'Bull · Cranky',
+    birthday:'20 May', bdayMMDD:'05-20', catchphrase:'moocher',
+    colours:'Blue, Black', styles:'Cool, Simple',
+    hobby:'Education', gift:'Blue or black cool/simple clothing — jackets, coats',
+    fact:'Gruff but warms up with time. Has the education hobby — will read and study outside. Birthday: 20 May.'
+  },
 ];
 
 function initVillagers() {
   const saved = LS.get('hanamori_villager_notes', {});
   const grid = document.getElementById('villager-grid');
+  const alert = document.getElementById('villager-bday-alert');
+  const todayMMDD = (()=>{ const d=new Date(); return String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); })();
+  const bdayToday = VILLAGERS.filter(v => v.bdayMMDD === todayMMDD);
+  if (bdayToday.length) {
+    alert.style.display = 'block';
+    alert.textContent = '🎂 Today is ' + bdayToday.map(v => v.name + '\'s birthday!').join(' & ') + ' Go wish them well and bring a gift!';
+  }
   VILLAGERS.forEach(v => {
+    const isBday = v.bdayMMDD === todayMMDD;
     const card = document.createElement('div');
-    card.className = 'villager-card';
+    card.className = 'villager-card' + (isBday ? ' is-birthday' : '');
     card.innerHTML = `
       <div class="villager-card-head">
-        <span class="villager-emoji">${v.emoji}</span>
+        <span class="villager-emoji">${v.emoji}${isBday?' 🎂':''}</span>
         <div><div class="villager-name">${v.name}</div><div class="villager-type">${v.type}</div></div>
       </div>
-      <textarea class="villager-notes-input" placeholder="Gifts given, birthday, notes..." rows="3">${saved[v.name]||''}</textarea>`;
+      <div class="villager-facts">
+        <span><span class="fact-label">Birthday:</span> ${v.birthday}</span>
+        <span><span class="fact-label">Catchphrase:</span> "${v.catchphrase}"</span>
+        <span><span class="fact-label">Fav colours:</span> ${v.colours}</span>
+        <span><span class="fact-label">Fav styles:</span> ${v.styles}</span>
+        <span><span class="fact-label">Hobby:</span> ${v.hobby}</span>
+        <span><span class="fact-label">Best gift:</span> ${v.gift}</span>
+        <span style="margin-top:4px;font-style:italic">${v.fact}</span>
+      </div>
+      <textarea class="villager-notes-input" placeholder="Your notes — gifts given, friendship level..." rows="2">${saved[v.name]||''}</textarea>`;
     card.querySelector('textarea').addEventListener('input', function() {
       const s = LS.get('hanamori_villager_notes', {});
       s[v.name] = this.value;
