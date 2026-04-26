@@ -335,6 +335,24 @@
     .cal-grid { grid-template-columns: 1fr; }
     .villager-grid { grid-template-columns: 1fr; }
   }
+
+  /* ── DAILY CHECKLIST ── */
+  .daily-checklist { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; margin-bottom: 36px; }
+  .daily-reset-info { font-size: 0.78rem; color: var(--muted); }
+  .daily-reset-btn { background: none; border: 1px solid var(--border); border-radius: 5px; padding: 3px 12px; font-size: 0.75rem; font-family: 'Lato', sans-serif; cursor: pointer; color: var(--muted); }
+  .daily-reset-btn:hover { border-color: var(--red); color: var(--red); }
+  .daily-group { margin-bottom: 18px; }
+  .daily-group:last-child { margin-bottom: 0; }
+  .daily-group h4 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+  .daily-item { display: flex; align-items: flex-start; gap: 10px; padding: 6px 0; border-bottom: 1px solid rgba(200,191,168,0.4); }
+  .daily-item:last-child { border-bottom: none; }
+  .daily-item input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--green); cursor: pointer; flex-shrink: 0; margin-top: 2px; }
+  .daily-item label { font-size: 0.84rem; cursor: pointer; line-height: 1.4; }
+  .daily-item.done label { text-decoration: line-through; color: var(--muted); }
+  .daily-progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .daily-bar-track { flex: 1; height: 7px; background: var(--surface); border-radius: 10px; overflow: hidden; }
+  .daily-bar-fill { height: 100%; background: var(--green); border-radius: 10px; transition: width 0.3s ease; }
+  .daily-pct { font-size: 0.8rem; font-weight: 700; color: var(--green); min-width: 36px; text-align: right; }
 </style>
 </head>
 <body>
@@ -361,6 +379,7 @@
 <!-- ── STICKY NAV ── -->
 <nav class="top-nav">
   <a href="#snapshot">📊 Snapshot</a>
+  <a href="#daily">✅ Daily</a>
   <a href="#progress">🌱 Progress</a>
   <a href="#calendar">🗓️ Calendar</a>
   <a href="#villagers">🏘️ Villagers</a>
@@ -399,6 +418,23 @@
       <div class="snap-item"><span class="snap-label">Residents</span><span class="snap-value" style="font-size:.9rem">Cherry · Nibbles · Bettina · Axel · Quillson · Stu</span></div>
       <div class="snap-item"><span class="snap-label">Island Rating</span><span class="snap-value status-early">Not yet rated</span></div>
       <div class="snap-item"><span class="snap-label">K.K. Slider</span><span class="snap-value status-early">Not yet</span></div>
+    </div>
+  </section>
+
+
+  <!-- ══ DAILY CHECKLIST ══ -->
+  <section id="daily">
+    <h2 class="section-title"><span class="icon">✅</span> Daily Checklist</h2>
+    <div class="daily-checklist">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <span class="daily-reset-info">Auto-resets each day. Date: <span id="daily-last-reset">—</span></span>
+        <button class="daily-reset-btn" onclick="resetDaily()">Reset now</button>
+      </div>
+      <div class="daily-progress-row">
+        <div class="daily-bar-track"><div class="daily-bar-fill" id="daily-fill" style="width:0%"></div></div>
+        <span class="daily-pct" id="daily-pct">0%</span>
+      </div>
+      <div id="daily-groups"></div>
     </div>
   </section>
 
@@ -553,6 +589,102 @@ const LS = {
   get: (k, def) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : def; } catch(e){ return def; } },
   set: (k, v)   => { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
 };
+
+
+// ══════════════════════════════════════════════════════
+//  DAILY CHECKLIST
+// ══════════════════════════════════════════════════════
+const DAILY_TASKS = [
+  { group: '🌅 Morning', items: [
+    'Check Nook Stop for daily Nook Miles bonus (500 NM)',
+    'Talk to all villagers — gifts, new dialogue, friendship building',
+    'Dig up 4 fossils — donate new ones, sell duplicates',
+    'Check beach for washed-up items and bottles (DIY recipes)',
+    'Check balloon presents (listen for pop sound near cliffs)',
+  ]},
+  { group: '🛍️ Shops & Economy', items: [
+    "Check Nook's Cranny for daily rotating items and turnip price",
+    'Check Able Sisters for new clothing items',
+    'Sell fish, bugs, and extra materials as needed',
+  ]},
+  { group: '🌿 Nature & Maintenance', items: [
+    'Water flowers (or check if rain is forecast)',
+    'Check for hybrid flower growth',
+    'Clear any weeds',
+    'Shake trees for furniture, wasps (net ready), and Bells',
+  ]},
+  { group: '🏘️ Villager Interaction', items: [
+    'Give a gift to 1–2 priority villagers (friendship farming)',
+    'Complete any villager requests or errands',
+  ]},
+  { group: '📌 Optional / As Needed', items: [
+    'NMT island hopping for villager hunting',
+    'Stalk Market — check AM and PM turnip prices',
+    'Catch seasonal fish or bugs before they rotate out',
+  ]},
+];
+
+function getTodayKey() {
+  const d = new Date();
+  return d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
+}
+
+function initDaily() {
+  const todayKey = getTodayKey();
+  const saved = LS.get('hanamori_daily', {});
+  if (saved._date !== todayKey) {
+    LS.set('hanamori_daily', { _date: todayKey });
+  }
+  const resetEl = document.getElementById('daily-last-reset');
+  if (resetEl) resetEl.textContent = todayKey;
+  renderDaily();
+}
+
+function renderDaily() {
+  const saved = LS.get('hanamori_daily', {});
+  const container = document.getElementById('daily-groups');
+  container.innerHTML = '';
+  DAILY_TASKS.forEach(group => {
+    const div = document.createElement('div');
+    div.className = 'daily-group';
+    div.innerHTML = '<h4>' + group.group + '</h4>';
+    group.items.forEach(item => {
+      const key = 'daily_' + item.replace(/\W/g, '_');
+      const checked = !!saved[key];
+      const row = document.createElement('div');
+      row.className = 'daily-item' + (checked ? ' done' : '');
+      const id = 'di_' + key;
+      row.innerHTML = '<input type="checkbox" id="' + id + '" ' + (checked ? 'checked' : '') + '><label for="' + id + '">' + item + '</label>';
+      row.querySelector('input').addEventListener('change', function() {
+        const s = LS.get('hanamori_daily', {});
+        s[key] = this.checked;
+        LS.set('hanamori_daily', s);
+        row.classList.toggle('done', this.checked);
+        updateDailyBar();
+      });
+      div.appendChild(row);
+    });
+    container.appendChild(div);
+  });
+  updateDailyBar();
+}
+
+function updateDailyBar() {
+  const saved = LS.get('hanamori_daily', {});
+  let total = 0, done = 0;
+  DAILY_TASKS.forEach(g => g.items.forEach(item => {
+    total++;
+    if (saved['daily_' + item.replace(/\W/g, '_')]) done++;
+  }));
+  const pct = total ? Math.round(done / total * 100) : 0;
+  document.getElementById('daily-fill').style.width = pct + '%';
+  document.getElementById('daily-pct').textContent = pct + '%';
+}
+
+function resetDaily() {
+  LS.set('hanamori_daily', { _date: getTodayKey() });
+  renderDaily();
+}
 
 // ══════════════════════════════════════════════════════
 //  ALERT BANNER
@@ -877,6 +1009,7 @@ function deleteWish(i) {
 // ══════════════════════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════════════════════
+initDaily();
 initAlert();
 initProgress();
 initCalendar();
