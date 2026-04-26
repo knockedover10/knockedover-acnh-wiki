@@ -6,7 +6,7 @@
 <title>🦋 Critters — Hanamori Wiki</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
 /* ── TOKENS ── */
 :root {
@@ -34,7 +34,7 @@ a:hover{text-decoration:underline;color:var(--red)}
 
 /* ── HEADER ── */
 header{background:var(--charcoal);color:#f5f0e8;padding:20px 20px 16px;text-align:center;border-bottom:3px solid var(--red)}
-header h1{font-family:'Noto Serif JP',serif;font-size:1.5rem;font-weight:600;letter-spacing:.05em}
+header h1{font-family:'Lato',sans-serif;font-size:1.5rem;font-weight:600;letter-spacing:.05em}
 header .subtitle{font-size:.8rem;color:rgba(245,240,232,.55);margin-top:4px;letter-spacing:.08em}
 
 /* ── NAV ── */
@@ -142,7 +142,7 @@ td{padding:9px 12px;vertical-align:middle;font-size:.83rem}
 .no-results{text-align:center;padding:40px;color:var(--muted);font-style:italic;display:none}
 
 /* ── SECTION TITLE ── */
-.section-title{font-family:'Noto Serif JP',serif;font-size:1.05rem;font-weight:600;color:var(--charcoal);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.section-title{font-family:'Lato',sans-serif;font-size:1.05rem;font-weight:600;color:var(--charcoal);margin-bottom:14px;display:flex;align-items:center;gap:8px}
 
 /* ── PANEL ── */
 .panel{display:none}
@@ -178,7 +178,7 @@ footer a{color:rgba(245,240,232,.5)}
 
 <nav class="top-nav">
   <a href="wiki.html">🌸 Wiki</a>
-  <a href="index.html">🏠 Dashboard</a>
+  <a href="index.html">🏠 Home</a>
   <a href="#fish" class="active" id="nav-fish">🐟 Fish</a>
   <a href="#bugs" id="nav-bugs">🦟 Bugs</a>
   <a href="#sea" id="nav-sea">🦀 Sea Creatures</a>
@@ -437,9 +437,9 @@ footer a{color:rgba(245,240,232,.5)}
 </main>
 
 <footer>
-  <span style="font-family:'Noto Serif JP',serif;color:rgba(245,240,232,.7);display:block;margin-bottom:4px">🌸 花森 — Hanamori</span>
+  <span style="font-family:'Lato',sans-serif;color:rgba(245,240,232,.7);display:block;margin-bottom:4px">🌸 花森 — Hanamori</span>
   Data from <a href="https://nookipedia.com" target="_blank" rel="noopener">Nookipedia</a> (CC BY-SA 3.0) ·
-  <a href="wiki.html">Wiki</a> · <a href="index.html">Dashboard</a>
+  <a href="index.html">Home</a> · <a href="wiki.html">Wiki</a>
 </footer>
 
 <script>
@@ -693,54 +693,14 @@ function getImg(name, type) {
 //  API-SYNCED STATE
 // ══════════════════════════════════════════════
 
-const API_BASE = ''; // same origin on Railway; empty = relative
+const API_BASE = '';
 let state = {};
-let _password = null;
-let _authed = false;
 
-// ── Password gate ──────────────────────────────
-function showPasswordModal(){
-  const modal = document.getElementById('pw-modal');
-  if(modal) modal.style.display='flex';
-}
-function hidePasswordModal(){
-  const modal = document.getElementById('pw-modal');
-  if(modal) modal.style.display='none';
-}
-async function submitPassword(){
-  const input = document.getElementById('pw-input');
-  const err   = document.getElementById('pw-error');
-  const pw = (input?.value||'').trim();
-  if(!pw) return;
-  try {
-    const res = await fetch(API_BASE+'/api/verify', { headers:{'x-password':pw} });
-    if(res.ok){
-      _password = pw;
-      _authed = true;
-      sessionStorage.setItem('critter_pw', pw);
-      hidePasswordModal();
-      showWriteUI();
-    } else {
-      if(err) err.textContent = 'Wrong password. Try again.';
-    }
-  } catch(e){
-    if(err) err.textContent = 'Could not connect. Are you on Railway?';
-  }
-}
-function showWriteUI(){
-  document.querySelectorAll('.check-cell').forEach(el=>el.style.display='');
-  document.getElementById('lock-notice')?.remove();
-}
-
-// ── Load all progress from API ─────────────────
 async function loadState(){
   try {
     const res = await fetch(API_BASE+'/api/progress');
     if(res.ok) state = await res.json();
-  } catch(e){
-    // fallback: empty state (read-only, viewing only)
-    state = {};
-  }
+  } catch(e){ state = {}; }
 }
 
 function getCritterKey(type, name){ return `${type}__${name}`; }
@@ -752,32 +712,13 @@ async function setCheck(type, name, field, val){
   if(!state[k]) state[k]={};
   state[k][field]=val;
   updateProgress(type);
-  if(!_authed) return; // viewer — don't try to save
   try {
     await fetch(API_BASE+'/api/progress', {
       method:'POST',
-      headers:{'Content-Type':'application/json','x-password':_password},
+      headers:{'Content-Type':'application/json'},
       body: JSON.stringify({key:k, field, value:val})
     });
   } catch(e){ console.warn('Save failed', e); }
-}
-
-// ── Init auth from session ─────────────────────
-async function initAuth(){
-  const saved = sessionStorage.getItem('critter_pw');
-  if(saved){
-    try {
-      const res = await fetch(API_BASE+'/api/verify', { headers:{'x-password':saved} });
-      if(res.ok){ _password=saved; _authed=true; showWriteUI(); return; }
-    } catch(e){}
-  }
-  // Not authed — hide checkboxes, show lock notice
-  document.querySelectorAll('.check-cell').forEach(el=>el.style.display='none');
-  const notice = document.createElement('div');
-  notice.id = 'lock-notice';
-  notice.style.cssText = 'text-align:center;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:8px;margin-bottom:14px;font-size:.82rem;color:var(--muted)';
-  notice.innerHTML = '🔒 Viewing in read-only mode. <button onclick="showPasswordModal()" style="background:none;border:none;color:var(--brown);font-weight:700;cursor:pointer;font-size:.82rem;">Log in to track progress</button>';
-  document.querySelector('.page-wrap')?.prepend(notice);
 }
 
 // ══════════════════════════════════════════════
@@ -1025,24 +966,8 @@ function switchTab(type){
     const th = table.querySelectorAll('thead th')[ss.col];
     if(th) th.classList.add('sorted-desc');
   });
-  // Auth check (shows/hides checkboxes)
-  await initAuth();
 })();
 </script>
 
-<!-- ── Password Modal ──────────────────────────────── -->
-<div id="pw-modal" style="display:none;position:fixed;inset:0;background:rgba(46,42,34,.7);z-index:9999;align-items:center;justify-content:center;">
-  <div style="background:var(--card);border:2px solid var(--border);border-radius:14px;padding:32px 28px;max-width:340px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.25);">
-    <div style="font-size:1.6rem;margin-bottom:8px">🔒</div>
-    <h2 style="font-family:'Noto Serif JP',serif;font-size:1rem;font-weight:600;color:var(--charcoal);margin-bottom:6px">Hikari's Critter Tracker</h2>
-    <p style="font-size:.8rem;color:var(--muted);margin-bottom:18px">Enter your password to track progress</p>
-    <input id="pw-input" type="password" placeholder="Password" autocomplete="current-password"
-      style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:7px;font-size:.95rem;font-family:'Lato',sans-serif;background:var(--bg);color:var(--text);outline:none;margin-bottom:10px;"
-      onkeydown="if(event.key==='Enter') submitPassword()">
-    <div id="pw-error" style="color:var(--red);font-size:.78rem;min-height:18px;margin-bottom:8px"></div>
-    <button onclick="submitPassword()" style="width:100%;background:var(--charcoal);color:#f5f0e8;border:none;border-radius:7px;padding:10px;font-family:'Lato',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;letter-spacing:.04em;">Unlock 🌿</button>
-    <button onclick="hidePasswordModal()" style="margin-top:10px;background:none;border:none;color:var(--muted);font-size:.78rem;cursor:pointer;">Continue as viewer</button>
-  </div>
-</div>
 </body>
 </html>

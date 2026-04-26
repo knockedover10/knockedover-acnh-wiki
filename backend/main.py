@@ -1,17 +1,12 @@
-import os
 import json
 import sqlite3
-import hashlib
 from pathlib import Path
-from fastapi import FastAPI, HTTPException, Header, Request
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
 from pydantic import BaseModel
-from typing import Optional
 
 # ── Config ──────────────────────────────────────────────────
-PASSWORD_HASH = hashlib.sha256(b"abcd1234").hexdigest()
 DB_PATH = Path(__file__).parent / "critters.db"
 DOCS_PATH = Path(__file__).parent.parent / "docs"
 
@@ -44,13 +39,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ── Auth helper ───────────────────────────────────────────────
-def verify_password(x_password: Optional[str] = None):
-    if not x_password:
-        raise HTTPException(status_code=401, detail="Password required")
-    if hashlib.sha256(x_password.encode()).hexdigest() != PASSWORD_HASH:
-        raise HTTPException(status_code=403, detail="Wrong password")
-
 # ── Models ────────────────────────────────────────────────────
 class UpdateRequest(BaseModel):
     key: str        # e.g. "fish__Sea Bass"
@@ -61,15 +49,12 @@ class UpdateRequest(BaseModel):
 
 @app.get("/api/progress")
 def get_progress():
-    """Public — anyone can read progress."""
     with get_db() as conn:
         rows = conn.execute("SELECT key, caught, donated FROM progress").fetchall()
     return {row["key"]: {"caught": bool(row["caught"]), "donated": bool(row["donated"])} for row in rows}
 
 @app.post("/api/progress")
-def update_progress(body: UpdateRequest, x_password: Optional[str] = Header(None)):
-    """Write-protected — requires password."""
-    verify_password(x_password)
+def update_progress(body: UpdateRequest):
     with get_db() as conn:
         conn.execute(
             "INSERT INTO progress (key, caught, donated) VALUES (?, 0, 0) ON CONFLICT(key) DO NOTHING",
@@ -81,12 +66,6 @@ def update_progress(body: UpdateRequest, x_password: Optional[str] = Header(None
             (1 if body.value else 0, body.key)
         )
         conn.commit()
-    return {"ok": True}
-
-@app.get("/api/verify")
-def verify(x_password: Optional[str] = Header(None)):
-    """Check if password is correct."""
-    verify_password(x_password)
     return {"ok": True}
 
 # ── Serve static docs/ folder ─────────────────────────────────
