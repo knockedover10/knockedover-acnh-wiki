@@ -14,8 +14,9 @@
 | **Axel** | Jock | Elephant | ❌ Poor | Less thematically ideal — rehome when possible |
 | **Quillson** | Smug | Duck | ⚠️ Neutral | Smug personality works; design has no Japanese theme link |
 | **Stu** | Lazy | Bull | ⚠️ Neutral | Lazy personality fits the relaxed vibe; no strong theme connection |
+| **T-Bone** | Cranky | Bull | ⚠️ Neutral | Cranky personality adds gruff character; no strong Japanese aesthetic link — keep an eye on fit |
 
-6 / 10 slots filled.
+7 / 10 slots filled.
 
 ---
 
@@ -107,4 +108,4 @@ Don't force him out before you have a replacement lined up — an empty plot can
 
 ---
 
-*Last updated: 26/04/2026 — Updated current residents: Cherry, Nibbles, Bettina, Axel, Quillson, Stu (6/10 slots)*
+*Last updated: 26/04/2026 — T-Bone moved in; roster now 7/10 (Cherry, Nibbles, Bettina, Axel, Quillson, Stu, T-Bone)*
