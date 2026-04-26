@@ -690,22 +690,94 @@ function getImg(name, type) {
 }
 
 // ══════════════════════════════════════════════
-//  LOCALSTORAGE
+//  API-SYNCED STATE
 // ══════════════════════════════════════════════
 
-const LS_KEY = 'hanamori_critters_v1';
+const API_BASE = ''; // same origin on Railway; empty = relative
 let state = {};
-try { state = JSON.parse(localStorage.getItem(LS_KEY)||'{}'); } catch(e){ state={}; }
-function saveState(){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
+let _password = null;
+let _authed = false;
+
+// ── Password gate ──────────────────────────────
+function showPasswordModal(){
+  const modal = document.getElementById('pw-modal');
+  if(modal) modal.style.display='flex';
+}
+function hidePasswordModal(){
+  const modal = document.getElementById('pw-modal');
+  if(modal) modal.style.display='none';
+}
+async function submitPassword(){
+  const input = document.getElementById('pw-input');
+  const err   = document.getElementById('pw-error');
+  const pw = (input?.value||'').trim();
+  if(!pw) return;
+  try {
+    const res = await fetch(API_BASE+'/api/verify', { headers:{'x-password':pw} });
+    if(res.ok){
+      _password = pw;
+      _authed = true;
+      sessionStorage.setItem('critter_pw', pw);
+      hidePasswordModal();
+      showWriteUI();
+    } else {
+      if(err) err.textContent = 'Wrong password. Try again.';
+    }
+  } catch(e){
+    if(err) err.textContent = 'Could not connect. Are you on Railway?';
+  }
+}
+function showWriteUI(){
+  document.querySelectorAll('.check-cell').forEach(el=>el.style.display='');
+  document.getElementById('lock-notice')?.remove();
+}
+
+// ── Load all progress from API ─────────────────
+async function loadState(){
+  try {
+    const res = await fetch(API_BASE+'/api/progress');
+    if(res.ok) state = await res.json();
+  } catch(e){
+    // fallback: empty state (read-only, viewing only)
+    state = {};
+  }
+}
+
 function getCritterKey(type, name){ return `${type}__${name}`; }
 function isCaught(type, name){ return !!(state[getCritterKey(type,name)]||{}).caught; }
 function isDonated(type, name){ return !!(state[getCritterKey(type,name)]||{}).donated; }
-function setCheck(type, name, field, val){
+
+async function setCheck(type, name, field, val){
   const k = getCritterKey(type, name);
   if(!state[k]) state[k]={};
   state[k][field]=val;
-  saveState();
   updateProgress(type);
+  if(!_authed) return; // viewer — don't try to save
+  try {
+    await fetch(API_BASE+'/api/progress', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-password':_password},
+      body: JSON.stringify({key:k, field, value:val})
+    });
+  } catch(e){ console.warn('Save failed', e); }
+}
+
+// ── Init auth from session ─────────────────────
+async function initAuth(){
+  const saved = sessionStorage.getItem('critter_pw');
+  if(saved){
+    try {
+      const res = await fetch(API_BASE+'/api/verify', { headers:{'x-password':saved} });
+      if(res.ok){ _password=saved; _authed=true; showWriteUI(); return; }
+    } catch(e){}
+  }
+  // Not authed — hide checkboxes, show lock notice
+  document.querySelectorAll('.check-cell').forEach(el=>el.style.display='none');
+  const notice = document.createElement('div');
+  notice.id = 'lock-notice';
+  notice.style.cssText = 'text-align:center;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:8px;margin-bottom:14px;font-size:.82rem;color:var(--muted)';
+  notice.innerHTML = '🔒 Viewing in read-only mode. <button onclick="showPasswordModal()" style="background:none;border:none;color:var(--brown);font-weight:700;cursor:pointer;font-size:.82rem;">Log in to track progress</button>';
+  document.querySelector('.page-wrap')?.prepend(notice);
 }
 
 // ══════════════════════════════════════════════
@@ -789,9 +861,9 @@ function formatMonths(arr){
   return ranges.map(([s,e])=>s===e?MONTH_NAMES[s]:`${MONTH_NAMES[s]}–${MONTH_NAMES[e]}`).join('; ');
 }
 
-function toggleCheck(type, name, field, el, idx){
+async function toggleCheck(type, name, field, el, idx){
   const val = el.checked;
-  setCheck(type, name, field, val);
+  await setCheck(type, name, field, val);
   const label = el.parentElement;
   label.classList.toggle('checked', val);
   label.querySelector('span').textContent = val ? '✓ Yes' : 'No';
@@ -939,6 +1011,8 @@ function switchTab(type){
 // ══════════════════════════════════════════════
 
 (async()=>{
+  // Load synced state from API, then init auth
+  await loadState();
   await Promise.all([
     buildTable('fish', FISH),
     buildTable('bugs', BUGS),
@@ -951,7 +1025,24 @@ function switchTab(type){
     const th = table.querySelectorAll('thead th')[ss.col];
     if(th) th.classList.add('sorted-desc');
   });
+  // Auth check (shows/hides checkboxes)
+  await initAuth();
 })();
 </script>
+
+<!-- ── Password Modal ──────────────────────────────── -->
+<div id="pw-modal" style="display:none;position:fixed;inset:0;background:rgba(46,42,34,.7);z-index:9999;align-items:center;justify-content:center;">
+  <div style="background:var(--card);border:2px solid var(--border);border-radius:14px;padding:32px 28px;max-width:340px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.25);">
+    <div style="font-size:1.6rem;margin-bottom:8px">🔒</div>
+    <h2 style="font-family:'Noto Serif JP',serif;font-size:1rem;font-weight:600;color:var(--charcoal);margin-bottom:6px">Hikari's Critter Tracker</h2>
+    <p style="font-size:.8rem;color:var(--muted);margin-bottom:18px">Enter your password to track progress</p>
+    <input id="pw-input" type="password" placeholder="Password" autocomplete="current-password"
+      style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:7px;font-size:.95rem;font-family:'Lato',sans-serif;background:var(--bg);color:var(--text);outline:none;margin-bottom:10px;"
+      onkeydown="if(event.key==='Enter') submitPassword()">
+    <div id="pw-error" style="color:var(--red);font-size:.78rem;min-height:18px;margin-bottom:8px"></div>
+    <button onclick="submitPassword()" style="width:100%;background:var(--charcoal);color:#f5f0e8;border:none;border-radius:7px;padding:10px;font-family:'Lato',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;letter-spacing:.04em;">Unlock 🌿</button>
+    <button onclick="hidePasswordModal()" style="margin-top:10px;background:none;border:none;color:var(--muted);font-size:.78rem;cursor:pointer;">Continue as viewer</button>
+  </div>
+</div>
 </body>
 </html>
