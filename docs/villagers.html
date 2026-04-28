@@ -191,15 +191,16 @@
   }
   .add-modal.open { display:flex; }
   .add-modal-box {
-    background:var(--card); border-radius:14px; padding:24px; max-width:380px; width:100%;
-    box-shadow:0 20px 60px rgba(0,0,0,0.3);
+    background:var(--card); border-radius:14px; padding:20px 18px; max-width:360px; width:calc(100% - 32px);
+    box-shadow:0 20px 60px rgba(0,0,0,0.3); overflow:hidden;
   }
-  .add-modal-title { font-weight:900; font-size:1rem; margin-bottom:16px; }
+  .add-modal-title { font-weight:900; font-size:0.95rem; margin-bottom:16px; word-break:break-word; }
   .add-modal-label { font-size:0.78rem; color:var(--muted); font-weight:700; margin-bottom:6px; display:block; }
   .add-modal-input {
-    width:100%; border:1px solid var(--border); border-radius:6px;
+    width:100%; min-width:0; border:1px solid var(--border); border-radius:6px;
     padding:9px 12px; font-family:'Lato',sans-serif; font-size:0.88rem;
     background:var(--bg); color:var(--text); outline:none; margin-bottom:14px;
+    box-sizing:border-box;
   }
   .add-modal-input:focus { border-color:var(--brown); }
   .add-modal-btns { display:flex; gap:8px; justify-content:flex-end; }
