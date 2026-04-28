@@ -208,6 +208,49 @@
   .cal-badge.event { background: var(--gold-lt); color: var(--brown); }
   .cal-badge.all-month { background: var(--surface); color: var(--muted); }
 
+  /* ── BELL TRACKER ── */
+  .bell-balance-row { display:flex; gap:16px; margin-bottom:16px; flex-wrap:wrap; }
+  .bell-balance-box, .bell-loan-box { flex:1; min-width:200px; background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+  .bell-bal-label { font-size:0.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+  .bell-bal-display { font-size:1.4rem; font-weight:700; color:var(--gold); margin-bottom:10px; }
+  .bell-unit { font-size:0.8rem; color:var(--muted); font-weight:400; }
+  .bell-bal-input-row { display:flex; gap:8px; }
+  .bell-input { flex:1; border:1px solid var(--border); border-radius:6px; padding:7px 10px; font-family:'Lato',sans-serif; font-size:0.84rem; background:var(--card); color:var(--text); outline:none; }
+  .bell-input:focus { border-color:var(--gold); }
+  .bell-set-btn { background:var(--gold); color:var(--charcoal); border:none; border-radius:6px; padding:7px 12px; font-family:'Lato',sans-serif; font-size:0.84rem; font-weight:700; cursor:pointer; }
+  .bell-set-btn:hover { opacity:0.85; }
+  .bell-loan-bar-wrap { background:var(--border); border-radius:20px; height:8px; margin:8px 0 4px; overflow:hidden; }
+  .bell-loan-bar { height:100%; background:var(--green); border-radius:20px; width:0%; transition:width 0.4s; }
+  .bell-loan-pct { font-size:0.75rem; color:var(--muted); }
+  .bell-log-row { display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap; }
+  .bell-log-label { flex:2; min-width:120px; border:1px solid var(--border); border-radius:6px; padding:7px 10px; font-family:'Lato',sans-serif; font-size:0.84rem; background:var(--bg); color:var(--text); outline:none; }
+  .bell-log-label:focus { border-color:var(--gold); }
+  .bell-log-btn { background:var(--brown); color:#fff; border:none; border-radius:6px; padding:7px 14px; font-family:'Lato',sans-serif; font-size:0.84rem; font-weight:700; cursor:pointer; white-space:nowrap; }
+  .bell-log-btn:hover { opacity:0.85; }
+  .bell-history { max-height:220px; overflow-y:auto; }
+  .bell-entry { display:flex; justify-content:space-between; align-items:center; padding:6px 4px; border-bottom:1px solid var(--surface); font-size:0.82rem; }
+  .bell-entry:last-child { border-bottom:none; }
+  .bell-entry-label { color:var(--text); flex:1; }
+  .bell-entry-time { font-size:0.72rem; color:var(--muted); margin:0 10px; }
+  .bell-entry-amt { font-weight:700; min-width:80px; text-align:right; }
+  .bell-entry-amt.pos { color:var(--green); }
+  .bell-entry-amt.neg { color:var(--red); }
+  .bell-entry-del { background:none; border:none; cursor:pointer; color:var(--muted); font-size:0.85rem; padding:0 4px; }
+  .bell-entry-del:hover { color:var(--red); }
+  /* ── RATING ESTIMATOR ── */
+  .rating-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; margin-bottom:16px; }
+  .rating-field { display:flex; flex-direction:column; gap:4px; }
+  .rating-label { font-size:0.78rem; color:var(--muted); font-weight:700; }
+  .rating-input { border:1px solid var(--border); border-radius:6px; padding:8px 10px; font-family:'Lato',sans-serif; font-size:0.9rem; background:var(--bg); color:var(--text); outline:none; }
+  .rating-input:focus { border-color:var(--gold); }
+  .rating-calc-btn { background:var(--gold); color:var(--charcoal); border:none; border-radius:8px; padding:10px 20px; font-family:'Lato',sans-serif; font-size:0.9rem; font-weight:700; cursor:pointer; margin-bottom:16px; }
+  .rating-calc-btn:hover { opacity:0.85; }
+  .rating-result { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:16px; display:none; }
+  .rating-stars { font-size:1.6rem; margin-bottom:6px; }
+  .rating-score { font-size:0.85rem; color:var(--muted); margin-bottom:10px; }
+  .rating-tips { font-size:0.82rem; color:var(--text); line-height:1.7; }
+  .rating-tips li { margin-bottom:3px; }
+
   /* ── ISLAND NOTES ── */
   .notes-block {
     background: var(--card); border: 1px solid var(--border); border-radius: 10px;
@@ -498,6 +541,8 @@
   <a href="#villagers">🏘️ Villagers</a>
   <a href="#flowers">🌸 Flowers</a>
   <a href="#wishlist">🏡 Wishlist</a>
+  <a href="#bells">💰 Bells</a>
+  <a href="#rating">⭐ Rating</a>
   <a href="#notes">📝 Notes</a>
   <a href="#wiki-pages">📚 Wiki</a>
   <a href="critters.html">🦋 Critters</a>
@@ -640,6 +685,53 @@
   </section>
 
   <!-- ══ CRITTER ALERT ══ -->
+  <!-- ══ BELL TRACKER ══ -->
+  <section id="bells">
+    <h2 class="section-title"><span class="icon">💰</span> Bell Tracker</h2>
+    <div class="notes-block">
+      <div class="bell-balance-row">
+        <div class="bell-balance-box">
+          <div class="bell-bal-label">Current Balance</div>
+          <div class="bell-bal-display" id="bell-balance-display">0 <span class="bell-unit">Bells</span></div>
+          <div class="bell-bal-input-row">
+            <input class="bell-input" id="bell-balance-input" type="number" min="0" placeholder="Enter current bells...">
+            <button class="bell-set-btn" id="bell-set-btn">Set</button>
+          </div>
+        </div>
+        <div class="bell-loan-box">
+          <div class="bell-bal-label">Loan Remaining</div>
+          <div class="bell-bal-display" id="bell-loan-display">5,000,000 <span class="bell-unit">Bells</span></div>
+          <div class="bell-loan-bar-wrap"><div class="bell-loan-bar" id="bell-loan-bar"></div></div>
+          <div class="bell-loan-pct" id="bell-loan-pct">0% paid off</div>
+        </div>
+      </div>
+      <div class="bell-log-row">
+        <input class="bell-input" id="bell-log-input" type="number" placeholder="Amount (use - for spend, + for earn)">
+        <input class="bell-log-label" id="bell-log-label-input" type="text" placeholder="Note (e.g. Sold turnips)" maxlength="60">
+        <button class="bell-log-btn" id="bell-log-btn">+ Log</button>
+      </div>
+      <div class="bell-history" id="bell-history"></div>
+    </div>
+  </section>
+
+  <!-- ══ ISLAND RATING ESTIMATOR ══ -->
+  <section id="rating">
+    <h2 class="section-title"><span class="icon">⭐</span> Island Rating Estimator</h2>
+    <div class="notes-block">
+      <p style="font-size:0.82rem;color:var(--muted);margin-bottom:16px">Input your current island stats to estimate your star rating. Based on official Isabelle scoring rules.</p>
+      <div class="rating-grid">
+        <div class="rating-field"><label class="rating-label">Furniture items placed (outdoors)</label><input class="rating-input" id="r-furniture" type="number" min="0" value="0"></div>
+        <div class="rating-field"><label class="rating-label">Trees on island</label><input class="rating-input" id="r-trees" type="number" min="0" value="0"></div>
+        <div class="rating-field"><label class="rating-label">Flowers on island</label><input class="rating-input" id="r-flowers" type="number" min="0" value="0"></div>
+        <div class="rating-field"><label class="rating-label">Fences placed</label><input class="rating-input" id="r-fences" type="number" min="0" value="0"></div>
+        <div class="rating-field"><label class="rating-label">Villagers (current)</label><input class="rating-input" id="r-villagers" type="number" min="0" max="10" value="8"></div>
+        <div class="rating-field"><label class="rating-label">Weeds on island</label><input class="rating-input" id="r-weeds" type="number" min="0" value="0"></div>
+      </div>
+      <button class="rating-calc-btn" id="rating-calc-btn">⭐ Calculate Rating</button>
+      <div class="rating-result" id="rating-result"></div>
+    </div>
+  </section>
+
   <!-- ══ NOTES ══ -->
   <section id="notes">
     <h2 class="section-title"><span class="icon">📝</span> Notes</h2>
@@ -934,6 +1026,8 @@ const MILESTONES = [
     'All fish donated',
     'All bugs donated',
     'All sea creatures donated',
+    'All fossils donated (73 total)',
+    'All artwork donated (43 total)',
   ]},
   { group: '🌿 Nature & Crafting', items: [
     'All native fruit trees planted',
@@ -941,6 +1035,35 @@ const MILESTONES = [
     'Hybrid flowers started',
     'All golden tools obtained',
     'All DIY recipes collected',
+  ]},
+  { group: '🏯 Japanese Theme Build', items: [
+    'First shrine built',
+    'Bamboo torii gate placed',
+    'Onsen area started',
+    'First stone/custom path laid',
+    'First district fully terraformed',
+    'Zen garden planted',
+    'Cherry blossom area set up',
+    'Lanterns placed along main street',
+  ]},
+  { group: '🏗️ Infrastructure', items: [
+    'All 6 bridges built',
+    'All 8 inclines built',
+    'All 10 villager home plots placed',
+    'Custom design path placed island-wide',
+  ]},
+  { group: '🤝 Villager Bonds', items: [
+    'First villager at max friendship',
+    'First villager photo received',
+    'All current villagers gifted their fav item',
+    'Received a framed photo from Cherry',
+    'Received a framed photo from Nibbles',
+    'Received a framed photo from Bettina',
+    'Received a framed photo from Axel',
+    'Received a framed photo from Quillson',
+    'Received a framed photo from Stu',
+    'Received a framed photo from T-Bone',
+    'Received a framed photo from Astrid',
   ]},
   { group: '🏘️ Villagers', items: [
     '8 villagers moved in',
@@ -1045,6 +1168,135 @@ function initCalendar() {
   if (!data.leaving.length && !data.arriving.length && !data.events.length) {
     grid.innerHTML = '<p style="color:var(--muted);font-size:.84rem">Nothing notable this month.</p>';
   }
+}
+
+// ══════════════════════════════════════════════════════
+//  BELL TRACKER
+// ══════════════════════════════════════════════════════
+const TOTAL_LOAN = 5000000;
+function fmtBells(n) { return Number(n).toLocaleString(); }
+function initBells() {
+  function getBalance() { return LS.get('hanamori_bells_balance', 0); }
+  function setBalance(n) { LS.set('hanamori_bells_balance', n); }
+  function getHistory() { return LS.get('hanamori_bells_history', []); }
+
+  function updateDisplay() {
+    const bal = getBalance();
+    document.getElementById('bell-balance-display').innerHTML = fmtBells(bal) + ' <span class="bell-unit">Bells</span>';
+    const paid = Math.max(0, TOTAL_LOAN - Math.max(0, TOTAL_LOAN - bal));
+    const pct = Math.min(100, Math.round((bal / TOTAL_LOAN) * 100));
+    const remaining = Math.max(0, TOTAL_LOAN - bal);
+    document.getElementById('bell-loan-display').innerHTML = fmtBells(remaining) + ' <span class="bell-unit">Bells</span>';
+    document.getElementById('bell-loan-bar').style.width = pct + '%';
+    document.getElementById('bell-loan-pct').textContent = pct + '% paid off';
+  }
+
+  function renderHistory() {
+    const hist = getHistory();
+    const el = document.getElementById('bell-history');
+    el.innerHTML = '';
+    if (!hist.length) { el.innerHTML = '<p class="log-empty">No transactions logged yet.</p>'; return; }
+    [...hist].reverse().forEach((e, ri) => {
+      const i = hist.length - 1 - ri;
+      const row = document.createElement('div'); row.className = 'bell-entry';
+      const amtClass = e.amount >= 0 ? 'pos' : 'neg';
+      const amtStr = (e.amount >= 0 ? '+' : '') + fmtBells(e.amount);
+      row.innerHTML = `<span class="bell-entry-label">${e.label||'Transaction'}</span><span class="bell-entry-time">${e.time}</span><span class="bell-entry-amt ${amtClass}">${amtStr}</span><button class="bell-entry-del" data-i="${i}">×</button>`;
+      row.querySelector('.bell-entry-del').addEventListener('click', function() {
+        const h = getHistory(); h.splice(i, 1); LS.set('hanamori_bells_history', h);
+        renderHistory();
+      });
+      el.appendChild(row);
+    });
+  }
+
+  document.getElementById('bell-set-btn').addEventListener('click', function() {
+    const val = parseInt(document.getElementById('bell-balance-input').value);
+    if (isNaN(val) || val < 0) return;
+    setBalance(val);
+    document.getElementById('bell-balance-input').value = '';
+    updateDisplay(); renderHistory();
+  });
+  document.getElementById('bell-balance-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') document.getElementById('bell-set-btn').click();
+  });
+
+  document.getElementById('bell-log-btn').addEventListener('click', function() {
+    const amt = parseInt(document.getElementById('bell-log-input').value);
+    if (isNaN(amt)) return;
+    const label = document.getElementById('bell-log-label-input').value.trim() || 'Transaction';
+    const now = new Date();
+    const time = String(now.getDate()).padStart(2,'0')+'/'+(String(now.getMonth()+1).padStart(2,'0'))+' '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+    const newBal = Math.max(0, getBalance() + amt);
+    setBalance(newBal);
+    const h = getHistory(); h.push({ amount: amt, label, time }); LS.set('hanamori_bells_history', h);
+    document.getElementById('bell-log-input').value = '';
+    document.getElementById('bell-log-label-input').value = '';
+    updateDisplay(); renderHistory();
+  });
+  document.getElementById('bell-log-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') document.getElementById('bell-log-btn').click();
+  });
+
+  updateDisplay(); renderHistory();
+}
+
+// ══════════════════════════════════════════════════════
+//  ISLAND RATING ESTIMATOR
+// ══════════════════════════════════════════════════════
+function initRating() {
+  document.getElementById('rating-calc-btn').addEventListener('click', function() {
+    const furniture = parseInt(document.getElementById('r-furniture').value) || 0;
+    const trees     = parseInt(document.getElementById('r-trees').value) || 0;
+    const flowers   = parseInt(document.getElementById('r-flowers').value) || 0;
+    const fences    = parseInt(document.getElementById('r-fences').value) || 0;
+    const villagers = parseInt(document.getElementById('r-villagers').value) || 0;
+    const weeds     = parseInt(document.getElementById('r-weeds').value) || 0;
+
+    // Official scoring (approximate): development + scenery - penalties
+    // Development score: furniture * 1pt each (capped contributions), villagers * 2pt
+    // Scenery score: trees * 1pt (up to ~220), flowers * 1pt (up to ~200), fences * 0.2pt
+    // Penalty: weeds * -1pt (heavy if >100)
+    const devScore = Math.min(furniture * 1, 450) + (villagers * 10);
+    const sceneryScore = Math.min(trees, 220) + Math.min(flowers, 200) + Math.min(fences * 0.2, 20);
+    const penalty = weeds > 100 ? (weeds - 100) * 2 : 0;
+    const total = devScore + sceneryScore - penalty;
+
+    let stars, label, starsDisplay, tips = [];
+    if (total < 45) {
+      stars = 1; label = '1 Star'; starsDisplay = '⭐☆☆☆☆';
+      if (furniture < 30) tips.push('Place more outdoor furniture (need ~30+ items)');
+      if (villagers < 6) tips.push('Get more villagers moved in');
+      tips.push('Talk to Isabelle to get specific feedback');
+    } else if (total < 90) {
+      stars = 2; label = '2 Stars'; starsDisplay = '⭐⭐☆☆☆';
+      if (furniture < 60) tips.push('Add more outdoor furniture (aim for 60+)');
+      if (flowers < 50) tips.push('Plant more flowers (aim for 50+)');
+      tips.push('Add fences around gardens or paths');
+    } else if (total < 160) {
+      stars = 3; label = '3 Stars'; starsDisplay = '⭐⭐⭐☆☆';
+      tips.push('You are close to 3 stars!');
+      if (weeds > 20) tips.push('Clear weeds — they reduce score');
+      if (furniture < 100) tips.push('Add ~'+(100-furniture)+' more outdoor furniture items');
+    } else if (total < 250) {
+      stars = 4; label = '4 Stars'; starsDisplay = '⭐⭐⭐⭐☆';
+      tips.push('Strong island! Keep decorating to reach 5 stars');
+      if (flowers < 100) tips.push('More flowers will boost scenery score');
+    } else {
+      stars = 5; label = '5 Stars'; starsDisplay = '⭐⭐⭐⭐⭐';
+      tips.push('Amazing island! You have achieved the maximum rating.');
+      tips.push('Isabelle will reward you with a Gold Watering Can recipe!');
+    }
+
+    const el = document.getElementById('rating-result');
+    el.style.display = 'block';
+    el.innerHTML = `
+      <div class="rating-stars">${starsDisplay} <strong>${label}</strong></div>
+      <div class="rating-score">Estimated score: ${Math.round(total)} pts (Development: ${Math.round(devScore)}, Scenery: ${Math.round(sceneryScore)}${penalty ? ', Penalty: -'+Math.round(penalty) : ''})</div>
+      ${tips.length ? '<ul class="rating-tips">'+tips.map(t=>'<li>→ '+t+'</li>').join('')+'</ul>' : ''}
+      <p style="font-size:0.72rem;color:var(--muted);margin-top:8px">Note: This is an estimate. Check with Isabelle in-game for your exact score and specific feedback.</p>
+    `;
+  });
 }
 
 // ══════════════════════════════════════════════════════
@@ -1392,6 +1644,8 @@ initCalendar();
 initVillagers();
 initFlowers();
 initWishlist();
+initBells();
+initRating();
 initNotes();
 </script>
 </body>
