@@ -207,6 +207,22 @@
   .cal-badge.event { background: var(--gold-lt); color: var(--brown); }
   .cal-badge.all-month { background: var(--surface); color: var(--muted); }
 
+  /* ── ISLAND NOTES ── */
+  .notes-section {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 20px 22px; margin-bottom: 36px;
+  }
+  .notes-textarea {
+    width: 100%; min-height: 260px; border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px 14px; font-family: 'Lato', sans-serif; font-size: 0.9rem;
+    background: var(--bg); color: var(--text); resize: vertical; outline: none;
+    line-height: 1.65; transition: border-color 0.15s;
+  }
+  .notes-textarea:focus { border-color: var(--brown); }
+  .notes-textarea::placeholder { color: var(--muted); font-style: italic; }
+  .notes-footer { display: flex; justify-content: flex-end; padding-top: 8px; }
+  .notes-saved { font-size: 0.75rem; color: var(--muted); font-style: italic; transition: opacity 0.4s; }
+
   /* ── VILLAGER NOTES ── */
   .villager-bday-alert {
     background: #fff3e0; border: 1.5px solid var(--gold); border-radius: 10px;
@@ -397,6 +413,7 @@
   <a href="#villagers">🏘️ Villagers</a>
   <a href="#flowers">🌸 Flowers</a>
   <a href="#wishlist">🏡 Wishlist</a>
+  <a href="#notes">📝 Notes</a>
   <a href="#wiki-pages">📚 Wiki</a>
   <a href="critters.html">🦋 Critters</a>
   <a href="https://wuffs.org/acnh/weather/" target="_blank" rel="noopener">🌦️ Weather</a>
@@ -538,6 +555,15 @@
   </section>
 
   <!-- ══ CRITTER ALERT ══ -->
+  <!-- ══ NOTES ══ -->
+  <section id="notes">
+    <h2 class="section-title"><span class="icon">📝</span> Notes</h2>
+    <div class="notes-section">
+      <textarea class="notes-textarea" id="island-notes" placeholder="Jot down anything — cool finds, ideas, things to do, island plans..."></textarea>
+      <div class="notes-footer"><span id="notes-saved-msg" class="notes-saved"></span></div>
+    </div>
+  </section>
+
   <section id="critters">
     <h2 class="section-title"><span class="icon">🦋</span> Critter Alert — April</h2>
     <div class="critter-callout">
@@ -904,6 +930,25 @@ function initCalendar() {
 }
 
 // ══════════════════════════════════════════════════════
+//  ISLAND NOTES
+// ══════════════════════════════════════════════════════
+function initNotes() {
+  const ta = document.getElementById('island-notes');
+  const msg = document.getElementById('notes-saved-msg');
+  ta.value = LS.get('hanamori_island_notes', '');
+  let saveTimer;
+  ta.addEventListener('input', function() {
+    clearTimeout(saveTimer);
+    msg.textContent = 'Saving...';
+    saveTimer = setTimeout(() => {
+      LS.set('hanamori_island_notes', ta.value);
+      msg.textContent = 'Saved';
+      setTimeout(() => { msg.textContent = ''; }, 2000);
+    }, 600);
+  });
+}
+
+// ══════════════════════════════════════════════════════
 //  VILLAGER NOTES
 // ══════════════════════════════════════════════════════
 const VILLAGERS = [
@@ -1122,6 +1167,7 @@ initCalendar();
 initVillagers();
 initFlowers();
 initWishlist();
+initNotes();
 </script>
 </body>
 </html>
