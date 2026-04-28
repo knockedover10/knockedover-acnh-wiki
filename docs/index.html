@@ -208,20 +208,104 @@
   .cal-badge.all-month { background: var(--surface); color: var(--muted); }
 
   /* ── ISLAND NOTES ── */
-  .notes-section {
+  .notes-block {
     background: var(--card); border: 1px solid var(--border); border-radius: 10px;
-    padding: 20px 22px; margin-bottom: 36px;
+    padding: 20px 22px; margin-bottom: 20px;
+  }
+  .notes-block-title {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+    color: var(--brown); margin-bottom: 12px;
   }
   .notes-textarea {
-    width: 100%; min-height: 260px; border: 1px solid var(--border); border-radius: 8px;
+    width: 100%; min-height: 140px; border: 1px solid var(--border); border-radius: 8px;
     padding: 12px 14px; font-family: 'Lato', sans-serif; font-size: 0.9rem;
     background: var(--bg); color: var(--text); resize: vertical; outline: none;
     line-height: 1.65; transition: border-color 0.15s;
   }
   .notes-textarea:focus { border-color: var(--brown); }
   .notes-textarea::placeholder { color: var(--muted); font-style: italic; }
-  .notes-footer { display: flex; justify-content: flex-end; padding-top: 8px; }
-  .notes-saved { font-size: 0.75rem; color: var(--muted); font-style: italic; transition: opacity 0.4s; }
+  .notes-footer { display: flex; justify-content: flex-end; padding-top: 6px; }
+  .notes-saved { font-size: 0.75rem; color: var(--muted); font-style: italic; }
+  /* visitor log */
+  .visitor-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .visitor-input {
+    flex: 1; min-width: 140px; border: 1px solid var(--border); border-radius: 6px;
+    padding: 8px 10px; font-family: 'Lato', sans-serif; font-size: 0.85rem;
+    background: var(--bg); color: var(--text); outline: none;
+  }
+  .visitor-input:focus { border-color: var(--brown); }
+  .visitor-select {
+    border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px;
+    font-family: 'Lato', sans-serif; font-size: 0.85rem;
+    background: var(--bg); color: var(--text); outline: none;
+  }
+  .visitor-add-btn {
+    background: var(--brown); color: #fff; border: none; border-radius: 6px;
+    padding: 8px 14px; font-family: 'Lato', sans-serif; font-size: 0.85rem;
+    cursor: pointer; font-weight: 700;
+  }
+  .visitor-add-btn:hover { opacity: 0.85; }
+  .visitor-list { list-style: none; padding: 0; margin: 0; }
+  .visitor-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 7px 10px; border-radius: 6px; font-size: 0.84rem;
+    background: var(--bg); border: 1px solid var(--border); margin-bottom: 6px;
+  }
+  .visitor-item .v-name { font-weight: 700; color: var(--charcoal); }
+  .visitor-item .v-type {
+    font-size: 0.75rem; color: var(--card); padding: 2px 8px; border-radius: 20px;
+    font-weight: 700; margin-left: 8px;
+  }
+  .v-type.visitor { background: var(--green); }
+  .v-type.merchant { background: var(--gold); color: var(--charcoal); }
+  .v-type.outside { background: var(--sakura); color: var(--charcoal); }
+  .v-type.other { background: var(--muted); }
+  .visitor-del { background: none; border: none; cursor: pointer; color: var(--muted); font-size: 1rem; padding: 0 4px; }
+  .visitor-del:hover { color: var(--red); }
+  .visitor-empty { font-size: 0.82rem; color: var(--muted); font-style: italic; }
+  /* daily log */
+  .log-summary-area {
+    width: 100%; min-height: 90px; border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 12px; font-family: 'Lato', sans-serif; font-size: 0.88rem;
+    background: var(--bg); color: var(--text); resize: vertical; outline: none; line-height: 1.6;
+  }
+  .log-summary-area:focus { border-color: var(--brown); }
+  .log-summary-area::placeholder { color: var(--muted); font-style: italic; }
+  .log-append-row { display: flex; gap: 8px; margin-top: 10px; }
+  .log-append-input {
+    flex: 1; border: 1px solid var(--border); border-radius: 6px;
+    padding: 8px 10px; font-family: 'Lato', sans-serif; font-size: 0.85rem;
+    background: var(--bg); color: var(--text); outline: none;
+  }
+  .log-append-input:focus { border-color: var(--brown); }
+  .log-append-btn {
+    background: var(--green); color: #fff; border: none; border-radius: 6px;
+    padding: 8px 14px; font-family: 'Lato', sans-serif; font-size: 0.85rem;
+    cursor: pointer; font-weight: 700; white-space: nowrap;
+  }
+  .log-append-btn:hover { opacity: 0.85; }
+  .log-entries { margin-top: 14px; }
+  .log-day-group { margin-bottom: 18px; }
+  .log-day-header {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--brown); border-bottom: 1px solid var(--border); padding-bottom: 4px; margin-bottom: 8px;
+  }
+  .log-entry {
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: 0.84rem; color: var(--text); padding: 5px 0;
+    border-bottom: 1px solid var(--surface);
+  }
+  .log-entry:last-child { border-bottom: none; }
+  .log-entry-time { font-size: 0.72rem; color: var(--muted); white-space: nowrap; padding-top: 2px; min-width: 42px; }
+  .log-entry-text { flex: 1; line-height: 1.5; }
+  .log-entry-del { background: none; border: none; cursor: pointer; color: var(--muted); font-size: 0.85rem; padding: 0; }
+  .log-entry-del:hover { color: var(--red); }
+  .log-day-summary {
+    font-size: 0.84rem; color: var(--text); background: var(--bg);
+    border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px;
+    line-height: 1.6; margin-bottom: 8px; white-space: pre-wrap;
+  }
+  .log-empty { font-size: 0.82rem; color: var(--muted); font-style: italic; }
 
   /* ── VILLAGER NOTES ── */
   .villager-bday-alert {
@@ -558,9 +642,42 @@
   <!-- ══ NOTES ══ -->
   <section id="notes">
     <h2 class="section-title"><span class="icon">📝</span> Notes</h2>
-    <div class="notes-section">
+
+    <!-- Scratchpad -->
+    <div class="notes-block">
+      <div class="notes-block-title">📌 Scratchpad</div>
       <textarea class="notes-textarea" id="island-notes" placeholder="Jot down anything — cool finds, ideas, things to do, island plans..."></textarea>
       <div class="notes-footer"><span id="notes-saved-msg" class="notes-saved"></span></div>
+    </div>
+
+    <!-- Visitor Log -->
+    <div class="notes-block">
+      <div class="notes-block-title">👤 Today's Visitors</div>
+      <div class="visitor-row">
+        <input class="visitor-input" id="visitor-name" type="text" placeholder="Name (e.g. Flick, Isabelle...)" maxlength="40">
+        <select class="visitor-select" id="visitor-type">
+          <option value="visitor">Visitor</option>
+          <option value="merchant">Merchant</option>
+          <option value="outside">Outside Encounter</option>
+          <option value="other">Other</option>
+        </select>
+        <button class="visitor-add-btn" id="visitor-add-btn">+ Add</button>
+      </div>
+      <ul class="visitor-list" id="visitor-list"></ul>
+      <p class="visitor-empty" id="visitor-empty">No visitors logged today.</p>
+    </div>
+
+    <!-- Daily Log -->
+    <div class="notes-block">
+      <div class="notes-block-title">📖 Daily Log</div>
+      <div class="notes-block-title" id="log-today-label" style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:0.8rem;margin-bottom:6px"></div>
+      <textarea class="log-summary-area" id="log-summary" placeholder="Today's summary — what happened, what you built, who you spoke to..."></textarea>
+      <div class="notes-footer" style="margin-bottom:0"><span id="log-summary-saved" class="notes-saved"></span></div>
+      <div class="log-append-row">
+        <input class="log-append-input" id="log-append-input" type="text" placeholder="Quick note — press Enter or + Log" maxlength="200">
+        <button class="log-append-btn" id="log-append-btn">+ Log</button>
+      </div>
+      <div class="log-entries" id="log-entries"></div>
     </div>
   </section>
 
@@ -933,6 +1050,7 @@ function initCalendar() {
 //  ISLAND NOTES
 // ══════════════════════════════════════════════════════
 function initNotes() {
+  // — Scratchpad —
   const ta = document.getElementById('island-notes');
   const msg = document.getElementById('notes-saved-msg');
   ta.value = LS.get('hanamori_island_notes', '');
@@ -946,6 +1064,112 @@ function initNotes() {
       setTimeout(() => { msg.textContent = ''; }, 2000);
     }, 600);
   });
+
+  // — Visitor Log —
+  const todayKey = (()=>{ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); })();
+  const visitorStoreKey = 'hanamori_visitors_' + todayKey;
+  const visitorList = document.getElementById('visitor-list');
+  const visitorEmpty = document.getElementById('visitor-empty');
+
+  function renderVisitors() {
+    const items = LS.get(visitorStoreKey, []);
+    visitorList.innerHTML = '';
+    visitorEmpty.style.display = items.length ? 'none' : 'block';
+    items.forEach((v, i) => {
+      const typeLabels = { visitor:'Visitor', merchant:'Merchant', outside:'Outside Encounter', other:'Other' };
+      const li = document.createElement('li');
+      li.className = 'visitor-item';
+      li.innerHTML = `<span><span class="v-name">${v.name}</span><span class="v-type ${v.type}">${typeLabels[v.type]||v.type}</span></span><button class="visitor-del" data-i="${i}">×</button>`;
+      li.querySelector('.visitor-del').addEventListener('click', function() {
+        const arr = LS.get(visitorStoreKey, []); arr.splice(i,1); LS.set(visitorStoreKey, arr); renderVisitors();
+      });
+      visitorList.appendChild(li);
+    });
+  }
+
+  document.getElementById('visitor-add-btn').addEventListener('click', function() {
+    const name = document.getElementById('visitor-name').value.trim();
+    if (!name) return;
+    const type = document.getElementById('visitor-type').value;
+    const arr = LS.get(visitorStoreKey, []);
+    arr.push({ name, type });
+    LS.set(visitorStoreKey, arr);
+    document.getElementById('visitor-name').value = '';
+    renderVisitors();
+  });
+  document.getElementById('visitor-name').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') document.getElementById('visitor-add-btn').click();
+  });
+  renderVisitors();
+
+  // — Daily Log —
+  const formatDate = (k) => { const p=k.split('-'); return p[2]+'/'+p[1]+'/'+p[0]; };
+  const logSummaryKey = 'hanamori_log_summary_' + todayKey;
+  const logEntriesKey = 'hanamori_log_entries_' + todayKey;
+  const logAllDays = 'hanamori_log_days';
+
+  // register today
+  const days = LS.get(logAllDays, []);
+  if (!days.includes(todayKey)) { days.unshift(todayKey); LS.set(logAllDays, days); }
+
+  document.getElementById('log-today-label').textContent = 'Today — ' + formatDate(todayKey);
+
+  // summary
+  const summaryArea = document.getElementById('log-summary');
+  const summaryMsg = document.getElementById('log-summary-saved');
+  summaryArea.value = LS.get(logSummaryKey, '');
+  let sumTimer;
+  summaryArea.addEventListener('input', function() {
+    clearTimeout(sumTimer);
+    summaryMsg.textContent = 'Saving...';
+    sumTimer = setTimeout(() => {
+      LS.set(logSummaryKey, summaryArea.value);
+      summaryMsg.textContent = 'Saved';
+      setTimeout(() => { summaryMsg.textContent = ''; }, 2000);
+    }, 600);
+  });
+
+  // append entries
+  function renderLogEntries() {
+    const container = document.getElementById('log-entries');
+    const allDays = LS.get(logAllDays, []);
+    container.innerHTML = '';
+    if (!allDays.length) { container.innerHTML = '<p class="log-empty">No log entries yet.</p>'; return; }
+    allDays.forEach(day => {
+      const summary = LS.get('hanamori_log_summary_' + day, '');
+      const entries = LS.get('hanamori_log_entries_' + day, []);
+      if (!summary && !entries.length) return;
+      const grp = document.createElement('div'); grp.className = 'log-day-group';
+      grp.innerHTML = `<div class="log-day-header">${formatDate(day)}</div>`;
+      if (summary) { const s=document.createElement('div'); s.className='log-day-summary'; s.textContent=summary; grp.appendChild(s); }
+      entries.forEach((e, ei) => {
+        const row = document.createElement('div'); row.className='log-entry';
+        row.innerHTML=`<span class="log-entry-time">${e.time}</span><span class="log-entry-text">${e.text}</span>${day===todayKey?`<button class="log-entry-del" data-day="${day}" data-i="${ei}">×</button>`:''}` ;
+        if (day===todayKey) row.querySelector('.log-entry-del').addEventListener('click', function() {
+          const arr=LS.get(logEntriesKey,[]); arr.splice(ei,1); LS.set(logEntriesKey,arr); renderLogEntries();
+        });
+        grp.appendChild(row);
+      });
+      container.appendChild(grp);
+    });
+    if (!container.children.length) container.innerHTML='<p class="log-empty">No log entries yet.</p>';
+  }
+
+  document.getElementById('log-append-btn').addEventListener('click', function() {
+    const inp = document.getElementById('log-append-input');
+    const text = inp.value.trim(); if (!text) return;
+    const now = new Date();
+    const time = String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+    const arr = LS.get(logEntriesKey, []);
+    arr.push({ text, time });
+    LS.set(logEntriesKey, arr);
+    inp.value = '';
+    renderLogEntries();
+  });
+  document.getElementById('log-append-input').addEventListener('keydown', function(e) {
+    if (e.key==='Enter') document.getElementById('log-append-btn').click();
+  });
+  renderLogEntries();
 }
 
 // ══════════════════════════════════════════════════════
