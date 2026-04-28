@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏘️ Villagers — Hanamori Wiki</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#f5f0e8; --surface:#ede7d9; --card:#faf6ee; --border:#c8bfa8;
+    --text:#2e2a22; --muted:#7a7060; --green:#5a7a4a; --brown:#7a5c38;
+    --red:#a83232; --charcoal:#3a3530; --sakura:#e8b4c0; --gold:#c9a84c;
+    --green-lt:#e8f0e4; --red-lt:#f5e8e8; --gold-lt:#f7f0dc;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Lato',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+
+  /* ── NAV ── */
+  nav {
+    background:var(--charcoal); padding:10px 16px; display:flex; gap:6px;
+    flex-wrap:wrap; position:sticky; top:0; z-index:100; align-items:center;
+  }
+  nav a {
+    color:#e8e0d0; text-decoration:none; font-size:0.78rem; font-weight:700;
+    padding:5px 9px; border-radius:6px; white-space:nowrap; transition:background 0.15s;
+  }
+  nav a:hover { background:rgba(255,255,255,0.12); }
+  nav a.active { background:var(--brown); color:#fff; }
+
+  /* ── HEADER ── */
+  .page-header {
+    background:linear-gradient(135deg, var(--charcoal) 0%, #5a4838 100%);
+    color:#e8e0d0; padding:28px 20px 22px; text-align:center;
+  }
+  .page-header h1 { font-size:1.6rem; font-weight:900; margin-bottom:4px; }
+  .page-header p { font-size:0.82rem; color:#b0a898; }
+
+  /* ── LAYOUT ── */
+  .container { max-width:900px; margin:0 auto; padding:24px 16px 60px; }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-size:0.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--brown); margin-bottom:14px; display:flex; align-items:center; gap:8px;
+  }
+  .section-title::after { content:''; flex:1; height:1px; background:var(--border); }
+
+  /* ── SEARCH BAR ── */
+  .search-wrap { position:relative; margin-bottom:24px; }
+  .search-input {
+    width:100%; padding:12px 16px 12px 44px; border:1.5px solid var(--border);
+    border-radius:10px; font-family:'Lato',sans-serif; font-size:1rem;
+    background:var(--card); color:var(--text); outline:none; transition:border-color 0.15s;
+  }
+  .search-input:focus { border-color:var(--brown); }
+  .search-input::placeholder { color:var(--muted); }
+  .search-icon { position:absolute; left:14px; top:50%; transform:translateY(-50%); font-size:1.1rem; pointer-events:none; }
+  .search-clear {
+    position:absolute; right:12px; top:50%; transform:translateY(-50%);
+    background:none; border:none; cursor:pointer; color:var(--muted); font-size:1.1rem;
+    display:none; padding:4px;
+  }
+  .search-clear:hover { color:var(--red); }
+
+  /* ── FILTERS ── */
+  .filter-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px; }
+  .filter-select {
+    border:1px solid var(--border); border-radius:6px; padding:7px 10px;
+    font-family:'Lato',sans-serif; font-size:0.82rem; background:var(--card);
+    color:var(--text); outline:none; cursor:pointer;
+  }
+  .filter-select:focus { border-color:var(--brown); }
+  .filter-btn {
+    border:1px solid var(--border); border-radius:6px; padding:7px 12px;
+    font-family:'Lato',sans-serif; font-size:0.82rem; background:var(--card);
+    color:var(--text); cursor:pointer; font-weight:700; transition:all 0.15s;
+  }
+  .filter-btn.active { background:var(--brown); color:#fff; border-color:var(--brown); }
+  .filter-btn:hover:not(.active) { background:var(--surface); }
+  .result-count { font-size:0.78rem; color:var(--muted); margin-bottom:14px; }
+
+  /* ── VILLAGER GRID ── */
+  .villager-grid {
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
+    gap:12px; margin-bottom:32px;
+  }
+  .vcard {
+    background:var(--card); border:1.5px solid var(--border); border-radius:12px;
+    padding:0; cursor:pointer; transition:transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    overflow:hidden; text-align:center;
+  }
+  .vcard:hover { transform:translateY(-2px); box-shadow:0 4px 16px rgba(0,0,0,0.12); border-color:var(--brown); }
+  .vcard.on-island { border-color:var(--green); border-width:2px; }
+  .vcard.on-island .vcard-name-bar { background:var(--green); }
+  .vcard-img-wrap {
+    background:var(--surface); padding:10px; display:flex;
+    align-items:center; justify-content:center; height:100px;
+  }
+  .vcard-img { width:72px; height:72px; object-fit:contain; }
+  .vcard-img-wrap .vcard-loading { font-size:2rem; }
+  .vcard-name-bar {
+    background:var(--brown); color:#fff; font-size:0.78rem;
+    font-weight:700; padding:6px 8px; text-align:center;
+  }
+  .vcard-sub { font-size:0.7rem; color:var(--muted); padding:5px 8px 8px; }
+  .vcard-island-badge {
+    font-size:0.62rem; background:var(--green-lt); color:var(--green);
+    font-weight:700; padding:2px 6px; border-radius:20px; display:inline-block;
+    margin-top:3px;
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position:fixed; inset:0; background:rgba(0,0,0,0.55);
+    z-index:200; display:none; align-items:center; justify-content:center;
+    padding:16px;
+  }
+  .modal-overlay.open { display:flex; }
+  .modal {
+    background:var(--card); border-radius:16px; max-width:500px; width:100%;
+    max-height:90vh; overflow-y:auto; box-shadow:0 20px 60px rgba(0,0,0,0.3);
+  }
+  .modal-header {
+    background:var(--charcoal); color:#fff; padding:18px 20px;
+    border-radius:16px 16px 0 0; display:flex; align-items:center; gap:14px;
+    position:sticky; top:0; z-index:1;
+  }
+  .modal-face {
+    width:64px; height:64px; object-fit:contain;
+    background:var(--surface); border-radius:50%; padding:4px;
+  }
+  .modal-face-placeholder { width:64px; height:64px; font-size:2.5rem; line-height:64px; text-align:center; }
+  .modal-title { flex:1; }
+  .modal-title h2 { font-size:1.2rem; font-weight:900; }
+  .modal-title p { font-size:0.78rem; color:#b0a898; margin-top:2px; }
+  .modal-close {
+    background:none; border:none; color:#fff; font-size:1.4rem; cursor:pointer;
+    padding:4px 8px; border-radius:6px; transition:background 0.15s;
+  }
+  .modal-close:hover { background:rgba(255,255,255,0.15); }
+  .modal-body { padding:20px; }
+  .modal-photo-wrap { text-align:center; margin-bottom:16px; }
+  .modal-photo { width:140px; height:140px; object-fit:contain; background:var(--surface); border-radius:12px; padding:8px; }
+
+  /* stats table */
+  .stat-table { width:100%; border-collapse:collapse; margin-bottom:16px; }
+  .stat-table tr:not(:last-child) td { border-bottom:1px solid var(--border); }
+  .stat-table td { padding:8px 10px; font-size:0.84rem; }
+  .stat-table td:first-child { font-weight:700; color:var(--brown); width:130px; background:var(--surface); border-radius:4px; }
+  .modal-section-title {
+    font-size:0.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--brown); margin:16px 0 8px; padding-bottom:4px; border-bottom:1px solid var(--border);
+  }
+  .furniture-chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:4px; }
+  .chip {
+    font-size:0.72rem; background:var(--surface); border:1px solid var(--border);
+    border-radius:20px; padding:3px 9px; color:var(--text);
+  }
+
+  /* Island roster section */
+  .island-actions { display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap; }
+  .roster-add-btn {
+    background:var(--green); color:#fff; border:none; border-radius:8px;
+    padding:9px 16px; font-family:'Lato',sans-serif; font-size:0.84rem;
+    font-weight:700; cursor:pointer;
+  }
+  .roster-add-btn:hover { opacity:0.85; }
+  .roster-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:10px; margin-bottom:28px; }
+  .roster-card {
+    background:var(--card); border:1.5px solid var(--green); border-radius:10px;
+    padding:12px 14px; display:flex; align-items:center; gap:10px;
+  }
+  .roster-card.moved-out { border-color:var(--border); opacity:0.5; }
+  .roster-face { width:44px; height:44px; object-fit:contain; background:var(--surface); border-radius:50%; padding:3px; }
+  .roster-info { flex:1; }
+  .roster-name { font-weight:700; font-size:0.9rem; }
+  .roster-sub { font-size:0.72rem; color:var(--muted); }
+  .roster-date { font-size:0.7rem; color:var(--muted); margin-top:2px; }
+  .roster-out-btn {
+    background:none; border:1px solid var(--border); border-radius:6px;
+    padding:4px 8px; font-size:0.72rem; color:var(--muted); cursor:pointer;
+    font-family:'Lato',sans-serif;
+  }
+  .roster-out-btn:hover { border-color:var(--red); color:var(--red); }
+
+  /* Add to island modal */
+  .add-modal {
+    position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:300;
+    display:none; align-items:center; justify-content:center; padding:16px;
+  }
+  .add-modal.open { display:flex; }
+  .add-modal-box {
+    background:var(--card); border-radius:14px; padding:24px; max-width:380px; width:100%;
+    box-shadow:0 20px 60px rgba(0,0,0,0.3);
+  }
+  .add-modal-title { font-weight:900; font-size:1rem; margin-bottom:16px; }
+  .add-modal-label { font-size:0.78rem; color:var(--muted); font-weight:700; margin-bottom:6px; display:block; }
+  .add-modal-input {
+    width:100%; border:1px solid var(--border); border-radius:6px;
+    padding:9px 12px; font-family:'Lato',sans-serif; font-size:0.88rem;
+    background:var(--bg); color:var(--text); outline:none; margin-bottom:14px;
+  }
+  .add-modal-input:focus { border-color:var(--brown); }
+  .add-modal-btns { display:flex; gap:8px; justify-content:flex-end; }
+  .add-modal-cancel {
+    background:none; border:1px solid var(--border); border-radius:6px;
+    padding:8px 16px; font-family:'Lato',sans-serif; font-size:0.84rem; cursor:pointer; color:var(--muted);
+  }
+  .add-modal-confirm {
+    background:var(--green); color:#fff; border:none; border-radius:6px;
+    padding:8px 16px; font-family:'Lato',sans-serif; font-size:0.84rem; font-weight:700; cursor:pointer;
+  }
+
+  .loading-msg { text-align:center; padding:40px; color:var(--muted); font-size:0.9rem; }
+  .no-results { text-align:center; padding:32px; color:var(--muted); font-size:0.88rem; font-style:italic; }
+
+  @media(max-width:480px) {
+    .villager-grid { grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:8px; }
+    .vcard-img-wrap { height:84px; }
+    .vcard-img { width:60px; height:60px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">🌸 Home</a>
+  <a href="index.html#daily">✅ Daily</a>
+  <a href="index.html#progress">🌱 Progress</a>
+  <a href="index.html#calendar">🗓️ Calendar</a>
+  <a href="villagers.html" class="active">🏘️ Villagers</a>
+  <a href="index.html#flowers">🌸 Flowers</a>
+  <a href="index.html#wishlist">🏡 Wishlist</a>
+  <a href="index.html#wiki-pages">📚 Wiki</a>
+  <a href="critters.html">🦋 Critters</a>
+  <a href="https://wuffs.org/acnh/weather/" target="_blank" rel="noopener">🌦️ Weather</a>
+  <a href="https://github.com/knockedover10/knockedover-acnh-wiki" target="_blank" rel="noopener">⚙️ GitHub</a>
+</nav>
+
+<div class="page-header">
+  <h1>🏘️ Villagers</h1>
+  <p>Hikari @ Hanamori · Search all 413 villagers · Track your island residents</p>
+</div>
+
+<div class="container">
+
+  <!-- ── ISLAND ROSTER ── -->
+  <div class="section-title">🏡 Hanamori Residents</div>
+  <div class="island-actions">
+    <button class="roster-add-btn" id="roster-add-btn">+ Add Villager</button>
+  </div>
+  <div class="roster-grid" id="roster-grid">
+    <div class="loading-msg">Loading residents...</div>
+  </div>
+
+  <!-- ── SEARCH ── -->
+  <div class="section-title">🔍 Search All Villagers</div>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="search-input" type="text" placeholder="Search by name (e.g. Cherry, Zucker, Raymond...)">
+    <button class="search-clear" id="search-clear">×</button>
+  </div>
+  <div class="filter-row">
+    <select class="filter-select" id="filter-personality">
+      <option value="">All Personalities</option>
+      <option>Cranky</option><option>Big Sister</option><option>Jock</option>
+      <option>Lazy</option><option>Normal</option><option>Peppy</option>
+      <option>Smug</option><option>Snooty</option>
+    </select>
+    <select class="filter-select" id="filter-species">
+      <option value="">All Species</option>
+    </select>
+    <button class="filter-btn" id="filter-island" title="Show only your islanders">🏝️ My Island</button>
+  </div>
+  <div class="result-count" id="result-count"></div>
+
+  <!-- ── VILLAGER GRID ── -->
+  <div id="loading-msg" class="loading-msg">Loading villager data...</div>
+  <div class="villager-grid" id="villager-grid" style="display:none"></div>
+  <div id="no-results" class="no-results" style="display:none">No villagers found. Try a different search.</div>
+
+</div>
+
+<!-- VILLAGER DETAIL MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="modal">
+    <div class="modal-header" id="modal-header">
+      <img class="modal-face" id="modal-face" src="" alt="">
+      <div class="modal-title">
+        <h2 id="modal-name"></h2>
+        <p id="modal-subtitle"></p>
+      </div>
+      <button class="modal-close" id="modal-close">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-photo-wrap">
+        <img class="modal-photo" id="modal-photo" src="" alt="">
+      </div>
+      <table class="stat-table" id="modal-stats"></table>
+      <div class="modal-section-title">🪴 Furniture</div>
+      <div class="furniture-chips" id="modal-furniture"></div>
+      <div class="modal-section-title" id="modal-island-section" style="display:none">🏡 On Your Island</div>
+      <div id="modal-island-info"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ADD TO ISLAND MODAL -->
+<div class="add-modal" id="add-modal">
+  <div class="add-modal-box">
+    <div class="add-modal-title" id="add-modal-title">Add Villager to Island</div>
+    <label class="add-modal-label">Date moved in</label>
+    <input class="add-modal-input" id="add-modal-date" type="date">
+    <label class="add-modal-label">Notes (optional)</label>
+    <input class="add-modal-input" id="add-modal-notes" type="text" placeholder="e.g. From mystery island, love her!">
+    <div class="add-modal-btns">
+      <button class="add-modal-cancel" id="add-modal-cancel">Cancel</button>
+      <button class="add-modal-confirm" id="add-modal-confirm">Add to Island</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── localStorage helpers ──
+const LS = {
+  get(k, def) { try { const v = localStorage.getItem(k); return v !== null ? JSON.parse(v) : def; } catch { return def; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+};
+
+// ── State ──
+let ALL_VILLAGERS = [];
+let filteredVillagers = [];
+let currentVillager = null;
+let addingVillagerName = null;
+const DATA_URL = 'https://raw.githubusercontent.com/Norviah/animal-crossing/master/json/data/Villagers.json';
+
+// ── Roster ──
+function getRoster() { return LS.get('hanamori_v2_roster', {}); }
+function isOnIsland(name) {
+  const r = getRoster();
+  return r[name] && !r[name].movedOut;
+}
+
+// ── Render Roster ──
+function renderRoster() {
+  const roster = getRoster();
+  const grid = document.getElementById('roster-grid');
+  const entries = Object.entries(roster).filter(([,v]) => !v.movedOut);
+  const past = Object.entries(roster).filter(([,v]) => v.movedOut);
+
+  if (!ALL_VILLAGERS.length) { grid.innerHTML = '<div class="loading-msg">Loading...</div>'; return; }
+
+  grid.innerHTML = '';
+  if (!entries.length && !past.length) {
+    grid.innerHTML = '<p style="color:var(--muted);font-size:0.84rem;font-style:italic">No villagers added yet. Click "+ Add Villager" to get started.</p>';
+    return;
+  }
+
+  [...entries, ...past].forEach(([name, data]) => {
+    const vd = ALL_VILLAGERS.find(v => v.name === name);
+    const card = document.createElement('div');
+    card.className = 'roster-card' + (data.movedOut ? ' moved-out' : '');
+    const img = vd ? `<img class="roster-face" src="${vd.iconImage}" alt="${name}" onerror="this.style.display='none'">` : `<div class="roster-face" style="background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:1.4rem">🐾</div>`;
+    card.innerHTML = `
+      ${img}
+      <div class="roster-info">
+        <div class="roster-name">${name}</div>
+        <div class="roster-sub">${vd ? vd.species + ' · ' + vd.personality : ''}</div>
+        <div class="roster-date">${data.movedOut ? '🚪 Moved out ' + data.movedOutDate : '📅 Since ' + (data.movedIn || '?')}</div>
+        ${data.notes ? `<div class="roster-date" style="color:var(--text)">${data.notes}</div>` : ''}
+      </div>
+      ${!data.movedOut ? `<button class="roster-out-btn" data-name="${name}">Moved out</button>` : ''}
+    `;
+    if (!data.movedOut) {
+      card.querySelector('.roster-out-btn').addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (!confirm(name + ' moved out?')) return;
+        const r = getRoster();
+        r[name].movedOut = true;
+        r[name].movedOutDate = new Date().toLocaleDateString('en-GB');
+        LS.set('hanamori_v2_roster', r);
+        renderRoster(); renderGrid();
+      });
+    }
+    card.addEventListener('click', () => openModal(name));
+    grid.appendChild(card);
+  });
+}
+
+// ── Render Grid ──
+function renderGrid() {
+  const grid = document.getElementById('villager-grid');
+  const noRes = document.getElementById('no-results');
+  const count = document.getElementById('result-count');
+  grid.innerHTML = '';
+  if (!filteredVillagers.length) {
+    grid.style.display = 'none';
+    noRes.style.display = 'block';
+    count.textContent = '';
+    return;
+  }
+  noRes.style.display = 'none';
+  grid.style.display = 'grid';
+  count.textContent = `Showing ${filteredVillagers.length} of ${ALL_VILLAGERS.length} villagers`;
+  filteredVillagers.forEach(v => {
+    const onIsland = isOnIsland(v.name);
+    const card = document.createElement('div');
+    card.className = 'vcard' + (onIsland ? ' on-island' : '');
+    card.innerHTML = `
+      <div class="vcard-img-wrap">
+        <img class="vcard-img" src="${v.iconImage}" alt="${v.name}" loading="lazy" onerror="this.src='';this.parentElement.innerHTML='<span style=font-size:2rem>🐾</span>'">
+      </div>
+      <div class="vcard-name-bar">${v.name}</div>
+      <div class="vcard-sub">${v.species}<br>${v.personality}
+        ${onIsland ? '<br><span class="vcard-island-badge">🏝️ On Island</span>' : ''}
+      </div>
+    `;
+    card.addEventListener('click', () => openModal(v.name));
+    grid.appendChild(card);
+  });
+}
+
+// ── Filter ──
+function applyFilters() {
+  const q = document.getElementById('search-input').value.trim().toLowerCase();
+  const pers = document.getElementById('filter-personality').value;
+  const spec = document.getElementById('filter-species').value;
+  const islandOnly = document.getElementById('filter-island').classList.contains('active');
+
+  filteredVillagers = ALL_VILLAGERS.filter(v => {
+    if (q && !v.name.toLowerCase().includes(q)) return false;
+    if (pers && v.personality !== pers) return false;
+    if (spec && v.species !== spec) return false;
+    if (islandOnly && !isOnIsland(v.name)) return false;
+    return true;
+  });
+  renderGrid();
+  document.getElementById('search-clear').style.display = q ? 'block' : 'none';
+}
+
+// ── Open Modal ──
+function openModal(name) {
+  const v = ALL_VILLAGERS.find(x => x.name === name);
+  if (!v) return;
+  currentVillager = v;
+  const roster = getRoster();
+  const onIsland = isOnIsland(name);
+
+  document.getElementById('modal-face').src = v.iconImage;
+  document.getElementById('modal-face').alt = name;
+  document.getElementById('modal-photo').src = v.photoImage || v.iconImage;
+  document.getElementById('modal-name').textContent = name;
+  document.getElementById('modal-subtitle').textContent = v.species + ' · ' + v.personality;
+
+  // header bubble color
+  const header = document.getElementById('modal-header');
+  header.style.background = v.bubbleColor && v.bubbleColor !== '#ffffff' ? v.bubbleColor : 'var(--charcoal)';
+
+  // stats
+  const stats = [
+    ['Birthday', v.birthday],
+    ['Catchphrase', v.catchphrase ? `"${v.catchphrase}"` : '—'],
+    ['Gender', v.gender],
+    ['Hobby', v.hobby],
+    ['Fav Colours', v.colors ? v.colors.join(', ') : '—'],
+    ['Fav Styles', v.styles ? v.styles.join(', ') : '—'],
+    ['Fav Song', v.favoriteSong || '—'],
+    ['Saying', v.favoriteSaying || '—'],
+    ['Umbrella', v.defaultUmbrella || '—'],
+    ['Clothing', v.defaultClothing || '—'],
+    ['Wallpaper', v.wallpaper || '—'],
+    ['Flooring', v.flooring || '—'],
+  ];
+  document.getElementById('modal-stats').innerHTML = stats
+    .map(([k, val]) => `<tr><td>${k}</td><td>${val}</td></tr>`).join('');
+
+  // furniture
+  const furn = v.furnitureNameList || [];
+  document.getElementById('modal-furniture').innerHTML = furn.length
+    ? furn.map(f => `<span class="chip">${f}</span>`).join('')
+    : '<span style="color:var(--muted);font-size:0.82rem;font-style:italic">None listed</span>';
+
+  // island section
+  const islandSec = document.getElementById('modal-island-section');
+  const islandInfo = document.getElementById('modal-island-info');
+  if (onIsland) {
+    islandSec.style.display = 'block';
+    const data = roster[name];
+    islandInfo.innerHTML = `
+      <table class="stat-table">
+        <tr><td>Moved in</td><td>${data.movedIn || '?'}</td></tr>
+        ${data.notes ? `<tr><td>Notes</td><td>${data.notes}</td></tr>` : ''}
+      </table>
+      <button style="margin-top:4px;background:none;border:1px solid var(--red);color:var(--red);border-radius:6px;padding:6px 12px;font-family:Lato,sans-serif;font-size:0.8rem;cursor:pointer" onclick="markMovedOut('${name}')">Mark as moved out</button>
+    `;
+  } else {
+    islandSec.style.display = 'block';
+    islandInfo.innerHTML = `<button style="background:var(--green);color:#fff;border:none;border-radius:6px;padding:8px 14px;font-family:Lato,sans-serif;font-size:0.84rem;font-weight:700;cursor:pointer" onclick="openAddModal('${name}')">+ Add to Island</button>`;
+  }
+
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function markMovedOut(name) {
+  if (!confirm(name + ' moved out?')) return;
+  const r = getRoster();
+  if (r[name]) {
+    r[name].movedOut = true;
+    r[name].movedOutDate = new Date().toLocaleDateString('en-GB');
+    LS.set('hanamori_v2_roster', r);
+  }
+  closeModal();
+  renderRoster(); renderGrid();
+}
+
+// ── Add to Island Modal ──
+function openAddModal(name) {
+  addingVillagerName = name;
+  document.getElementById('add-modal-title').textContent = 'Add ' + name + ' to Island';
+  document.getElementById('add-modal-date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('add-modal-notes').value = '';
+  closeModal();
+  document.getElementById('add-modal').classList.add('open');
+}
+
+document.getElementById('add-modal-cancel').addEventListener('click', () => {
+  document.getElementById('add-modal').classList.remove('open');
+});
+document.getElementById('add-modal-confirm').addEventListener('click', () => {
+  const name = addingVillagerName;
+  if (!name) return;
+  const dateVal = document.getElementById('add-modal-date').value;
+  const notes = document.getElementById('add-modal-notes').value.trim();
+  const movedInDate = dateVal ? new Date(dateVal).toLocaleDateString('en-GB') : new Date().toLocaleDateString('en-GB');
+  const r = getRoster();
+  r[name] = { movedIn: movedInDate, notes, movedOut: false };
+  LS.set('hanamori_v2_roster', r);
+  document.getElementById('add-modal').classList.remove('open');
+  renderRoster(); renderGrid();
+});
+
+// Roster "Add Villager" button — open a search to find who to add
+document.getElementById('roster-add-btn').addEventListener('click', () => {
+  document.getElementById('search-input').focus();
+  document.getElementById('search-input').scrollIntoView({ behavior:'smooth' });
+});
+
+// ── Species filter population ──
+function populateSpecies() {
+  const species = [...new Set(ALL_VILLAGERS.map(v => v.species))].sort();
+  const sel = document.getElementById('filter-species');
+  species.forEach(s => {
+    const opt = document.createElement('option'); opt.value = s; opt.textContent = s;
+    sel.appendChild(opt);
+  });
+}
+
+// ── Events ──
+document.getElementById('search-input').addEventListener('input', applyFilters);
+document.getElementById('search-clear').addEventListener('click', () => {
+  document.getElementById('search-input').value = '';
+  document.getElementById('search-clear').style.display = 'none';
+  applyFilters();
+});
+document.getElementById('filter-personality').addEventListener('change', applyFilters);
+document.getElementById('filter-species').addEventListener('change', applyFilters);
+document.getElementById('filter-island').addEventListener('click', function() {
+  this.classList.toggle('active'); applyFilters();
+});
+document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── Load Data ──
+fetch(DATA_URL)
+  .then(r => r.json())
+  .then(data => {
+    ALL_VILLAGERS = data.sort((a, b) => a.name.localeCompare(b.name));
+    document.getElementById('loading-msg').style.display = 'none';
+    filteredVillagers = [...ALL_VILLAGERS];
+    populateSpecies();
+    renderGrid();
+    renderRoster();
+  })
+  .catch(() => {
+    document.getElementById('loading-msg').textContent = 'Failed to load villager data. Check your connection and refresh.';
+  });
+</script>
+</body>
+</html>
