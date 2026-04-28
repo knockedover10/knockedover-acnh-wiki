@@ -8,21 +8,12 @@ Chill only lol.
 
 ---
 
-## 🕹️ Dashboard
-
-> **[🗂 Open Interactive Dashboard](https://knockedover10.github.io/knockedover-acnh-wiki/dashboard.html)** — 3-star checklist, progress tracker, critter tracker, villager lookup, recipe finder, and more.
->
-> **[🦋 Interactive Critter Tracker](https://knockedover10.github.io/knockedover-acnh-wiki/critters.html)** — filter by month/location, sort, track caught & donated.
-
----
-
 ## 🔔 Recent Updates
 
 - **22/04/2026** — [🌸 Flowers & Breeding](wiki/flowers-and-breeding.md) — new page: all 8 species, probabilities, layout guide, isolation cheat sheet, FAQs (running/picking questions)
 - **22/04/2026** — [🌿 Trees & Nature](wiki/trees-and-nature.md) — added Money Trees section (gold spot mechanics, odds, 10,000-Bell strategy) and Tree Shaking section (daily limits, fruit-power clarification)
 - **18/04/2026** — [🏨 Villagers](wiki/villagers.md) — villager hunting strategy: RNG mechanics, per-species odds, Hanamori tips, rehoming Axel
 - **18/04/2026** — [🖥️ Critter Tracker](https://knockedover10.github.io/knockedover-acnh-wiki/critters.html) — interactive page: filter, sort, caught/donated checkboxes, critter images
-- **18/04/2026** — [🗂 Dashboard](https://knockedover10.github.io/knockedover-acnh-wiki/dashboard.html) — renamed, sticky nav, Nookipedia integration, collectibles tracker, Spontaneous Thoughts
 
 > Full history → [📋 Changelog](wiki/changelog.md)
 
