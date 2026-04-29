@@ -1,0 +1,329 @@
+{
+  "hanamori_critters_v1": {
+    "fish__Dace": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Crucian carp": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Horse mackerel": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Tadpole": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Black bass": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Sea horse": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Butterfly fish": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Cherry salmon": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Surgeonfish": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Olive flounder": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Clown fish": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Neon tetra": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Anchovy": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Bluegill": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Crawfish": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Pale chub": {
+      "caught": true
+    },
+    "fish__Carp": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Dab": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Loach": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Sea bass": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Squid": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Zebra turkeyfish": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Goldfish": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Guppy": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Red snapper": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Koi": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Barred knifejaw": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Tuna": {
+      "caught": true,
+      "donated": true
+    },
+    "fish__Coelacanth": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Stinkbug": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Moth": {
+      "donated": true,
+      "caught": true
+    },
+    "bugs__Common butterfly": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Yellow butterfly": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Honeybee": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Ladybug": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Long locust": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Wharf roach": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Darner dragonfly": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Tiger butterfly": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Pill bug": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Snail": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Centipede": {
+      "caught": false,
+      "donated": false
+    },
+    "bugs__Common bluebottle": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Mantis": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Bagworm": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Spider": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Hermit crab": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Man-faced stink bug": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Paper kite butterfly": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Tiger beetle": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Giant water bug": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Orchid mantis": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Madagascan sunset moth": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Wasp": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Tarantula": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Atlas moth": {
+      "caught": true,
+      "donated": true
+    },
+    "bugs__Agrias butterfly": {
+      "caught": true,
+      "donated": true
+    },
+    "sea__Acorn barnacle": {
+      "caught": true,
+      "donated": true
+    },
+    "sea__Chambered nautilus": {
+      "caught": true,
+      "donated": true
+    },
+    "sea__Dungeness crab": {
+      "caught": true,
+      "donated": true
+    },
+    "sea__Lobster": {
+      "caught": true,
+      "donated": true
+    },
+    "sea__Mantis shrimp": {
+      "caught": true,
+      "donated": true
+    },
+    "sea__Pearl oyster": {
+      "caught": true,
+      "donated": true
+    },
+    "sea__Scallop": {
+      "caught": false,
+      "donated": false
+    },
+    "sea__Sea anemone": {
+      "caught": true,
+      "donated": true
+    },
+    "sea__Sea cucumber": {
+      "caught": true,
+      "donated": true
+    },
+    "sea__Sea pineapple": {
+      "caught": true,
+      "donated": true
+    },
+    "sea__Sea slug": {
+      "caught": true,
+      "donated": true
+    },
+    "sea__Sea star": {
+      "caught": true,
+      "donated": true
+    },
+    "sea__Seaweed": {
+      "caught": true,
+      "donated": true
+    },
+    "sea__Turban shell": {
+      "caught": true,
+      "donated": true
+    },
+    "sea__Umbrella octopus": {
+      "caught": true,
+      "donated": true
+    },
+    "sea__Whelk": {
+      "caught": true,
+      "donated": true
+    },
+    "sea__Octopus": {
+      "caught": true,
+      "donated": true
+    }
+  },
+  "hanamori_flowers": [
+    {
+      "species": "Hyacinth",
+      "p1": "Red",
+      "p2": "White",
+      "result": "Pink",
+      "watered": false
+    }
+  ],
+  "hanamori_progress": {
+    "prog_Blathers arrived (museum tent)": true,
+    "prog_Nook's Cranny opened": true,
+    "prog_Mable visited (first time)": true,
+    "prog_Able Sisters opened": true,
+    "prog_Resident Services upgraded (building)": true,
+    "prog_Campsite built": true,
+    "prog_Museum building opened (donated 15 critters)": true,
+    "prog_Art wing opened (donated first artwork)": true,
+    "prog_Bamboo grove planted": false,
+    "prog_3-star island rating achieved": true,
+    "prog_K.K. Slider performed (first concert)": true,
+    "prog_Terraforming unlocked (Island Designer)": true,
+    "prog_Hybrid flowers started": true
+  },
+  "hanamori_daily": {
+    "_date": "2026-4-30"
+  },
+  "hanamori_log_days": [
+    "2026-04-30"
+  ]
+}
