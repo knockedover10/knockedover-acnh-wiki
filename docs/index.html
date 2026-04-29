@@ -1555,16 +1555,87 @@ function initNotes() {
   const encEmpty = document.getElementById('enc-empty');
 
   const ACNH_NPCS = [
-    'Able Sisters (Mabel)','Able Sisters (Sable)','Able Sisters (Label)',
-    'Blathers','Brewster','C.J.','Celeste','Daisy Mae','Flick',
-    'Gullivarrr','Gulliver','Harvey','Isabelle',
-    'Jack','K.K. Slider','Kapp n','Kicks','Label','Leif','Luna',
-    'Mabel','Pascal','Redd','Reese','Sable','Saharah',
-    'Serena','Shrunk','Timmy','Tom Nook','Tommy',
-    'Wendell','Wisp','Zipper T. Bunny',
-    // Also allow free-type villager names
-    'Cherry','Nibbles','Bettina','Axel','Quillson','Stu','T-Bone','Astrid','Goose',
-  ].sort();
+    "Ace","Admiral","Agent S","Agnes","Al","Alfonso",
+    "Alice","Alli","Amelia","Anabelle","Anchovy","Angus",
+    "Anicotti","Ankha","Annalisa","Annalise","Antonio","Apollo",
+    "Apple","Astrid","Audie","Aurora","Ava","Avery",
+    "Axel","Azalea","Baabara","Bam","Bangle","Barold",
+    "Bea","Beardo","Beau","Becky","Bella","Benedict",
+    "Benjamin","Bertha","Bettina","Bianca","Biff","Big Top",
+    "Bill","Billy","Biskit","Bitty","Blaire","Blanca",
+    "Blanche","Blathers","Bluebear","Bob","Bonbon","Bones",
+    "Booker","Boomer","Boone","Boots","Boris","Boyd",
+    "Bree","Brewster","Broccolo","Broffina","Bruce","Bubbles",
+    "Buck","Bud","Bunnie","Butch","Buzz","C.J.",
+    "Cally","Camofrog","Canberra","Candi","Carmen","Caroline",
+    "Carrie","Cashmere","Celeste","Celia","Cephalobot","Cesar",
+    "Chabwick","Chadder","Chai","Charlise","Chelsea","Cheri",
+    "Cherry","Chester","Chevre","Chief","Chip","Chops",
+    "Chow","Chrissy","Claude","Claudia","Clay","Cleo",
+    "Clyde","Coach","Cobb","Coco","Cole","Colton",
+    "Cookie","Copper","Cornimer","Cousteau","Cranston","Croque",
+    "Cube","Curlos","Curly","Curt","Cyd","Cyrano",
+    "Cyrus","DJ KK","Daisy","Daisy Mae","Deena","Deirdre",
+    "Del","Deli","Derwin","Diana","Digby","Diva",
+    "Dizzy","Dobie","Doc","Dom","Don Resetti","Dora",
+    "Dotty","Dr. Shrunk","Drago","Drake","Drift","Ed",
+    "Egbert","Elise","Ellie","Elmer","Eloise","Elvis",
+    "Erik","Eugene","Eunice","Faith","Fang","Fauna",
+    "Felicity","Filbert","Flick","Flip","Flo","Flora",
+    "Flurry","Francine","Frank","Franklin","Freckles","Frett",
+    "Freya","Friga","Frita","Frobert","Fuchsia","Gabi",
+    "Gala","Gaston","Gayle","Genji","Gigi","Gladys",
+    "Gloria","Goldie","Gonzo","Goose","Gracie","Graham",
+    "Grams","Greta","Grizzly","Groucho","Gruff","Gullivarrr",
+    "Gulliver","Gwen","Hamlet","Hamphrey","Hans","Harriet",
+    "Harry","Harvey","Hazel","Henry","Hippeux","Hopkins",
+    "Hopper","Hornsby","Huck","Hugh","Iggly","Ike",
+    "Ione","Isabelle","Jack","Jacob","Jacques","Jambette",
+    "Jay","Jeremiah","Jingle","Jitters","Joan","Joey",
+    "Judy","Julia","Julian","June","K.K. Slider","Kabuki",
+    "Kapp'n","Katrina","Katt","Keaton","Ken","Ketchup",
+    "Kevin","Kicks","Kid Cat","Kidd","Kiki","Kitt",
+    "Kitty","Klaus","Knox","Kody","Kyle","Label",
+    "Leif","Leonardo","Leopold","Lily","Limberg","Lionel",
+    "Lloid","Lobo","Lolly","Lopez","Lottie","Louie",
+    "Lucha","Lucky","Lucy","Luna","Lyle","Lyman",
+    "Mabel","Mac","Maddie","Maelle","Maggie","Mallary",
+    "Maple","Marcel","Marcie","Margie","Marina","Marlo",
+    "Marshal","Marty","Mathilda","Megan","Melba","Merengue",
+    "Merry","Midge","Mint","Mira","Miranda","Mitzi",
+    "Moe","Molly","Monique","Monty","Moose","Mott",
+    "Muffy","Murphy","Nan","Nana","Naomi","Nat",
+    "Nate","Nibbles","Niko","Norma","O'Hare","Octavian",
+    "Olaf","Olive","Olivia","Opal","Orville","Ozzie",
+    "Pancetti","Pango","Paolo","Papi","Pascal","Pashmina",
+    "Pate","Patty","Paula","Pavé","Peaches","Peanut",
+    "Pecan","Peck","Peewee","Peggy","Pekoe","Pelly",
+    "Penelope","Pete","Petri","Phil","Phineas","Phoebe",
+    "Pierce","Pietro","Pinky","Piper","Pippy","Plucky",
+    "Pompom","Poncho","Poppy","Portia","Prince","Puck",
+    "Puddles","Pudge","Punchy","Purrl","Queenie","Quillson",
+    "Quinn","Raddle","Rasher","Raymond","Redd","Reese",
+    "Ren\\u00e9e","Reneigh","Rex","Rhonda","Ribbot","Ricky",
+    "Rilla","Rio","Rizzo","Roald","Robin","Rocco",
+    "Rocket","Rod","Rodeo","Rodney","Rolf","Rooney",
+    "Rory","Roscoe","Rosie","Roswell","Rover","Rowan",
+    "Ruby","Rudy","Sable","Saharah","Sally","Samson",
+    "Sandy","Sasha","Savannah","Scoot","Shari","Sheldon",
+    "Shep","Sherb","Shino","Shrunk","Simon","Skye",
+    "Sly","Snake","Snooty","Snowboy","Soleil","Sparro",
+    "Spike","Spork","Sprinkle","Sprocket","Static","Stella",
+    "Sterling","Stinky","Stitches","Stu","Sydney","Sylvana",
+    "Sylvia","T-Bone","Tabby","Tad","Tammi","Tammy",
+    "Tangy","Tank","Tasha","Teddy","Tex","Tia",
+    "Tiansheng","Tiffany","Timbra","Timmy","Timmy & Tommy","Tipper",
+    "Toby","Tom","Tom Nook","Tommy","Tortimer","Truffles",
+    "Tucker","Tutu","Twiggy","Tybalt","Ursala","Velma",
+    "Vesta","Vic","Victoria","Violet","Vivian","Vladimir",
+    "Wade","Walker","Walt","Wardell","Wart Jr.","Weber",
+    "Wendy","Whitney","Wilbur","Willow","Winnie","Wisp",
+    "Wolfgang","Yuka","Zell","Zipper T. Bunny","Zoe","Zucker",
+    "\u00c9toile",
+  ];
 
   const encNameInput = document.getElementById('enc-name');
   const encDropdown = document.getElementById('enc-dropdown');
@@ -1575,7 +1646,7 @@ function initNotes() {
     encDropdown.innerHTML = '';
     encHighlight = -1;
     if (!matches.length) { encDropdown.classList.remove('open'); return; }
-    matches.slice(0,12).forEach((name, i) => {
+    matches.slice(0,20).forEach((name, i) => {
       const opt = document.createElement('div');
       opt.className = 'enc-opt';
       opt.textContent = name;
@@ -1659,7 +1730,6 @@ function initNotes() {
   renderEncounters();
 
   // — Daily Log —
-  const formatDate = (k) => { const p=k.split('-'); return p[2]+'/'+p[1]+'/'+p[0]; };
   const logSummaryKey = 'hanamori_log_summary_' + todayKey;
   const logEntriesKey = 'hanamori_log_entries_' + todayKey;
   const logAllDays = 'hanamori_log_days';
