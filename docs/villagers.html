@@ -614,6 +614,27 @@ document.getElementById('modal-overlay').addEventListener('click', function(e) {
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
+// ── Pre-populate Hanamori residents if roster is empty ──
+(function seedRoster() {
+  const r = getRoster();
+  const defaults = [
+    { name: 'Cherry',   movedIn: '17/04/2026', notes: 'Starter villager' },
+    { name: 'Axel',     movedIn: '17/04/2026', notes: 'Starter villager' },
+    { name: 'Nibbles',  movedIn: '25/04/2026', notes: '' },
+    { name: 'Bettina',  movedIn: '25/04/2026', notes: '' },
+    { name: 'Quillson', movedIn: '25/04/2026', notes: '' },
+    { name: 'Stu',      movedIn: '25/04/2026', notes: '' },
+    { name: 'T-Bone',   movedIn: '26/04/2026', notes: '' },
+    { name: 'Astrid',   movedIn: '26/04/2026', notes: '' },
+    { name: 'Goose',    movedIn: '29/04/2026', notes: 'Randomly came' },
+  ];
+  let changed = false;
+  defaults.forEach(d => {
+    if (!r[d.name]) { r[d.name] = { movedIn: d.movedIn, notes: d.notes, movedOut: false }; changed = true; }
+  });
+  if (changed) LS.set('hanamori_v2_roster', r);
+})();
+
 // ── Load Data ──
 fetch(DATA_URL)
   .then(r => r.json())
@@ -624,6 +645,13 @@ fetch(DATA_URL)
     populateSpecies();
     renderGrid();
     renderRoster();
+    // Auto-open villager modal if ?v=Name in URL
+    const params = new URLSearchParams(window.location.search);
+    const vParam = params.get('v');
+    if (vParam) {
+      const match = ALL_VILLAGERS.find(v => v.name.toLowerCase() === vParam.toLowerCase());
+      if (match) openModal(match);
+    }
   })
   .catch(() => {
     document.getElementById('loading-msg').textContent = 'Failed to load villager data. Check your connection and refresh.';

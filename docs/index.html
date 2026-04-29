@@ -542,7 +542,7 @@
   <p class="hero-sub">Animal Crossing: New Horizons · Personal Wiki</p>
   <div class="hero-divider"></div>
   <div class="hero-badges">
-    <span class="badge">👥 8 / 10 Villagers</span>
+    <span class="badge">👥 9 / 10 Villagers</span>
     <span class="badge">🦋 Critters: Apr leaving soon</span>
     <span class="badge">🌿 Bamboo planted</span>
     <span class="badge">🏛️ Museum in progress</span>
@@ -591,8 +591,8 @@
       <div class="snap-item"><span class="snap-label">Island Name</span><span class="snap-value">Hanamori 🌸</span></div>
       <div class="snap-item"><span class="snap-label">Theme</span><span class="snap-value">Traditional Japanese</span></div>
       <div class="snap-item"><span class="snap-label">Stage</span><span class="snap-value status-early">Early Game</span></div>
-      <div class="snap-item"><span class="snap-label">Villagers</span><span class="snap-value">8 / 10</span></div>
-      <div class="snap-item"><span class="snap-label">Residents</span><span class="snap-value" style="font-size:.9rem">Cherry · Nibbles · Bettina · Axel · Quillson · Stu · T-Bone · Astrid</span></div>
+      <div class="snap-item"><span class="snap-label">Villagers</span><span class="snap-value">9 / 10</span></div>
+      <div class="snap-item"><span class="snap-label">Residents</span><span class="snap-value" style="font-size:.9rem">Cherry · Nibbles · Bettina · Axel · Quillson · Stu · T-Bone · Astrid · Goose</span></div>
       <div class="snap-item"><span class="snap-label">Island Rating</span><span class="snap-value status-early">Not yet rated</span></div>
       <div class="snap-item"><span class="snap-label">K.K. Slider</span><span class="snap-value status-done">✅ Performed</span></div>
     </div>
@@ -642,12 +642,6 @@
   </section>
 
   <!-- ══ VILLAGER NOTES ══ -->
-  <section id="villagers">
-    <h2 class="section-title"><span class="icon">🏘️</span> Villager Notes</h2>
-    <div class="villager-bday-alert" id="villager-bday-alert"></div>
-    <div class="villager-grid" id="villager-grid"></div>
-  </section>
-
   <!-- ══ FLOWER BREEDING TRACKER ══ -->
   <section id="flowers">
     <h2 class="section-title"><span class="icon">🌸</span> Flower Breeding Tracker</h2>
@@ -1055,7 +1049,9 @@ function renderVillagerCards() {
     const card = document.createElement('div');
     card.className = 'vc-card';
     card.innerHTML = `
-      <img src="${imgUrl}" alt="${v.name}" onerror="this.style.opacity=0.3">
+      <a href="villagers.html?v=${encodeURIComponent(v.name)}" style="display:block;text-decoration:none">
+        <img src="${imgUrl}" alt="${v.name}" onerror="this.style.opacity=0.3" style="cursor:pointer">
+      </a>
       <div class="vc-name">${v.name}</div>
       <div class="vc-btns">
         <button class="vc-btn${saved[gKey] ? ' active' : ''}" title="Gifted" data-key="${gKey}">🎁</button>
@@ -1625,44 +1621,24 @@ const VILLAGERS = [
     hobby:'Music', gift:'Black or colourful active/cool clothing — sporty jackets, cool accessories',
     fact:'White kangaroo with a star design around one eye. Snooty but warms up over time. Cares deeply about star signs. Has a joey in her pouch. Birthday: 8 Sep.'
   },
+  {
+    name:'Goose', emoji:'🐔', type:'Chicken · Jock',
+    birthday:'4 Oct', bdayMMDD:'10-04', catchphrase:'buh-kay',
+    colours:'Blue, White', styles:'Active, Simple',
+    hobby:'Fitness', gift:'Blue or white sporty/active clothing — track jackets, athletic gear',
+    fact:'Energetic and always on the move. Goes to bed early, wakes up early. Loves fitness and working out. Birthday: 4 Oct.'
+  },
 ];
 
 function initVillagers() {
-  const saved = LS.get('hanamori_villager_notes', {});
-  const grid = document.getElementById('villager-grid');
-  const alert = document.getElementById('villager-bday-alert');
+  // Birthday alert only — Villager Notes section moved to villagers.html
   const todayMMDD = (()=>{ const d=new Date(); return String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); })();
   const bdayToday = VILLAGERS.filter(v => v.bdayMMDD === todayMMDD);
-  if (bdayToday.length) {
-    alert.style.display = 'block';
-    alert.textContent = '🎂 Today is ' + bdayToday.map(v => v.name + '\'s birthday!').join(' & ') + ' Go wish them well and bring a gift!';
+  const alertEl = document.getElementById('villager-bday-banner');
+  if (bdayToday.length && alertEl) {
+    alertEl.style.display = 'block';
+    alertEl.textContent = '🎂 Today is ' + bdayToday.map(v => v.name + '\'s birthday!').join(' & ') + ' Go wish them well and bring a gift!';
   }
-  VILLAGERS.forEach(v => {
-    const isBday = v.bdayMMDD === todayMMDD;
-    const card = document.createElement('div');
-    card.className = 'villager-card' + (isBday ? ' is-birthday' : '');
-    card.innerHTML = `
-      <div class="villager-card-head">
-        <span class="villager-emoji">${v.emoji}${isBday?' 🎂':''}</span>
-        <div><div class="villager-name">${v.name}</div><div class="villager-type">${v.type}</div></div>
-      </div>
-      <div class="villager-facts">
-        <span><span class="fact-label">Birthday:</span> ${v.birthday}</span>
-        <span><span class="fact-label">Catchphrase:</span> "${v.catchphrase}"</span>
-        <span><span class="fact-label">Fav colours:</span> ${v.colours}</span>
-        <span><span class="fact-label">Fav styles:</span> ${v.styles}</span>
-        <span><span class="fact-label">Hobby:</span> ${v.hobby}</span>
-        <span><span class="fact-label">Best gift:</span> ${v.gift}</span>
-        <span style="margin-top:4px;font-style:italic">${v.fact}</span>
-      </div>
-      <textarea class="villager-notes-input" placeholder="Your notes — gifts given, friendship level..." rows="2">${saved[v.name]||''}</textarea>`;
-    card.querySelector('textarea').addEventListener('input', function() {
-      const s = LS.get('hanamori_villager_notes', {});
-      s[v.name] = this.value;
-      LS.set('hanamori_villager_notes', s);
-    });
-    grid.appendChild(card);
-  });
 }
 
 // ══════════════════════════════════════════════════════
