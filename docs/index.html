@@ -823,6 +823,10 @@
 
 <!-- ── FOOTER ── -->
 <footer>
+  <div style="margin-bottom:12px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+    <button onclick="exportData()" style="background:var(--brown);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-family:'Lato',sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;">⬇️ Export my data</button>
+    <label style="background:var(--green);color:#fff;border-radius:8px;padding:8px 16px;font-size:0.82rem;font-weight:700;cursor:pointer;font-family:'Lato',sans-serif;">⬆️ Import data<input type="file" accept=".json" onchange="importData(event)" style="display:none;"></label>
+  </div>
   <span class="footer-island">🌸 花森 — Hanamori · Hikari's Island</span>
   <p>Animal Crossing: New Horizons · Northern Hemisphere · Traditional Japanese Theme</p>
   <p style="margin-top:8px;">
@@ -878,6 +882,42 @@ const LS = {
     if (typeof renderWishlist === 'function') renderWishlist();
   } catch(e) {}
 })();
+
+// ══════════════════════════════════════════════════════
+//  EXPORT / IMPORT
+// ══════════════════════════════════════════════════════
+function exportData() {
+  const data = {};
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (k.startsWith('hanamori')) {
+      try { data[k] = JSON.parse(localStorage.getItem(k)); } catch { data[k] = localStorage.getItem(k); }
+    }
+  }
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'hanamori-backup.json';
+  a.click();
+}
+
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    try {
+      const data = JSON.parse(e.target.result);
+      // Write each key to localStorage and Supabase
+      for (const [k, v] of Object.entries(data)) {
+        LS.set(k, v);
+      }
+      alert('Data imported! Refreshing...');
+      setTimeout(() => location.reload(), 800);
+    } catch { alert('Invalid file. Please use a hanamori-backup.json file.'); }
+  };
+  reader.readAsText(file);
+}
 
 
 // ══════════════════════════════════════════════════════
