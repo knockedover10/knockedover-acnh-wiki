@@ -515,6 +515,17 @@
   .daily-bar-track { flex: 1; height: 7px; background: var(--surface); border-radius: 10px; overflow: hidden; }
   .daily-bar-fill { height: 100%; background: var(--green); border-radius: 10px; transition: width 0.3s ease; }
   .daily-pct { font-size: 0.8rem; font-weight: 700; color: var(--green); min-width: 36px; text-align: right; }
+  /* Villager Interaction Cards */
+  .villager-interact-section { margin-top: 18px; }
+  .villager-interact-section h4 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+  .villager-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 10px; }
+  .vc-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 10px 6px 8px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+  .vc-card img { width: 52px; height: 52px; border-radius: 50%; background: var(--surface); object-fit: cover; }
+  .vc-name { font-size: 0.75rem; font-weight: 700; color: var(--text); }
+  .vc-btns { display: flex; gap: 4px; }
+  .vc-btn { font-size: 1rem; background: var(--surface); border: 1.5px solid var(--border); border-radius: 7px; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.15s, border-color 0.15s; }
+  .vc-btn.active { background: var(--green); border-color: var(--green); }
+  .vc-btn:active { transform: scale(0.92); }
 </style>
 </head>
 <body>
@@ -601,6 +612,11 @@
         <span class="daily-pct" id="daily-pct">0%</span>
       </div>
       <div id="daily-groups"></div>
+      <!-- Villager Interaction Card Grid -->
+      <div class="villager-interact-section">
+        <h4>🏘️ Villager Interaction</h4>
+        <div id="villager-cards-grid" class="villager-cards-grid"></div>
+      </div>
     </div>
   </section>
 
@@ -958,24 +974,7 @@ const DAILY_TASKS = [
     'Shake tree (wasp) 3 — net ready',
     'Shake tree (wasp) 4 — net ready',
   ]},
-  { group: '🏘️ Villager Interaction', items: [
-    'Talk to Cherry',
-    'Talk to Nibbles',
-    'Talk to Bettina',
-    'Talk to Axel',
-    'Talk to Quillson',
-    'Talk to Stu',
-    'Talk to T-Bone',
-    'Talk to Astrid',
-    'Gift Cherry',
-    'Gift Nibbles',
-    'Gift Bettina',
-    'Gift Axel',
-    'Gift Quillson',
-    'Gift Stu',
-    'Gift T-Bone',
-    'Gift Astrid',
-  ]},
+  // Villager Interaction is handled separately as a card grid — see renderVillagerCards()
   { group: '📌 Optional / As Needed', items: [
     'NMT island hopping for villager hunting',
     'Stalk Market — check AM and PM turnip prices',
@@ -997,6 +996,7 @@ function initDaily() {
   const resetEl = document.getElementById('daily-last-reset');
   if (resetEl) resetEl.textContent = todayKey;
   renderDaily();
+  renderVillagerCards();
 }
 
 function renderDaily() {
@@ -1028,13 +1028,69 @@ function renderDaily() {
   updateDailyBar();
 }
 
+// Villager interaction card grid
+const VILLAGERS_ROSTER = [
+  { name: 'Cherry',   filename: 'Dga14' },
+  { name: 'Nibbles',  filename: 'Squ12' },
+  { name: 'Bettina',  filename: 'Mus01' },
+  { name: 'Axel',     filename: 'Elp03' },
+  { name: 'Quillson', filename: 'Duk12' },
+  { name: 'Stu',      filename: 'Bul06' },
+  { name: 'T-Bone',   filename: 'Bul04' },
+  { name: 'Astrid',   filename: 'Kng04' },
+  { name: 'Goose',    filename: 'Chk08' },
+];
+
+function renderVillagerCards() {
+  const grid = document.getElementById('villager-cards-grid');
+  if (!grid) return;
+  const today = getTodayKey();
+  const saved = LS.get('hanamori_daily', {});
+  grid.innerHTML = '';
+  VILLAGERS_ROSTER.forEach(v => {
+    const gKey = 'vc_gift_' + today + '_' + v.name;
+    const cKey = 'vc_chat_' + today + '_' + v.name;
+    const dKey = 'vc_diy_'  + today + '_' + v.name;
+    const imgUrl = 'https://acnhcdn.com/latest/NpcIcon/' + v.filename + '.png';
+    const card = document.createElement('div');
+    card.className = 'vc-card';
+    card.innerHTML = `
+      <img src="${imgUrl}" alt="${v.name}" onerror="this.style.opacity=0.3">
+      <div class="vc-name">${v.name}</div>
+      <div class="vc-btns">
+        <button class="vc-btn${saved[gKey] ? ' active' : ''}" title="Gifted" data-key="${gKey}">🎁</button>
+        <button class="vc-btn${saved[cKey] ? ' active' : ''}" title="Chatted" data-key="${cKey}">🗣️</button>
+        <button class="vc-btn${saved[dKey] ? ' active' : ''}" title="Got DIY" data-key="${dKey}">🔧</button>
+      </div>`;
+    card.querySelectorAll('.vc-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const k = btn.dataset.key;
+        const s = LS.get('hanamori_daily', {});
+        s[k] = !s[k];
+        LS.set('hanamori_daily', s);
+        btn.classList.toggle('active', !!s[k]);
+        updateDailyBar();
+      });
+    });
+    grid.appendChild(card);
+  });
+}
+
 function updateDailyBar() {
   const saved = LS.get('hanamori_daily', {});
+  const today = getTodayKey();
   let total = 0, done = 0;
   DAILY_TASKS.forEach(g => g.items.forEach(item => {
     total++;
     if (saved['daily_' + item.replace(/\W/g, '_')]) done++;
   }));
+  // Count villager card buttons
+  VILLAGERS_ROSTER.forEach(v => {
+    ['gift','chat','diy'].forEach(t => {
+      total++;
+      if (saved['vc_' + t + '_' + today + '_' + v.name]) done++;
+    });
+  });
   const pct = total ? Math.round(done / total * 100) : 0;
   document.getElementById('daily-fill').style.width = pct + '%';
   document.getElementById('daily-pct').textContent = pct + '%';

@@ -109,4 +109,4 @@ Don't force him out before you have a replacement lined up — an empty plot can
 
 ---
 
-*Last updated: 27/04/2026 — Astrid moved in; roster now 8/10 (Cherry, Nibbles, Bettina, Axel, Quillson, Stu, T-Bone, Astrid)*
+*Last updated: 30/04/2026 — Goose moved in; roster now 9/10 (Cherry, Nibbles, Bettina, Axel, Quillson, Stu, T-Bone, Astrid, Goose)*

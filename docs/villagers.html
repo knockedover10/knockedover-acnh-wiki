@@ -202,7 +202,7 @@
     width:100%; min-width:0; border:1px solid var(--border); border-radius:6px;
     padding:9px 12px; font-family:'Lato',sans-serif; font-size:0.88rem;
     background:var(--bg); color:var(--text); outline:none; margin-bottom:14px;
-    box-sizing:border-box;
+    box-sizing:border-box; display:block; -webkit-appearance:none; appearance:none;
   }
   .add-modal-input:focus { border-color:var(--brown); }
   .add-modal-btns { display:flex; gap:8px; justify-content:flex-end; }
@@ -313,8 +313,8 @@
 <div class="add-modal" id="add-modal">
   <div class="add-modal-box">
     <div class="add-modal-title" id="add-modal-title">Add Villager to Island</div>
-    <label class="add-modal-label">Date moved in</label>
-    <input class="add-modal-input" id="add-modal-date" type="date">
+    <label class="add-modal-label">Date moved in (DD/MM/YYYY)</label>
+    <input class="add-modal-input" id="add-modal-date" type="text" placeholder="e.g. 30/04/2026" inputmode="numeric">
     <label class="add-modal-label">Notes (optional)</label>
     <input class="add-modal-input" id="add-modal-notes" type="text" placeholder="e.g. From mystery island, love her!">
     <div class="add-modal-btns">
@@ -557,7 +557,8 @@ function markMovedOut(name) {
 function openAddModal(name) {
   addingVillagerName = name;
   document.getElementById('add-modal-title').textContent = 'Add ' + name + ' to Island';
-  document.getElementById('add-modal-date').value = new Date().toISOString().split('T')[0];
+  const now = new Date(); const dd = String(now.getDate()).padStart(2,'0'); const mm = String(now.getMonth()+1).padStart(2,'0'); const yyyy = now.getFullYear();
+  document.getElementById('add-modal-date').value = dd + '/' + mm + '/' + yyyy;
   document.getElementById('add-modal-notes').value = '';
   closeModal();
   document.getElementById('add-modal').classList.add('open');
@@ -571,7 +572,7 @@ document.getElementById('add-modal-confirm').addEventListener('click', () => {
   if (!name) return;
   const dateVal = document.getElementById('add-modal-date').value;
   const notes = document.getElementById('add-modal-notes').value.trim();
-  const movedInDate = dateVal ? new Date(dateVal).toLocaleDateString('en-GB') : new Date().toLocaleDateString('en-GB');
+  const movedInDate = dateVal || new Date().toLocaleDateString('en-GB');
   const r = getRoster();
   r[name] = { movedIn: movedInDate, notes, movedOut: false };
   LS.set('hanamori_v2_roster', r);
