@@ -834,12 +834,50 @@
 
 <script>
 // ══════════════════════════════════════════════════════
-//  STORAGE HELPERS
+//  STORAGE HELPERS  (Supabase-backed, localStorage cache)
 // ══════════════════════════════════════════════════════
+const SUPABASE_URL = 'https://hhahvjzklungebwdmtlq.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhoYWh2anprbHVuZ2Vid2RtdGxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0ODIyNjksImV4cCI6MjA5MzA1ODI2OX0.lRQ5aMVgYn7_DK9ke9kwGHggj8dliH65Kc5zo_uCI7A';
+
 const LS = {
+  // Sync read from localStorage cache (instant, for UI rendering)
   get: (k, def) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : def; } catch(e){ return def; } },
-  set: (k, v)   => { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+  // Write to localStorage immediately, then sync to Supabase in background
+  set: (k, v) => {
+    try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){}
+    fetch(`${SUPABASE_URL}/rest/v1/hanamori_store`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'resolution=merge-duplicates'
+      },
+      body: JSON.stringify({ key: k, value: v })
+    }).catch(() => {}); // silent fail — localStorage still has the data
+  }
 };
+
+// On page load, pull latest data from Supabase and update localStorage cache
+(async function syncFromSupabase() {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/hanamori_store?select=key,value`, {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+    });
+    if (!res.ok) return;
+    const rows = await res.json();
+    rows.forEach(({ key, value }) => {
+      try { localStorage.setItem(key, JSON.stringify(value)); } catch(e){}
+    });
+    // Re-render all sections after sync
+    if (typeof renderChecklist === 'function') renderChecklist();
+    if (typeof renderProgress === 'function') renderProgress();
+    if (typeof renderBells === 'function') renderBells();
+    if (typeof renderNotes === 'function') renderNotes();
+    if (typeof renderFlowers === 'function') renderFlowers();
+    if (typeof renderWishlist === 'function') renderWishlist();
+  } catch(e) {}
+})();
 
 
 // ══════════════════════════════════════════════════════
