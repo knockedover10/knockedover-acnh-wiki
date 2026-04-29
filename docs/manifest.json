@@ -1,0 +1,22 @@
+{
+  "name": "Hikari @ Hanamori — ACNH Wiki",
+  "short_name": "Hanamori",
+  "description": "Personal Animal Crossing: New Horizons wiki for Hanamori island",
+  "start_url": "/knockedover-acnh-wiki/",
+  "display": "standalone",
+  "background_color": "#f5f0e8",
+  "theme_color": "#e8b4c0",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}
