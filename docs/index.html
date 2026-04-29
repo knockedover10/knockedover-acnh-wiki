@@ -276,43 +276,91 @@
   .notes-textarea::placeholder { color: var(--muted); font-style: italic; }
   .notes-footer { display: flex; justify-content: flex-end; padding-top: 6px; }
   .notes-saved { font-size: 0.75rem; color: var(--muted); font-style: italic; }
-  /* visitor log */
-  .visitor-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
-  .visitor-input {
-    flex: 1; min-width: 140px; border: 1px solid var(--border); border-radius: 6px;
-    padding: 8px 10px; font-family: 'Lato', sans-serif; font-size: 0.85rem;
-    background: var(--bg); color: var(--text); outline: none;
+  /* icon-based checklist grid */
+  .icon-task-group { margin-bottom: 20px; }
+  .icon-task-group h4 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+  .icon-task-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+  .icon-task-item {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    width: 64px; cursor: pointer; user-select: none;
+    padding: 6px 4px; border-radius: 8px; border: 2px solid transparent;
+    transition: border-color 0.15s, background 0.15s, opacity 0.15s;
+    position: relative;
   }
-  .visitor-input:focus { border-color: var(--brown); }
-  .visitor-select {
+  .icon-task-item:hover { background: var(--surface); }
+  .icon-task-item.done { opacity: 0.45; }
+  .icon-task-item.done .icon-task-img { filter: grayscale(1); }
+  .icon-task-item.done::after {
+    content: '✓'; position: absolute; top: 2px; right: 4px;
+    font-size: 0.7rem; color: var(--green); font-weight: 900;
+  }
+  .icon-task-img { width: 42px; height: 42px; object-fit: contain; image-rendering: pixelated; }
+  .icon-task-label {
+    font-size: 0.65rem; font-weight: 700; text-align: center; color: var(--text);
+    line-height: 1.2; max-width: 60px;
+  }
+  /* encounter log */
+  .enc-form { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+  .enc-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .enc-search-wrap { position: relative; flex: 1; min-width: 160px; }
+  .enc-input {
+    width: 100%; border: 1px solid var(--border); border-radius: 6px;
+    padding: 8px 10px; font-family: 'Lato', sans-serif; font-size: 0.85rem;
+    background: var(--bg); color: var(--text); outline: none; box-sizing: border-box;
+  }
+  .enc-input:focus { border-color: var(--brown); }
+  .enc-dropdown {
+    position: absolute; top: 100%; left: 0; right: 0; z-index: 200;
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+    max-height: 180px; overflow-y: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    display: none;
+  }
+  .enc-dropdown.open { display: block; }
+  .enc-opt {
+    padding: 7px 12px; font-size: 0.84rem; cursor: pointer; color: var(--text);
+  }
+  .enc-opt:hover, .enc-opt.highlighted { background: var(--surface); }
+  .enc-select {
     border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px;
     font-family: 'Lato', sans-serif; font-size: 0.85rem;
     background: var(--bg); color: var(--text); outline: none;
   }
-  .visitor-add-btn {
+  .enc-add-btn {
     background: var(--brown); color: #fff; border: none; border-radius: 6px;
     padding: 8px 14px; font-family: 'Lato', sans-serif; font-size: 0.85rem;
-    cursor: pointer; font-weight: 700;
+    cursor: pointer; font-weight: 700; white-space: nowrap;
   }
-  .visitor-add-btn:hover { opacity: 0.85; }
-  .visitor-list { list-style: none; padding: 0; margin: 0; }
-  .visitor-item {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 7px 10px; border-radius: 6px; font-size: 0.84rem;
-    background: var(--bg); border: 1px solid var(--border); margin-bottom: 6px;
+  .enc-add-btn:hover { opacity: 0.85; }
+  .enc-notes-input {
+    width: 100%; border: 1px solid var(--border); border-radius: 6px;
+    padding: 7px 10px; font-family: 'Lato', sans-serif; font-size: 0.83rem;
+    background: var(--bg); color: var(--text); outline: none; box-sizing: border-box;
   }
-  .visitor-item .v-name { font-weight: 700; color: var(--charcoal); }
-  .visitor-item .v-type {
+  .enc-notes-input:focus { border-color: var(--brown); }
+  .enc-notes-input::placeholder { color: var(--muted); font-style: italic; }
+  .enc-list { list-style: none; padding: 0; margin: 0; }
+  .enc-item {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    padding: 8px 10px; border-radius: 6px; font-size: 0.84rem;
+    background: var(--bg); border: 1px solid var(--border); margin-bottom: 6px; gap: 8px;
+  }
+  .enc-item-left { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+  .enc-item-main { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .enc-name { font-weight: 700; color: var(--charcoal); }
+  .enc-loc {
     font-size: 0.75rem; color: var(--card); padding: 2px 8px; border-radius: 20px;
-    font-weight: 700; margin-left: 8px;
+    font-weight: 700;
   }
-  .v-type.visitor { background: var(--green); }
-  .v-type.merchant { background: var(--gold); color: var(--charcoal); }
-  .v-type.outside { background: var(--sakura); color: var(--charcoal); }
-  .v-type.other { background: var(--muted); }
-  .visitor-del { background: none; border: none; cursor: pointer; color: var(--muted); font-size: 1rem; padding: 0 4px; }
-  .visitor-del:hover { color: var(--red); }
-  .visitor-empty { font-size: 0.82rem; color: var(--muted); font-style: italic; }
+  .enc-loc.my-island { background: var(--green); }
+  .enc-loc.mystery-island { background: var(--gold); color: var(--charcoal); }
+  .enc-loc.dream-island { background: var(--sakura); color: var(--charcoal); }
+  .enc-loc.online { background: #6a8fbc; }
+  .enc-loc.nook-shopping { background: var(--brown); }
+  .enc-loc.other { background: var(--muted); }
+  .enc-note { font-size: 0.78rem; color: var(--muted); font-style: italic; padding-left: 2px; }
+  .enc-del { background: none; border: none; cursor: pointer; color: var(--muted); font-size: 1rem; padding: 0 4px; flex-shrink: 0; }
+  .enc-del:hover { color: var(--red); }
+  .enc-empty { font-size: 0.82rem; color: var(--muted); font-style: italic; }
   /* daily log */
   .log-summary-area {
     width: 100%; min-height: 90px; border: 1px solid var(--border); border-radius: 8px;
@@ -759,21 +807,29 @@
       <div class="notes-footer"><span id="notes-saved-msg" class="notes-saved"></span></div>
     </div>
 
-    <!-- Visitor Log -->
+    <!-- Encounters Log -->
     <div class="notes-block">
-      <div class="notes-block-title">👤 Today's Visitors</div>
-      <div class="visitor-row">
-        <input class="visitor-input" id="visitor-name" type="text" placeholder="Name (e.g. Flick, Isabelle...)" maxlength="40">
-        <select class="visitor-select" id="visitor-type">
-          <option value="visitor">Visitor</option>
-          <option value="merchant">Merchant</option>
-          <option value="outside">Outside Encounter</option>
-          <option value="other">Other</option>
-        </select>
-        <button class="visitor-add-btn" id="visitor-add-btn">+ Add</button>
+      <div class="notes-block-title">🤝 Today's Encounters</div>
+      <div class="enc-form">
+        <div class="enc-row">
+          <div class="enc-search-wrap">
+            <input class="enc-input" id="enc-name" type="text" placeholder="NPC name (search or type)..." maxlength="50" autocomplete="off">
+            <div class="enc-dropdown" id="enc-dropdown"></div>
+          </div>
+          <select class="enc-select" id="enc-loc">
+            <option value="my-island">My Island</option>
+            <option value="mystery-island">Mystery Island</option>
+            <option value="dream-island">Dream Island</option>
+            <option value="online">Online Visit</option>
+            <option value="nook-shopping">Nook Shopping</option>
+            <option value="other">Other</option>
+          </select>
+          <button class="enc-add-btn" id="enc-add-btn">+ Add</button>
+        </div>
+        <input class="enc-notes-input" id="enc-notes" type="text" placeholder="Notes (optional)..." maxlength="120">
       </div>
-      <ul class="visitor-list" id="visitor-list"></ul>
-      <p class="visitor-empty" id="visitor-empty">No visitors logged today.</p>
+      <ul class="enc-list" id="enc-list"></ul>
+      <p class="enc-empty" id="enc-empty">No encounters logged today.</p>
     </div>
 
     <!-- Daily Log -->
@@ -945,34 +1001,38 @@ const DAILY_TASKS = [
     'Check Able Sisters for new clothing items',
     'Sell fish, bugs, and extra materials as needed',
   ]},
-  { group: '🌿 Nature & Maintenance', items: [
-    'Water flowers (or check if rain is forecast)',
-    'Check for hybrid flower growth',
-    'Clear any weeds',
-    'Dig up fossil 1 — donate new ones, sell duplicates',
-    'Dig up fossil 2',
-    'Dig up fossil 3',
-    'Dig up fossil 4',
-    'Water money tree (or plant new 99k bag)',
-    'Check beach for DIY recipe bottle',
-    'Hit rock 1',
-    'Hit rock 2',
-    'Hit rock 3',
-    'Hit rock 4',
-    'Hit rock 5',
-    'Hit rock 6',
-    'Shake tree 1 — collect branches / furniture',
-    'Shake tree 2 — collect branches / furniture',
-    'Shake tree (wasp) 1 — net ready',
-    'Shake tree (wasp) 2 — net ready',
-    'Shake tree (wasp) 3 — net ready',
-    'Shake tree (wasp) 4 — net ready',
-  ]},
   // Villager Interaction is handled separately as a card grid — see renderVillagerCards()
   { group: '📌 Optional / As Needed', items: [
     'NMT island hopping for villager hunting',
     'Stalk Market — check AM and PM turnip prices',
     'Catch seasonal fish or bugs before they rotate out',
+  ]},
+];
+
+// Icon-based Nature & Maintenance tasks
+const ICON_TASKS = [
+  { group: '🌿 Nature & Maintenance', items: [
+    { key: 'water_flowers',   label: 'Water Flowers',  img: 'https://acnhcdn.com/latest/MenuIcon/Watering.png' },
+    { key: 'check_hybrids',  label: 'Check Hybrids',  img: 'https://acnhcdn.com/latest/MenuIcon/Leaf.png' },
+    { key: 'clear_weeds',    label: 'Clear Weeds',    img: 'https://acnhcdn.com/latest/MenuIcon/Weed.png' },
+    { key: 'fossil_1',       label: 'Fossil 1',       img: 'https://dodo.ac/np/images/5/57/Fossil_NH_Inv_Icon.png' },
+    { key: 'fossil_2',       label: 'Fossil 2',       img: 'https://dodo.ac/np/images/5/57/Fossil_NH_Inv_Icon.png' },
+    { key: 'fossil_3',       label: 'Fossil 3',       img: 'https://dodo.ac/np/images/5/57/Fossil_NH_Inv_Icon.png' },
+    { key: 'fossil_4',       label: 'Fossil 4',       img: 'https://dodo.ac/np/images/5/57/Fossil_NH_Inv_Icon.png' },
+    { key: 'money_tree',     label: 'Money Tree',     img: 'https://dodo.ac/np/images/3/30/Money_Tree_NH_Inv_Icon.png' },
+    { key: 'diy_bottle',     label: 'Recipe Bottle',  img: 'https://dodo.ac/np/images/0/0a/Message_Bottle_NH_Inv_Icon.png' },
+    { key: 'rock_1',         label: 'Rock 1',         img: 'https://dodo.ac/np/images/5/55/Rock_NH_Icon.png' },
+    { key: 'rock_2',         label: 'Rock 2',         img: 'https://dodo.ac/np/images/5/55/Rock_NH_Icon.png' },
+    { key: 'rock_3',         label: 'Rock 3',         img: 'https://dodo.ac/np/images/5/55/Rock_NH_Icon.png' },
+    { key: 'rock_4',         label: 'Rock 4',         img: 'https://dodo.ac/np/images/5/55/Rock_NH_Icon.png' },
+    { key: 'rock_5',         label: 'Rock 5',         img: 'https://dodo.ac/np/images/5/55/Rock_NH_Icon.png' },
+    { key: 'rock_6',         label: 'Rock 6',         img: 'https://dodo.ac/np/images/5/55/Rock_NH_Icon.png' },
+    { key: 'tree_branch_1',  label: 'Branch Tree 1',  img: 'https://dodo.ac/np/images/b/bb/Tree_Branch_NH_Inv_Icon.png' },
+    { key: 'tree_branch_2',  label: 'Branch Tree 2',  img: 'https://dodo.ac/np/images/b/bb/Tree_Branch_NH_Inv_Icon.png' },
+    { key: 'wasp_tree_1',    label: 'Wasp Tree 1',    img: 'https://dodo.ac/np/images/e/ee/Wasp_Nest_NH_Inv_Icon.png' },
+    { key: 'wasp_tree_2',    label: 'Wasp Tree 2',    img: 'https://dodo.ac/np/images/e/ee/Wasp_Nest_NH_Inv_Icon.png' },
+    { key: 'wasp_tree_3',    label: 'Wasp Tree 3',    img: 'https://dodo.ac/np/images/e/ee/Wasp_Nest_NH_Inv_Icon.png' },
+    { key: 'wasp_tree_4',    label: 'Wasp Tree 4',    img: 'https://dodo.ac/np/images/e/ee/Wasp_Nest_NH_Inv_Icon.png' },
   ]},
 ];
 
@@ -997,6 +1057,8 @@ function renderDaily() {
   const saved = LS.get('hanamori_daily', {});
   const container = document.getElementById('daily-groups');
   container.innerHTML = '';
+
+  // Text checklist groups (Shops & Economy, Optional)
   DAILY_TASKS.forEach(group => {
     const div = document.createElement('div');
     div.className = 'daily-group';
@@ -1019,6 +1081,34 @@ function renderDaily() {
     });
     container.appendChild(div);
   });
+
+  // Icon-based groups (Nature & Maintenance)
+  ICON_TASKS.forEach(group => {
+    const div = document.createElement('div');
+    div.className = 'icon-task-group';
+    div.innerHTML = '<h4>' + group.group + '</h4>';
+    const grid = document.createElement('div');
+    grid.className = 'icon-task-grid';
+    group.items.forEach(item => {
+      const key = 'icon_' + item.key;
+      const done = !!saved[key];
+      const el = document.createElement('div');
+      el.className = 'icon-task-item' + (done ? ' done' : '');
+      el.title = item.label;
+      el.innerHTML = '<img class="icon-task-img" src="' + item.img + '" alt="' + item.label + '" loading="lazy"><span class="icon-task-label">' + item.label + '</span>';
+      el.addEventListener('click', function() {
+        const s = LS.get('hanamori_daily', {});
+        s[key] = !s[key];
+        LS.set('hanamori_daily', s);
+        el.classList.toggle('done', !!s[key]);
+        updateDailyBar();
+      });
+      grid.appendChild(el);
+    });
+    div.appendChild(grid);
+    container.appendChild(div);
+  });
+
   updateDailyBar();
 }
 
@@ -1079,6 +1169,11 @@ function updateDailyBar() {
   DAILY_TASKS.forEach(g => g.items.forEach(item => {
     total++;
     if (saved['daily_' + item.replace(/\W/g, '_')]) done++;
+  }));
+  // Count icon-based tasks
+  ICON_TASKS.forEach(g => g.items.forEach(item => {
+    total++;
+    if (saved['icon_' + item.key]) done++;
   }));
   // Count villager card buttons
   VILLAGERS_ROSTER.forEach(v => {
@@ -1454,42 +1549,115 @@ function initNotes() {
     }, 600);
   });
 
-  // — Visitor Log —
+  // — Encounters Log —
   const todayKey = (()=>{ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); })();
-  const visitorStoreKey = 'hanamori_visitors_' + todayKey;
-  const visitorList = document.getElementById('visitor-list');
-  const visitorEmpty = document.getElementById('visitor-empty');
+  const encStoreKey = 'hanamori_visitors_' + todayKey; // keep same key for backward compat
+  const encList = document.getElementById('enc-list');
+  const encEmpty = document.getElementById('enc-empty');
 
-  function renderVisitors() {
-    const items = LS.get(visitorStoreKey, []);
-    visitorList.innerHTML = '';
-    visitorEmpty.style.display = items.length ? 'none' : 'block';
-    items.forEach((v, i) => {
-      const typeLabels = { visitor:'Visitor', merchant:'Merchant', outside:'Outside Encounter', other:'Other' };
-      const li = document.createElement('li');
-      li.className = 'visitor-item';
-      li.innerHTML = `<span><span class="v-name">${v.name}</span><span class="v-type ${v.type}">${typeLabels[v.type]||v.type}</span></span><button class="visitor-del" data-i="${i}">×</button>`;
-      li.querySelector('.visitor-del').addEventListener('click', function() {
-        const arr = LS.get(visitorStoreKey, []); arr.splice(i,1); LS.set(visitorStoreKey, arr); renderVisitors();
+  const ACNH_NPCS = [
+    'Able Sisters (Mabel)','Able Sisters (Sable)','Able Sisters (Label)',
+    'Blathers','Brewster','C.J.','Celeste','Daisy Mae','Flick',
+    'Gullivarrr','Gulliver','Harvey','Isabelle',
+    'Jack','K.K. Slider','Kapp n','Kicks','Label','Leif','Luna',
+    'Mabel','Pascal','Redd','Reese','Sable','Saharah',
+    'Serena','Shrunk','Timmy','Tom Nook','Tommy',
+    'Wendell','Wisp','Zipper T. Bunny',
+    // Also allow free-type villager names
+    'Cherry','Nibbles','Bettina','Axel','Quillson','Stu','T-Bone','Astrid','Goose',
+  ].sort();
+
+  const encNameInput = document.getElementById('enc-name');
+  const encDropdown = document.getElementById('enc-dropdown');
+  let encHighlight = -1;
+
+  function buildDropdown(q) {
+    const matches = q.length < 1 ? ACNH_NPCS : ACNH_NPCS.filter(n => n.toLowerCase().includes(q.toLowerCase()));
+    encDropdown.innerHTML = '';
+    encHighlight = -1;
+    if (!matches.length) { encDropdown.classList.remove('open'); return; }
+    matches.slice(0,12).forEach((name, i) => {
+      const opt = document.createElement('div');
+      opt.className = 'enc-opt';
+      opt.textContent = name;
+      opt.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+        encNameInput.value = name;
+        encDropdown.classList.remove('open');
       });
-      visitorList.appendChild(li);
+      encDropdown.appendChild(opt);
+    });
+    encDropdown.classList.add('open');
+  }
+
+  encNameInput.addEventListener('input', function() { buildDropdown(this.value); });
+  encNameInput.addEventListener('focus', function() { buildDropdown(this.value); });
+  encNameInput.addEventListener('blur', function() { setTimeout(() => encDropdown.classList.remove('open'), 150); });
+  encNameInput.addEventListener('keydown', function(e) {
+    const opts = encDropdown.querySelectorAll('.enc-opt');
+    if (e.key === 'ArrowDown') {
+      encHighlight = Math.min(encHighlight + 1, opts.length - 1);
+      opts.forEach((o,i) => o.classList.toggle('highlighted', i === encHighlight));
+    } else if (e.key === 'ArrowUp') {
+      encHighlight = Math.max(encHighlight - 1, 0);
+      opts.forEach((o,i) => o.classList.toggle('highlighted', i === encHighlight));
+    } else if (e.key === 'Enter') {
+      if (encHighlight >= 0 && opts[encHighlight]) {
+        encNameInput.value = opts[encHighlight].textContent;
+        encDropdown.classList.remove('open');
+      } else {
+        document.getElementById('enc-add-btn').click();
+      }
+    }
+  });
+
+  const LOC_LABELS = {
+    'my-island': 'My Island',
+    'mystery-island': 'Mystery Island',
+    'dream-island': 'Dream Island',
+    'online': 'Online Visit',
+    'nook-shopping': 'Nook Shopping',
+    'other': 'Other'
+  };
+
+  function renderEncounters() {
+    const items = LS.get(encStoreKey, []);
+    encList.innerHTML = '';
+    encEmpty.style.display = items.length ? 'none' : 'block';
+    items.forEach((v, i) => {
+      const li = document.createElement('li');
+      li.className = 'enc-item';
+      const loc = v.loc || v.type || 'other';
+      const locLabel = LOC_LABELS[loc] || loc;
+      li.innerHTML = `<div class="enc-item-left">
+        <div class="enc-item-main">
+          <span class="enc-name">${v.name}</span>
+          <span class="enc-loc ${loc}">${locLabel}</span>
+        </div>
+        ${v.notes ? '<div class="enc-note">' + v.notes + '</div>' : ''}
+      </div>
+      <button class="enc-del" data-i="${i}">×</button>`;
+      li.querySelector('.enc-del').addEventListener('click', function() {
+        const arr = LS.get(encStoreKey, []); arr.splice(i,1); LS.set(encStoreKey, arr); renderEncounters();
+      });
+      encList.appendChild(li);
     });
   }
 
-  document.getElementById('visitor-add-btn').addEventListener('click', function() {
-    const name = document.getElementById('visitor-name').value.trim();
+  document.getElementById('enc-add-btn').addEventListener('click', function() {
+    const name = encNameInput.value.trim();
     if (!name) return;
-    const type = document.getElementById('visitor-type').value;
-    const arr = LS.get(visitorStoreKey, []);
-    arr.push({ name, type });
-    LS.set(visitorStoreKey, arr);
-    document.getElementById('visitor-name').value = '';
-    renderVisitors();
+    const loc = document.getElementById('enc-loc').value;
+    const notes = document.getElementById('enc-notes').value.trim();
+    const arr = LS.get(encStoreKey, []);
+    arr.push({ name, loc, notes });
+    LS.set(encStoreKey, arr);
+    encNameInput.value = '';
+    document.getElementById('enc-notes').value = '';
+    encDropdown.classList.remove('open');
+    renderEncounters();
   });
-  document.getElementById('visitor-name').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') document.getElementById('visitor-add-btn').click();
-  });
-  renderVisitors();
+  renderEncounters();
 
   // — Daily Log —
   const formatDate = (k) => { const p=k.split('-'); return p[2]+'/'+p[1]+'/'+p[0]; };
