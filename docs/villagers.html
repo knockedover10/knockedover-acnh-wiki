@@ -180,11 +180,17 @@
   .roster-sub { font-size:0.72rem; color:var(--muted); }
   .roster-date { font-size:0.7rem; color:var(--muted); margin-top:2px; }
   .roster-out-btn {
-    background:none; border:1px solid var(--border); border-radius:6px;
-    padding:4px 8px; font-size:0.72rem; color:var(--muted); cursor:pointer;
-    font-family:'Lato',sans-serif;
+    background: var(--green); border: none; border-radius: 6px;
+    padding: 5px 10px; font-size: 0.72rem; color: #fff; cursor: pointer;
+    font-family: 'Lato', sans-serif; font-weight: 700; white-space: nowrap; flex-shrink: 0;
   }
-  .roster-out-btn:hover { border-color:var(--red); color:var(--red); }
+  .roster-out-btn:hover { opacity: 0.8; }
+  .roster-moved-badge {
+    background: none; border: 1px solid var(--red); border-radius: 6px;
+    padding: 4px 8px; font-size: 0.72rem; color: var(--red);
+    font-family: 'Lato', sans-serif; font-weight: 700; white-space: nowrap; flex-shrink: 0;
+    pointer-events: none;
+  }
 
   /* Add to island modal */
   .add-modal {
@@ -390,25 +396,49 @@ function renderRoster() {
     return;
   }
 
-  [...entries, ...past].forEach(([name, data]) => {
+  // Sort: current residents first, moved-out at bottom
+  const sorted = [...entries, ...past].sort(([,a],[,b]) => {
+    if (!!a.movedOut === !!b.movedOut) return 0;
+    return a.movedOut ? 1 : -1;
+  });
+
+  const ROSTER_ICONS = {
+    'Cherry':   'https://dodo.ac/np/images/6/67/Cherry_NH_Icon.png',
+    'Nibbles':  'https://dodo.ac/np/images/2/26/Nibbles_NH_Villager_Icon.png',
+    'Bettina':  'https://dodo.ac/np/images/a/a5/Bettina_NH_Villager_Icon.png',
+    'Axel':     'https://dodo.ac/np/images/9/93/Axel_NH_Villager_Icon.png',
+    'Quillson': 'https://dodo.ac/np/images/1/1c/Quillson_NH_Villager_Icon.png',
+    'Stu':      'https://dodo.ac/np/images/e/ea/Stu_NH_Villager_Icon.png',
+    'T-Bone':   'https://dodo.ac/np/images/1/16/T-Bone_NH_Villager_Icon.png',
+    'Astrid':   'https://dodo.ac/np/images/2/2a/Astrid_NH_Villager_Icon.png',
+    'Goose':    'https://dodo.ac/np/images/d/d3/Goose_NH_Villager_Icon.png',
+  };
+
+  sorted.forEach(([name, data]) => {
     const vd = ALL_VILLAGERS.find(v => v.name === name);
     const card = document.createElement('div');
     card.className = 'roster-card' + (data.movedOut ? ' moved-out' : '');
-    const img = vd ? `<img class="roster-face" src="${vd.iconImage}" alt="${name}" onerror="this.style.display='none'">` : `<div class="roster-face" style="background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:1.4rem">🐾</div>`;
+    const imgSrc = ROSTER_ICONS[name] || (vd ? vd.iconImage : '');
+    const img = imgSrc
+      ? `<img class="roster-face" src="${imgSrc}" alt="${name}" onerror="this.style.display='none'">`
+      : `<div class="roster-face" style="background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:1.4rem">🐾</div>`;
     card.innerHTML = `
       ${img}
       <div class="roster-info">
         <div class="roster-name">${name}</div>
         <div class="roster-sub">${vd ? vd.species + ' · ' + vd.personality : ''}</div>
         <div class="roster-date">${data.movedOut ? '🚪 Moved out ' + data.movedOutDate : '📅 Since ' + (data.movedIn || '?')}</div>
-        ${data.notes ? `<div class="roster-date" style="color:var(--text)">${data.notes}</div>` : ''}
+        ${data.notes ? `<div class="roster-date" style="color:var(--muted);font-style:italic">${data.notes}</div>` : ''}
       </div>
-      ${!data.movedOut ? `<button class="roster-out-btn" data-name="${name}">Moved out</button>` : ''}
+      ${!data.movedOut
+        ? `<button class="roster-out-btn" data-name="${name}">✅ Resident</button>`
+        : `<span class="roster-moved-badge">🚶 Moved Out</span>`
+      }
     `;
     if (!data.movedOut) {
       card.querySelector('.roster-out-btn').addEventListener('click', function(e) {
         e.stopPropagation();
-        if (!confirm(name + ' moved out?')) return;
+        if (!confirm(name + ' has moved out of Hanamori?')) return;
         const r = getRoster();
         r[name].movedOut = true;
         r[name].movedOutDate = new Date().toLocaleDateString('en-GB');
@@ -650,7 +680,7 @@ fetch(DATA_URL)
     const vParam = params.get('v');
     if (vParam) {
       const match = ALL_VILLAGERS.find(v => v.name.toLowerCase() === vParam.toLowerCase());
-      if (match) openModal(match);
+      if (match) openModal(match.name);
     }
   })
   .catch(() => {

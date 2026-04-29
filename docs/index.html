@@ -1114,15 +1114,15 @@ function renderDaily() {
 
 // Villager interaction card grid
 const VILLAGERS_ROSTER = [
-  { name: 'Cherry',   filename: 'Dga14' },
-  { name: 'Nibbles',  filename: 'Squ12' },
-  { name: 'Bettina',  filename: 'Mus01' },
-  { name: 'Axel',     filename: 'Elp03' },
-  { name: 'Quillson', filename: 'Duk12' },
-  { name: 'Stu',      filename: 'Bul06' },
-  { name: 'T-Bone',   filename: 'Bul04' },
-  { name: 'Astrid',   filename: 'Kng04' },
-  { name: 'Goose',    filename: 'Chk08' },
+  { name: 'Cherry',   img: 'https://dodo.ac/np/images/6/67/Cherry_NH_Icon.png' },
+  { name: 'Nibbles',  img: 'https://dodo.ac/np/images/2/26/Nibbles_NH_Villager_Icon.png' },
+  { name: 'Bettina',  img: 'https://dodo.ac/np/images/a/a5/Bettina_NH_Villager_Icon.png' },
+  { name: 'Axel',     img: 'https://dodo.ac/np/images/9/93/Axel_NH_Villager_Icon.png' },
+  { name: 'Quillson', img: 'https://dodo.ac/np/images/1/1c/Quillson_NH_Villager_Icon.png' },
+  { name: 'Stu',      img: 'https://dodo.ac/np/images/e/ea/Stu_NH_Villager_Icon.png' },
+  { name: 'T-Bone',   img: 'https://dodo.ac/np/images/1/16/T-Bone_NH_Villager_Icon.png' },
+  { name: 'Astrid',   img: 'https://dodo.ac/np/images/2/2a/Astrid_NH_Villager_Icon.png' },
+  { name: 'Goose',    img: 'https://dodo.ac/np/images/d/d3/Goose_NH_Villager_Icon.png' },
 ];
 
 function renderVillagerCards() {
@@ -1135,12 +1135,11 @@ function renderVillagerCards() {
     const gKey = 'vc_gift_' + today + '_' + v.name;
     const cKey = 'vc_chat_' + today + '_' + v.name;
     const dKey = 'vc_diy_'  + today + '_' + v.name;
-    const imgUrl = 'https://acnhcdn.com/latest/NpcIcon/' + v.filename + '.png';
     const card = document.createElement('div');
     card.className = 'vc-card';
     card.innerHTML = `
       <a href="villagers.html?v=${encodeURIComponent(v.name)}" style="display:block;text-decoration:none">
-        <img src="${imgUrl}" alt="${v.name}" onerror="this.style.opacity=0.3" style="cursor:pointer">
+        <img src="${v.img}" alt="${v.name}" onerror="this.style.opacity=0.3" style="cursor:pointer">
       </a>
       <div class="vc-name">${v.name}</div>
       <div class="vc-btns">
