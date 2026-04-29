@@ -4,20 +4,21 @@
 
 ---
 
-## 🏡 Current Residents (as of 26/04/2026)
+## 🏡 Current Residents (as of 30/04/2026)
 
-| Villager | Personality | Species | Thematic Fit | Notes |
-|----------|-------------|---------|--------------|-------|
-| **Cherry** | Uchi (big sister) | Dog | ✅ Good | Edgy look; dark colour palette suits a moody Japanese aesthetic |
-| **Nibbles** | Peppy | Squirrel | ⚠️ Neutral | Peppy personality is tonally mismatched with the quiet island vibe |
-| **Bettina** | Normal | Mouse | ⚠️ Neutral | Plain design; no strong Japanese aesthetic connection |
-| **Axel** | Jock | Elephant | ❌ Poor | Less thematically ideal — rehome when possible |
-| **Quillson** | Smug | Duck | ⚠️ Neutral | Smug personality works; design has no Japanese theme link |
-| **Stu** | Lazy | Bull | ⚠️ Neutral | Lazy personality fits the relaxed vibe; no strong theme connection |
-| **T-Bone** | Cranky | Bull | ⚠️ Neutral | Cranky personality adds gruff character; no strong Japanese aesthetic link — keep an eye on fit |
-| **Astrid** | Snooty | Kangaroo | ⚠️ Neutral | Star-themed design is charming; snooty personality can add drama. No strong Japanese link but aesthetically distinctive |
+| Villager | Personality | Species | Birthday | Move-in | Thematic Fit | Notes |
+|----------|-------------|---------|----------|---------|--------------|-------|
+| **Cherry** | Uchi | Dog | 11 May | 17/04/2026 | ✅ Good | Edgy look; dark colour palette suits a moody Japanese aesthetic |
+| **Nibbles** | Peppy | Squirrel | 19 Sep | 25/04/2026 | ⚠️ Neutral | Peppy personality is tonally mismatched with the quiet island vibe |
+| **Bettina** | Normal | Mouse | 16 Jul | 25/04/2026 | ⚠️ Neutral | Plain design; no strong Japanese aesthetic connection |
+| **Axel** | Jock | Elephant | 19 Mar | 17/04/2026 | ❌ Poor | Less thematically ideal — rehome when possible |
+| **Quillson** | Smug | Duck | 11 Dec | 25/04/2026 | ⚠️ Neutral | Smug personality works; design has no Japanese theme link |
+| **Stu** | Lazy | Bull | 10 May | 25/04/2026 | ⚠️ Neutral | Lazy personality fits the relaxed vibe; no strong theme connection |
+| **T-Bone** | Cranky | Bull | 20 May | 26/04/2026 | ⚠️ Neutral | Cranky personality adds gruff character; no strong Japanese aesthetic link |
+| **Astrid** | Snooty | Kangaroo | 8 Sep | 26/04/2026 | ⚠️ Neutral | Star-themed design is charming; snooty personality adds drama |
+| **Goose** | Jock | Chicken | 4 Oct | 29/04/2026 | ⚠️ Neutral | Energetic jock; no Japanese theme link — possible Axel replacement placeholder |
 
-8 / 10 slots filled.
+9 / 10 slots filled.
 
 ---
 
