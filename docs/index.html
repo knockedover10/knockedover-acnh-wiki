@@ -666,6 +666,44 @@
         <div id="villager-cards-grid" class="villager-cards-grid"></div>
       </div>
     </div>
+
+    <!-- Encounters Log -->
+    <div class="notes-block">
+      <div class="notes-block-title">🤝 Today's Encounters</div>
+      <div class="enc-form">
+        <div class="enc-row">
+          <div class="enc-search-wrap">
+            <input class="enc-input" id="enc-name" type="text" placeholder="NPC name (search or type)..." maxlength="50" autocomplete="off">
+            <div class="enc-dropdown" id="enc-dropdown"></div>
+          </div>
+          <select class="enc-select" id="enc-loc">
+            <option value="my-island">My Island</option>
+            <option value="mystery-island">Mystery Island</option>
+            <option value="dream-island">Dream Island</option>
+            <option value="online">Online Visit</option>
+            <option value="nook-shopping">Nook Shopping</option>
+            <option value="other">Other</option>
+          </select>
+          <button class="enc-add-btn" id="enc-add-btn">+ Add</button>
+        </div>
+        <input class="enc-notes-input" id="enc-notes" type="text" placeholder="Notes (optional)..." maxlength="120">
+      </div>
+      <ul class="enc-list" id="enc-list"></ul>
+      <p class="enc-empty" id="enc-empty">No encounters logged today.</p>
+    </div>
+
+    <!-- Daily Log -->
+    <div class="notes-block">
+      <div class="notes-block-title">📖 Daily Log</div>
+      <div class="notes-block-title" id="log-today-label" style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:0.8rem;margin-bottom:6px"></div>
+      <textarea class="log-summary-area" id="log-summary" placeholder="Today's summary — what happened, what you built, who you spoke to..."></textarea>
+      <div class="notes-footer" style="margin-bottom:0"><span id="log-summary-saved" class="notes-saved"></span></div>
+      <div class="log-append-row">
+        <input class="log-append-input" id="log-append-input" type="text" placeholder="Quick note — press Enter or + Log" maxlength="200">
+        <button class="log-append-btn" id="log-append-btn">+ Log</button>
+      </div>
+      <div class="log-entries" id="log-entries"></div>
+    </div>
   </section>
 
   <!-- ══ ISLAND PROGRESS TRACKER ══ -->
@@ -807,43 +845,7 @@
       <div class="notes-footer"><span id="notes-saved-msg" class="notes-saved"></span></div>
     </div>
 
-    <!-- Encounters Log -->
-    <div class="notes-block">
-      <div class="notes-block-title">🤝 Today's Encounters</div>
-      <div class="enc-form">
-        <div class="enc-row">
-          <div class="enc-search-wrap">
-            <input class="enc-input" id="enc-name" type="text" placeholder="NPC name (search or type)..." maxlength="50" autocomplete="off">
-            <div class="enc-dropdown" id="enc-dropdown"></div>
-          </div>
-          <select class="enc-select" id="enc-loc">
-            <option value="my-island">My Island</option>
-            <option value="mystery-island">Mystery Island</option>
-            <option value="dream-island">Dream Island</option>
-            <option value="online">Online Visit</option>
-            <option value="nook-shopping">Nook Shopping</option>
-            <option value="other">Other</option>
-          </select>
-          <button class="enc-add-btn" id="enc-add-btn">+ Add</button>
-        </div>
-        <input class="enc-notes-input" id="enc-notes" type="text" placeholder="Notes (optional)..." maxlength="120">
-      </div>
-      <ul class="enc-list" id="enc-list"></ul>
-      <p class="enc-empty" id="enc-empty">No encounters logged today.</p>
-    </div>
 
-    <!-- Daily Log -->
-    <div class="notes-block">
-      <div class="notes-block-title">📖 Daily Log</div>
-      <div class="notes-block-title" id="log-today-label" style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:0.8rem;margin-bottom:6px"></div>
-      <textarea class="log-summary-area" id="log-summary" placeholder="Today's summary — what happened, what you built, who you spoke to..."></textarea>
-      <div class="notes-footer" style="margin-bottom:0"><span id="log-summary-saved" class="notes-saved"></span></div>
-      <div class="log-append-row">
-        <input class="log-append-input" id="log-append-input" type="text" placeholder="Quick note — press Enter or + Log" maxlength="200">
-        <button class="log-append-btn" id="log-append-btn">+ Log</button>
-      </div>
-      <div class="log-entries" id="log-entries"></div>
-    </div>
   </section>
 
   <section id="critters">
