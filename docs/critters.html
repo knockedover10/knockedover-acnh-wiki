@@ -951,6 +951,13 @@ function switchTab(type){
     buildTable('bugs', BUGS),
     buildTable('sea',  SEA),
   ]);
+  // Default all month filters to current ACNH month (5am day-start rule)
+  const _d = new Date(); if (_d.getHours() < 5) _d.setDate(_d.getDate() - 1);
+  const _m = String(_d.getMonth() + 1);
+  ['fish','bugs','sea'].forEach(type => {
+    const sel = document.getElementById(`${type}-month`);
+    if (sel) { sel.value = _m; applyFilters(type); }
+  });
   // set initial sort header indicators
   ['fish','bugs','sea'].forEach(type=>{
     const ss = sortState[type];
