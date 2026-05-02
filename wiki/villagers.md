@@ -17,8 +17,9 @@
 | **T-Bone** | Cranky | Bull | 20 May | 26/04/2026 | ⚠️ Neutral | Cranky personality adds gruff character; no strong Japanese aesthetic link |
 | **Astrid** | Snooty | Kangaroo | 8 Sep | 26/04/2026 | ⚠️ Neutral | Star-themed design is charming; snooty personality adds drama |
 | **Goose** | Jock | Chicken | 4 Oct | 29/04/2026 | ⚠️ Neutral | Energetic jock; no Japanese theme link — possible Axel replacement placeholder |
+| **Kyle** | Smug | Wolf | 6 Nov | 03/05/2026 | ⚠️ Neutral | Smug wolf; letterman jacket aesthetic doesn't fit Japanese theme — mystery island find |
 
-9 / 10 slots filled.
+10 / 10 slots filled.
 
 ---
 
@@ -110,4 +111,4 @@ Don't force him out before you have a replacement lined up — an empty plot can
 
 ---
 
-*Last updated: 30/04/2026 — Goose moved in; roster now 9/10 (Cherry, Nibbles, Bettina, Axel, Quillson, Stu, T-Bone, Astrid, Goose)*
+*Last updated: 03/05/2026 — Kyle moved in; roster now 10/10 (Cherry, Nibbles, Bettina, Axel, Quillson, Stu, T-Bone, Astrid, Goose, Kyle)*

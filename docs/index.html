@@ -640,8 +640,8 @@
       <div class="snap-item"><span class="snap-label">Island Name</span><span class="snap-value">Hanamori 🌸</span></div>
       <div class="snap-item"><span class="snap-label">Theme</span><span class="snap-value">Traditional Japanese</span></div>
       <div class="snap-item"><span class="snap-label">Stage</span><span class="snap-value status-early">Early Game</span></div>
-      <div class="snap-item"><span class="snap-label">Villagers</span><span class="snap-value">9 / 10</span></div>
-      <div class="snap-item"><span class="snap-label">Residents</span><span class="snap-value" style="font-size:.9rem">Cherry · Nibbles · Bettina · Axel · Quillson · Stu · T-Bone · Astrid · Goose</span></div>
+      <div class="snap-item"><span class="snap-label">Villagers</span><span class="snap-value" id="snap-villager-count">— / 10</span></div>
+      <div class="snap-item"><span class="snap-label">Residents</span><span class="snap-value" id="snap-villager-names" style="font-size:.9rem">Loading...</span></div>
       <div class="snap-item"><span class="snap-label">Island Rating</span><span class="snap-value status-early">Not yet rated</span></div>
       <div class="snap-item"><span class="snap-label">K.K. Slider</span><span class="snap-value status-done">✅ Performed</span></div>
     </div>
@@ -940,6 +940,7 @@ const LS = {
     if (typeof renderNotes === 'function') renderNotes();
     if (typeof renderFlowers === 'function') renderFlowers();
     if (typeof renderWishlist === 'function') renderWishlist();
+    if (typeof renderSnapshotVillagers === 'function') renderSnapshotVillagers();
   } catch(e) {}
 })();
 
@@ -1113,7 +1114,20 @@ const VILLAGERS_ROSTER = [
   { name: 'T-Bone',   img: 'https://dodo.ac/np/images/1/16/T-Bone_NH_Villager_Icon.png' },
   { name: 'Astrid',   img: 'https://dodo.ac/np/images/2/2a/Astrid_NH_Villager_Icon.png' },
   { name: 'Goose',    img: 'https://dodo.ac/np/images/d/d3/Goose_NH_Villager_Icon.png' },
+  { name: 'Kyle',     img: 'https://dodo.ac/np/images/4/44/Kyle_NH_Villager_Icon.png' },
 ];
+
+function renderSnapshotVillagers() {
+  const roster = LS.get('hanamori_v2_roster', {});
+  const current = Object.entries(roster)
+    .filter(([, d]) => !d.movedOut)
+    .map(([name]) => name)
+    .sort();
+  const countEl = document.getElementById('snap-villager-count');
+  const namesEl = document.getElementById('snap-villager-names');
+  if (countEl) countEl.textContent = current.length + ' / 10';
+  if (namesEl) namesEl.textContent = current.length ? current.join(' · ') : 'None yet';
+}
 
 function renderVillagerCards() {
   const grid = document.getElementById('villager-cards-grid');
@@ -1980,6 +1994,7 @@ function deleteWish(i) {
 // ══════════════════════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════════════════════
+renderSnapshotVillagers();
 initDaily();
 initAlert();
 initProgress();
