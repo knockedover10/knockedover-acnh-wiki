@@ -896,7 +896,10 @@
   </p>
 </footer>
 
-<script>
+<script type="module">
+import { getTodayKey } from './utils/acnhDay.js';
+import { calcRatingScore } from './js/ratingCalc.js';
+
 // ══════════════════════════════════════════════════════
 //  STORAGE HELPERS  (Supabase-backed, localStorage cache)
 // ══════════════════════════════════════════════════════
@@ -1024,13 +1027,6 @@ const ICON_TASKS = [
     { key: 'wasp_tree_4',    label: 'Wasp Tree 4',    img: 'https://dodo.ac/np/images/e/ee/Wasp_Nest_NH_Inv_Icon.png' },
   ]},
 ];
-
-function getTodayKey() {
-  // ACNH day starts at 5:00 AM — before 5am still counts as the previous day
-  const d = new Date();
-  if (d.getHours() < 5) d.setDate(d.getDate() - 1);
-  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
-}
 
 function initDaily() {
   const todayKey = getTodayKey();
@@ -1487,37 +1483,31 @@ function initRating() {
     const villagers = parseInt(document.getElementById('r-villagers').value) || 0;
     const weeds     = parseInt(document.getElementById('r-weeds').value) || 0;
 
-    // Official scoring (approximate): development + scenery - penalties
-    // Development score: furniture * 1pt each (capped contributions), villagers * 2pt
-    // Scenery score: trees * 1pt (up to ~220), flowers * 1pt (up to ~200), fences * 0.2pt
-    // Penalty: weeds * -1pt (heavy if >100)
-    const devScore = Math.min(furniture * 1, 450) + (villagers * 10);
-    const sceneryScore = Math.min(trees, 220) + Math.min(flowers, 200) + Math.min(fences * 0.2, 20);
-    const penalty = weeds > 100 ? (weeds - 100) * 2 : 0;
-    const total = devScore + sceneryScore - penalty;
+    const { devScore, sceneryScore, penalty, total, stars } =
+      calcRatingScore({ furniture, trees, flowers, fences, villagers, weeds });
 
-    let stars, label, starsDisplay, tips = [];
-    if (total < 45) {
-      stars = 1; label = '1 Star'; starsDisplay = '⭐☆☆☆☆';
+    let label, starsDisplay, tips = [];
+    if (stars === 1) {
+      label = '1 Star'; starsDisplay = '⭐☆☆☆☆';
       if (furniture < 30) tips.push('Place more outdoor furniture (need ~30+ items)');
       if (villagers < 6) tips.push('Get more villagers moved in');
       tips.push('Talk to Isabelle to get specific feedback');
-    } else if (total < 90) {
-      stars = 2; label = '2 Stars'; starsDisplay = '⭐⭐☆☆☆';
+    } else if (stars === 2) {
+      label = '2 Stars'; starsDisplay = '⭐⭐☆☆☆';
       if (furniture < 60) tips.push('Add more outdoor furniture (aim for 60+)');
       if (flowers < 50) tips.push('Plant more flowers (aim for 50+)');
       tips.push('Add fences around gardens or paths');
-    } else if (total < 160) {
-      stars = 3; label = '3 Stars'; starsDisplay = '⭐⭐⭐☆☆';
+    } else if (stars === 3) {
+      label = '3 Stars'; starsDisplay = '⭐⭐⭐☆☆';
       tips.push('You are close to 3 stars!');
       if (weeds > 20) tips.push('Clear weeds — they reduce score');
       if (furniture < 100) tips.push('Add ~'+(100-furniture)+' more outdoor furniture items');
-    } else if (total < 250) {
-      stars = 4; label = '4 Stars'; starsDisplay = '⭐⭐⭐⭐☆';
+    } else if (stars === 4) {
+      label = '4 Stars'; starsDisplay = '⭐⭐⭐⭐☆';
       tips.push('Strong island! Keep decorating to reach 5 stars');
       if (flowers < 100) tips.push('More flowers will boost scenery score');
     } else {
-      stars = 5; label = '5 Stars'; starsDisplay = '⭐⭐⭐⭐⭐';
+      label = '5 Stars'; starsDisplay = '⭐⭐⭐⭐⭐';
       tips.push('Amazing island! You have achieved the maximum rating.');
       tips.push('Isabelle will reward you with a Gold Watering Can recipe!');
     }
