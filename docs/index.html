@@ -170,35 +170,45 @@
   .snap-value.status-early { color:var(--brown); }
   .snap-value.status-done { color:var(--green); font-weight:700; }
 
-  /* ── ISLAND PROGRESS TRACKER ── */
-  .progress-tracker {
-    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
-    padding: 22px 24px; margin-bottom: 36px;
+  /* ── TO-DO LIST ── */
+  .todo-input-row {
+    display: flex; gap: 8px; margin-bottom: 16px;
   }
-  .progress-overall {
-    display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
+  .todo-input-row input {
+    flex: 1; padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px;
+    background: var(--card); color: var(--text); font-family: inherit; font-size: 0.9rem;
   }
-  .progress-bar-track {
-    flex: 1; height: 10px; background: var(--surface); border-radius: 10px; overflow: hidden;
+  .todo-input-row input:focus { outline: none; border-color: var(--green); }
+  #todo-add-btn {
+    padding: 9px 18px; background: var(--green); color: #fff; border: none;
+    border-radius: 8px; font-family: inherit; font-size: 0.88rem; font-weight: 700;
+    cursor: pointer; white-space: nowrap;
   }
-  .progress-bar-fill {
-    height: 100%; background: linear-gradient(90deg, var(--green), var(--gold));
-    border-radius: 10px; transition: width 0.4s ease;
+  #todo-add-btn:active { opacity: 0.8; }
+  .todo-list { list-style: none; margin: 0; padding: 0; }
+  .todo-item {
+    display: flex; align-items: center; gap: 10px; padding: 10px 0;
+    border-bottom: 1px solid var(--border);
   }
-  .progress-pct { font-size: 0.85rem; font-weight: 700; color: var(--green); min-width: 36px; text-align: right; }
-  .milestone-groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-  .milestone-group h4 {
-    font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
-    color: var(--muted); margin-bottom: 10px;
+  .todo-item:last-child { border-bottom: none; }
+  .todo-check {
+    background: none; border: none; cursor: pointer; padding: 0;
+    font-size: 1.1rem; flex-shrink: 0; line-height: 1;
   }
-  .milestone-item {
-    display: flex; align-items: center; gap: 10px; padding: 6px 0;
-    border-bottom: 1px solid var(--border); cursor: pointer;
+  .todo-circle {
+    display: inline-block; width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid var(--border); vertical-align: middle;
   }
-  .milestone-item:last-child { border-bottom: none; }
-  .milestone-item input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--green); cursor: pointer; flex-shrink: 0; }
-  .milestone-item label { font-size: 0.84rem; cursor: pointer; line-height: 1.3; }
-  .milestone-item.done label { text-decoration: line-through; color: var(--muted); }
+  .todo-text {
+    flex: 1; font-size: 0.88rem; color: var(--text); line-height: 1.4;
+  }
+  .todo-done .todo-text { text-decoration: line-through; color: var(--muted); }
+  .todo-del {
+    background: none; border: none; cursor: pointer; color: var(--muted);
+    font-size: 1.2rem; line-height: 1; padding: 0 4px; flex-shrink: 0;
+  }
+  .todo-del:hover { color: var(--red); }
+  .todo-empty { font-size: 0.85rem; color: var(--muted); text-align: center; padding: 20px 0; }
 
   /* ── SEASONAL CALENDAR ── */
   .seasonal-card {
@@ -542,7 +552,6 @@
     .wiki-card h3 { font-size:0.88rem;margin:0;flex:1;line-height:1.2; }
     .wiki-card p { display:none; }
     .card-link { font-size:0.72rem;white-space:nowrap;flex-shrink:0; }
-    .milestone-groups { grid-template-columns: 1fr; }
     .cal-grid { grid-template-columns: 1fr; }
     .villager-grid { grid-template-columns: 1fr; }
   }
@@ -602,7 +611,7 @@
 <nav class="top-nav">
   <a href="#snapshot">📊 Snapshot</a>
   <a href="#daily">✅ Daily</a>
-  <a href="#progress">🌱 Progress</a>
+  <a href="#progress">✅ To-Do</a>
   <a href="#calendar">🗓️ Calendar</a>
   <a href="villagers.html">🏘️ Villagers</a>
   <a href="#flowers">🌸 Flowers</a>
@@ -717,15 +726,13 @@
 
   <!-- ══ ISLAND PROGRESS TRACKER ══ -->
   <section id="progress">
-    <h2 class="section-title"><span class="icon">🌱</span> Island Progress</h2>
-    <div class="progress-tracker">
-      <div class="progress-overall">
-        <span style="font-size:.82rem;color:var(--muted);font-weight:700;min-width:90px">Overall</span>
-        <div class="progress-bar-track"><div class="progress-bar-fill" id="prog-fill" style="width:0%"></div></div>
-        <span class="progress-pct" id="prog-pct">0%</span>
-      </div>
-      <div class="milestone-groups" id="milestone-groups"></div>
+    <h2 class="section-title"><span class="icon">✅</span> To-Do</h2>
+    <div class="todo-input-row">
+      <input type="text" id="todo-input" placeholder="Add a task..." maxlength="120" autocomplete="off">
+      <button id="todo-add-btn" onclick="addTodoItem()">Add</button>
     </div>
+    <ul id="todo-list" class="todo-list"></ul>
+    <p id="todo-empty" class="todo-empty" style="display:none">No tasks yet — add one above.</p>
   </section>
 
 
@@ -935,7 +942,7 @@ const LS = {
     });
     // Re-render all sections after sync
     if (typeof renderChecklist === 'function') renderChecklist();
-    if (typeof renderProgress === 'function') renderProgress();
+    if (typeof renderTodo === 'function') renderTodo();
     if (typeof renderBells === 'function') renderBells();
     if (typeof renderNotes === 'function') renderNotes();
     if (typeof renderFlowers === 'function') renderFlowers();
@@ -1238,121 +1245,66 @@ function clearAlert() {
 document.getElementById('alert-input')?.addEventListener('keydown', e => { if(e.key==='Enter') saveAlert(); });
 
 // ══════════════════════════════════════════════════════
-//  ISLAND PROGRESS TRACKER
+//  TO-DO LIST
 // ══════════════════════════════════════════════════════
-const MILESTONES = [
-  { group: '🏗️ Early Unlocks', items: [
-    'Blathers arrived (museum tent)',
-    'Nook\'s Cranny opened',
-    'Mable visited (first time)',
-    'Able Sisters opened',
-    'Resident Services upgraded (building)',
-    'Campsite built',
-  ]},
-  { group: '⭐ Island Rating', items: [
-    '3-star island rating achieved',
-    'K.K. Slider performed (first concert)',
-    'Terraforming unlocked (Island Designer)',
-  ]},
-  { group: '🏛️ Museum', items: [
-    'Museum building opened (donated 15 critters)',
-    'Art wing opened (donated first artwork)',
-    'All fish donated',
-    'All bugs donated',
-    'All sea creatures donated',
-    'All fossils donated (73 total)',
-    'All artwork donated (43 total)',
-  ]},
-  { group: '🌿 Nature & Crafting', items: [
-    'All native fruit trees planted',
-    'Bamboo grove planted',
-    'Hybrid flowers started',
-    'All golden tools obtained',
-    'All DIY recipes collected',
-  ]},
-  { group: '🏯 Japanese Theme Build', items: [
-    'First shrine built',
-    'Bamboo torii gate placed',
-    'Onsen area started',
-    'First stone/custom path laid',
-    'First district fully terraformed',
-    'Zen garden planted',
-    'Cherry blossom area set up',
-    'Lanterns placed along main street',
-  ]},
-  { group: '🏗️ Infrastructure', items: [
-    'All 6 bridges built',
-    'All 8 inclines built',
-    'All 10 villager home plots placed',
-    'Custom design path placed island-wide',
-  ]},
-  { group: '🤝 Villager Bonds', items: [
-    'First villager at max friendship',
-    'First villager photo received',
-    'All current villagers gifted their fav item',
-    'Received a framed photo from Cherry',
-    'Received a framed photo from Nibbles',
-    'Received a framed photo from Bettina',
-    'Received a framed photo from Axel',
-    'Received a framed photo from Quillson',
-    'Received a framed photo from Stu',
-    'Received a framed photo from T-Bone',
-    'Received a framed photo from Astrid',
-  ]},
-  { group: '🏘️ Villagers', items: [
-    '8 villagers moved in',
-    '10 villagers moved in',
-    'All wishlist villagers obtained',
-  ]},
-  { group: '💰 Bells & Economy', items: [
-    'Loan fully paid off (5M Bells)',
-    'First 1M Bells earned from turnips',
-  ]},
-];
-
 function initProgress() {
-  const saved = LS.get('hanamori_progress', {});
-  const container = document.getElementById('milestone-groups');
-  let total = 0, done = 0;
-
-  MILESTONES.forEach(group => {
-    const div = document.createElement('div');
-    div.className = 'milestone-group';
-    div.innerHTML = `<h4>${group.group}</h4>`;
-    group.items.forEach(item => {
-      total++;
-      const key = 'prog_' + item;
-      const checked = !!saved[key];
-      if (checked) done++;
-      const row = document.createElement('div');
-      row.className = 'milestone-item' + (checked ? ' done' : '');
-      const id = 'ms_' + key.replace(/\W/g,'_');
-      row.innerHTML = `<input type="checkbox" id="${id}" ${checked?'checked':''}><label for="${id}">${item}</label>`;
-      row.querySelector('input').addEventListener('change', function() {
-        const s = LS.get('hanamori_progress', {});
-        s[key] = this.checked;
-        LS.set('hanamori_progress', s);
-        row.classList.toggle('done', this.checked);
-        updateProgressBar();
-      });
-      div.appendChild(row);
+  renderTodo();
+  const input = document.getElementById('todo-input');
+  if (input) {
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') addTodoItem();
     });
-    container.appendChild(div);
-  });
-
-  updateProgressBar();
+  }
 }
 
-function updateProgressBar() {
-  const saved = LS.get('hanamori_progress', {});
-  let total = 0, done = 0;
-  MILESTONES.forEach(g => g.items.forEach(item => {
-    total++;
-    if (saved['prog_' + item]) done++;
-  }));
-  const pct = total ? Math.round(done / total * 100) : 0;
-  document.getElementById('prog-fill').style.width = pct + '%';
-  document.getElementById('prog-pct').textContent = pct + '%';
+function renderTodo() {
+  const todos = LS.get('hanamori_todos', []);
+  const list = document.getElementById('todo-list');
+  const empty = document.getElementById('todo-empty');
+  if (!list) return;
+  list.innerHTML = '';
+  const open = todos.filter(t => !t.done);
+  const done = todos.filter(t => t.done);
+  const ordered = [...open, ...done];
+  ordered.forEach((t, i) => {
+    const realIdx = todos.indexOf(t);
+    const li = document.createElement('li');
+    li.className = 'todo-item' + (t.done ? ' todo-done' : '');
+    li.innerHTML = `
+      <button class="todo-check" onclick="toggleTodo(${realIdx})" title="${t.done ? 'Mark incomplete' : 'Mark complete'}">${t.done ? '✅' : '<span class=\'todo-circle\'></span>'}</button>
+      <span class="todo-text">${t.text}</span>
+      <button class="todo-del" onclick="deleteTodo(${realIdx})" title="Delete">&times;</button>
+    `;
+    list.appendChild(li);
+  });
+  if (empty) empty.style.display = ordered.length ? 'none' : 'block';
+}
+
+function addTodoItem() {
+  const input = document.getElementById('todo-input');
+  if (!input) return;
+  const text = input.value.trim();
+  if (!text) return;
+  const todos = LS.get('hanamori_todos', []);
+  todos.push({ text, done: false, created: Date.now() });
+  LS.set('hanamori_todos', todos);
+  input.value = '';
+  renderTodo();
+}
+
+function toggleTodo(idx) {
+  const todos = LS.get('hanamori_todos', []);
+  if (todos[idx] === undefined) return;
+  todos[idx].done = !todos[idx].done;
+  LS.set('hanamori_todos', todos);
+  renderTodo();
+}
+
+function deleteTodo(idx) {
+  const todos = LS.get('hanamori_todos', []);
+  todos.splice(idx, 1);
+  LS.set('hanamori_todos', todos);
+  renderTodo();
 }
 
 // ══════════════════════════════════════════════════════
