@@ -620,8 +620,10 @@ function openModal(name) {
     islandInfo.innerHTML = `<button style="background:var(--green);color:#fff;border:none;border-radius:6px;padding:8px 14px;font-family:Lato,sans-serif;font-size:0.84rem;font-weight:700;cursor:pointer" onclick="openAddModal('${name}')">+ Add to Island</button>`;
   }
 
-  document.getElementById('modal-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  setTimeout(() => {
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }, 0);
 }
 
 function closeModal() {
