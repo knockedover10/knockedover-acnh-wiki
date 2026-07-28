@@ -156,6 +156,21 @@
     color:var(--brown); margin:16px 0 8px; padding-bottom:4px; border-bottom:1px solid var(--border);
   }
   .furniture-chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:4px; }
+  /* Gift Guide */
+  .gift-guide-link { display:block; text-decoration:none; }
+  .gift-guide-img {
+    width:100%; border-radius:10px; display:block;
+    border:1px solid var(--border); margin-bottom:6px;
+  }
+  .gift-guide-caption {
+    display:block; text-align:center; font-size:0.75rem;
+    color:var(--muted); margin-bottom:4px; letter-spacing:.03em;
+  }
+  .gift-guide-credit {
+    font-size:0.72rem; color:var(--muted); text-align:right;
+    margin:0 0 8px;
+  }
+  .gift-guide-credit a { color:var(--muted); text-decoration:underline; }
   .chip {
     font-size:0.72rem; background:var(--surface); border:1px solid var(--border);
     border-radius:20px; padding:3px 9px; color:var(--text);
@@ -310,6 +325,8 @@
       <table class="stat-table" id="modal-stats"></table>
       <div class="modal-section-title">🪴 Furniture</div>
       <div class="furniture-chips" id="modal-furniture"></div>
+      <div class="modal-section-title" id="modal-gift-section" style="display:none">🎁 Gift Guide</div>
+      <div id="modal-gift-info"></div>
       <div class="modal-section-title" id="modal-island-section" style="display:none">🏡 On Your Island</div>
       <div id="modal-island-info"></div>
     </div>
@@ -403,7 +420,21 @@ function renderRoster() {
     return a.movedOut ? 1 : -1;
   });
 
-  const ROSTER_ICONS = {
+  // ── Gift Guide infographic URLs (source: thefriendlyfig.com) ──
+const GIFT_GUIDES = {
+  'Cherry':   'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-villager-guide-1-1.png',
+  'Nibbles':  'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/gifts-1.jpg',
+  'Bettina':  'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/style-elegant-gorgeous.jpg',
+  'Axel':     'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/Copy-of-Copy-of-Copy-of-gifts-22.png',
+  'Quillson': 'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/09/gift-guide-14.jpg',
+  'Stu':      'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-gift-guide-4.png',
+  'T-Bone':   'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/09/gift-guide-9.png',
+  'Astrid':   'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/Copy-of-Copy-of-Copy-of-gifts-20.png',
+  'Goose':    'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/09/gift-guide-15.png',
+  'Kyle':     'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-gift-guide-4.png',
+};
+
+const ROSTER_ICONS = {
     'Cherry':   'https://dodo.ac/np/images/6/67/Cherry_NH_Icon.png',
     'Nibbles':  'https://dodo.ac/np/images/2/26/Nibbles_NH_Villager_Icon.png',
     'Bettina':  'https://dodo.ac/np/images/a/a5/Bettina_NH_Villager_Icon.png',
@@ -545,6 +576,24 @@ function openModal(name) {
   document.getElementById('modal-furniture').innerHTML = furn.length
     ? furn.map(f => `<span class="chip">${f}</span>`).join('')
     : '<span style="color:var(--muted);font-size:0.82rem;font-style:italic">None listed</span>';
+
+  // gift guide section
+  const giftSec = document.getElementById('modal-gift-section');
+  const giftInfo = document.getElementById('modal-gift-info');
+  const giftUrl = GIFT_GUIDES[name];
+  if (giftUrl) {
+    giftSec.style.display = 'block';
+    giftInfo.innerHTML = `
+      <a class="gift-guide-link" href="${giftUrl}" target="_blank" rel="noopener" title="Tap to open full size">
+        <img class="gift-guide-img" src="${giftUrl}" alt="${name} gift guide infographic" loading="lazy">
+        <span class="gift-guide-caption">Tap to open full size &rarr;</span>
+      </a>
+      <p class="gift-guide-credit">Source: <a href="https://thefriendlyfig.com/acnh-villager-gift-guides/" target="_blank" rel="noopener">The Friendly Fig</a></p>
+    `;
+  } else {
+    giftSec.style.display = 'none';
+    giftInfo.innerHTML = '';
+  }
 
   // island section
   const islandSec = document.getElementById('modal-island-section');
