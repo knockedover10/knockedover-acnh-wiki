@@ -718,21 +718,41 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
   const defaults = [
     { name: 'Cherry',   movedIn: '17/04/2026', notes: 'Starter villager' },
     { name: 'Axel',     movedIn: '17/04/2026', notes: 'Starter villager' },
-    { name: 'Nibbles',  movedIn: '25/04/2026', notes: '' },
-    { name: 'Bettina',  movedIn: '25/04/2026', notes: '' },
-    { name: 'Quillson', movedIn: '25/04/2026', notes: '' },
+    { name: 'Nibbles',  movedIn: '25/04/2026', notes: '', movedOut: true, movedOutDate: '29/07/2026' },
+    { name: 'Bettina',  movedIn: '25/04/2026', notes: '', movedOut: true, movedOutDate: '29/07/2026' },
+    { name: 'Quillson', movedIn: '25/04/2026', notes: '', movedOut: true, movedOutDate: '29/07/2026' },
     { name: 'Stu',      movedIn: '25/04/2026', notes: '' },
     { name: 'T-Bone',   movedIn: '26/04/2026', notes: '' },
     { name: 'Astrid',   movedIn: '26/04/2026', notes: '' },
     { name: 'Goose',    movedIn: '29/04/2026', notes: 'Randomly came' },
-    { name: 'Kyle',     movedIn: '03/05/2026', notes: 'Mystery island' },
+    { name: 'Kyle',     movedIn: '03/05/2026', notes: 'Mystery island', movedOut: true, movedOutDate: '29/07/2026' },
     { name: 'Henry',    movedIn: '29/07/2026', notes: '' },
     { name: 'Aurora',   movedIn: '29/07/2026', notes: '' },
     { name: 'Curlos',   movedIn: '29/07/2026', notes: '' },
   ];
   let changed = false;
   defaults.forEach(d => {
-    if (!r[d.name]) { r[d.name] = { movedIn: d.movedIn, notes: d.notes, movedOut: false }; changed = true; }
+    if (!r[d.name]) { r[d.name] = { movedIn: d.movedIn, notes: d.notes, movedOut: !!d.movedOut, movedOutDate: d.movedOutDate || '' }; changed = true; }
+  });
+  if (changed) LS.set('hanamori_v2_roster', r);
+})();
+
+// ── One-time migration: ensure moved-out villagers are marked correctly ──
+(function migrateMovedOut() {
+  const movedOut = {
+    'Nibbles':  '29/07/2026',
+    'Bettina':  '29/07/2026',
+    'Quillson': '29/07/2026',
+    'Kyle':     '29/07/2026',
+  };
+  const r = getRoster();
+  let changed = false;
+  Object.entries(movedOut).forEach(([name, date]) => {
+    if (r[name] && !r[name].movedOut) {
+      r[name].movedOut = true;
+      r[name].movedOutDate = date;
+      changed = true;
+    }
   });
   if (changed) LS.set('hanamori_v2_roster', r);
 })();
