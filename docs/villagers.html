@@ -279,6 +279,10 @@
     <div class="loading-msg">Loading residents...</div>
   </div>
 
+  <!-- ── FORMER RESIDENTS ── -->
+  <div class="section-title" id="past-section-title" style="display:none">🚶 Former Residents</div>
+  <div class="roster-grid" id="past-grid"></div>
+
   <!-- ── SEARCH ── -->
   <div class="section-title">🔍 Search All Villagers</div>
   <div class="search-wrap">
@@ -487,7 +491,11 @@ const ROSTER_ICONS = {
       });
     }
     card.addEventListener('click', () => openModal(name));
-    grid.appendChild(card);
+    if (data.movedOut) {
+      pastGrid.appendChild(card);
+    } else {
+      grid.appendChild(card);
+    }
   });
 }
 
