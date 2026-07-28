@@ -399,6 +399,20 @@ function isOnIsland(name) {
   return r[name] && !r[name].movedOut;
 }
 
+// ── Gift Guide infographic URLs (source: thefriendlyfig.com) ──
+const GIFT_GUIDES = {
+  'Cherry':   'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-villager-guide-1-1.png',
+  'Nibbles':  'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/gifts-1.jpg',
+  'Bettina':  'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/style-elegant-gorgeous.jpg',
+  'Axel':     'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/Copy-of-Copy-of-Copy-of-gifts-22.png',
+  'Quillson': 'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/09/gift-guide-14.jpg',
+  'Stu':      'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-gift-guide-4.png',
+  'T-Bone':   'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/09/gift-guide-9.png',
+  'Astrid':   'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/Copy-of-Copy-of-Copy-of-gifts-20.png',
+  'Goose':    'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/09/gift-guide-15.png',
+  'Kyle':     'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-gift-guide-4.png',
+};
+
 // ── Render Roster ──
 function renderRoster() {
   const roster = getRoster();
@@ -420,19 +434,6 @@ function renderRoster() {
     return a.movedOut ? 1 : -1;
   });
 
-  // ── Gift Guide infographic URLs (source: thefriendlyfig.com) ──
-const GIFT_GUIDES = {
-  'Cherry':   'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-villager-guide-1-1.png',
-  'Nibbles':  'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/gifts-1.jpg',
-  'Bettina':  'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/style-elegant-gorgeous.jpg',
-  'Axel':     'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/Copy-of-Copy-of-Copy-of-gifts-22.png',
-  'Quillson': 'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/09/gift-guide-14.jpg',
-  'Stu':      'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-gift-guide-4.png',
-  'T-Bone':   'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/09/gift-guide-9.png',
-  'Astrid':   'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/Copy-of-Copy-of-Copy-of-gifts-20.png',
-  'Goose':    'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/09/gift-guide-15.png',
-  'Kyle':     'https://cdn.thefriendlyfig.com/wp-content/uploads/2025/08/Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-Copy-of-gift-guide-4.png',
-};
 
 const ROSTER_ICONS = {
     'Cherry':   'https://dodo.ac/np/images/6/67/Cherry_NH_Icon.png',
@@ -445,6 +446,9 @@ const ROSTER_ICONS = {
     'Astrid':   'https://dodo.ac/np/images/2/2a/Astrid_NH_Villager_Icon.png',
     'Goose':    'https://dodo.ac/np/images/d/d3/Goose_NH_Villager_Icon.png',
     'Kyle':     'https://dodo.ac/np/images/4/44/Kyle_NH_Villager_Icon.png',
+    'Henry':    'https://dodo.ac/np/images/2/2f/Henry_NH_Villager_Icon.png',
+    'Aurora':   'https://dodo.ac/np/images/2/25/Aurora_NH_Villager_Icon.png',
+    'Curlos':   'https://dodo.ac/np/images/d/d0/Curlos_NH_Villager_Icon.png',
   };
 
   sorted.forEach(([name, data]) => {
@@ -709,6 +713,9 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
     { name: 'Astrid',   movedIn: '26/04/2026', notes: '' },
     { name: 'Goose',    movedIn: '29/04/2026', notes: 'Randomly came' },
     { name: 'Kyle',     movedIn: '03/05/2026', notes: 'Mystery island' },
+    { name: 'Henry',    movedIn: '29/07/2026', notes: '' },
+    { name: 'Aurora',   movedIn: '29/07/2026', notes: '' },
+    { name: 'Curlos',   movedIn: '29/07/2026', notes: '' },
   ];
   let changed = false;
   defaults.forEach(d => {
